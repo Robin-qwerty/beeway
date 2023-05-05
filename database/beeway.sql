@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 05 mei 2023 om 09:46
+-- Gegenereerd op: 05 mei 2023 om 14:12
 -- Serverversie: 10.4.27-MariaDB
 -- PHP-versie: 8.2.0
 
@@ -184,26 +184,24 @@ CREATE TABLE `logs` (
   `id` int(11) NOT NULL,
   `date` timestamp NOT NULL DEFAULT current_timestamp(),
   `userid` varchar(11) NOT NULL,
-  `action` tinyint(1) NOT NULL COMMENT '1=insert\r\n2=update\r\n3=delete\r\n4=login\r\n5=logout',
+  `action` tinyint(1) NOT NULL COMMENT '0=select\r\n1=insert\r\n2=update\r\n3=delete\r\n4=login\r\n5=logout',
   `tableid` tinyint(4) NOT NULL COMMENT '1=beeway\r\n2=disciplines\r\n3=groups\r\n4=maintheme\r\n5=schools\r\n6=users',
-  `interactionid` int(11) NOT NULL
+  `interactionid` int(11) NOT NULL,
+  `error` tinyint(4) NOT NULL DEFAULT 0 COMMENT '0=no error\r\n1=error'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Gegevens worden geëxporteerd voor tabel `logs`
 --
 
-INSERT INTO `logs` (`id`, `date`, `userid`, `action`, `tableid`, `interactionid`) VALUES
-(1, '2023-05-05 06:53:35', '1', 1, 1, 1),
-(2, '2023-05-05 06:55:04', '1', 1, 1, 1),
-(3, '2023-05-05 06:55:08', '1', 1, 1, 1),
-(4, '2023-05-05 06:55:11', '1', 1, 1, 1),
-(5, '2023-05-05 06:55:13', '1', 1, 1, 1),
-(6, '2023-05-05 06:55:15', '1', 1, 1, 1),
-(7, '2023-05-05 06:55:16', '1', 1, 1, 1),
-(8, '2023-05-05 06:55:18', '1', 1, 1, 1),
-(9, '2023-05-05 07:01:28', '1', 1, 1, 1),
-(10, '2023-05-05 07:01:32', '1', 1, 1, 1);
+INSERT INTO `logs` (`id`, `date`, `userid`, `action`, `tableid`, `interactionid`, `error`) VALUES
+(11, '2023-05-05 08:47:04', '1', 4, 6, 1, 0),
+(12, '2023-05-05 09:00:02', '1', 5, 6, 1, 0),
+(13, '2023-05-05 09:00:23', '2', 4, 6, 2, 0),
+(14, '2023-05-05 09:00:26', '2', 5, 6, 2, 0),
+(15, '2023-05-05 09:00:29', '1', 4, 6, 1, 0),
+(16, '2023-05-05 09:21:55', '1', 5, 6, 1, 0),
+(17, '2023-05-05 09:31:34', '1', 4, 6, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -387,7 +385,7 @@ ALTER TABLE `disciplines`
 -- AUTO_INCREMENT voor een tabel `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT voor een tabel `maintheme`
