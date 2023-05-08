@@ -25,8 +25,8 @@
 }
 
 .beewaylijstopties {
-  width: 42%;
-  margin: 5px 34%;
+  /* width: 42%;
+  margin: 5px 34%; */
   text-align: center;
 }
 .beewaylijstopties button {
@@ -133,6 +133,11 @@
 #adduserbtn {
   bottom: 20px;
   right: 35%;
+}
+#password-validation {
+  font-size: 15px;
+  color: orange;
+  font-weight: bold;
 }
 
 .selectBox {

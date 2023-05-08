@@ -1,4 +1,4 @@
-<?php if (isset($_SESSION['userrol'])) { // check if user is logedin ?>
+<?php if (isset($_SESSION['userid']) && isset($_SESSION['userrol']) && $_SESSION['userrol'] == 'superuser') { // check if user is logedin ?>
   <div class="beewaylijst">
       <?php if ($_SESSION['userrol'] == "superuser") { ?>
         <div class="beewaylijsttitel"><h1>Welkom op het super user dashboard</h1></div>
@@ -67,19 +67,18 @@
       </script>
 
     <hr>
-
     <br>
 
       <?php
         if (isset($_GET['offset'])) {
-          $offset = $_GET['offset'] * 4;
+          $offset = $_GET['offset'] * 10;
           if (isset($_GET['userid'])) {
             $sql = 'SELECT l.*, u.firstname, u.lastname
                     FROM logs as l, users as u
                     WHERE u.userid=:userid
                     AND l.userid=u.userid
                     ORDER BY id DESC
-                    LIMIT 4 OFFSET '.intval($offset);
+                    LIMIT 10 OFFSET '.intval($offset);
             $sth = $conn->prepare($sql);
             $sth->bindParam(':userid', $_GET['userid']);
             $sth->execute();
@@ -88,7 +87,7 @@
                     FROM logs as l, users as u
                     WHERE l.userid=u.userid
                     ORDER BY id DESC
-                    LIMIT 4 OFFSET '.intval($offset);
+                    LIMIT 10 OFFSET '.intval($offset);
             $sth = $conn->prepare($sql);
             $sth->execute();
           }
@@ -97,7 +96,7 @@
                   FROM logs as l, users as u
                   WHERE l.userid=u.userid
                   ORDER BY id DESC
-                  LIMIT 4';
+                  LIMIT 10';
           $sth = $conn->prepare($sql);
           $sth->execute();
         }
@@ -105,7 +104,7 @@
           echo '<table class="beewaylijsttable">
             <tr>
               <th><h3>datum en tijd</h3></th>
-              <th><h3>user name</h3></th>
+              <th><h3>username</h3></th>
               <th><h3>actie</h3></th>
               <th><h3>tabel van actie</h3></th>
               <th><h3>id van actie</h3></th>
@@ -128,7 +127,7 @@
             echo'
               <tr>
                 <td><b>'.$logs->date.'</b></td>
-                <td><b>'.$logs->firstname." ".$logs->lastname.'</b></td>
+                <td><b><i>('.$logs->userid.")</i> - ".$logs->firstname." ".$logs->lastname.'</b></td>
                 <td><b>'.$action.'</b></td>
                 <td><b>'.$tableid.'</b></td>
                 <td><b>'.$logs->interactionid.'</b></td>
@@ -136,6 +135,9 @@
             ';
           }
           echo '</table>
+
+          <hr>
+          <br>
 
           <div class="tablebuttons">';
             if (isset($_GET['offset'])) {
@@ -160,7 +162,7 @@
 
         } else {
           // the query did not return any rows
-          echo '<h2><strong>the query did not return any rows</string></h2>';
+          echo '<h2 style="text-align:center;"><strong>Er zijn geen resultaten gevonden</string></h2>';
           if (isset($_GET['offset']) && $_GET['offset'] >= '1') {
             $terug = $_GET['offset'] - 1;
 
@@ -168,16 +170,14 @@
           } else if (isset($_GET['offset'])) {
             echo '<div class="tablebuttons"><a href="index.php?page=logslijst" class="addbutton">terug</a></div>';
           }
-          $_SESSION['error'] = "the query did not return any rows. Pech!";
+          $_SESSION['error'] = "Er zijn geen resultaten gevonden. Pech!";
         }
       ?>
 
-
-    <hr>
   </div>
 
   <?php include 'include/error.inc.php'; ?>
 <?php } else {
   $_SESSION['error'] = "er ging iets mis. Pech!";
-  header("location: index.php?page=login");
+  header("location: php/logout.php");
 } ?>

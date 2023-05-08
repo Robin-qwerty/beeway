@@ -2,13 +2,13 @@
   include'../private/dbconnect.php';
   session_start();
 
-  // try {
-    if ($_POST['firstname'] == '' || $_POST['lastname'] == '' || $_POST['role'] == '' || $_POST['email'] == '' || $_POST['password'] == '') {
+  try {
+    if ($_POST['firstname'] == '' || $_POST['lastname'] == '' || $_POST['role'] == '' || $_POST['role'] == '2' || $_POST['email'] == '' || $_POST['password'] == '') {
       $_SESSION['error'] = "vul ff iets in";
       header("location: ../index.php?page=adduser");
     } elseif (checkForIllegalCharacters($_POST['firstname']) || checkForIllegalCharacters($_POST['lastname']) || checkForIllegalCharacters($_POST['email']) || checkForIllegalCharacters($_POST['password'])) {
       $_SESSION['error'] = "illegal character used";
-      header("location: ../index.php?page=login");
+      header("location: ../index.php?page=adduser");
     } else {
       $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
@@ -21,37 +21,49 @@
       $sth->bindParam(':password', $password);
       $sth->execute();
 
-      // if ($user = $sth->fetch(PDO::FETCH_OBJ)) {
-      //   if (isset($user->role) && $user->role == '2') {
-      //     $_SESSION['userid'] = $user->role;
-      //     header('location: ../index.php?page=dashboard');
-      //   } else if (isset($user->role) && $user->role == '1') {
-      //     $_SESSION['userid'] = $user->role;
-      //     header('location: ../index.php?page=dashboard');
-      //   } else {
-      //     $_SESSION['userid'] = $user->userid;
-      //     // echo "<pre>", print_r($_SESSION),"</pre>";
-      //     header('location: ../index.php?page=dashboard');
-      //   }
-      // } else {
-      //   header('location: ../index.php?page=login');
-      //   $_SESSION['error'] = 'Fout, geen geldige login. Probeer opnieuw';
-      // }
+      $lastInsertedId = $conn->lastInsertId();
+
+      if ($lastInsertedId) {
+        try {
+          $selectedGroepen = $_POST['groepen'];
+
+          foreach ($selectedGroepen as $groep) {
+            $sql = "INSERT INTO `linkgroups` (`userid`, `groupid`) VALUES (:userid, :groupid)";
+            $sth = $conn->prepare($sql);
+            $sth->bindParam(':userid', $lastInsertedId);
+            $sth->bindParam(':groupid', $groep);
+            $sth->execute();
+          }
+        } catch (\Exception $e) {
+          $_SESSION['error'] = 'kon geen groepen koppelen. Pech';
+          header('location: ../index.php?page=userlijst');
+        }
+
+        $sql = "INSERT INTO `logs` (`userid`, `action`, `tableid`, `interactionid`) VALUES (:userid, '1', '6', :interactionid)";
+        $sth = $conn->prepare($sql);
+        $sth->bindParam(':userid', $_SESSION['userid']);
+        $sth->bindParam(':interactionid', $lastInsertedId);
+        $sth->execute();
+
+        $_SESSION['info'] = 'user toegevoegt';
+        header('location: ../index.php?page=userlijst');
+      } else {
+        $_SESSION['error'] = 'er ging iets mis. Pech';
+        header('location: ../index.php?page=userlijst');
+      }
     }
-  // } catch (\Exception $e) {
-  //   // $_SESSION['error'] = "Fout, er ging iets mis. Pech";
-  //   // header("location: ../index.php?page=login");
-  //   echo "string";
-  // }
+  } catch (\Exception $e) {
+    $_SESSION['error'] = "er ging iets mis. Pech";
+    header("location: ../index.php?page=userlijst");
+  }
 
   function checkForIllegalCharacters($str) { // check for iliegal characters
-  $illegalChars = array('<', '>', '{', '}', '(', ')', '[', ']', '*', '$', '^', '`', '~', '|', '\\', '\'', '"', ':', ';', ',', '/');
-  foreach ($illegalChars as $char) {
-    if (strpos($str, $char) !== false) {
-      return true;
+    $illegalChars = array('<', '>', '{', '}', '(', ')', '[', ']', '*', '$', '^', '`', '~', '|', '\\', '\'', '"', ':', ';', ',', '/');
+    foreach ($illegalChars as $char) {
+      if (strpos($str, $char) !== false) {
+        return true;
+      }
     }
+    return false;
   }
-  return false;
-}
-
 ?>

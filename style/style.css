@@ -466,13 +466,13 @@ input[type='checkbox']:checked {
   position: fixed;
   right: 10px;
   bottom: 10px;
-}
+} */
 .alert.info {
   background-color: #2196F3;
   position: fixed;
-  right: 10px;
-  bottom: 10px;
-} */
+  right: 20px;
+  bottom: 20px;
+}
 .alert.warning {
   background-color: #ff9800;
   position: fixed;

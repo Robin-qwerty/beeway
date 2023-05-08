@@ -11,7 +11,7 @@
 <html>
 <head>
   <meta charset = "UTF-8">
-  <title>home</title>
+  <title> <?php if(isset($page)) { echo $page; } else {echo "Home";}?></title>
   <link rel="icon" type="image/x-icon" href="media/favicon.ico">
   <link href="style/style.css" rel="stylesheet">
   <link href="style/beheer.css" rel="stylesheet">

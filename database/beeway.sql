@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 05 mei 2023 om 14:12
+-- Gegenereerd op: 08 mei 2023 om 16:23
 -- Serverversie: 10.4.27-MariaDB
 -- PHP-versie: 8.2.0
 
@@ -162,6 +162,7 @@ INSERT INTO `groups` (`groupid`, `groups`, `createdat`, `createdby`, `updatedat`
 --
 
 CREATE TABLE `linkgroups` (
+  `linkgroupsid` int(11) NOT NULL,
   `userid` int(11) NOT NULL,
   `groupid` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -170,9 +171,11 @@ CREATE TABLE `linkgroups` (
 -- Gegevens worden geëxporteerd voor tabel `linkgroups`
 --
 
-INSERT INTO `linkgroups` (`userid`, `groupid`) VALUES
-(3, 1),
-(3, 2);
+INSERT INTO `linkgroups` (`linkgroupsid`, `userid`, `groupid`) VALUES
+(1, 3, 1),
+(2, 3, 2),
+(4, 21, 1),
+(5, 21, 2);
 
 -- --------------------------------------------------------
 
@@ -195,13 +198,22 @@ CREATE TABLE `logs` (
 --
 
 INSERT INTO `logs` (`id`, `date`, `userid`, `action`, `tableid`, `interactionid`, `error`) VALUES
-(11, '2023-05-05 08:47:04', '1', 4, 6, 1, 0),
-(12, '2023-05-05 09:00:02', '1', 5, 6, 1, 0),
-(13, '2023-05-05 09:00:23', '2', 4, 6, 2, 0),
-(14, '2023-05-05 09:00:26', '2', 5, 6, 2, 0),
-(15, '2023-05-05 09:00:29', '1', 4, 6, 1, 0),
-(16, '2023-05-05 09:21:55', '1', 5, 6, 1, 0),
-(17, '2023-05-05 09:31:34', '1', 4, 6, 1, 0);
+(32, '2023-05-08 10:43:51', '1', 4, 6, 1, 0),
+(33, '2023-05-08 10:44:02', '1', 1, 6, 17, 0),
+(34, '2023-05-08 10:45:52', '1', 4, 6, 1, 0),
+(35, '2023-05-08 10:49:58', '1', 1, 6, 18, 0),
+(36, '2023-05-08 11:09:43', '1', 1, 6, 19, 0),
+(37, '2023-05-08 12:28:57', '1', 1, 6, 22, 0),
+(38, '2023-05-08 12:34:25', '1', 5, 6, 1, 0),
+(39, '2023-05-08 12:34:32', '1', 4, 6, 1, 0),
+(40, '2023-05-08 12:48:00', '1', 1, 6, 23, 0),
+(41, '2023-05-08 13:03:30', '1', 5, 6, 1, 0),
+(42, '2023-05-08 13:03:53', '1', 4, 6, 1, 0),
+(43, '2023-05-08 13:03:58', '1', 5, 6, 1, 0),
+(44, '2023-05-08 13:04:15', '1', 4, 6, 1, 0),
+(45, '2023-05-08 13:10:11', '1', 5, 6, 1, 0),
+(46, '2023-05-08 13:10:38', '1', 4, 6, 1, 0),
+(47, '2023-05-08 13:10:46', '1', 4, 6, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -330,6 +342,12 @@ ALTER TABLE `groups`
   ADD PRIMARY KEY (`groupid`);
 
 --
+-- Indexen voor tabel `linkgroups`
+--
+ALTER TABLE `linkgroups`
+  ADD PRIMARY KEY (`linkgroupsid`);
+
+--
 -- Indexen voor tabel `logs`
 --
 ALTER TABLE `logs`
@@ -382,10 +400,16 @@ ALTER TABLE `disciplines`
   MODIFY `disciplineid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT voor een tabel `linkgroups`
+--
+ALTER TABLE `linkgroups`
+  MODIFY `linkgroupsid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT voor een tabel `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT voor een tabel `maintheme`
@@ -397,7 +421,7 @@ ALTER TABLE `maintheme`
 -- AUTO_INCREMENT voor een tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `userid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `userid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

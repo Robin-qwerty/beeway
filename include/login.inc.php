@@ -59,3 +59,4 @@
 </form>
 
 <?php include 'include/error.inc.php'; ?>
+<?php include 'include/info.inc.php'; ?>

@@ -1,4 +1,4 @@
-<?php if (isset($_SESSION['userrol']) && $_SESSION['userrol'] == 'superuser') {?>
+<?php if (isset($_SESSION['userid']) && isset($_SESSION['userrol']) && $_SESSION['userrol'] == 'superuser') { // check if user is logedin ?>
   <script src="script/admin_gebruikertoevoegen.js"></script>
   <form class="form adduserform" method="POST" action="php/adduser.php">
     <div class="admin_adduser form">
@@ -28,17 +28,25 @@
         <div class="multiselect">
           <div class="selectBox" onclick="showCheckboxes()">
             <select>
-              <option>-- Selecteer groepen die bij de docent horen --</option>
+              <option style="text-align:center;">-- Selecteer groepen die bij de docent horen --</option>
             </select>
             <div class="overSelect"></div>
           </div>
           <div id="checkboxes">
-            <label for="groepen">
-              <input type="checkbox" name="1" />groepen 1</label>
-            <label for="groepen">
-              <input type="checkbox" name="2" />groepen 2</label>
-            <label for="groepen">
-              <input type="checkbox" name="3" />groepen 3</label>
+            <?php
+              $sql = 'SELECT groups, groupid
+                      FROM groups
+                      WHERE archive<>"1"';
+              $sth = $conn->prepare($sql);
+              $sth->execute();
+
+              while ($groups = $sth->fetch(PDO::FETCH_OBJ)) {
+                echo'
+                  <label for="groepen">
+                    <input type="checkbox" name="groepen[]" value="'.$groups->groupid.'"/>groepen '.$groups->groups.'</label>
+                ';
+              }
+            ?>
           </div>
         </div>
       </div>
@@ -52,15 +60,43 @@
       <br>
       <label for="psw"><b>Password</b></label>
       <br>
-      <input type="password" placeholder="Enter Password" name="password" required>
+      <input type="password" placeholder="Enter Password" name="password" id="password" style="margin-bottom:0;" required>
+      <p id="password-validation"></p>
 
-      <div id="errormsg"></div>
+      <button type="submit" id="adduserbtn" class="registerbtn" disabled>aanmaken</button>
 
-      <button type="submit" id="adduserbtn" class="registerbtn">aanmaken</button>
+      <script>
+        var passwordField = document.getElementById("password");
+        var validationField = document.getElementById("password-validation");
+        var submitButton = document.getElementById("adduserbtn");
+
+        // Add a listener to the password field for when the user types
+        passwordField.addEventListener("keyup", function() {
+          // Get the value of the password field
+          var password = passwordField.value;
+
+          // Check if the password meets the requirements
+          var hasUpperCase = /[A-Z]/.test(password);
+          var hasLowerCase = /[a-z]/.test(password);
+          var hasMinLength = password.length >= 6;
+
+          // Update the validation message based on the requirements
+          if (hasUpperCase && hasLowerCase && hasMinLength) {
+            validationField.innerHTML = "";
+            submitButton.disabled = false;
+          } else {
+            validationField.innerHTML = "Password must contain at least one uppercase letter, one lowercase letter, and be at least 6 characters long.";
+            submitButton.disabled = true;
+          }
+        });
+      </script>
+
       <hr>
     </div>
   </form>
-<?php } else {
-  $_SESSION['error'] = "er ging iets mis. Pech!";
-  header("location: index.php?page=dashboard");
-} ?>
+<?php
+  } else {
+    $_SESSION['error'] = "er ging iets mis. Pech!";
+    header("location: index.php?page=dashboard");
+  }
+?>
