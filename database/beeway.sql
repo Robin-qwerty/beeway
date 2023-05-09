@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 08 mei 2023 om 16:23
+-- Gegenereerd op: 09 mei 2023 om 16:13
 -- Serverversie: 10.4.27-MariaDB
 -- PHP-versie: 8.2.0
 
@@ -153,7 +153,8 @@ CREATE TABLE `groups` (
 
 INSERT INTO `groups` (`groupid`, `groups`, `createdat`, `createdby`, `updatedat`, `updatedby`, `archive`, `deletedat`, `deletedby`) VALUES
 (1, '2', '2023-05-03 08:18:01', 1, '2023-05-03 08:18:01', 1, 0, NULL, NULL),
-(2, '6', '2023-05-03 08:18:09', 1, '2023-05-03 08:18:09', 1, 0, NULL, NULL);
+(2, '6', '2023-05-03 08:18:09', 1, '2023-05-03 08:18:09', 1, 0, NULL, NULL),
+(3, '3', '2023-05-09 13:54:26', 0, '2023-05-09 13:54:26', 0, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -164,18 +165,25 @@ INSERT INTO `groups` (`groupid`, `groups`, `createdat`, `createdby`, `updatedat`
 CREATE TABLE `linkgroups` (
   `linkgroupsid` int(11) NOT NULL,
   `userid` int(11) NOT NULL,
-  `groupid` int(11) NOT NULL
+  `groupid` int(11) NOT NULL,
+  `archive` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Gegevens worden geëxporteerd voor tabel `linkgroups`
 --
 
-INSERT INTO `linkgroups` (`linkgroupsid`, `userid`, `groupid`) VALUES
-(1, 3, 1),
-(2, 3, 2),
-(4, 21, 1),
-(5, 21, 2);
+INSERT INTO `linkgroups` (`linkgroupsid`, `userid`, `groupid`, `archive`) VALUES
+(1, 3, 1, 0),
+(2, 3, 2, 0),
+(4, 21, 1, 0),
+(5, 21, 2, 0),
+(6, 26, 2, 0),
+(7, 27, 1, 0),
+(8, 27, 3, 0),
+(9, 24, 1, 1),
+(10, 24, 2, 1),
+(11, 24, 2, 0);
 
 -- --------------------------------------------------------
 
@@ -187,6 +195,7 @@ CREATE TABLE `logs` (
   `id` int(11) NOT NULL,
   `date` timestamp NOT NULL DEFAULT current_timestamp(),
   `userid` varchar(11) NOT NULL,
+  `useragent` varchar(255) NOT NULL,
   `action` tinyint(1) NOT NULL COMMENT '0=select\r\n1=insert\r\n2=update\r\n3=delete\r\n4=login\r\n5=logout',
   `tableid` tinyint(4) NOT NULL COMMENT '1=beeway\r\n2=disciplines\r\n3=groups\r\n4=maintheme\r\n5=schools\r\n6=users',
   `interactionid` int(11) NOT NULL,
@@ -197,23 +206,22 @@ CREATE TABLE `logs` (
 -- Gegevens worden geëxporteerd voor tabel `logs`
 --
 
-INSERT INTO `logs` (`id`, `date`, `userid`, `action`, `tableid`, `interactionid`, `error`) VALUES
-(32, '2023-05-08 10:43:51', '1', 4, 6, 1, 0),
-(33, '2023-05-08 10:44:02', '1', 1, 6, 17, 0),
-(34, '2023-05-08 10:45:52', '1', 4, 6, 1, 0),
-(35, '2023-05-08 10:49:58', '1', 1, 6, 18, 0),
-(36, '2023-05-08 11:09:43', '1', 1, 6, 19, 0),
-(37, '2023-05-08 12:28:57', '1', 1, 6, 22, 0),
-(38, '2023-05-08 12:34:25', '1', 5, 6, 1, 0),
-(39, '2023-05-08 12:34:32', '1', 4, 6, 1, 0),
-(40, '2023-05-08 12:48:00', '1', 1, 6, 23, 0),
-(41, '2023-05-08 13:03:30', '1', 5, 6, 1, 0),
-(42, '2023-05-08 13:03:53', '1', 4, 6, 1, 0),
-(43, '2023-05-08 13:03:58', '1', 5, 6, 1, 0),
-(44, '2023-05-08 13:04:15', '1', 4, 6, 1, 0),
-(45, '2023-05-08 13:10:11', '1', 5, 6, 1, 0),
-(46, '2023-05-08 13:10:38', '1', 4, 6, 1, 0),
-(47, '2023-05-08 13:10:46', '1', 4, 6, 1, 0);
+INSERT INTO `logs` (`id`, `date`, `userid`, `useragent`, `action`, `tableid`, `interactionid`, `error`) VALUES
+(49, '2023-05-09 06:16:40', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36', 4, 6, 1, 0),
+(50, '2023-05-09 07:03:15', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36', 1, 6, 24, 0),
+(51, '2023-05-09 12:02:21', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36', 1, 6, 26, 0),
+(52, '2023-05-09 12:06:52', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36', 5, 6, 1, 0),
+(53, '2023-05-09 12:08:05', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36', 4, 6, 1, 0),
+(54, '2023-05-09 12:11:31', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36', 4, 6, 1, 0),
+(55, '2023-05-09 12:12:49', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36', 5, 6, 1, 0),
+(56, '2023-05-09 12:12:55', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36', 4, 6, 1, 0),
+(57, '2023-05-09 12:21:49', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36', 1, 6, 27, 0),
+(58, '2023-05-09 14:08:54', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36', 2, 6, 24, 0),
+(59, '2023-05-09 14:09:21', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36', 2, 6, 24, 0),
+(60, '2023-05-09 14:09:29', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36', 2, 6, 24, 0),
+(61, '2023-05-09 14:11:45', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36', 2, 6, 24, 0),
+(62, '2023-05-09 14:12:36', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36', 2, 6, 24, 0),
+(63, '2023-05-09 14:13:27', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36', 2, 6, 24, 0);
 
 -- --------------------------------------------------------
 
@@ -303,9 +311,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`userid`, `schoolid`, `firstname`, `lastname`, `email`, `password`, `role`, `createdat`, `createdby`, `updatedat`, `updatedby`, `archive`, `deletedat`, `deletedby`) VALUES
+(0, 0, 'system', '', '', '', 3, '2023-05-09 09:29:55', 0, '2023-05-09 09:29:55', 0, 0, NULL, NULL),
 (1, 0, 'superuser', 'test', 'test@test.nl', '$2y$10$PEIaTvE2w3VJw/t9iagKSu8tL1eUiGjYJqtkQ8snMoOWvW1lin6Lu', 2, '2023-05-03 08:20:53', 1, '2023-05-03 08:20:53', 1, 0, NULL, NULL),
 (2, 1, 'school admin', 'test', 'een@test.nl', '$2y$10$PEIaTvE2w3VJw/t9iagKSu8tL1eUiGjYJqtkQ8snMoOWvW1lin6Lu', 1, '2023-05-03 08:21:20', 1, '2023-05-03 08:21:20', 1, 0, NULL, NULL),
-(3, 1, 'docent', 'test', 'twee@test.nl', '$2y$10$PEIaTvE2w3VJw/t9iagKSu8tL1eUiGjYJqtkQ8snMoOWvW1lin6Lu', 0, '2023-05-03 08:21:45', 1, '2023-05-03 08:21:45', 1, 0, NULL, NULL);
+(3, 1, 'docent', 'test', 'twee@test.nl', '$2y$10$PEIaTvE2w3VJw/t9iagKSu8tL1eUiGjYJqtkQ8snMoOWvW1lin6Lu', 0, '2023-05-03 08:21:45', 1, '2023-05-03 08:21:45', 1, 0, NULL, NULL),
+(24, 1, 'docent 1', 'test', 'drie@test.nl', '$2y$10$SpBA48a5gyg56irZTPMRwOXLL.fY6DBxBphsJf8YOFVV0vqzinCfa', 1, '2023-05-09 09:03:15', 0, '2023-05-09 09:03:15', 1, 0, NULL, NULL);
 
 --
 -- Indexen voor geëxporteerde tabellen
@@ -403,13 +413,13 @@ ALTER TABLE `disciplines`
 -- AUTO_INCREMENT voor een tabel `linkgroups`
 --
 ALTER TABLE `linkgroups`
-  MODIFY `linkgroupsid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `linkgroupsid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT voor een tabel `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- AUTO_INCREMENT voor een tabel `maintheme`
@@ -421,7 +431,7 @@ ALTER TABLE `maintheme`
 -- AUTO_INCREMENT voor een tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `userid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `userid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

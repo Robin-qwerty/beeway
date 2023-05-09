@@ -3,9 +3,10 @@
   include'../private/dbconnect.php';
 
   try {
-    $sql = "INSERT INTO `logs` (`userid`, `action`, `tableid`, `interactionid`) VALUES (:userid, '5', '6', :interactionid)";
+    $sql = "INSERT INTO `logs` (`userid`, `useragent`, `action`, `tableid`, `interactionid`) VALUES (:userid, :useragent, '5', '6', :interactionid)";
     $sth = $conn->prepare($sql);
     $sth->bindParam(':userid', $_SESSION['userid']);
+    $sth->bindParam(':useragent', $_SESSION['useragent']);
     $sth->bindParam(':interactionid', $_SESSION['userid']);
     $sth->execute();
   } catch (\Exception $e) {

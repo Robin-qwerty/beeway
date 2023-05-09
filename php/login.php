@@ -1,5 +1,6 @@
 <?php
   include'../private/dbconnect.php';
+  // session_set_cookie_params(120);
   session_start();
 
   try {
@@ -24,9 +25,10 @@
       }
 
       if ($user = $sth->fetch(PDO::FETCH_OBJ)) {
-        $sql = "INSERT INTO `logs`(`userid`, `action`, `tableid`, `interactionid`) VALUES (:userid, '4', '6', :interactionid)";
+        $sql = "INSERT INTO `logs` (`userid`, `useragent`, `action`, `tableid`, `interactionid`) VALUES (:userid, :useragent, '4', '6', :interactionid)";
         $sth = $conn->prepare($sql);
         $sth->bindParam(':userid', $user->userid);
+        $sth->bindParam(':useragent', $_SESSION['useragent']);
         $sth->bindParam(':interactionid', $user->userid);
         $sth->execute();
 

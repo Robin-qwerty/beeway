@@ -114,8 +114,12 @@
 
   </div>
 
-  <?php include 'include/error.inc.php'; ?>
-<?php } else {
-  $_SESSION['error'] = "er ging iets mis. Pech!";
-  header("location: php/logout.php");
-} ?>
+  <?php
+    include 'include/info.inc.php';
+    include 'include/error.inc.php';
+
+  } else {
+    $_SESSION['error'] = "er ging iets mis. Pech!";
+    header("location: php/logout.php");
+  } 
+?>

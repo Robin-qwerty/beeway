@@ -71,14 +71,14 @@
 
       <?php
         if (isset($_GET['offset'])) {
-          $offset = $_GET['offset'] * 10;
+          $offset = $_GET['offset'] * 25;
           if (isset($_GET['userid'])) {
             $sql = 'SELECT l.*, u.firstname, u.lastname
                     FROM logs as l, users as u
                     WHERE u.userid=:userid
                     AND l.userid=u.userid
                     ORDER BY id DESC
-                    LIMIT 10 OFFSET '.intval($offset);
+                    LIMIT 25 OFFSET '.intval($offset);
             $sth = $conn->prepare($sql);
             $sth->bindParam(':userid', $_GET['userid']);
             $sth->execute();
@@ -87,7 +87,7 @@
                     FROM logs as l, users as u
                     WHERE l.userid=u.userid
                     ORDER BY id DESC
-                    LIMIT 10 OFFSET '.intval($offset);
+                    LIMIT 25 OFFSET '.intval($offset);
             $sth = $conn->prepare($sql);
             $sth->execute();
           }
@@ -96,7 +96,7 @@
                   FROM logs as l, users as u
                   WHERE l.userid=u.userid
                   ORDER BY id DESC
-                  LIMIT 10';
+                  LIMIT 25';
           $sth = $conn->prepare($sql);
           $sth->execute();
         }
@@ -159,7 +159,6 @@
               ';
             }
           echo '</div>';
-
         } else {
           // the query did not return any rows
           echo '<h2 style="text-align:center;"><strong>Er zijn geen resultaten gevonden</string></h2>';
@@ -176,8 +175,12 @@
 
   </div>
 
-  <?php include 'include/error.inc.php'; ?>
-<?php } else {
-  $_SESSION['error'] = "er ging iets mis. Pech!";
-  header("location: php/logout.php");
-} ?>
+  <?php
+    include 'include/info.inc.php';
+    include 'include/error.inc.php';
+
+  } else {
+    $_SESSION['error'] = "er ging iets mis. Pech!";
+    header("location: php/logout.php");
+  }
+?>

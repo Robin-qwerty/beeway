@@ -6,7 +6,14 @@
   include'private/dbconnect.php';
   session_start();
 
+  $_SESSION['useragent'] = $_SERVER['HTTP_USER_AGENT'];
+
+  // test if mysql user can delete from table (he can't)
+  // $sql = 'DELETE FROM `users` WHERE userid=24';
+  // $sth = $conn->prepare($sql);
+  // $sth->execute();
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,7 +31,7 @@
   <?php
     include 'include/navbar.inc.php';
 
-    if (isset($page)) {
+    if (isset($page) && isset($_SESSION['userid']) && isset($_SESSION['userrol'])) {
       include 'include/'.$page.'.inc.php';
     } else {
       include 'include/login.inc.php';
