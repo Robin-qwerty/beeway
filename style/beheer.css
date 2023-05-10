@@ -2,7 +2,7 @@
 
 .beewaylijst {
   margin: 7rem 1rem 0 1rem;
-  background: #7197a9;
+  background: #8a9297;
   padding: 1.5rem;
   border-radius: 1rem;
 }
@@ -36,7 +36,7 @@
   border: none;
   outline: none;
   cursor: pointer;
-  background-color: #7197a9;
+  background-color: #8a9297;
   font-size: 18px;
   font-weight: bold;
   color: #596970;

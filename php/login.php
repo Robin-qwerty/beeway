@@ -1,74 +1,80 @@
 <?php
-  include'../private/dbconnect.php';
-  // session_set_cookie_params(120);
+  // Include the database connection file
+  require_once '../private/dbconnect.php';
+
+  // Start the session
   session_start();
 
   try {
-    if ($_POST['email'] == '' || $_POST['password'] == '' || $_POST['school'] == '') {
-      $_SESSION['error'] = "fout, vul ff iets in";
-      header("location: ../index.php?page=login");
-    } elseif (checkForIllegalCharacters($_POST['email']) || checkForIllegalCharacters($_POST['password'])) {
-      $_SESSION['error'] = "illegal character used";
-      header("location: ../index.php?page=login");
-    } else {
-      if ($_POST['school'] == "0") {
-        $sql = "SELECT role, userid, password FROM users WHERE email=:email AND schoolid='0' AND archive<>'1'";
-        $sth = $conn->prepare($sql);
-        $sth->bindParam(':email', $_POST['email']);
-        $sth->execute();
-      } else {
-        $sql = "SELECT role, userid, password FROM users WHERE email=:email AND schoolid=:schoolid AND role<>'2' AND archive<>'1'";
-        $sth = $conn->prepare($sql);
-        $sth->bindParam(':email', $_POST['email']);
-        $sth->bindParam(':schoolid', $_POST['school']);
-        $sth->execute();
-      }
-
-      if ($user = $sth->fetch(PDO::FETCH_OBJ)) {
-        $sql = "INSERT INTO `logs` (`userid`, `useragent`, `action`, `tableid`, `interactionid`) VALUES (:userid, :useragent, '4', '6', :interactionid)";
-        $sth = $conn->prepare($sql);
-        $sth->bindParam(':userid', $user->userid);
-        $sth->bindParam(':useragent', $_SESSION['useragent']);
-        $sth->bindParam(':interactionid', $user->userid);
-        $sth->execute();
-
-        if (password_verify($_POST['password'], $user->password)) {
-            echo 'Password is valid!';
-            if (isset($user->role) && $user->role == '2') {
-              $_SESSION['userrol'] = 'superuser';
-              $_SESSION['userid'] = $user->userid;
-              header('location: ../index.php?page=dashboard');
-            } else if (isset($user->role) && $user->role == '1') {
-              $_SESSION['userrol'] = 'admin';
-              $_SESSION['userid'] = $user->userid;
-              header('location: ../index.php?page=dashboard');
-            } else {
-              $_SESSION['userrol'] = 'docent';
-              $_SESSION['userid'] = $user->userid;
-              header('location: ../index.php?page=dashboard');
-            }
-        } else {
-          header('location: ../index.php?page=login');
-          $_SESSION['error'] = 'geen geldige login. Probeer het opnieuw!';
-        }
-      } else {
-        header('location: ../index.php?page=login');
-        $_SESSION['error'] = 'geen geldige login. Probeer het opnieuw!';
-      }
+    // Validate the input fields
+    if (empty($_POST['email']) || empty($_POST['password']) || $_POST['school'] == '') {
+      $_SESSION['error'] = 'Please fill in all fields.';
+      header('Location: ../index.php?page=login');
+      exit();
     }
+
+    // Check for illegal characters in the input fields
+    if (checkForIllegalCharacters($_POST['email']) || checkForIllegalCharacters($_POST['password'])) {
+      $_SESSION['error'] = 'Illegal characters used.';
+      header('Location: ../index.php?page=login');
+      exit();
+    }
+
+    // Get the user from the database
+    $sql = 'SELECT role, userid, password FROM users WHERE email=:email AND schoolid=:schoolid AND archive <> 1';
+    $sth = $conn->prepare($sql);
+    $sth->bindParam(':email', $_POST['email']);
+    $sth->bindParam(':schoolid', $_POST['school']);
+    $sth->execute();
+    $user = $sth->fetch(PDO::FETCH_OBJ);
+
+    // Log the login attempt
+    if ($user) {
+      $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid) VALUES (:userid, :useragent, 4, 6, :interactionid)';
+      $sth = $conn->prepare($sql);
+      $sth->bindParam(':userid', $user->userid);
+      $sth->bindParam(':useragent', $_SESSION['useragent']);
+      $sth->bindParam(':interactionid', $user->userid);
+      $sth->execute();
+    }
+
+    // Check if the user exists and the password is correct
+    if (!$user || !password_verify($_POST['password'], $user->password)) {
+      $_SESSION['school'] = $_POST['school'];
+      $_SESSION['email'] = $_POST['email'];
+      $_SESSION['error'] = 'Invalid email or password. Please try again.';
+      header('Location: ../index.php?page=login');
+      exit();
+    }
+
+    // Set the session variables based on the user role
+    if ($user->role == 2) {
+      $_SESSION['userrol'] = 'superuser';
+    } elseif ($user->role == 1) {
+      $_SESSION['userrol'] = 'admin';
+    } else {
+      $_SESSION['userrol'] = 'docent';
+    }
+
+    $_SESSION['userid'] = $user->userid;
+    header('Location: ../index.php?page=dashboard');
+    exit();
   } catch (\Exception $e) {
-    $_SESSION['error'] = "er ging iets mis. Pech!";
+    $_SESSION['school'] = $_POST['school'];
+    $_SESSION['email'] = $_POST['email'];
+    $_SESSION['error'] = "er ging iets mis. Pech";
     header("location: ../index.php?page=login");
   }
 
-  function checkForIllegalCharacters($str) { // check for iliegal characters
-  $illegalChars = array('<', '>', '{', '}', '(', ')', '[', ']', '*', '$', '`', '|', '\\', '\'', '"', ':', ';', ',', '/');
-  foreach ($illegalChars as $char) {
-    if (strpos($str, $char) !== false) {
-      return true;
+  // Check for illegal characters in a string
+  function checkForIllegalCharacters($str) {
+    $illegalChars = array('<', '>', '{', '}', '(', ')', '[', ']', '*', '$', '`', '|', '\\', '\'', '"', ':', ';', ',', '/');
+    foreach ($illegalChars as $char) {
+      if (strpos($str, $char) !== false) {
+        return true;
+      }
     }
+    return false;
   }
-  return false;
-}
 
 ?>

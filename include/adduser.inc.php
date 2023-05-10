@@ -7,11 +7,11 @@
       <div id="LP">
         <label for="name"><b>voornaam</b></label>
         <br>
-        <input type="text" placeholder="Enter voornaam" name="firstname" required>
+        <input type="text" placeholder="Enter voornaam" name="firstname" value="<?php echo isset($_SESSION['firstname']) ? htmlspecialchars($_SESSION['firstname']) : ''; unset($_SESSION['firstname']); ?>" required>
         <br>
         <label for="lastname"><b>achternaam</b></label>
         <br>
-        <input type="text" placeholder="Enter achternaam" name="lastname" required>
+        <input type="text" placeholder="Enter achternaam" name="lastname" value="<?php echo isset($_SESSION['lastname']) ? htmlspecialchars($_SESSION['lastname']) : ''; unset($_SESSION['lastname']); ?>" required>
         <br>
         <label for="rol"><b>rol</b></label>
         <br>
@@ -79,7 +79,7 @@
         <br>
         <label for="email"><b>Email</b></label>
         <br>
-        <input type="email" placeholder="Enter Email" name="email" required>
+        <input type="email" placeholder="Enter Email" name="email" value="<?php echo isset($_SESSION['email']) ? htmlspecialchars($_SESSION['email']) : ''; unset($_SESSION['email']); ?>" required>
         <br>
         <label for="psw"><b>Password</b></label>
         <br>

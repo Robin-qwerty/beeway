@@ -1,65 +1,68 @@
 <?php
-  include'../private/dbconnect.php';
+  // Include the database connection file
+  require_once '../private/dbconnect.php';
+
+  // Start the session
   session_start();
 
+  // Check if all required fields are filled in
+  if (empty($_POST['firstname']) || empty($_POST['lastname']) || empty($_POST['role'])
+      || $_POST['role'] == '2' || $_POST['school'] == '0' || empty($_POST['email']) || empty($_POST['password'])) {
+      $_SESSION['error'] = 'Please fill in all required fields';
+      $_SESSION['firstname'] = $_POST['firstname'];
+      $_SESSION['lastname'] = $_POST['lastname'];
+      $_SESSION['email'] = $_POST['email'];
+      header('Location: ../index.php?page=adduser');
+      exit;
+  }
+
+  // Check for illegal characters in user input
+  if (strpbrk($_POST['firstname'] . $_POST['lastname'] . $_POST['email'] . $_POST['password'], '<>{()}[]*$^`~|\\\'":;,/')) {
+      $_SESSION['error'] = 'Illegal character used';
+      header('Location: ../index.php?page=adduser');
+      exit;
+  }
+
+  // Insert user into database
   try {
-    if ($_POST['firstname'] == '' || $_POST['lastname'] == '' || $_POST['role'] == '' || $_POST['role'] == '2' || $_POST['school'] == '0' || $_POST['email'] == '' || $_POST['password'] == '') {
-      $_SESSION['error'] = "vul ff iets in";
-      header("location: ../index.php?page=adduser");
-    } elseif (checkForIllegalCharacters($_POST['firstname']) || checkForIllegalCharacters($_POST['lastname']) || checkForIllegalCharacters($_POST['email']) || checkForIllegalCharacters($_POST['password'])) {
-      $_SESSION['error'] = "illegal character used";
-      header("location: ../index.php?page=adduser");
-    } else {
+      $conn->beginTransaction();
+
       $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
       $sql = "INSERT INTO users (`schoolid`, `firstname`, `lastname`, `email`, `password`, `role`, `createdby`, `updatedby`)
-              VALUES (:schoolid, :firstname, :lastname, :email, :password, :role, :createdby, :updatedby)";
-      $sth = $conn->prepare($sql);
-      $sth->bindParam(':schoolid', $_POST['school']);
-      $sth->bindParam(':firstname', $_POST['firstname']);
-      $sth->bindParam(':lastname', $_POST['lastname']);
-      $sth->bindParam(':role', $_POST['role']);
-      $sth->bindParam(':email', $_POST['email']);
-      $sth->bindParam(':password', $password);
-      $sth->bindParam(':createdby', $_SESSION['userid']);
-      $sth->bindParam(':updatedby', $_SESSION['userid']);
-      $sth->execute();
+              VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+      $stmt = $conn->prepare($sql);
+      $stmt->execute([$_POST['school'], $_POST['firstname'], $_POST['lastname'], $_POST['email'], $password, $_POST['role'], $_SESSION['userid'], $_SESSION['userid']]);
 
-      $lastInsertedId = $conn->lastInsertId();
+      $userId = $conn->lastInsertId();
 
-      if ($lastInsertedId) {
-        try {
-          $selectedGroepen = $_POST['groepen'];
+      // Insert user into selected groups
+      if ($userId) {
+          $selectedGroups = $_POST['groepen'];
 
-          foreach ($selectedGroepen as $groep) {
-            $sql = "INSERT INTO `linkgroups` (`userid`, `groupid`) VALUES (:userid, :groupid)";
-            $sth = $conn->prepare($sql);
-            $sth->bindParam(':userid', $lastInsertedId);
-            $sth->bindParam(':groupid', $groep);
-            $sth->execute();
+          foreach ($selectedGroups as $groupId) {
+              $sql = "INSERT INTO `linkgroups` (`userid`, `groupid`) VALUES (?, ?)";
+              $stmt = $conn->prepare($sql);
+              $stmt->execute([$userId, $groupId]);
           }
-        } catch (\Exception $e) {
-          $_SESSION['error'] = 'kon geen groepen koppelen. Pech';
-          header('location: ../index.php?page=userlijst');
-        }
 
-        $sql = "INSERT INTO `logs` (`userid`, `useragent`, `action`, `tableid`, `interactionid`) VALUES (:userid, :useragent, '1', '6', :interactionid)";
-        $sth = $conn->prepare($sql);
-        $sth->bindParam(':userid', $_SESSION['userid']);
-        $sth->bindParam(':useragent', $_SESSION['useragent']);
-        $sth->bindParam(':interactionid', $lastInsertedId);
-        $sth->execute();
+          $conn->commit();
 
-        $_SESSION['info'] = 'user toegevoegt';
-        header('location: ../index.php?page=userlijst');
+          $_SESSION['info'] = 'User added';
+          header('Location: ../index.php?page=userlijst');
+          exit;
       } else {
-        $_SESSION['error'] = 'er ging iets mis. Pech';
-        header('location: ../index.php?page=userlijst');
+          throw new Exception('Failed to insert user into database');
       }
-    }
-  } catch (\Exception $e) {
-    $_SESSION['error'] = "er ging iets mis. Pech";
-    header("location: ../index.php?page=userlijst");
+  } catch (Exception $e) {
+      $conn->rollback();
+
+      $_SESSION['error'] = 'Failed to add user';
+      $_SESSION['firstname'] = $_POST['firstname'];
+      $_SESSION['lastname'] = $_POST['lastname'];
+      $_SESSION['email'] = $_POST['email'];
+      header('Location: ../index.php?page=adduser');
+      exit;
   }
 
   function checkForIllegalCharacters($str) { // check for iliegal characters

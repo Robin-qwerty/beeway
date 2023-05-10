@@ -66,50 +66,68 @@
         });
       </script>
 
+      <!-- <br> -->
+
+      <input style="width:200px;" type="text" id="myInput" onkeyup="myFunction()" placeholder="zoek op naam..." title="Type in a name">
+
+      <script src="script/tablesearch.js"></script>
+
     <hr>
     <br>
 
-      <?php
-        if (isset($_GET['offset'])) {
-          $offset = $_GET['offset'] * 25;
-          if (isset($_GET['userid'])) {
-            $sql = 'SELECT l.*, u.firstname, u.lastname
-                    FROM logs as l, users as u
-                    WHERE u.userid=:userid
-                    AND l.userid=u.userid
-                    ORDER BY id DESC
-                    LIMIT 25 OFFSET '.intval($offset);
-            $sth = $conn->prepare($sql);
-            $sth->bindParam(':userid', $_GET['userid']);
-            $sth->execute();
-          } else {
-            $sql = 'SELECT l.*, u.firstname, u.lastname
-                    FROM logs as l, users as u
-                    WHERE l.userid=u.userid
-                    ORDER BY id DESC
-                    LIMIT 25 OFFSET '.intval($offset);
-            $sth = $conn->prepare($sql);
-            $sth->execute();
-          }
+    <?php
+      // Check if offset parameter is set in the URL
+      if (isset($_GET['offset'])) {
+        // Multiply offset by 25 to get the correct number of records to skip
+        $offset = $_GET['offset'] * 30;
+        // Check if userid parameter is also set in the URL
+        if (isset($_GET['userid'])) {
+          // If userid is set, get logs and user data for that specific user
+          $sql = 'SELECT l.*, u.firstname, u.lastname
+                  FROM logs as l, users as u
+                  WHERE u.userid=:userid
+                  AND l.userid=u.userid
+                  ORDER BY id DESC
+                  LIMIT 30 OFFSET '.intval($offset);
+          $sth = $conn->prepare($sql);
+          // Bind userid parameter to the prepared statement
+          $sth->bindParam(':userid', $_GET['userid']);
+          $sth->execute();
         } else {
+          // If userid is not set, get logs and user data for all users
           $sql = 'SELECT l.*, u.firstname, u.lastname
                   FROM logs as l, users as u
                   WHERE l.userid=u.userid
                   ORDER BY id DESC
-                  LIMIT 25';
+                  LIMIT 30 OFFSET '.intval($offset);
           $sth = $conn->prepare($sql);
           $sth->execute();
         }
+        } else {
+        // If offset parameter is not set, get logs and user data for all users starting from the beginning
+        $sql = 'SELECT l.*, u.firstname, u.lastname
+                FROM logs as l, users as u
+                WHERE l.userid=u.userid
+                ORDER BY id DESC
+                LIMIT 30';
+        $sth = $conn->prepare($sql);
+        $sth->execute();
+        }
+
+        // Check if there are any rows returned by the query
         if ($sth->rowCount() > 0) {
+          // Output table headers
           echo '<table class="beewaylijsttable">
-            <tr>
-              <th><h3>datum en tijd</h3></th>
-              <th><h3>username</h3></th>
-              <th><h3>actie</h3></th>
-              <th><h3>tabel van actie</h3></th>
-              <th><h3>id van actie</h3></th>
-            </tr>';
+                <tr>
+                  <th><h3>username</h3></th>
+                  <th><h3>actie</h3></th>
+                  <th><h3>tabel van actie</h3></th>
+                  <th><h3>id van actie</h3></th>
+                  <th><h3>datum en tijd</h3></th>
+                </tr>';
+          // Output table rows with log data
           while ($logs = $sth->fetch(PDO::FETCH_OBJ)) {
+            // Translate action code to human-readable text
             if ($logs->action == '0') {$action = 'select';}
             elseif ($logs->action == '1') {$action = 'insert';}
             elseif ($logs->action == '2') {$action = 'update';}
@@ -117,6 +135,7 @@
             elseif ($logs->action == '4') {$action = 'login';}
             elseif ($logs->action == '5') {$action = 'logout';}
 
+            // Translate tableid to human-readable text
             if ($logs->tableid == '1') {$tableid = 'beeway';}
             elseif ($logs->tableid == '2') {$tableid = 'vakken';}
             elseif ($logs->tableid == '3') {$tableid = 'groepen';}
@@ -126,11 +145,11 @@
 
             echo'
               <tr>
-                <td><b>'.$logs->date.'</b></td>
                 <td><b><i>('.$logs->userid.")</i> - ".$logs->firstname." ".$logs->lastname.'</b></td>
                 <td><b>'.$action.'</b></td>
                 <td><b>'.$tableid.'</b></td>
                 <td><b>'.$logs->interactionid.'</b></td>
+                <td><b>'.$logs->date.'</b></td>
               </tr>
             ';
           }

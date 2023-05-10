@@ -34,6 +34,11 @@
     </div>
 
     <hr>
+
+    <input style="width:200px;" type="text" id="myInput" onkeyup="myFunction()" placeholder="zoek op naam..." title="Type in a name">
+
+    <script src="script/tablesearch.js"></script>
+
     <br>
 
       <?php

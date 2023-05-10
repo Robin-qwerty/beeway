@@ -20,7 +20,7 @@
     <select id="schoolselect" name="school">
       <option value="0" selected="selected">-- selecteer je school --</option>
       <?php
-        $sql = 'SELECT schoolname
+        $sql = 'SELECT schoolname, schoolid
                 FROM schools
                 WHERE schoolid<>"0"
                 AND archive<>"1"';
@@ -28,16 +28,19 @@
         $sth->execute();
 
         while ($schools = $sth->fetch(PDO::FETCH_OBJ)) {
-          echo'
-          <option value="1">'.$schools->schoolname.'</option>
-          ';
+          $selected = '';
+          if (isset($_SESSION['school']) && $schools->schoolid == $_SESSION['school']) {
+            $selected = 'selected="selected"';
+            unset($_SESSION['school']);
+          }
+          echo '<option value="'.$schools->schoolid.'" '.$selected.'>'.$schools->schoolname.'</option>';
         }
       ?>
     </select>
 
     <label for="email"><b>Email</b></label>
     <br>
-    <input type="email" placeholder="Enter Email" name="email" id="email" required>
+    <input type="email" placeholder="Enter Email" name="email" id="email" value="<?php echo isset($_SESSION['email']) ? htmlspecialchars($_SESSION['email']) : ''; unset($_SESSION['email']); ?>" required>
 
     <label for="psw"><b>Password</b></label>
     <br>

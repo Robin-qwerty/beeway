@@ -35,7 +35,7 @@
         $sth->bindParam(':updatedby', $_SESSION['userid']);
         $sth->bindParam(':userid', $_GET['userid']);
         $sth->execute();
-        echo "string";
+
       }
 
       // $lastInsertedId = $conn->lastInsertId();

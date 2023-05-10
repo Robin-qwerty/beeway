@@ -106,18 +106,20 @@
           <br>
           <select id="schoolselect" name="school">
             <option value="0" selected="selected">-- selecteer de bijbehorende school --</option>';
-              $sql4 = 'SELECT schoolname
+            $sql4 = 'SELECT schoolname, schoolid
                       FROM schools
                       WHERE schoolid<>"0"
                       AND archive<>"1"';
-              $sth4 = $conn->prepare($sql4);
-              $sth4->execute();
+            $sth4 = $conn->prepare($sql4);
+            $sth4->execute();
 
-              while ($schools = $sth4->fetch(PDO::FETCH_OBJ)) {
-                echo'
-                <option value="1">'.$schools->schoolname.'</option>
-                ';
+            while ($schools = $sth4->fetch(PDO::FETCH_OBJ)) {
+              $selected = '';
+              if ($schools->schoolid == $user->schoolid) {
+                $selected = 'selected="selected"';
               }
+              echo '<option value="'.$schools->schoolid.'" '.$selected.'>'.$schools->schoolname.'</option>';
+            }
               echo'
           </select>
 
