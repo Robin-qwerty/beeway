@@ -105,7 +105,7 @@
           <label for="rol"><b>school</b></label>
           <br>
           <select id="schoolselect" name="school">
-            <option value="0" selected="selected">-- selecteer de bijbehorende school --</option>';
+            <option value="0">-- selecteer de bijbehorende school --</option>';
             $sql4 = 'SELECT schoolname, schoolid
                       FROM schools
                       WHERE schoolid<>"0"

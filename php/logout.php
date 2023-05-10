@@ -1,22 +1,24 @@
 <?php
-  session_start();
-  include'../private/dbconnect.php';
+  session_start(); // start the session
+  include '../private/dbconnect.php'; // include the database connection
 
   try {
+    // prepare the SQL statement for logging user activity
     $sql = "INSERT INTO `logs` (`userid`, `useragent`, `action`, `tableid`, `interactionid`) VALUES (:userid, :useragent, '5', '6', :interactionid)";
     $sth = $conn->prepare($sql);
-    $sth->bindParam(':userid', $_SESSION['userid']);
-    $sth->bindParam(':useragent', $_SESSION['useragent']);
-    $sth->bindParam(':interactionid', $_SESSION['userid']);
-    $sth->execute();
+    $sth->bindParam(':userid', $_SESSION['userid']); // bind the session userid to the SQL statement
+    $sth->bindParam(':useragent', $_SESSION['useragent']); // bind the session useragent to the SQL statement
+    $sth->bindParam(':interactionid', $_SESSION['userid']); // bind the session userid to the SQL statement
+    $sth->execute(); // execute the SQL statement
   } catch (\Exception $e) {
+    // handle any exceptions thrown during logging (in this case, do nothing)
     // $_SESSION['error'] = "Pech";
   }
 
-  session_destroy();
-  session_start();
+  session_destroy(); // destroy the session
+  session_start(); // start a new session
 
-  $_SESSION['info'] = "uitgelogd.";
+  $_SESSION['info'] = "uitgelogd."; // set the session info message
 
-  header('location: ../index.php');
+  header('location: ../index.php'); // redirect to the index page
 ?>

@@ -1,3 +1,10 @@
+<?php
+  if (isset($_SESSION['userid']) && isset($_SESSION['userrol'])) {
+    header("Location: index.php?page=dashboard");
+    exit;
+  }
+?>
+
 <style>
   body{ background: linear-gradient(to bottom right, #c18ac1, #da9f71, #71d3f4, #c4de87); }
 </style>
@@ -40,7 +47,7 @@
 
     <label for="email"><b>Email</b></label>
     <br>
-    <input type="email" placeholder="Enter Email" name="email" id="email" value="<?php echo isset($_SESSION['email']) ? htmlspecialchars($_SESSION['email']) : ''; unset($_SESSION['email']); ?>" required>
+    <input type="text" placeholder="Enter Email" name="email" id="email" value="<?php echo isset($_SESSION['email']) ? htmlspecialchars($_SESSION['email']) : ''; unset($_SESSION['email']); ?>" required>
 
     <label for="psw"><b>Password</b></label>
     <br>

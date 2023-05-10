@@ -42,14 +42,14 @@
 
           $sql = 'SELECT * FROM schools
                   WHERE schoolid<>"0"
-                  ORDER BY schoolid DESC
+                  ORDER BY schoolid
                   LIMIT 4 OFFSET '.intval($offset);
           $sth = $conn->prepare($sql);
           $sth->execute();
         } else {
           $sql = 'SELECT * FROM schools
                   WHERE schoolid<>"0"
-                  ORDER BY schoolid DESC
+                  ORDER BY schoolid
                   LIMIT 4';
           $sth = $conn->prepare($sql);
           $sth->execute();
@@ -59,7 +59,8 @@
             <tr>
               <th><h3>school naam</h3></th>
               <th><h3>geblokkeerd/verwijderd</h3></th>
-              <th><a href="index.php?page=schooltoevoegen" class="addbutton">toevoegen</a></th>
+              <th><h3>users van deze school bekijken</h3></th>
+              <th><a href="index.php?page=addschool" class="addbutton">toevoegen</a></th>
             </tr>';
           while ($schools = $sth->fetch(PDO::FETCH_OBJ)) {
             if ($schools->archive == "1") {$archive = "yes";}
@@ -69,7 +70,8 @@
               <tr>
                 <td><b>'.$schools->schoolname.'</b></td>
                 <td><b>'.$archive.'</b></td>
-                <td><a href="index.php?page=schoolaanpassen" class="editbutton">bewerken</a></td>
+                <td><a href="index.php?page=userlijst&schoolid='.$schools->schoolid.'" class="editbutton">users bekijken</a></td>
+                <td><a href="index.php?page=editschool&schoolid='.$schools->schoolid.'" class="editbutton">bewerken</a></td>
               </tr>
             ';
           }
@@ -121,5 +123,5 @@
   } else {
     $_SESSION['error'] = "er ging iets mis. Pech!";
     header("location: php/logout.php");
-  } 
+  }
 ?>

@@ -59,7 +59,7 @@
         <select id="schoolselect" name="school">
           <option value="0" selected="selected">-- selecteer de bijbehorende school --</option>
           <?php
-            $sql = 'SELECT schoolname
+            $sql = 'SELECT schoolname, schoolid
                     FROM schools
                     WHERE schoolid<>"0"
                     AND archive<>"1"';
@@ -67,9 +67,13 @@
             $sth->execute();
 
             while ($schools = $sth->fetch(PDO::FETCH_OBJ)) {
-              echo'
-              <option value="1">'.$schools->schoolname.'</option>
-              ';
+              $selected = '';
+              if (isset($_SESSION['school']) && $schools->schoolid == $_SESSION['school']) {
+                echo $_SESSION['school'];
+                $selected = 'selected="selected"';
+                // unset($_SESSION['school']);
+              }
+              echo '<option value="'.$schools->schoolid.'" '.$selected.'>'.$schools->schoolname.'</option>';
             }
           ?>
         </select>

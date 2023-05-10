@@ -327,7 +327,9 @@ html {
 .form #rolselect,
 .form .multiselect select {
   width: 90%;
-  padding: 15px;
+  padding: 12px;
+  font-size: 17px;
+  font-weight: bold;
   margin: 5px 0 22px 0;
   display: inline-block;
   border: none;

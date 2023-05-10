@@ -6,12 +6,12 @@
   session_start();
 
   // Check if all required fields are filled in
-  if (empty($_POST['firstname']) || empty($_POST['lastname']) || empty($_POST['role'])
-      || $_POST['role'] == '2' || $_POST['school'] == '0' || empty($_POST['email']) || empty($_POST['password'])) {
-      $_SESSION['error'] = 'Please fill in all required fields';
+  if (empty($_POST['firstname']) || empty($_POST['lastname']) || empty($_POST['role']) || $_POST['role'] == '2' || $_POST['school'] == '' || $_POST['school'] == '0' || empty($_POST['email']) || empty($_POST['password'])) {
+      $_SESSION['school'] = $_POST['school'];
       $_SESSION['firstname'] = $_POST['firstname'];
       $_SESSION['lastname'] = $_POST['lastname'];
       $_SESSION['email'] = $_POST['email'];
+      $_SESSION['error'] = 'Please fill in all required fields';
       header('Location: ../index.php?page=adduser');
       exit;
   }
@@ -46,6 +46,13 @@
               $stmt->execute([$userId, $groupId]);
           }
 
+          $sql2 = "INSERT INTO `logs` (`userid`, `useragent`, `action`, `tableid`, `interactionid`) VALUES (:userid, :useragent, '1', '6', :interactionid)";
+          $sth2 = $conn->prepare($sql2);
+          $sth2->bindParam(':userid', $_SESSION['userid']);
+          $sth2->bindParam(':useragent', $_SESSION['useragent']);
+          $sth2->bindParam(':interactionid', $userId);
+          $sth2->execute();
+
           $conn->commit();
 
           $_SESSION['info'] = 'User added';
@@ -57,10 +64,11 @@
   } catch (Exception $e) {
       $conn->rollback();
 
-      $_SESSION['error'] = 'Failed to add user';
+      $_SESSION['school'] = $_POST['school'];
       $_SESSION['firstname'] = $_POST['firstname'];
       $_SESSION['lastname'] = $_POST['lastname'];
       $_SESSION['email'] = $_POST['email'];
+      $_SESSION['error'] = 'Failed to add user';
       header('Location: ../index.php?page=adduser');
       exit;
   }

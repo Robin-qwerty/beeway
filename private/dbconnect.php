@@ -1,6 +1,6 @@
 <?php
   $servername = "localhost";
-  $username = "Beeway";
+  $username = "beeway";
   $password = "qwerty";
 
   try {
