@@ -79,7 +79,7 @@
       // Check if offset parameter is set in the URL
       if (isset($_GET['offset'])) {
         // Multiply offset by 25 to get the correct number of records to skip
-        $offset = $_GET['offset'] * 30;
+        $offset = $_GET['offset'] * 50;
         // Check if userid parameter is also set in the URL
         if (isset($_GET['userid'])) {
           // If userid is set, get logs and user data for that specific user
@@ -88,7 +88,7 @@
                   WHERE u.userid=:userid
                   AND l.userid=u.userid
                   ORDER BY id DESC
-                  LIMIT 30 OFFSET '.intval($offset);
+                  LIMIT 50 OFFSET '.intval($offset);
           $sth = $conn->prepare($sql);
           // Bind userid parameter to the prepared statement
           $sth->bindParam(':userid', $_GET['userid']);
@@ -99,7 +99,7 @@
                   FROM logs as l, users as u
                   WHERE l.userid=u.userid
                   ORDER BY id DESC
-                  LIMIT 30 OFFSET '.intval($offset);
+                  LIMIT 50 OFFSET '.intval($offset);
           $sth = $conn->prepare($sql);
           $sth->execute();
         }
@@ -109,7 +109,7 @@
                 FROM logs as l, users as u
                 WHERE l.userid=u.userid
                 ORDER BY id DESC
-                LIMIT 30';
+                LIMIT 50';
         $sth = $conn->prepare($sql);
         $sth->execute();
         }
