@@ -106,6 +106,14 @@ html {
   background-color: #008ae6;
 }
 
+#trashbutton {
+  position: relative;
+  float: right;
+  bottom: -85px;
+  font-size: 25px;
+  padding: 0.5rem;
+}
+
 /*---------------------navbar----------------------------------------------------*/
 
 .navbar,
@@ -119,7 +127,7 @@ html {
 .dropdown {
   display: flex;
 }
-/* .dropdown-content {
+.dropdown-content {
   display: none;
   position: absolute;
   background-color: #1a1a1a;
@@ -132,7 +140,7 @@ html {
 }
 .dropdown-content a {
   font-size: 20px!important;
-} */
+}
 
 #navbar_left a,
 #navbar_right a,

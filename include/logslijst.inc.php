@@ -160,33 +160,49 @@
 
           <div class="tablebuttons">';
             if (isset($_GET['offset'])) {
+              $pagina = $_GET['offset'] + 1;
               $terug = $_GET['offset'] - 1;
               $volgende = $_GET['offset'] + 1;
               if ($_GET['offset'] == '0') {
                 echo '
                   <a href="index.php?page=logslijst&offset='.$volgende.'" class="addbutton">volgende</a>
+                  <p style="margin:6px;">pagina: '.$pagina.'</p>
                 ';
               } else {
                 echo '
                   <a href="index.php?page=logslijst&offset='.$terug.'" class="addbutton">terug</a>
+                  <p style="margin:6px;">pagina: '.$pagina.'</p>
                   <a href="index.php?page=logslijst&offset='.$volgende.'" class="addbutton">volgende</a>
                 ';
               }
             } else {
               echo '
                 <a href="index.php?page=logslijst&offset=1" class="addbutton">volgende</a>
+                <p style="margin:6px;">pagina: 1</p>
               ';
             }
           echo '</div>';
         } else {
           // the query did not return any rows
+          $pagina = $_GET['offset'] + 1;
+
           echo '<h2 style="text-align:center;"><strong>Er zijn geen resultaten gevonden</string></h2>';
           if (isset($_GET['offset']) && $_GET['offset'] >= '1') {
             $terug = $_GET['offset'] - 1;
 
-            echo '<div class="tablebuttons"><a href="index.php?page=logslijst&offset='.$terug.'" class="addbutton">terug</a></div>';
+            echo '
+              <div class="tablebuttons">
+                <p style="margin:6px;">pagina: '.$pagina.'</p>
+                <a href="index.php?page=logslijst&offset='.$terug.'" class="addbutton">terug</a>
+              </div>
+              ';
           } else if (isset($_GET['offset'])) {
-            echo '<div class="tablebuttons"><a href="index.php?page=logslijst" class="addbutton">terug</a></div>';
+            echo '
+              <div class="tablebuttons">
+                <p style="margin:6px;">pagina: '.$pagina.'</p>
+                <a href="index.php?page=logslijst&offset='.$terug.'" class="addbutton">terug</a>
+              </div>
+              ';
           }
           $_SESSION['error'] = "Er zijn geen resultaten gevonden. Pech!";
         }

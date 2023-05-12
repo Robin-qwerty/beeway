@@ -6,13 +6,13 @@
         <a href="home.html"><b>Home</b></a>
         <div class="dropdown">
           <a id="dashboard" href="index.php?page=dashboard"><b>dashboard</b></a>
-          <!-- <div class="dropdown-content">
+          <div class="dropdown-content">
             <a href="beewaylijst.html"><b>Beeway's</b></a>
             <a href="klassenlijst.html"><b>Klassen</b></a>
             <a href="vakkenlijst.html"><b>Vakken</b></a>
             <a href="hoofdthemalijst.html"><b>Hoofdthema's</b></a>
             <a href="userlijst.html"><b>Users</b></a>
-          </div> -->
+          </div>
         </div>
       </div>
     <?php } else { ?>

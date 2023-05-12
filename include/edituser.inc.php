@@ -1,4 +1,4 @@
-<?php if (isset($_SESSION['userid']) && isset($_SESSION['userrol']) && $_SESSION['userrol'] == 'superuser' && isset($_GET['userid'])) { // check if user is logedin and if a user was selected to edit ?>
+<?php if (isset($_SESSION['userid']) && isset($_SESSION['userrol']) && $_SESSION['userrol'] == 'superuser' || $_SESSION['userrol'] == 'admin') { // check if user is logedin and if a user was selected to edit ?>
   <script src="script/admin_gebruikertoevoegen.js"></script>
   <?php echo'<form class="form addedit" method="POST" action="php/edituser.php?userid='.$_GET['userid'].'">'; ?>
     <!-- <div class="admin_adduser form"> -->
@@ -141,6 +141,8 @@
         }
         echo'
       <button type="submit" id="adduserbtn" class="registerbtn">aanpasingen opslaan</button>
+
+      <a class="deletebutton" id="trashbutton"'; ?> onclick='return confirm("Weet je zekker dat je deze user wilt verwijderen!?")' <?php echo ' href="php/deleteuser.php?userid='.$_GET['userid'].'"><iconify-icon icon="tabler:trash"></iconify-icon></a>
 
       <script>
         var passwordField = document.getElementById("password");

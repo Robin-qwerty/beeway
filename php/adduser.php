@@ -1,9 +1,14 @@
 <?php
-  // Include the database connection file
   require_once '../private/dbconnect.php';
-
-  // Start the session
   session_start();
+
+  if (isset($_SESSION['userid'], $_SESSION['userrol']) && ($_SESSION['userrol'] === 'superuser' || $_SESSION['userrol'] === 'admin')) {
+    // User has the necessary privileges
+  } else {
+    $_SESSION['error'] = 'Unauthorized access. Please log in with appropriate credentials.';
+    header('location: ../index.php?page=dashboard');
+    exit;
+  }
 
   // Check if all required fields are filled in
   if (empty($_POST['firstname']) || empty($_POST['lastname']) || empty($_POST['role']) || $_POST['role'] == '2' || $_POST['school'] == '' || $_POST['school'] == '0' || empty($_POST['email']) || empty($_POST['password'])) {

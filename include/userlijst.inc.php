@@ -1,4 +1,4 @@
-<?php if (isset($_SESSION['userid']) && isset($_SESSION['userrol'])) { // check if user is logedin ?>
+<?php if (isset($_SESSION['userid']) && isset($_SESSION['userrol']) && $_SESSION['userrol'] == 'superuser' || $_SESSION['userrol'] == 'admin') { // check if user is logedin ?>
   <div class="beewaylijst">
       <?php if ($_SESSION['userrol'] == "superuser") { ?>
         <div class="beewaylijsttitel"><h1>Welkom op het super user dashboard</h1></div>
@@ -70,14 +70,10 @@
               <th><h3>Rol</h3></th>
               <th><h3>School</h3></th>
               <th><h3>groepen</h3></th>
-              <th><h3>geblokkeerd/verwijderd</h3></th>
               <th><a href="index.php?page=adduser" class="addbutton">toevoegen</a></th>
             </tr>';
 
           while ($users = $sth->fetch(PDO::FETCH_OBJ)) {
-            if ($users->archive == "1") {$archive = "yes";}
-            else {$archive = "no";}
-
             if ($users->role == "0") {$role = "docent";}
             else if ($users->role == "1") {$role = "school admin";}
             else {$role = "super user";}
@@ -114,7 +110,6 @@
               }
 
             echo '
-                <td><b>'.$archive.'</b></td>
                 <td><a href="index.php?page=edituser&userid='.$users->userid.'" class="editbutton">bewerken</a></td>
               </tr>
             ';
@@ -126,33 +121,49 @@
 
           <div class="tablebuttons">';
             if (isset($_GET['offset'])) {
+              $pagina = $_GET['offset'] + 1;
               $terug = $_GET['offset'] - 1;
               $volgende = $_GET['offset'] + 1;
               if ($_GET['offset'] == '0') {
                 echo '
                   <a href="index.php?page=userlijst&offset='.$volgende.'" class="addbutton">volgende</a>
+                  <p style="margin:6px;">pagina: '.$pagina.'</p>
                 ';
               } else {
                 echo '
                   <a href="index.php?page=userlijst&offset='.$terug.'" class="addbutton">terug</a>
+                  <p style="margin:6px;">pagina: '.$pagina.'</p>
                   <a href="index.php?page=userlijst&offset='.$volgende.'" class="addbutton">volgende</a>
                 ';
               }
             } else {
               echo '
                 <a href="index.php?page=userlijst&offset=1" class="addbutton">volgende</a>
+                <p style="margin:6px;">pagina: 1</p>
               ';
             }
           echo '</div>';
         } else {
           // the query did not return any rows
+          $pagina = $_GET['offset'] + 1;
+
           echo '<h2 style="text-align:center;"><strong>Er zijn geen resultaten gevonden</string></h2>';
           if (isset($_GET['offset']) && $_GET['offset'] >= '1') {
             $terug = $_GET['offset'] - 1;
 
-            echo '<div class="tablebuttons"><a href="index.php?page=userlijst&offset='.$terug.'" class="addbutton">terug</a></div>';
+            echo '
+              <div class="tablebuttons">
+                <p style="margin:6px;">pagina: '.$pagina.'</p>
+                <a href="index.php?page=userlijst&offset='.$terug.'" class="addbutton">terug</a>
+              </div>
+              ';
           } else if (isset($_GET['offset'])) {
-            echo '<div class="tablebuttons"><a href="index.php?page=userlijst" class="addbutton">terug</a></div>';
+            echo '
+              <div class="tablebuttons">
+                <p style="margin:6px;">pagina: '.$pagina.'</p>
+                <a href="index.php?page=userlijst&offset='.$terug.'" class="addbutton">terug</a>
+              </div>
+              ';
           }
           $_SESSION['error'] = "Er zijn geen resultaten gevonden. Pech!";
         }

@@ -1,8 +1,16 @@
 <?php
-  include'../private/dbconnect.php';
+  require_once '../private/dbconnect.php';
   session_start();
 
-  // try {
+  if (isset($_SESSION['userid'], $_SESSION['userrol']) && ($_SESSION['userrol'] === 'superuser' || $_SESSION['userrol'] === 'admin')) {
+    // User has the necessary privileges
+  } else {
+    $_SESSION['error'] = 'Unauthorized access. Please log in with appropriate credentials.';
+    header('location: ../index.php?page=dashboard');
+    exit;
+  }
+
+  try {
     if ($_POST['firstname'] == '' || $_POST['lastname'] == '' || $_POST['school'] == '0' || $_POST['email'] == '') {
       $_SESSION['error'] = "vul ff iets in";
       header("location: ../index.php?page=edituser&userid=".$_GET['userid']);
@@ -60,6 +68,7 @@
         } catch (\Exception $e) {
           $_SESSION['error'] = 'kon geen groepen koppelen. Pech';
           header('location: ../index.php?page=userlijst');
+          exit;
         }
 
         $sql = "INSERT INTO `logs` (`userid`, `useragent`, `action`, `tableid`, `interactionid`) VALUES (:userid, :useragent, '2', '6', :interactionid)";
@@ -76,10 +85,10 @@
       //   header('location: ../index.php?page=userlijst');
       // }
     }
-  // } catch (\Exception $e) {
-  //   $_SESSION['error'] = "er ging iets mis. Pech";
-  //   header("location: ../index.php?page=userlijst");
-  // }
+  } catch (\Exception $e) {
+    $_SESSION['error'] = "er ging iets mis. Pech";
+    header("location: ../index.php?page=userlijst");
+  }
 
   function checkForIllegalCharacters($str) { // check for iliegal characters
     $illegalChars = array('<', '>', '{', '}', '(', ')', '[', ']', '*', '$', '^', '`', '~', '|', '\\', '\'', '"', ':', ';', ',', '/');

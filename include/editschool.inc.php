@@ -4,7 +4,7 @@
 ?>
 
   <div class="addeditschool">
-    <form class="form" action="php/editschool.php" method="POST">
+    <form class="form" action="php/editschool.php?schoolid=<?php echo $_GET['schoolid']; ?>" method="POST">
       <div id="name">
         <div id="logintittle"><h1>school aanpassen <iconify-icon icon="fa6-solid:school"></iconify-icon></h1></div>
         <p style="color:white;">pas deze school aan</p>
@@ -52,6 +52,9 @@
 
       <hr style="margin: 20px 0;">
       <button type="submit" class="registerbtn" style="font-weight: bold;">School aanpassen</button>
+
+      <a class="deletebutton" id="trashbutton" style="bottom:0" onclick='return confirm("Weet je zekker dat je deze user wilt verwijderen!?")' href="php/deleteuser.php?userid='.$_GET['userid'].'"><iconify-icon icon="tabler:trash"></iconify-icon></a>
+
     </form>
   </div>
 
