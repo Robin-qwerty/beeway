@@ -18,11 +18,15 @@
       $_SESSION['error'] = "illegal character used";
       header("location: ../index.php?page=edituser&userid=".$_GET['userid']);
     } else {
-      $sql = "UPDATE schools SET schoolname = :schoolname, updatedby = :updatedby
+      $timestamp = time();
+      $date_time = date('Y-m-d H:i:s', $timestamp);
+
+      $sql = "UPDATE schools SET schoolname = :schoolname, updatedby = :updatedby, updatedat = :updatedat
               WHERE schoolid=:schoolid";
       $sth = $conn->prepare($sql);
       $sth->bindParam(':schoolname', $_POST['schoolname']);
       $sth->bindParam(':updatedby', $_SESSION['userid']);
+      $sth->bindParam(':updatedat', $date_time);
       $sth->bindParam(':schoolid', $_GET['schoolid']);
       $sth->execute();
 

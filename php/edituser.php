@@ -18,10 +18,13 @@
       $_SESSION['error'] = "illegal character used";
       header("location: ../index.php?page=edituser&userid=".$_GET['userid']);
     } else {
+      $timestamp = time();
+      $date_time = date('Y-m-d H:i:s', $timestamp);
+
       if (isset($_POST['password'])) {
         $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-        $sql = "UPDATE users SET schoolid = :schoolid, firstname = :firstname, lastname = :lastname, email = :email, password = :password, updatedby = :updatedby
+        $sql = "UPDATE users SET schoolid = :schoolid, firstname = :firstname, lastname = :lastname, email = :email, password = :password, updatedby = :updatedby, updatedat = :updatedat
                 WHERE userid=:userid";
         $sth = $conn->prepare($sql);
         $sth->bindParam(':schoolid', $_POST['school']);
@@ -30,10 +33,11 @@
         $sth->bindParam(':email', $_POST['email']);
         $sth->bindParam(':password', $password);
         $sth->bindParam(':updatedby', $_SESSION['userid']);
+        $sth->bindParam(':updatedat', $date_time);
         $sth->bindParam(':userid', $_GET['userid']);
         $sth->execute();
       } else {
-        $sql = "UPDATE users SET schoolid = :schoolid, firstname = :firstname, lastname = :lastname, email = :email, updatedby = :updatedby
+        $sql = "UPDATE users SET schoolid = :schoolid, firstname = :firstname, lastname = :lastname, email = :email, updatedby = :updatedby, updatedat = :updatedat
                 WHERE userid=:userid";
         $sth = $conn->prepare($sql);
         $sth->bindParam(':schoolid', $_POST['school']);
@@ -41,6 +45,7 @@
         $sth->bindParam(':lastname', $_POST['lastname']);
         $sth->bindParam(':email', $_POST['email']);
         $sth->bindParam(':updatedby', $_SESSION['userid']);
+        $sth->bindParam(':updatedat', $date_time);
         $sth->bindParam(':userid', $_GET['userid']);
         $sth->execute();
 

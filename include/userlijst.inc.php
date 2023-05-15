@@ -43,21 +43,23 @@
 
       <?php
         if (isset($_GET['offset'])) {
-          $offset = $_GET['offset'] * 10;
+          $offset = $_GET['offset'] * 25;
 
           $sql = 'SELECT u.*, s.schoolname FROM users as u, schools as s
                   WHERE s.schoolid=u.schoolid
                   AND u.userid<>0
+                  AND u.archive=0
                   ORDER BY userid
-                  LIMIT 10 OFFSET '.intval($offset);
+                  LIMIT 25 OFFSET '.intval($offset);
           $sth = $conn->prepare($sql);
           $sth->execute();
         } else {
           $sql = 'SELECT u.*, s.schoolname FROM users as u, schools as s
                   WHERE s.schoolid=u.schoolid
                   AND u.userid<>0
+                  AND u.archive=0
                   ORDER BY userid
-                  LIMIT 10';
+                  LIMIT 25';
           $sth = $conn->prepare($sql);
           $sth->execute();
         }
@@ -126,8 +128,8 @@
               $volgende = $_GET['offset'] + 1;
               if ($_GET['offset'] == '0') {
                 echo '
-                  <a href="index.php?page=userlijst&offset='.$volgende.'" class="addbutton">volgende</a>
                   <p style="margin:6px;">pagina: '.$pagina.'</p>
+                  <a href="index.php?page=userlijst&offset='.$volgende.'" class="addbutton">volgende</a>
                 ';
               } else {
                 echo '
@@ -138,8 +140,8 @@
               }
             } else {
               echo '
-                <a href="index.php?page=userlijst&offset=1" class="addbutton">volgende</a>
                 <p style="margin:6px;">pagina: 1</p>
+                <a href="index.php?page=userlijst&offset=1" class="addbutton">volgende</a>
               ';
             }
           echo '</div>';
@@ -153,15 +155,15 @@
 
             echo '
               <div class="tablebuttons">
-                <p style="margin:6px;">pagina: '.$pagina.'</p>
                 <a href="index.php?page=userlijst&offset='.$terug.'" class="addbutton">terug</a>
+                <p style="margin:6px;">pagina: '.$pagina.'</p>
               </div>
               ';
           } else if (isset($_GET['offset'])) {
             echo '
               <div class="tablebuttons">
-                <p style="margin:6px;">pagina: '.$pagina.'</p>
                 <a href="index.php?page=userlijst&offset='.$terug.'" class="addbutton">terug</a>
+                <p style="margin:6px;">pagina: '.$pagina.'</p>
               </div>
               ';
           }
@@ -169,6 +171,12 @@
         }
       ?>
 
+    <div class="seedeleted">
+      <h3>bekijk verwijderde users: </h3>
+      <a class="deletebutton" id="trashbutton" href="index.php?page=deletedusers"><iconify-icon icon="tabler:trash"></iconify-icon></a>
+    </div>
+    <br>
+    <br>
   </div>
 
   <?php

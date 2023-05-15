@@ -53,7 +53,19 @@
       <hr style="margin: 20px 0;">
       <button type="submit" class="registerbtn" style="font-weight: bold;">School aanpassen</button>
 
-      <a class="deletebutton" id="trashbutton" style="bottom:0" onclick='return confirm("Weet je zekker dat je deze user wilt verwijderen!?")' href="php/deleteuser.php?userid='.$_GET['userid'].'"><iconify-icon icon="tabler:trash"></iconify-icon></a>
+      <a class="deletebutton" id="trashbutton" style="bottom:0" onclick='deleteschool()'><iconify-icon icon="tabler:trash"></iconify-icon></a>
+
+      <script>
+        function deleteschool() {
+          var txt;
+          if (confirm("Weet je zekker dat je deze school wilt verwijderen!?")) {
+            if (confirm("Dan word alles dat me de school temaken heeft ook verwijdert!!! weet je zeker dat je dat wil!?")) {
+              window.location.href = "#";
+            }
+          }
+        }
+      </script>
+
 
     </form>
   </div>

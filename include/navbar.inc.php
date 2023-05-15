@@ -3,16 +3,16 @@
   <div id="navbar_left">
     <?php if (isset($_SESSION['userid'])) { ?>
       <div id="navbuttons">
-        <a href="home.html"><b>Home</b></a>
+        <a href="index.php"><b>Home</b></a>
         <div class="dropdown">
           <a id="dashboard" href="index.php?page=dashboard"><b>dashboard</b></a>
-          <div class="dropdown-content">
+          <!-- <div class="dropdown-content">
             <a href="beewaylijst.html"><b>Beeway's</b></a>
             <a href="klassenlijst.html"><b>Klassen</b></a>
             <a href="vakkenlijst.html"><b>Vakken</b></a>
             <a href="hoofdthemalijst.html"><b>Hoofdthema's</b></a>
             <a href="userlijst.html"><b>Users</b></a>
-          </div>
+          </div> -->
         </div>
       </div>
     <?php } else { ?>
@@ -46,7 +46,7 @@
       <div class="menu_profiel_foto">
         <iconify-icon icon="material-symbols:person" style="font-size:80px;"></iconify-icon>
       </div>
-      <div class="menu_profiel_rechts" style="margin-top:20px;">
+      <div class="menu_profiel_rechts" style="margin-top:20px;">  
         <h2 id="menu_profiel_naam" style="font-weight:none;" class="day-message">Hallo</h2>
         <h3 id="voornaam" style="margin:0;margin-left:35px;"></h3>
         <script type='text/javascript'>
@@ -55,7 +55,7 @@
           // Set the value as the innerHTML of the div element
           document.getElementById("voornaam").innerHTML = sessionData;
         </script>
-        <a id="menu_profiel_knop" href="profiel.html" class="editbutton">Profiel</a>
+        <a id="menu_profiel_knop" href="index.php?page=profiel" class="editbutton">Profiel</a>
       </div>
     </div>
     <div class="menu_Buttons">

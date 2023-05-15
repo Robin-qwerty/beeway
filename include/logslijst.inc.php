@@ -165,8 +165,8 @@
               $volgende = $_GET['offset'] + 1;
               if ($_GET['offset'] == '0') {
                 echo '
-                  <a href="index.php?page=logslijst&offset='.$volgende.'" class="addbutton">volgende</a>
                   <p style="margin:6px;">pagina: '.$pagina.'</p>
+                  <a href="index.php?page=logslijst&offset='.$volgende.'" class="addbutton">volgende</a>
                 ';
               } else {
                 echo '
@@ -177,8 +177,8 @@
               }
             } else {
               echo '
-                <a href="index.php?page=logslijst&offset=1" class="addbutton">volgende</a>
                 <p style="margin:6px;">pagina: 1</p>
+                <a href="index.php?page=logslijst&offset=1" class="addbutton">volgende</a>
               ';
             }
           echo '</div>';
@@ -192,15 +192,15 @@
 
             echo '
               <div class="tablebuttons">
-                <p style="margin:6px;">pagina: '.$pagina.'</p>
                 <a href="index.php?page=logslijst&offset='.$terug.'" class="addbutton">terug</a>
+                <p style="margin:6px;">pagina: '.$pagina.'</p>
               </div>
               ';
           } else if (isset($_GET['offset'])) {
             echo '
               <div class="tablebuttons">
-                <p style="margin:6px;">pagina: '.$pagina.'</p>
                 <a href="index.php?page=logslijst&offset='.$terug.'" class="addbutton">terug</a>
+                <p style="margin:6px;">pagina: '.$pagina.'</p>
               </div>
               ';
           }

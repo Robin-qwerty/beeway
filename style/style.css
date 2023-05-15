@@ -107,11 +107,20 @@ html {
 }
 
 #trashbutton {
-  position: relative;
-  float: right;
+  /* position: relative;
+  float: right; */
   bottom: -85px;
   font-size: 25px;
   padding: 0.5rem;
+  max-height: 44px;
+}
+
+.seedeleted {
+  float: right;
+  display: flex;
+}
+.seedeleted a {
+  bottom: 40px!important;
 }
 
 /*---------------------navbar----------------------------------------------------*/
@@ -352,6 +361,9 @@ html {
 .form #textaddedit:focus {
   background-color: #ffc107;
   outline: none;
+}
+input[type="password"] {
+  -webkit-text-security: disc;
 }
 
 input[type='checkbox'] {

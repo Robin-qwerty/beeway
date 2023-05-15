@@ -142,7 +142,16 @@
         echo'
       <button type="submit" id="adduserbtn" class="registerbtn">aanpasingen opslaan</button>
 
-      <a class="deletebutton" id="trashbutton"'; ?> onclick='return confirm("Weet je zekker dat je deze user wilt verwijderen!?")' <?php echo ' href="php/deleteuser.php?userid='.$_GET['userid'].'"><iconify-icon icon="tabler:trash"></iconify-icon></a>
+      <a class="deletebutton" id="trashbutton" onclick="deleteuser()"><iconify-icon icon="tabler:trash"></iconify-icon></a>
+
+      <script>
+        function deleteuser() {
+          var txt;
+          if (confirm("Weet je zekker dat je deze user wilt verwijderen!?")) {
+            window.location.href = "php/deleteuser.php?userid='.$_GET['userid'].'";
+          }
+        }
+      </script>
 
       <script>
         var passwordField = document.getElementById("password");
