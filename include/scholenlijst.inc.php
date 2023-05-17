@@ -130,7 +130,7 @@
 
     <div class="seedeleted">
       <h3>bekijk verwijderde scholen: </h3>
-      <a class="deletebutton" id="trashbutton" href="index.php?page=deletedschools"><iconify-icon icon="tabler:trash"></iconify-icon></a>
+      <a class="deletebutton" id="trashbutton" href="index.php?page=scholendeletedlijst"><iconify-icon icon="tabler:trash"></iconify-icon></a>
     </div>
     <br>
     <br>

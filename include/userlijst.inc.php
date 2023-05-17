@@ -23,7 +23,7 @@
           <b>|</b>
           <button onclick="window.location.href='index.php?page=Hoofdthemalijst';" id="beewaylijstopties3">Hoofdthema's</button>
           <b>|</b>
-          <button onclick="window.location.href='index.php?page=userlijst';" id="beewaylijstopties5">Users</button>
+          <button onclick="window.location.href='index.php?page=userlijst';" id="beewaylijstopties5"><u>Users</u></button>
       <?php } else { ?>
         <div class="beewaylijsttitel"><h1>Welkom op het docenten dashboard</h1></div>
         <h2>beheer hier dingen (:</h2>
@@ -133,15 +133,15 @@
                 ';
               } else {
                 echo '
-                  <a href="index.php?page=userlijst&offset='.$terug.'" class="addbutton">terug</a>
+                  <a href="index.php?page='.$_GET['page'].'&offset='.$terug.'" class="addbutton">terug</a>
                   <p style="margin:6px;">pagina: '.$pagina.'</p>
-                  <a href="index.php?page=userlijst&offset='.$volgende.'" class="addbutton">volgende</a>
+                  <a href="index.php?page='.$_GET['page'].'&offset='.$volgende.'" class="addbutton">volgende</a>
                 ';
               }
             } else {
               echo '
                 <p style="margin:6px;">pagina: 1</p>
-                <a href="index.php?page=userlijst&offset=1" class="addbutton">volgende</a>
+                <a href="index.php?page='.$_GET['page'].'&offset=1" class="addbutton">volgende</a>
               ';
             }
           echo '</div>';
@@ -155,14 +155,14 @@
 
             echo '
               <div class="tablebuttons">
-                <a href="index.php?page=userlijst&offset='.$terug.'" class="addbutton">terug</a>
+                <a href="index.php?page='.$_GET['page'].'&offset='.$terug.'" class="addbutton">terug</a>
                 <p style="margin:6px;">pagina: '.$pagina.'</p>
               </div>
               ';
           } else if (isset($_GET['offset'])) {
             echo '
               <div class="tablebuttons">
-                <a href="index.php?page=userlijst&offset='.$terug.'" class="addbutton">terug</a>
+                <a href="index.php?page='.$_GET['page'].'&offset='.$terug.'" class="addbutton">terug</a>
                 <p style="margin:6px;">pagina: '.$pagina.'</p>
               </div>
               ';
@@ -173,7 +173,7 @@
 
     <div class="seedeleted">
       <h3>bekijk verwijderde users: </h3>
-      <a class="deletebutton" id="trashbutton" href="index.php?page=deletedusers"><iconify-icon icon="tabler:trash"></iconify-icon></a>
+      <a class="deletebutton" id="trashbutton" href="index.php?page=usersdeletedlijst"><iconify-icon icon="tabler:trash"></iconify-icon></a>
     </div>
     <br>
     <br>
