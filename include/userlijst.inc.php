@@ -173,7 +173,7 @@
 
     <div class="seedeleted">
       <h3>bekijk verwijderde users: </h3>
-      <a class="deletebutton" id="trashbutton" href="index.php?page=usersdeletedlijst"><iconify-icon icon="tabler:trash"></iconify-icon></a>
+      <a class="deletebutton" id="trashbutton2" href="index.php?page=usersdeletedlijst"><iconify-icon icon="tabler:trash"></iconify-icon></a>
     </div>
     <br>
     <br>

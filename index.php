@@ -44,6 +44,16 @@
 
     // Debugging: display the contents of the session
     echo "<pre>", print_r($_SESSION),"</pre>";
+
+    $fileToInclude = 'error.inc.php';
+
+    if (!in_array($fileToInclude, get_included_files())) {
+        include $fileToInclude;
+        // or require $fileToInclude;
+        // Code to execute if the file has not been included before
+    } else {
+        // Code to execute if the file has already been included
+    }
   ?>
 
 </body>

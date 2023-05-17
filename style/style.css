@@ -107,9 +107,14 @@ html {
 }
 
 #trashbutton {
-  /* position: relative;
-  float: right; */
+  position: relative;
+  float: right;
   bottom: -85px;
+  font-size: 25px;
+  padding: 0.5rem;
+  max-height: 44px;
+}
+#trashbutton2 {
   font-size: 25px;
   padding: 0.5rem;
   max-height: 44px;
