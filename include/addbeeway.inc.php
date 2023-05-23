@@ -1,5 +1,22 @@
 <script src="script/beeway.js"></script>
 
+<?php
+
+  $sql = 'SELECT schoolid
+       FROM users
+       WHERE schoolid <> "0"
+       AND archive <> "1"
+       AND userid = :userid';
+
+  $sth = $conn->prepare($sql);
+  $sth->bindValue(':userid', $_SESSION['userid']);
+  $sth->execute();
+
+  $result = $sth->fetch(); // Fetch the result from the executed query
+  $schoolid = $result['schoolid']; // Access the schoolid value from the result array
+
+?>
+
 <div class="beewayedit">
   <form id="form0" action="php/addbeeway.php" method="post">
     <div><input type="text" placeholder="BeewayNaam" name="beewaynaam" required></div>
@@ -32,19 +49,19 @@
 
       <div class="cell HOOFDTHEMA">
         <h2 id="orange">HOOFDTHEMA</h2>
-        <input type="radio" name="hoofdthemaid[]" value="1" required>
+        <input type="radio" name="hoofdthemaid" value="1" required>
         <label for="html">P1: EDI</label>
         <br>
-        <input type="radio" name="hoofdthemaid[]" value="2">
+        <input type="radio" name="hoofdthemaid" value="2">
         <label for="html">P2: BEGELEIDENDE INOEFENING</label>
         <br>
-        <input type="radio" name="hoofdthemaid[]" value="3">
+        <input type="radio" name="hoofdthemaid" value="3">
         <label for="html">P3: LEZEN</label>
         <br>
-        <input type="radio" name="hoofdthemaid[]" value="4">
+        <input type="radio" name="hoofdthemaid" value="4">
         <label for="html">P4: DIFFERENTIATIE EDI</label>
         <br>
-        <input type="radio" name="hoofdthemaid[]" value="5">
+        <input type="radio" name="hoofdthemaid" value="5">
         <label for="html">P5: DOELENPLANNER</label>
         <br>
       </div>
@@ -74,11 +91,24 @@
         <select name="vakgebiedid" id="vakgebied" required>
           <!-- <optgroup label="Selecteer een vakgebied"> -->
             <option value="">-- selecteer een vakgebied --</option>
-            <option value="1">Rekenen</option>
-            <option value="2">Lezen</option>
-            <option value="3">taal</option>
-            <option value="4">engels</option>
-            <option value="5">gym</option>
+            <?php
+              $sql = 'SELECT disciplinename, disciplineid
+                      FROM disciplines
+                      WHERE archive=0
+                      AND schoolid=:schoolid';
+              $sth = $conn->prepare($sql);
+              $sth->bindValue(':schoolid', $schoolid);
+              $sth->execute();
+
+              while ($disciplines = $sth->fetch(PDO::FETCH_OBJ)) {
+                $selected = '';
+                if (isset($_SESSION['disciplines']) && $disciplines->disciplineid == $_SESSION['disciplines']) {
+                  $selected = 'selected="selected"';
+                  unset($_SESSION['disciplines']);
+                }
+                echo '<option value="'.$disciplines->disciplineid.'" '.$selected.'>'.$disciplines->disciplinename.'</option>';
+              }
+            ?>
           <!-- </optgroup> -->
         </select>
       </form>

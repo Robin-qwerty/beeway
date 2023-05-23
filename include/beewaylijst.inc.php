@@ -106,7 +106,7 @@
 
                 <td><b>'.$beeway->concretegoal.'</b></td>
                 <td><b>'.$status.'</b></td>
-                <td><a href="index.php?page=editbeeway&userid='.$beeway->beewayid.'" class="editbutton">bewerken</a></td>
+                <td><a href="index.php?page=editbeeway&beewayid='.$beeway->beewayid.'" class="editbutton">bewerken</a></td>
               </tr>
             ';
           }

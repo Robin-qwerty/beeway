@@ -19,9 +19,9 @@
           <b>|</b>
           <button onclick="window.location.href='index.php?page=klassenlijst';" id="beewaylijstopties4">Klassen</button>
           <b>|</b>
-          <button onclick="window.location.href='index.php?page=vakkenlijst';" id="beewaylijstopties2">Vakken</button>
+          <button onclick="window.location.href='index.php?page=vakkenlijst';" id="beewaylijstopties2"><u>Vakken</u></button>
           <b>|</b>
-          <button onclick="window.location.href='index.php?page=Hoofdthemalijst';" id="beewaylijstopties3"><u>Hoofdthema's</u></button>
+          <button onclick="window.location.href='index.php?page=Hoofdthemalijst';" id="beewaylijstopties3">Hoofdthema's</button>
           <b>|</b>
           <button onclick="window.location.href='index.php?page=userlijst';" id="beewaylijstopties5">Users</button>
       <?php } else { ?>
@@ -38,64 +38,29 @@
     <br>
 
       <?php
-      $sql = 'SELECT schoolid FROM users
-              WHERE userid= :userid';
-      $sth = $conn->prepare($sql);
-      $sth->bindParam(':userid', $_SESSION['userid']);
-      $sth->execute();
-      while ($school = $sth->fetch(PDO::FETCH_OBJ)) {
-        $schoolid = $school -> schoolid;
-
-      }
-
         if (isset($_GET['offset'])) {
-          $offset = $_GET['offset'] * 4;
-
+          $offset = $_GET['offset'] * 25;
 
         } else {
-          $sql = 'SELECT * FROM maintheme
-                  WHERE schoolid = :schoolid and archive = 0
-                  LIMIT 4';
+          $sql = 'SELECT * FROM disciplines
+                  WHERE archive = 1
+                  LIMIT 25';
           $sth = $conn->prepare($sql);
-          $sth->bindParam(':schoolid', $schoolid);
           $sth->execute();
         }
 
         if ($sth->rowCount() > 0) {
           echo '<table class="beewaylijsttable">
             <tr>
-              <th><h3>Schooljaar</h3></th>
-              <th><h3>Periode 1</h3></th>
-              <th><h3>Periode 2</h3></th>
-              <th><h3>Periode 3</h3></th>
-              <th><h3>Periode 4</h3></th>
-              <th><h3>Periode 5</h3></th>
+              <th><h3>vak</h3></th>
               <th><h3>verwijderd</h3></th>
-              <th><a href="index.php?page=hoofdthematoevoegen" class="addbutton">toevoegen</a></th>
             </tr>';
-          while ($maintheme = $sth->fetch(PDO::FETCH_OBJ)) {
-            if ($maintheme->archive == "1") {$archive = "yes";}
-            else {$archive = "no";}
-
-            if ($maintheme->schoolyear == "1") {$schoolyear = "2021/2022";}
-            else if ($maintheme->schoolyear == "2") {$schoolyear = "2022/2023";}
-            else if ($maintheme->schoolyear == "3") {$schoolyear = "2023/2024";}
-            else if ($maintheme->schoolyear == "4") {$schoolyear = "2024/2025";}
-            else if ($maintheme->schoolyear == "5") {$schoolyear = "2025/2026";}
-            else if ($maintheme->schoolyear == "6") {$schoolyear = "2026/2027";}
-            else if ($maintheme->schoolyear == "7") {$schoolyear = "2027/2028";}
-
+          while ($disciplines = $sth->fetch(PDO::FETCH_OBJ)) {
 
             echo'
               <tr>
-                <td><b>'.$schoolyear.'</b></td>
-                <td><b>'.$maintheme->namethemep1.'</b></td>
-                <td><b>'.$maintheme->namethemep2.'</b></td>
-                <td><b>'.$maintheme->namethemep3.'</b></td>
-                <td><b>'.$maintheme->namethemep4.'</b></td>
-                <td><b>'.$maintheme->namethemep5.'</b></td>
-                <td><b>'.$archive.'</b></td>
-                <td><a href="index.php?page=hoofdthemabewerken&mainthemeid='.$maintheme->themeid.'" class="editbutton">bewerken</a></td>
+                <td><b>'.$disciplines->disciplinename.'</b></td>
+                <td><a '; ?> onclick='return confirm("Weet je zekker dat je deze vak wilt terughalen!?")' <?php echo ' href="php/disciplinearchive.php?disciplineid='.$disciplines->disciplineid.'" class="deletebutton">vak terughalen</a></td>
               </tr>
             ';
 
@@ -103,7 +68,6 @@
 
 
           echo '</table>
-
 
           <div class="tablebuttons">';
             if (isset($_GET['offset'])) {
@@ -138,8 +102,9 @@
           $_SESSION['error'] = "the query did not return any rows. Pech!";
         }
       ?>
+
+
     <hr>
-    <a class="deletebutton" href="index.php?page=hoofdthemaarchive"><iconify-icon icon="mdi:trash-outline" style="font-size:20px"  ></iconify-icon></a>
   </div>
 
   <?php include 'include/error.inc.php'; ?>
