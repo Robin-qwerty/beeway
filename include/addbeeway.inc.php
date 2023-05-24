@@ -17,21 +17,10 @@
 
 ?>
 
-<div class="beewayedit">
-  <form id="form0" action="php/addbeeway.php" method="post">
-    <div><input type="text" placeholder="BeewayNaam" name="beewaynaam" required></div>
-    <div><button id="opslaan" class="addbutton" type="submit" style="font-size: 16px;">Opslaan</button></div>
-    <!-- <div><a onclick='return confirm("Weet je zekker dat je deze beeway wilt verwijderen!?")' href="##" class="deletebutton" style="font-size: 16px;">Verwijderen</a></div> -->
-    <div>
-      <p>Aangemaakt door: <b>Robin</b></p>
-      <p>Als laatst bewerkt door: <b>Robin</b></p>
-    </div>
-    <div>
-
-      <label for="status" style="font-size:20px;"><b>beeway Markeren als afgerond</b></label>
-      <input id="my-checkbox" type="checkbox" name="status" value="1">
-
-    </div>
+  <div class="beewayedit">
+    <form id="form0" action="php/addbeeway.php" method="post">
+      <div><input type="text" placeholder="BeewayNaam" name="beewaynaam" required></div>
+      <div><button id="opslaan" class="addbutton" type="submit" style="font-size: 16px;">Opslaan</button></div>
   </div>
 
   <hr>

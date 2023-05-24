@@ -46,90 +46,114 @@ if (isset($_SESSION['userrol'])) { // controleer of de gebruiker is ingelogd
     </div>
     <?php } ?>
   </div>
-<hr>
-<br>
+  <hr>
+  <br>
+  <?php
+    $sql = 'SELECT schoolid
+         FROM users
+         WHERE schoolid<>0
+         AND archive=0
+         AND userid=:userid';
 
-<?php
-$sql = 'SELECT disciplinename, disciplineid FROM disciplines
-        WHERE archive<>1';
-$sth = $conn->prepare($sql);
-$sth->execute();
+    $sth = $conn->prepare($sql);
+    $sth->bindValue(':userid', $_SESSION['userid']);
+    $sth->execute();
 
-echo '<table class="beewaylijsttable">
-    <tr>
-        <th>
+    $result = $sth->fetch(); // Fetch the result from the executed query
+    $schoolid = $result['schoolid']; // Access the schoolid value from the result array
+
+    if ($schoolid) {
+      $sql = 'SELECT disciplinename, disciplineid FROM disciplines
+              WHERE archive=0
+              AND schoolid=:schoolid';
+      $sth = $conn->prepare($sql);
+      $sth->bindValue(':schoolid', $schoolid);
+      $sth->execute();
+
+      echo '
+        <table class="beewaylijsttable">
+        <tr>
+          <th>
             <h3>vakken</h3>
             <th><a href="index.php?page=disciplinetoevoegen&disciplineid" class="addbutton">toevoegen</a></th>
-        </th>
-
-    </tr>';
-
-    while ($disciplines = $sth->fetch(PDO::FETCH_OBJ)) {
-        echo '
-            <tr>
-                <td><b>'.$disciplines->disciplinename.'</b></td>
-                <td><a href="index.php?page=disciplinebewerken&disciplineid='.$disciplines->disciplineid.'" class="editbutton">bewerken</a></td>
-            </tr>
-      ';
-    }
-
-    echo '</table>
-    <hr>
-    <br>
-    <div class="tablebuttons"> ';
-    if (isset($_GET['offset'])) {
-        $pagina = $_GET['offset'] + 1;
-        $terug = $_GET['offset'] - 1;
-        $volgende = $_GET['offset'] + 1;
-        if ($_GET['offset'] == '0') {
-            echo '
-                <a href="index.php?page=logslijst&offset='.$volgende.'" class="addbutton">volgende</a>
-                <p style="margin:6px;">pagina: '.$pagina.'</p>
-            ';
-        } else {
-            echo '
-                <a href="index.php?page=logslijst&offset='.$terug.'" class="addbutton">terug</a>
-                <p style="margin:6px;">pagina: '.$pagina.'</p>
-                <a href="index.php?page=logslijst&offset='.$volgende.'" class="addbutton">volgende</a>
-            ';
-        }
-    } else {
-        echo '
-            <a href="index.php?page=logslijst&offset=1" class="addbutton">volgende</a>
-            <p style="margin:6px;">pagina: 1</p>
+          </th>
+        </tr>
         ';
-    }
-    echo '</div>';
-    } else {
-        // de query heeft geen rijen geretourneerd
-        $pagina = $_GET['offset'] + 1;
 
-        echo '<h2 style="text-align:center;"><strong>Er zijn geen resultaten gevonden</strong></h2>';
-        if (isset($_GET['offset']) && $_GET['offset'] >= '1') {
-            $terug = $_GET['offset'] - 1;
-
-            echo '
-                <div class="tablebuttons">
-                    <p style="margin:6px;">pagina: '.$pagina.'</p>
-                    <a href="index.php?page=logslijst&offset='.$terug.'" class="addbutton">terug</a>
-                </div>
-            ';
-        } else if (isset($_GET['offset'])) {
-            echo '
-                <div class="tablebuttons">
-                    <p style="margin:6px;">pagina: '.$pagina.'</p>
-                    <a href="index.php?page=logslijst&offset='.$terug.'" class="addbutton">terug</a>
-                </div>
-            ';
+        while ($disciplines = $sth->fetch(PDO::FETCH_OBJ)) {
+          echo '
+            <tr>
+              <td><b>'.$disciplines->disciplinename.'</b></td>
+              <td><a href="index.php?page=disciplinebewerken&disciplineid='.$disciplines->disciplineid.'" class="editbutton">bewerken</a></td>
+            </tr>
+          ';
         }
 
-        $_SESSION['error'] = "Er zijn geen resultaten gevonden. Pech!";
+        echo '</table>
+        <hr>
+        <br>
+        <div class="tablebuttons"> ';
+        if (isset($_GET['offset'])) {
+          $pagina = $_GET['offset'] + 1;
+          $terug = $_GET['offset'] - 1;
+          $volgende = $_GET['offset'] + 1;
+          if ($_GET['offset'] == '0') {
+            echo '
+              <p style="margin:6px;">pagina: '.$pagina.'</p>
+              <a href="index.php?page='.$_GET['page'].'&offset='.$volgende.'" class="addbutton">volgende</a>
+            ';
+          } else {
+            echo '
+              <a href="index.php?page='.$_GET['page'].'&offset='.$terug.'" class="addbutton">terug</a>
+              <p style="margin:6px;">pagina: '.$pagina.'</p>
+              <a href="index.php?page='.$_GET['page'].'&offset='.$volgende.'" class="addbutton">volgende</a>
+            ';
+          }
+        } else {
+          echo '
+            <p style="margin:6px;">pagina: 1</p>
+            <a href="index.php?page='.$_GET['page'].'&offset=1" class="addbutton">volgende</a>
+          ';
+        }
+      echo '</div>';
+    } elseif (!isset($offset)) {
+      $_SESSION['error'] = "Er zijn geen resultaten gevonden. Pech!";
+    } else {
+      // the query did not return any rows
+      $pagina = $_GET['offset'] + 1;
+
+      echo '<h2 style="text-align:center;"><strong>Er zijn geen resultaten gevonden</string></h2>';
+      if (isset($_GET['offset']) && $_GET['offset'] >= '1') {
+        $terug = $_GET['offset'] - 1;
+
+        echo '
+          <div class="tablebuttons">
+            <a href="index.php?page='.$_GET['page'].'&offset='.$terug.'" class="addbutton">terug</a>
+            <p style="margin:6px;">pagina: '.$pagina.'</p>
+          </div>
+          ';
+      } else if (isset($_GET['offset'])) {
+        echo '
+          <div class="tablebuttons">
+            <a href="index.php?page='.$_GET['page'].'&offset='.$terug.'" class="addbutton">terug</a>
+            <p style="margin:6px;">pagina: '.$pagina.'</p>
+          </div>
+          ';
+      }
+      $_SESSION['error'] = "Er zijn geen resultaten gevonden. Pech!";
     }
-    ?>
+  ?>
     <div <a class="deletebutton archivebutton" href="index.php?page=disciplinearchive"><iconify-icon icon="mdi:trash-outline" style="font-size:20px"></iconify-icon></a>
   </div>
 
     <hr>
     </div>
-    <?php include 'include/error.inc.php'; ?>
-    <?php    ?>
+  <?php
+    include 'include/info.inc.php';
+    include 'include/error.inc.php';
+
+    } else {
+      $_SESSION['error'] = "er ging iets mis. Pech!";
+      header("location: php/logout.php");
+    }
+  ?>

@@ -49,8 +49,6 @@
         // } else {
         //   $_SESSION['error'] = 'er ging iets mis. Pech';
         //   header('location: ../index.php?page=hoofdthemalijst');
-
-        }
       }
     }
   // } catch (\Exception $e) {

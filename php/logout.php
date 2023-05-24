@@ -3,7 +3,7 @@
   include '../private/dbconnect.php'; // include the database connection
 
   try {
-    // prepare the SQL statement for logging user activity
+    // Prepare the SQL statement for logging user activity
     $sql = "INSERT INTO `logs` (`userid`, `useragent`, `action`, `tableid`, `interactionid`) VALUES (:userid, :useragent, '5', '6', :interactionid)";
     $sth = $conn->prepare($sql);
     $sth->bindParam(':userid', $_SESSION['userid']); // bind the session userid to the SQL statement
@@ -15,10 +15,12 @@
     // $_SESSION['error'] = "Pech";
   }
 
+  session_unset(); // remove all session variables
   session_destroy(); // destroy the session
   session_start(); // start a new session
 
-  $_SESSION['info'] = "uitgelogd."; // set the session info message
+  $_SESSION['info'] = "You have been logged out."; // set the session info message
 
-  header('location: ../index.php'); // redirect to the index page
+  header('Location: ../index.php'); // redirect to the index page
+  exit; // exit the script
 ?>

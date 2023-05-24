@@ -28,7 +28,7 @@
 
               echo'
               <div class="beewayedit">
-                <form id="form0" action="php/addbeeway.php" method="post">
+                <form id="form0" action="php/editbeeway.php?beewayid='.$_GET['beewayid'].'" method="post">
                   <div><input type="text" placeholder="BeewayNaam" name="beewaynaam" value="'.$beeway->beewayname.'" required></div>
                   <div><button id="opslaan" class="addbutton" type="submit" style="font-size: 16px;">Opslaan</button></div>
                   <div><button '; ?> onclick='return confirm("Weet je zekker dat je deze beeway wilt verwijderen!?")' <?php echo ' href="##" class="deletebutton" style="font-size: 16px;">Verwijderen</button></div>

@@ -53,6 +53,8 @@
       if (isset($_POST['schooladmin']) == 1) {
         // Create a temporary password for the school admin user
         $schooladminpassword = $_POST['schoolname'] . '2023!';
+
+        echo $schooladminpassword;
         // Hash the password
         $password = password_hash($schooladminpassword, PASSWORD_DEFAULT);
 
@@ -75,9 +77,9 @@
         $conn->commit();
 
         // Redirect to the school list page with a success message
-        $_SESSION['info'] = 'School and user added successfully';
-        header('Location: ../index.php?page=scholenlijst');
-        exit;
+        // $_SESSION['info'] = 'School and user added successfully';
+        // header('Location: ../index.php?page=scholenlijst');
+        // exit;
       } else {
         // Commit the transaction
         $conn->commit();

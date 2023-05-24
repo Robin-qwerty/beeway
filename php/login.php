@@ -1,30 +1,31 @@
 <?php
-  // Include the database connection file
   require_once '../private/dbconnect.php';
-
-  // Start the session
   session_start();
 
   try {
     // Validate the input fields
-    if (empty($_POST['email']) || empty($_POST['password']) || $_POST['school'] == '') {
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $schoolId = $_POST['school'];
+
+    if (empty($email) || empty($password) || empty($schoolId)) {
       $_SESSION['error'] = 'Please fill in all fields.';
       header('Location: ../index.php?page=login');
       exit();
     }
 
     // Check for illegal characters in the input fields
-    if (checkForIllegalCharacters($_POST['email']) || checkForIllegalCharacters($_POST['password'])) {
+    if (checkForIllegalCharacters([$email, $password])) {
       $_SESSION['error'] = 'Illegal characters used.';
       header('Location: ../index.php?page=login');
       exit();
     }
 
     // Get the user from the database
-    $sql = 'SELECT role, userid, password FROM users WHERE email=:email AND schoolid=:schoolid AND archive <> 1';
+    $sql = 'SELECT role, userid, password FROM users WHERE email=:email AND schoolid=:schoolid AND archive=0';
     $sth = $conn->prepare($sql);
-    $sth->bindParam(':email', $_POST['email']);
-    $sth->bindParam(':schoolid', $_POST['school']);
+    $sth->bindValue(':email', $email);
+    $sth->bindValue(':schoolid', $schoolId);
     $sth->execute();
     $user = $sth->fetch(PDO::FETCH_OBJ);
 
@@ -32,16 +33,16 @@
     if ($user) {
       $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid) VALUES (:userid, :useragent, 4, 6, :interactionid)';
       $sth = $conn->prepare($sql);
-      $sth->bindParam(':userid', $user->userid);
-      $sth->bindParam(':useragent', $_SESSION['useragent']);
-      $sth->bindParam(':interactionid', $user->userid);
+      $sth->bindValue(':userid', $user->userid);
+      $sth->bindValue(':useragent', $_SESSION['useragent']);
+      $sth->bindValue(':interactionid', $user->userid);
       $sth->execute();
     }
 
     // Check if the user exists and the password is correct
-    if (!$user || !password_verify($_POST['password'], $user->password)) {
-      $_SESSION['school'] = $_POST['school'];
-      $_SESSION['email'] = $_POST['email'];
+    if (!$user || !password_verify($password, $user->password)) {
+      $_SESSION['school'] = $schoolId;
+      $_SESSION['email'] = $email;
       $_SESSION['error'] = 'Invalid email or password. Please try again.';
       header('Location: ../index.php?page=login');
       exit();
@@ -60,21 +61,24 @@
     header('Location: ../index.php?page=dashboard');
     exit();
   } catch (\Exception $e) {
-    $_SESSION['school'] = $_POST['school'];
-    $_SESSION['email'] = $_POST['email'];
-    $_SESSION['error'] = "er ging iets mis. Pech";
+    $_SESSION['school'] = $schoolId;
+    $_SESSION['email'] = $email;
+    $_SESSION['error'] = "An error occurred. Please try again.";
     header("location: ../index.php?page=login");
   }
 
-  // Check for illegal characters in a string
-  function checkForIllegalCharacters($str) {
+  // Check for illegal characters in an array of strings
+  function checkForIllegalCharacters($strings) {
     $illegalChars = array('<', '>', '{', '}', '(', ')', '[', ']', '*', '$', '`', '|', '\\', '\'', '"', ':', ';', ',', '/');
-    foreach ($illegalChars as $char) {
-      if (strpos($str, $char) !== false) {
-        return true;
+
+    foreach ($strings as $str) {
+      foreach ($illegalChars as $char) {
+        if (strpos($str, $char) !== false) {
+          return true;
+        }
       }
     }
+
     return false;
   }
-
 ?>

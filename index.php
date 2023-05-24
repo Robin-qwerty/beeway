@@ -6,7 +6,6 @@
 
   // Include the database connection file
   include 'private/dbconnect.php';
-
   // Start a new session
   session_start();
 
