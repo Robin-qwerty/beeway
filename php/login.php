@@ -8,7 +8,7 @@
     $password = $_POST['password'];
     $schoolId = $_POST['school'];
 
-    if (empty($email) || empty($password) || empty($schoolId)) {
+    if (empty($email) || empty($password)) {
       $_SESSION['error'] = 'Please fill in all fields.';
       header('Location: ../index.php?page=login');
       exit();
