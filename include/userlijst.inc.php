@@ -42,7 +42,7 @@
     <br>
 
       <?php
-        $sql = 'SELECT role, schoolid FROM users WHERE userid=:userid AND archive<>1';
+        $sql = 'SELECT role, schoolid FROM users WHERE userid=:userid AND archive=0';
         $sth = $conn->prepare($sql);
         $sth->bindParam(':userid', $_SESSION['userid']);
         $sth->execute();
@@ -135,8 +135,8 @@
               $sql1 = 'SELECT groups FROM groups as g, linkgroups as l
                       WHERE l.userid=:userid
                       AND g.groupid=l.groupid
-                      AND g.archive<>"1"
-                      AND l.archive<>"1"';
+                      AND g.archive=0
+                      AND l.archive=0';
               $sth1 = $conn->prepare($sql1);
               $sth1->bindParam(':userid', $users->userid);
               $sth1->execute();

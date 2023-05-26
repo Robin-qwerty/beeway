@@ -72,7 +72,7 @@
               <div id="checkboxes">';
                   $sql2 = 'SELECT groups, groupid
                           FROM groups
-                          WHERE archive<>"1"';
+                          WHERE archive=0';
                   $sth2 = $conn->prepare($sql2);
                   $sth2->execute();
 
@@ -84,7 +84,7 @@
                     $sql3 = 'SELECT *
                             FROM linkgroups
                             WHERE userid=:userid
-                            AND archive<>"1"';
+                            AND archive=0';
                     $sth3 = $conn->prepare($sql3);
                     $sth3->bindParam(':userid', $_GET['userid']);
                     $sth3->execute();
@@ -109,7 +109,7 @@
             $sql4 = 'SELECT schoolname, schoolid
                       FROM schools
                       WHERE schoolid<>"0"
-                      AND archive<>"1"';
+                      AND archive=0';
             $sth4 = $conn->prepare($sql4);
             $sth4->execute();
 

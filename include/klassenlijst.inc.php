@@ -49,7 +49,7 @@ if (isset($_SESSION['userrol'])) { // controleer of de gebruiker is ingelogd
 
 <?php
 $sql = 'SELECT groups, groupid FROM groups
-        WHERE archive<>1';
+        WHERE archive=0';
 $sth = $conn->prepare($sql);
 $sth->execute();
 echo '<table class="beewaylijsttable">

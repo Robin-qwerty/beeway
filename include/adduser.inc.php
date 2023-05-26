@@ -36,7 +36,7 @@
               <?php
                 $sql = 'SELECT groups, groupid
                         FROM groups
-                        WHERE archive<>"1"';
+                        WHERE archive=0';
                 $sth = $conn->prepare($sql);
                 $sth->execute();
 
@@ -62,7 +62,7 @@
             $sql = 'SELECT schoolname, schoolid
                     FROM schools
                     WHERE schoolid<>"0"
-                    AND archive<>"1"';
+                    AND archive=0';
             $sth = $conn->prepare($sql);
             $sth->execute();
 

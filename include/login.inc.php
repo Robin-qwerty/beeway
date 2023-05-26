@@ -28,7 +28,7 @@ body {
         <label for="rol"><b>Je school</b></label>
         <br>
         <select id="schoolselect" name="school">
-            <option value="0" selected="selected">-- selecteer je school --</option>
+            <option value="0" selected="selected">-- select eer je school --</option>
             <?php
             $sql = 'SELECT schoolname, schoolid
                 FROM schools
@@ -47,7 +47,7 @@ body {
         <label for="email"><b>Email</b></label>
         <br>
         <input type="text" placeholder="Enter Email" name="email" id="email"
-            value="<?= isset($_SESSION['email']) ? htmlspecialchars($_SESSION['email']) : '' ?>" required>
+            value="<?= isset($_SESSION['email']) ? htmlspecialchars($_SESSION['email']) : ''; unset($_SESSION['email']); ?>" required>
 
         <label for="psw"><b>Password</b></label>
         <br>

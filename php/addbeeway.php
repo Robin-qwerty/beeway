@@ -31,8 +31,8 @@
   // try {
     $sql = 'SELECT schoolid
          FROM users
-         WHERE schoolid <> "0"
-         AND archive <> "1"
+         WHERE schoolid<>0
+         AND archive=0
          AND userid = :userid';
 
     $sth = $conn->prepare($sql);
