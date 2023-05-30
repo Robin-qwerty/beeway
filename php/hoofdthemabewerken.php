@@ -1,5 +1,5 @@
 <?php
-  include'../private/dbconnect.php';
+  require_once '../private/dbconnect.php';
   session_start();
 
   // try {
@@ -19,7 +19,7 @@
      while ($school = $sth1->fetch(PDO::FETCH_OBJ)) {
 
        $sql = 'SELECT schoolid FROM users
-               WHERE userid= :userid';
+               WHERE userid=:userid';
        $sth = $conn->prepare($sql);
        $sth->bindParam(':userid', $_SESSION['userid']);
        $sth->execute();
@@ -28,7 +28,8 @@
        }
 
        try {
-         $sql = "UPDATE `maintheme` SET `schoolid`=:schoolid, `namethemep1`=:namethemep1, `namethemep2`=:namethemep2, `namethemep3`=:namethemep3, `namethemep4`=:namethemep4, `namethemep5`=:namethemep5, `schoolyear`=:schoolyear WHERE themeid=:themeid ";
+         $sql = "UPDATE `maintheme` SET `schoolid`=:schoolid, `namethemep1`=:namethemep1, `namethemep2`=:namethemep2, `namethemep3`=:namethemep3, `namethemep4`=:namethemep4, `namethemep5`=:namethemep5, `schoolyear`=:schoolyear
+                WHERE themeid=:themeid ";
          $sth = $conn->prepare($sql);
          $sth->bindParam(':schoolid', $schoolid);
          $sth->bindParam(':namethemep1', $_POST['namethemep1']);

@@ -224,9 +224,9 @@
     <br>
   </div>
 
-  <?php
-    include 'include/info.inc.php';
-    include 'include/error.inc.php';
+<?php
+    require_once 'include/info.inc.php';
+    require_once 'include/error.inc.php';
 
   } else {
     $_SESSION['error'] = "er ging iets mis. Pech!";

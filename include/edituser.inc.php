@@ -39,7 +39,7 @@
 
         <hr>
         <div id="LP">
-          <label for="name"><b>voornaam</b></label>
+          <label for="firstname"><b>voornaam</b></label>
           <br>
           <input type="text" placeholder="Enter voornaam" name="firstname" value="'.$user->firstname.'" required>
           <br>
@@ -47,7 +47,7 @@
           <br>
           <input type="text" placeholder="Enter achternaam" name="lastname" value="'.$user->lastname.'" required>
           <br>
-          <label for="rol"><b>rol</b></label>
+          <label for="role"><b>rol</b></label>
           <br>
           <p id="editedby">je kan de rol niet aanpassen. Deze user is: <b>';
 
@@ -59,7 +59,7 @@
 
           <div class="klassenselect" id="klassenselect">
             <br>
-            <label for="lastname"><b>groepen</b></label>
+            <label for="groepen"><b>groepen</b></label>
             <br>
 
             <div class="multiselect">
@@ -102,13 +102,13 @@
         </div>
         <div id="RP">
 
-          <label for="rol"><b>school</b></label>
+          <label for="schoolselect"><b>school</b></label>
           <br>
           <select id="schoolselect" name="school">
             <option value="0">-- selecteer de bijbehorende school --</option>';
             $sql4 = 'SELECT schoolname, schoolid
                       FROM schools
-                      WHERE schoolid<>"0"
+                      WHERE schoolid<>0
                       AND archive=0';
             $sth4 = $conn->prepare($sql4);
             $sth4->execute();
@@ -130,7 +130,7 @@
           <br>
           <input type="email" placeholder="Enter Email" name="email" value="'.$user->email.'" required>
           <br>
-          <label for="psw"><b>Password</b></label>
+          <label for="password"><b>Password</b></label>
           <br>
           <p id="passwordchangewarning">Als je hier iets invult word dat het nieuwe wachtwoord voor deze user!</p>
           <input type="password" placeholder="Enter Password" name="password" id="password" style="margin-bottom:0;">
@@ -185,7 +185,7 @@
     <!-- </div> -->
   </form>';
 
-   include 'include/error.inc.php';
+   require_once 'include/error.inc.php';
 
 
   } else {

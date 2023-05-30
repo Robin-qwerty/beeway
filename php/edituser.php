@@ -24,7 +24,7 @@
       if (isset($_POST['password'])) {
         $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-        $sql = "UPDATE users SET schoolid = :schoolid, firstname = :firstname, lastname = :lastname, email = :email, password = :password, updatedby = :updatedby, updatedat = :updatedat
+        $sql = "UPDATE users SET schoolid=:schoolid, firstname=:firstname, lastname=:lastname, email=:email, password=:password, updatedby=:updatedby, updatedat=:updatedat
                 WHERE userid=:userid";
         $sth = $conn->prepare($sql);
         $sth->bindParam(':schoolid', $_POST['school']);
@@ -37,7 +37,7 @@
         $sth->bindParam(':userid', $_GET['userid']);
         $sth->execute();
       } else {
-        $sql = "UPDATE users SET schoolid = :schoolid, firstname = :firstname, lastname = :lastname, email = :email, updatedby = :updatedby, updatedat = :updatedat
+        $sql = "UPDATE users SET schoolid=:schoolid, firstname=:firstname, lastname=:lastname, email=:email, updatedby=:updatedby, updatedat=:updatedat
                 WHERE userid=:userid";
         $sth = $conn->prepare($sql);
         $sth->bindParam(':schoolid', $_POST['school']);
@@ -54,9 +54,9 @@
       // $lastInsertedId = $conn->lastInsertId();
       //
       // if ($lastInsertedId) {
-          $sql = "UPDATE `linkgroups` SET `archive`='1'
+          $sql = "UPDATE linkgroups SET archive=1
                   WHERE userid=:userid
-                  AND archive<>'1'";
+                  AND archive<>1";
           $sth = $conn->prepare($sql);
           $sth->bindParam(':userid', $_GET['userid']);
           $sth->execute();
@@ -76,7 +76,8 @@
           exit;
         }
 
-        $sql = "INSERT INTO `logs` (`userid`, `useragent`, `action`, `tableid`, `interactionid`) VALUES (:userid, :useragent, '2', '6', :interactionid)";
+        $sql = "INSERT INTO `logs` (`userid`, `useragent`, `action`, `tableid`, `interactionid`)
+                VALUES (:userid, :useragent, '2', '6', :interactionid)";
         $sth = $conn->prepare($sql);
         $sth->bindParam(':userid', $_SESSION['userid']);
         $sth->bindParam(':useragent', $_SESSION['useragent']);

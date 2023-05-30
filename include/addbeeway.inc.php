@@ -1,26 +1,23 @@
 <script src="script/beeway.js"></script>
 
 <?php
-
   $sql = 'SELECT schoolid
        FROM users
-       WHERE schoolid <> "0"
-       AND archive <> "1"
-       AND userid = :userid';
-
+       WHERE schoolid<>0
+       AND archive<>1
+       AND userid=:userid';
   $sth = $conn->prepare($sql);
   $sth->bindValue(':userid', $_SESSION['userid']);
   $sth->execute();
 
   $result = $sth->fetch(); // Fetch the result from the executed query
   $schoolid = $result['schoolid']; // Access the schoolid value from the result array
-
 ?>
 
   <div class="beewayedit">
     <form id="form0" action="php/addbeeway.php" method="post">
-      <div><input type="text" placeholder="BeewayNaam" name="beewaynaam" required></div>
-      <div><button id="opslaan" class="addbutton" type="submit" style="font-size: 16px;">Opslaan</button></div>
+    <div><input type="text" placeholder="BeewayNaam" name="beewaynaam" required></div>
+    <div><button id="opslaan" class="addbutton" type="submit" style="font-size: 16px;">Opslaan</button></div>
   </div>
 
   <hr>

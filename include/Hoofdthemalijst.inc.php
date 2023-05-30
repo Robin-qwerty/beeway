@@ -39,22 +39,20 @@
 
       <?php
       $sql = 'SELECT schoolid FROM users
-              WHERE userid= :userid';
+              WHERE userid=:userid';
       $sth = $conn->prepare($sql);
       $sth->bindParam(':userid', $_SESSION['userid']);
       $sth->execute();
       while ($school = $sth->fetch(PDO::FETCH_OBJ)) {
         $schoolid = $school -> schoolid;
-
       }
 
         if (isset($_GET['offset'])) {
           $offset = $_GET['offset'] * 4;
 
-
         } else {
           $sql = 'SELECT * FROM maintheme
-                  WHERE schoolid = :schoolid and archive = 0
+                  WHERE schoolid=:schoolid and archive=0
                   LIMIT 4';
           $sth = $conn->prepare($sql);
           $sth->bindParam(':schoolid', $schoolid);
@@ -85,7 +83,6 @@
             else if ($maintheme->schoolyear == "6") {$schoolyear = "2026/2027";}
             else if ($maintheme->schoolyear == "7") {$schoolyear = "2027/2028";}
 
-
             echo'
               <tr>
                 <td><b>'.$schoolyear.'</b></td>
@@ -98,12 +95,9 @@
                 <td><a href="index.php?page=hoofdthemabewerken&mainthemeid='.$maintheme->themeid.'" class="editbutton">bewerken</a></td>
               </tr>
             ';
-
           }
 
-
           echo '</table>
-
 
           <div class="tablebuttons">';
             if (isset($_GET['offset'])) {
@@ -142,8 +136,12 @@
     <a class="deletebutton" href="index.php?page=hoofdthemaarchive"><iconify-icon icon="mdi:trash-outline" style="font-size:20px"  ></iconify-icon></a>
   </div>
 
-  <?php include 'include/error.inc.php'; ?>
-<?php } else {
-  $_SESSION['error'] = "er ging iets mis. Pech!";
-  header("location: index.php?page=login");
-} ?>
+<?php
+    require_once 'include/info.inc.php';
+    require_once 'include/error.inc.php';
+
+  } else {
+    $_SESSION['error'] = "er ging iets mis. Pech!";
+    header("location: php/logout.php");
+  }
+?>

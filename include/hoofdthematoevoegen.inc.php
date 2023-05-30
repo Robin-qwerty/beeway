@@ -32,8 +32,6 @@
         </select>
       </div>
 
-      <div id="errormsg"></div>
-
       <hr style="margin: 20px 0;">
       <button type="submit" class="addbutton" style="font-size:20px;font-weight: bold;">Hoofdthema toevoegen</button>
     </form>

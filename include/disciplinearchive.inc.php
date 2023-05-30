@@ -34,7 +34,6 @@
     </div>
 
     <hr>
-
     <br>
 
       <?php
@@ -43,7 +42,7 @@
 
         } else {
           $sql = 'SELECT * FROM disciplines
-                  WHERE archive = 1
+                  WHERE archive=1
                   LIMIT 25';
           $sth = $conn->prepare($sql);
           $sth->execute();
@@ -63,9 +62,7 @@
                 <td><a '; ?> onclick='return confirm("Weet je zekker dat je deze vak wilt terughalen!?")' <?php echo ' href="php/disciplinearchive.php?disciplineid='.$disciplines->disciplineid.'" class="deletebutton">vak terughalen</a></td>
               </tr>
             ';
-
           }
-
 
           echo '</table>
 
@@ -103,12 +100,15 @@
         }
       ?>
 
-
     <hr>
   </div>
 
-  <?php include 'include/error.inc.php'; ?>
-<?php } else {
-  $_SESSION['error'] = "er ging iets mis. Pech!";
-  header("location: index.php?page=login");
-} ?>
+<?php
+  require_once 'include/error.inc.php';
+  require_once 'include/info.inc.php';
+
+  } else {
+    $_SESSION['error'] = "er ging iets mis. Pech!";
+    header("location: index.php?page=login");
+  }
+?>

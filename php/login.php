@@ -6,7 +6,7 @@
     // Validate the input fields
     $email = $_POST['email'];
     $password = $_POST['password'];
-    $schoolId = $_POST['school'];
+    $schoolId = $_POST['schoolselect'];
 
     if (empty($email) || empty($password)) {
       $_SESSION['error'] = 'Please fill in all fields.';

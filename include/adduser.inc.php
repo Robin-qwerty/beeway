@@ -5,7 +5,7 @@
       <div id="logintittle"><h1>admin - gebruiker toevoegen <iconify-icon icon="akar-icons:person"></iconify-icon></h1></div>
       <hr>
       <div id="LP">
-        <label for="name"><b>voornaam</b></label>
+        <label for="firstname"><b>voornaam</b></label>
         <br>
         <input type="text" placeholder="Enter voornaam" name="firstname" value="<?php echo isset($_SESSION['firstname']) ? htmlspecialchars($_SESSION['firstname']) : ''; unset($_SESSION['firstname']); ?>" required>
         <br>
@@ -13,7 +13,7 @@
         <br>
         <input type="text" placeholder="Enter achternaam" name="lastname" value="<?php echo isset($_SESSION['lastname']) ? htmlspecialchars($_SESSION['lastname']) : ''; unset($_SESSION['lastname']); ?>" required>
         <br>
-        <label for="rol"><b>rol</b></label>
+        <label for="rolselect"><b>rol</b></label>
         <br>
         <select id="rolselect" name="role">
           <option value="1">docent</option>
@@ -22,7 +22,7 @@
 
         <div class="klassenselect" id="klassenselect">
           <br>
-          <label for="lastname"><b>groepen</b></label>
+          <label for="groepen"><b>groepen</b></label>
           <br>
 
           <div class="multiselect">
@@ -61,7 +61,7 @@
           <?php
             $sql = 'SELECT schoolname, schoolid
                     FROM schools
-                    WHERE schoolid<>"0"
+                    WHERE schoolid<>0
                     AND archive=0';
             $sth = $conn->prepare($sql);
             $sth->execute();
@@ -85,7 +85,7 @@
         <br>
         <input type="email" placeholder="Enter Email" name="email" value="<?php echo isset($_SESSION['email']) ? htmlspecialchars($_SESSION['email']) : ''; unset($_SESSION['email']); ?>" required>
         <br>
-        <label for="psw"><b>Password</b></label>
+        <label for="password"><b>Password</b></label>
         <br>
         <input type="password" placeholder="Enter Password" name="password" id="password" style="margin-bottom:0;" required>
         <p id="password-validation"></p>
@@ -123,7 +123,7 @@
     <!-- </div> -->
   </form>
 
-  <?php include 'include/error.inc.php'; ?>
+  <?php require_once 'include/error.inc.php'; ?>
 
 <?php
   } else {

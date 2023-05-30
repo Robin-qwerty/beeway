@@ -43,9 +43,9 @@
         </div>
 
         <hr style="margin: 20px 0;">
-        <label for="NaamThemaP4"><b>School naam</b></label>
+        <label for="schoolname"><b>School naam</b></label>
 
-        <input type="text" placeholder="school naam" name="schoolname" id="naamschool" maxlength="40" value="'.$school->schoolname.'" required>';
+        <input type="text" placeholder="school naam" name="schoolname" id="schoolname" maxlength="40" value="'.$school->schoolname.'" required>';
         }
       ?>
       <br>
@@ -66,13 +66,12 @@
         }
       </script>
 
-
     </form>
   </div>
 
 <?php
-  // include any error messages
-  include 'include/error.inc.php';
+  // require_once any error messages
+  require_once 'include/error.inc.php';
 
   } else {
     // redirect to dashboard if user is not logged in or does not have superuser role

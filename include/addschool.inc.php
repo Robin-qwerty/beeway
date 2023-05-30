@@ -10,8 +10,8 @@
         <p>Voeg een nieuwe school toe aan het systeem</p>
       </div>
       <hr style="margin: 20px 0;">
-      <label for="NaamThemaP4"><b>School naam</b></label>
-      <input type="text" placeholder="school naam" name="schoolname" id="naamschool" maxlength="40" required oninput="updateWachtwoord()">
+      <label for="schoolname"><b>School naam</b></label>
+      <input type="text" placeholder="school naam" name="schoolname" id="schoolname" maxlength="40" required oninput="updateWachtwoord()">
 
       <br>
       <label for="schooladmin">
@@ -44,8 +44,8 @@
   </div>
 
 <?php
-  // include any error messages
-  include 'include/error.inc.php';
+  // require_once any error messages
+  require_once 'include/error.inc.php';
 
   } else {
     // redirect to dashboard if user is not logged in or does not have superuser role

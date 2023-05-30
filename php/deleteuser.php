@@ -19,7 +19,8 @@
     try {
       $conn->beginTransaction();
 
-      $sql = "UPDATE users SET archive = :archive, deletedby = :deletedby, deletedat = :deletedat WHERE userid=:userid";
+      $sql = "UPDATE users SET archive=:archive, deletedby=:deletedby, deletedat=:deletedat
+              WHERE userid=:userid";
       $sth = $conn->prepare($sql);
       $sth->execute([
         ':archive' => $archive,
@@ -28,15 +29,16 @@
         ':userid' => $userId
       ]);
 
-      $sql1 = "UPDATE `linkgroups` SET `archive`='1'
+      $sql1 = "UPDATE linkgroups SET archive=1
               WHERE userid=:userid
-              AND archive<>'1'";
+              AND archive<>1";
       $sth1 = $conn->prepare($sql1);
       $sth1->execute([
         ':userid' => $userId
       ]);
 
-      $sql2 = "INSERT INTO `logs` (`userid`, `useragent`, `action`, `tableid`, `interactionid`) VALUES (:userid, :useragent, '3', '6', :interactionid)";
+      $sql2 = "INSERT INTO `logs` (`userid`, `useragent`, `action`, `tableid`, `interactionid`)
+              VALUES (:userid, :useragent, '3', '6', :interactionid)";
       $sth2 = $conn->prepare($sql2);
       $sth2->execute([
         ':userid' => $_SESSION['userid'],

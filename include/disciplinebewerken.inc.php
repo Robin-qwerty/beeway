@@ -17,8 +17,6 @@ $sql = "SELECT * FROM disciplines WHERE disciplineid = :disciplineid";
         <input id="textaddedit" type="text" placeholder="vak" name="disciplinename" value="'.$discipline->disciplinename.'" required>
       </div>
 
-      <div id="errormsg"></div>
-
       <hr style="margin: 20px 0;">
       <div class="form-wrapper">
       <button type="submit" class="addbutton" style="font-size:20px;font-weight: bold;">vak bewerken</button>

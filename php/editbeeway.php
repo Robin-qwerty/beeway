@@ -89,7 +89,8 @@
           $conn->commit();
 
           // Insert log entry
-          $sql = "INSERT INTO `logs` (`userid`, `useragent`, `action`, `tableid`, `interactionid`) VALUES (:userid, :useragent, '2', '1', :interactionid)";
+          $sql = "INSERT INTO `logs` (`userid`, `useragent`, `action`, `tableid`, `interactionid`)
+                  VALUES (:userid, :useragent, '2', '1', :interactionid)";
           $sth = $conn->prepare($sql);
           $sth->bindParam(':userid', $_SESSION['userid']);
           $sth->bindParam(':useragent', $_SESSION['useragent']);

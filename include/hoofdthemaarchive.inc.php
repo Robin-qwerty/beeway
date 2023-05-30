@@ -47,7 +47,7 @@
           $offset = $_GET['offset'] * 4;
         } else {
           $sql = 'SELECT * FROM maintheme
-                  WHERE schoolid = :schoolid and archive = 1
+                  WHERE schoolid=:schoolid and archive=1
                   LIMIT 4';
           $sth = $conn->prepare($sql);
           $sth->bindParam(':schoolid', $schoolid);
@@ -127,7 +127,7 @@
     <hr>
   </div>
 
-  <?php include 'include/error.inc.php'; ?>
+  <?php require_once 'include/error.inc.php'; ?>
 <?php } else {
   $_SESSION['error'] = "er ging iets mis. Pech!";
   header("location: index.php?page=login");

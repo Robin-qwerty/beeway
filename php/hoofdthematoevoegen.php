@@ -1,5 +1,5 @@
 <?php
-  include'../private/dbconnect.php';
+  require_once '../private/dbconnect.php';
   session_start();
 
   // try {
@@ -18,7 +18,8 @@
 
      while ($school = $sth1->fetch(PDO::FETCH_OBJ)) {
 
-        $sql = "INSERT INTO maintheme (`schoolid`, `namethemep1`, `namethemep2`, `namethemep3`, `namethemep4`, `namethemep5`, `schoolyear`) VALUES (:schoolid, :namethemep1, :namethemep2, :namethemep3, :namethemep4, :namethemep5, :schoolyear)";
+        $sql = "INSERT INTO maintheme (`schoolid`, `namethemep1`, `namethemep2`, `namethemep3`, `namethemep4`, `namethemep5`, `schoolyear`)
+                VALUES (:schoolid, :namethemep1, :namethemep2, :namethemep3, :namethemep4, :namethemep5, :schoolyear)";
         $sth = $conn->prepare($sql);
         $sth->bindParam(':schoolid', $school->schoolid);
         $sth->bindParam(':namethemep1', $_POST['namethemep1']);

@@ -1,14 +1,13 @@
 <script src="script/beeway.js"></script>
 
 <?php
-
   if (isset($_GET['beewayid']) && $_GET['beewayid'] > 0) {
 
     $sql = 'SELECT schoolid
          FROM users
-         WHERE schoolid <> "0"
-         AND archive <> "1"
-         AND userid = :userid';
+         WHERE schoolid<>0
+         AND archive<>1
+         AND userid=:userid';
 
     $sth = $conn->prepare($sql);
     $sth->bindValue(':userid', $_SESSION['userid']);
@@ -16,7 +15,6 @@
 
     $result = $sth->fetch(); // Fetch the result from the executed query
     $schoolid = $result['schoolid']; // Access the schoolid value from the result array
-
 
             $sql = 'SELECT * FROM beeway
                     WHERE beewayid=:beewayid';

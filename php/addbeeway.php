@@ -30,10 +30,10 @@
   // Insert school into database
   // try {
     $sql = 'SELECT schoolid
-         FROM users
-         WHERE schoolid<>0
-         AND archive=0
-         AND userid = :userid';
+           FROM users
+           WHERE schoolid<>0
+           AND archive=0
+           AND userid=:userid';
 
     $sth = $conn->prepare($sql);
     $sth->bindValue(':userid', $_SESSION['userid']);

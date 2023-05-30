@@ -1,5 +1,5 @@
 <?php
-if (isset($_SESSION['userrol'])) { // controleer of de gebruiker is ingelogd
+  if (isset($_SESSION['userrol'])) { // controleer of de gebruiker is ingelogd
 ?>
 <div class="beewaylijst">
     <?php if ($_SESSION['userrol'] == "superuser") { ?>
@@ -44,15 +44,15 @@ if (isset($_SESSION['userrol'])) { // controleer of de gebruiker is ingelogd
     </div>
     <?php } ?>
   </div>
-<hr>
-<br>
+  <hr>
+  <br>
 
 <?php
-$sql = 'SELECT groups, groupid FROM groups
-        WHERE archive=0';
-$sth = $conn->prepare($sql);
-$sth->execute();
-echo '<table class="beewaylijsttable">
+  $sql = 'SELECT groups, groupid FROM groups
+          WHERE archive=0';
+  $sth = $conn->prepare($sql);
+  $sth->execute();
+  echo '<table class="beewaylijsttable">
     <tr>
         <th>
             <h3>groepen</h3>
@@ -119,5 +119,7 @@ echo '<table class="beewaylijsttable">
     ?>
     <hr>
     </div>
-    <?php include 'include/error.inc.php'; ?>
-    <?php    ?>
+  <?php
+    require_once 'include/error.inc.php';
+    require_once 'include/info.inc.php';
+  ?>

@@ -43,7 +43,8 @@
 
     // Insert a school admin user into the database
     if ($schoolid) {
-      $sql = "INSERT INTO `logs` (`userid`, `useragent`, `action`, `tableid`, `interactionid`) VALUES (:userid, :useragent, '1', '5', :interactionid)";
+      $sql = "INSERT INTO `logs` (`userid`, `useragent`, `action`, `tableid`, `interactionid`)
+              VALUES (:userid, :useragent, '1', '5', :interactionid)";
       $sth = $conn->prepare($sql);
       $sth->bindParam(':userid', $_SESSION['userid']);
       $sth->bindParam(':useragent', $_SESSION['useragent']);
@@ -69,7 +70,8 @@
 
         $userId = $conn->lastInsertId();
 
-        $sql = "INSERT INTO `logs` (`userid`, `useragent`, `action`, `tableid`, `interactionid`) VALUES (:userid, :useragent, '1', '6', :interactionid)";
+        $sql = "INSERT INTO `logs` (`userid`, `useragent`, `action`, `tableid`, `interactionid`)
+                VALUES (:userid, :useragent, '1', '6', :interactionid)";
         $sth = $conn->prepare($sql);
         $sth->bindParam(':userid', $_SESSION['userid']);
         $sth->bindParam(':useragent', $_SESSION['useragent']);

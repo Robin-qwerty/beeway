@@ -49,7 +49,7 @@
     <br>
   </div>
 
-  <?php include 'include/error.inc.php'; ?>
+  <?php require_once 'include/error.inc.php'; ?>
   
 <?php } else { // no valid user logedin
   $_SESSION['error'] = "er ging iets mis. Pech!";

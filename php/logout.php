@@ -1,6 +1,6 @@
 <?php
   session_start(); // start the session
-  include '../private/dbconnect.php'; // include the database connection
+  require_once '../private/dbconnect.php'; // require_once the database connection
 
   try {
     // Prepare the SQL statement for logging user activity

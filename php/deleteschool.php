@@ -14,7 +14,7 @@
 
         $archive = 1;
         try {
-          $sql = "UPDATE users SET archive = :archive, deletedby = :deletedby, deletedat = :deletedat
+          $sql = "UPDATE users SET archive=:archive, deletedby=:deletedby, deletedat=:deletedat
                   WHERE schoolid=:schoolid";
           $sth = $conn->prepare($sql);
           $sth->bindParam(':archive', $archive);
@@ -23,7 +23,8 @@
           $sth->bindParam(':userid', $_GET['userid']);
           $sth->execute();
 
-          $sql2 = "INSERT INTO `logs` (`userid`, `useragent`, `action`, `tableid`, `interactionid`) VALUES (:userid, :useragent, '3', '5', :interactionid)";
+          $sql2 = "INSERT INTO `logs` (`userid`, `useragent`, `action`, `tableid`, `interactionid`)
+                  VALUES (:userid, :useragent, '3', '5', :interactionid)";
           $sth2 = $conn->prepare($sql2);
           $sth2->bindParam(':userid', $_SESSION['userid']);
           $sth2->bindParam(':useragent', $_SESSION['useragent']);

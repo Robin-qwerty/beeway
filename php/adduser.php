@@ -51,12 +51,14 @@
       $selectedGroups = $_POST['groepen'];
 
       foreach ($selectedGroups as $groupId) {
-        $sql = "INSERT INTO `linkgroups` (`userid`, `groupid`) VALUES (?, ?)";
+        $sql = "INSERT INTO `linkgroups` (`userid`, `groupid`)
+                VALUES (?, ?)";
         $stmt = $conn->prepare($sql);
         $stmt->execute([$userId, $groupId]);
       }
 
-      $sql2 = "INSERT INTO `logs` (`userid`, `useragent`, `action`, `tableid`, `interactionid`) VALUES (:userid, :useragent, '1', '6', :interactionid)";
+      $sql2 = "INSERT INTO `logs` (`userid`, `useragent`, `action`, `tableid`, `interactionid`)
+              VALUES (:userid, :useragent, '1', '6', :interactionid)";
       $sth2 = $conn->prepare($sql2);
       $sth2->bindParam(':userid', $_SESSION['userid']);
       $sth2->bindParam(':useragent', $_SESSION['useragent']);

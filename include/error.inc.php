@@ -1,5 +1,4 @@
 <?php
-
   if (isset($_SESSION['error'])) {
     echo '<div id="error-message" class="alert warning"><strong>error,</strong> '.$_SESSION['error'].'</div>';
     unset($_SESSION['error']);

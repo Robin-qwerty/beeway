@@ -1,5 +1,5 @@
 <?php
-  include'../private/dbconnect.php';
+  require_once '../private/dbconnect.php';
   session_start();
 
   // try {
@@ -10,7 +10,8 @@
       $_SESSION['error'] = "illegal character used";
       header("location: ../index.php?page=disciplinetoevoegen");
     } else {
-      $sql = "INSERT INTO disciplines (`disciplinename`, `createdby`, `updatedby`) VALUES (:disciplinename, :createdby, :updatedby)";
+      $sql = "INSERT INTO disciplines (`disciplinename`, `createdby`, `updatedby`)
+              VALUES (:disciplinename, :createdby, :updatedby)";
       $sth = $conn->prepare($sql);
       $sth->bindParam(':disciplinename', $_POST['disciplinename']);
       $sth->bindParam(':createdby', $_SESSION['userid']);
