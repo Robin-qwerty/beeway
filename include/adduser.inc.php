@@ -16,8 +16,8 @@
         <label for="rolselect"><b>rol</b></label>
         <br>
         <select id="rolselect" name="role">
-          <option value="1">docent</option>
-          <option value="2">admin</option>
+          <option value="0">docent</option>
+          <option value="1">admin</option>
         </select>
 
         <div class="klassenselect" id="klassenselect">

@@ -29,26 +29,27 @@
     <label for="schoolselect"><b>Je school</b></label>
     <br>
     <select id="schoolselect" name="schoolselect">
-        <option value="0" selected="selected">-- select eer je school --</option>
-        <?php
-          $sql = 'SELECT schoolname, schoolid
-                  FROM schools
-                  WHERE schoolid<>0
-                  AND archive=0';
-          $sth = $conn->prepare($sql);
-          $sth->execute();
+      <option value="0" selected>-- selecteer je school --</option>
+      <?php
+        $sql = 'SELECT schoolname, schoolid
+                FROM schools
+                WHERE schoolid <> 0
+                AND archive = 0';
+        $sth = $conn->prepare($sql);
+        $sth->execute();
 
-          while ($schools = $sth->fetch(PDO::FETCH_OBJ)) {
-            $selected = ($_SESSION['school'] ?? null) == $schools->schoolid ? 'selected="selected"' : '';
-            echo '<option value="' . $schools->schoolid . '" ' . $selected . '>' . $schools->schoolname . '</option>';
-          }
-        ?>
+        while ($schools = $sth->fetch(PDO::FETCH_OBJ)) {
+          $selected = ($_SESSION['school'] ?? null) == $schools->schoolid ? 'selected' : '';
+          echo '<option value="' . $schools->schoolid . '" ' . $selected . '>' . $schools->schoolname . '</option>';
+        }
+      ?>
     </select>
 
     <label for="email"><b>Email</b></label>
     <br>
     <input type="text" placeholder="Enter Email" name="email" id="email"
-      value="<?= isset($_SESSION['email']) ? htmlspecialchars($_SESSION['email']) : ''; unset($_SESSION['email']); ?>" required>
+      value="<?= isset($_SESSION['email']) ? htmlspecialchars($_SESSION['email']) : ''; ?>">
+    <?php unset($_SESSION['email']); ?>
 
     <label for="password"><b>Password</b></label>
     <br>

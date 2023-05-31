@@ -1,4 +1,7 @@
-<?php if (isset($_SESSION['userid']) && isset($_SESSION['userrol']) && $_SESSION['userrol'] == 'superuser' || $_SESSION['userrol'] == 'admin') { // check if user is logedin ?>
+<?php
+  require_once 'php/authcheck.php';
+
+  if (isset($_SESSION['userid']) && isset($_SESSION['userrol']) && $_SESSION['userrol'] == 'superuser' || $_SESSION['userrol'] == 'admin') { // check if user is logedin ?>
   <div class="beewaylijst">
       <?php if ($_SESSION['userrol'] == "superuser") { ?>
         <div class="beewaylijsttitel"><h1>Welkom op het super user dashboard</h1></div>
@@ -36,22 +39,23 @@
     <hr>
 
     <input style="width:200px;" type="text" id="myInput" onkeyup="myFunction()" placeholder="zoek op naam..." title="Type in a name">
-
     <script src="script/tablesearch.js"></script>
 
     <br>
 
       <?php
-        $sql = 'SELECT role, schoolid FROM users WHERE userid=:userid AND archive=0';
-        $sth = $conn->prepare($sql);
-        $sth->bindParam(':userid', $_SESSION['userid']);
-        $sth->execute();
-        $user = $sth->fetch(PDO::FETCH_OBJ);
+        // $sql = 'SELECT role, schoolid FROM users WHERE userid=:userid AND archive=0';
+        // $sth = $conn->prepare($sql);
+        // $sth->bindParam(':userid', $_SESSION['userid']);
+        // $sth->execute();
+        // $user = $sth->fetch(PDO::FETCH_OBJ);
+        //
+        // if ($user) { // get logedin user
+        //   $userrol = $user->role;
+        //   $userschoolid = $user->schoolid;
+        // }
 
-        if ($user) { // get logedin user
-          $userrol = $user->role;
-          $userschoolid = $user->schoolid;
-        }
+        global $userrole, $userschoolid;
 
         if (isset($_GET['offset'])) {
           $offset = $_GET['offset'] * 25;
@@ -78,11 +82,12 @@
             $sth->bindParam(':schoolid', $userschoolid);
             $sth->execute();
           } else { // no accese to userlist
-            $_SESSION['error'] = "er ging iets mis. Pech!";
-            header("location: index.php?page=dashboard");
+            $_SESSION['error'] = "Unauthorized access. Please log in with appropriate credentials";
+            // header("location: index.php?page=dashboard");
+            exit;
           }
         } else {
-          if ($userrol == 2) { // userlist for superuser
+          if ($userrole == 2) { // userlist for superuser
             $sql = 'SELECT u.*, s.schoolname FROM users as u, schools as s
                     WHERE s.schoolid=u.schoolid
                     AND u.userid<>0
@@ -91,7 +96,7 @@
                     LIMIT 25';
             $sth = $conn->prepare($sql);
             $sth->execute();
-          } elseif ($userrol == 1) { // userlist for school admin
+          } elseif ($userrole == 1) { // userlist for school admin
             $sql = 'SELECT u.*, s.schoolname FROM users as u, schools as s
                     WHERE u.schoolid=:schoolid
                     AND s.schoolid=u.schoolid
@@ -104,8 +109,9 @@
             $sth->bindParam(':schoolid', $userschoolid);
             $sth->execute();
           } else { // no accese to userlist
-            $_SESSION['error'] = "er ging iets mis. Pech!";
-            header("location: index.php?page=dashboard");
+            $_SESSION['error'] = "Unauthorized access. Please log in with appropriate credentials";
+            // header("location: index.php?page=dashboard");
+            exit;
           }
         }
 

@@ -49,9 +49,9 @@
     if (!in_array($fileTorequire_once , get_included_files())) {
       require_once $fileTorequire_once ;
       // or require $fileTorequire_once ;
-      // Code to execute if the file has not been require_once d before
+      // Code to execute if the file has not been require_once before
     } else {
-      // Code to execute if the file has already been require_once d
+      // Code to execute if the file has already been require_once
     }
   ?>
 

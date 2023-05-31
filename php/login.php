@@ -21,6 +21,19 @@
       exit();
     }
 
+    // Check if the school exists and is not archived
+    $sql = 'SELECT COUNT(*) AS count FROM schools WHERE schoolid = :schoolid AND archive = 0';
+    $sth = $conn->prepare($sql);
+    $sth->bindValue(':schoolid', $schoolId);
+    $sth->execute();
+    $schoolCount = $sth->fetchColumn();
+
+    if ($schoolCount === 0) {
+      $_SESSION['error'] = 'Invalid school selected.';
+      header('Location: ../index.php?page=login');
+      exit();
+    }
+
     // Get the user from the database
     $sql = 'SELECT role, userid, password FROM users WHERE email=:email AND schoolid=:schoolid AND archive=0';
     $sth = $conn->prepare($sql);
@@ -43,7 +56,7 @@
     if (!$user || !password_verify($password, $user->password)) {
       $_SESSION['school'] = $schoolId;
       $_SESSION['email'] = $email;
-      $_SESSION['error'] = 'Invalid email or password. Please try again.';
+      $_SESSION['error'] = 'Invalid school, email or password. Please try again.';
       header('Location: ../index.php?page=login');
       exit();
     }

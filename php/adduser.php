@@ -37,6 +37,35 @@
   try {
     $conn->beginTransaction();
 
+    // Check if the role value is valid
+    $role = $_POST['role'];
+    if ($role !== '1' && $role !== '2') {
+      $_SESSION['school'] = $_POST['school'];
+      $_SESSION['firstname'] = $_POST['firstname'];
+      $_SESSION['lastname'] = $_POST['lastname'];
+      $_SESSION['email'] = $_POST['email'];
+      $_SESSION['error'] = 'Invalid role selected';
+      header('Location: ../index.php?page=adduser');
+      exit;
+    }
+
+    // Check if the email is already in use
+    $email = $_POST['email'];
+    $sql = 'SELECT COUNT(*) AS count FROM users WHERE email = :email';
+    $sth = $conn->prepare($sql);
+    $sth->bindValue(':email', $email);
+    $sth->execute();
+    $emailCount = $sth->fetchColumn();
+
+    if ($emailCount > 0) {
+      $_SESSION['school'] = $_POST['school'];
+      $_SESSION['firstname'] = $_POST['firstname'];
+      $_SESSION['lastname'] = $_POST['lastname'];
+      $_SESSION['error'] = 'Email already in use. Please choose a different email.';
+      header('Location: ../index.php?page=adduser');
+      exit;
+    }
+
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
     $sql = "INSERT INTO users (`schoolid`, `firstname`, `lastname`, `email`, `password`, `role`, `createdby`, `updatedby`)
@@ -83,15 +112,5 @@
     $_SESSION['error'] = 'Failed to add user';
     header('Location: ../index.php?page=adduser');
     exit;
-  }
-
-  function checkForIllegalCharacters($str) { // check for iliegal characters
-    $illegalChars = array('<', '>', '{', '}', '(', ')', '[', ']', '*', '$', '^', '`', '~', '|', '\\', '\'', '"', ':', ';', ',', '/');
-    foreach ($illegalChars as $char) {
-      if (strpos($str, $char) !== false) {
-        return true;
-      }
-    }
-    return false;
   }
 ?>
