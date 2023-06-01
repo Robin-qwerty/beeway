@@ -44,15 +44,8 @@
     // Debugging: display the contents of the session
     echo "<pre>", print_r($_SESSION),"</pre>";
 
-    $fileTorequire_once = 'include/error.inc.php';
-
-    if (!in_array($fileTorequire_once , get_included_files())) {
-      require_once $fileTorequire_once ;
-      // or require $fileTorequire_once ;
-      // Code to execute if the file has not been require_once before
-    } else {
-      // Code to execute if the file has already been require_once
-    }
+    require_once 'include/error.inc.php';
+    require_once 'include/info.inc.php';
   ?>
 
 </body>

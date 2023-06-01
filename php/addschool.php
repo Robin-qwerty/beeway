@@ -108,13 +108,4 @@
     exit;
   }
 
-  function checkForIllegalCharacters($str) { // check for iliegal characters
-    $illegalChars = array('<', '>', '{', '}', '(', ')', '[', ']', '*', '$', '^', '`', '~', '|', '\\', '\'', '"', ':', ';', ',', '/');
-    foreach ($illegalChars as $char) {
-      if (strpos($str, $char) !== false) {
-        return true;
-      }
-    }
-    return false;
-  }
 ?>

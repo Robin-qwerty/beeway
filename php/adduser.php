@@ -10,7 +10,7 @@
   }
 
   // Check if all required fields are filled in
-  $requiredFields = ['firstname', 'lastname', 'role', 'school', 'email', 'password'];
+  $requiredFields = ['firstname', 'lastname', 'email', 'password'];
   foreach ($requiredFields as $field) {
     if (empty($_POST[$field])) {
       $_SESSION['school'] = $_POST['school'];
@@ -39,7 +39,7 @@
 
     // Check if the role value is valid
     $role = $_POST['role'];
-    if ($role !== '1' && $role !== '2') {
+    if ($role !== '0' && $role !== '1') {
       $_SESSION['school'] = $_POST['school'];
       $_SESSION['firstname'] = $_POST['firstname'];
       $_SESSION['lastname'] = $_POST['lastname'];
@@ -68,10 +68,26 @@
 
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
+    if ($_SESSION['userrol'] === 'admin') {
+      // Retrieve schoolid for admin user
+      $adminId = $_SESSION['userid'];
+      $sqlAdmin = 'SELECT schoolid FROM users WHERE userid = :adminId';
+      $sthAdmin = $conn->prepare($sqlAdmin);
+      $sthAdmin->bindValue(':adminId', $adminId);
+      $sthAdmin->execute();
+      $schoolId = $sthAdmin->fetchColumn();
+
+      if (!$schoolId) {
+        throw new Exception('Failed to retrieve schoolid for admin user');
+      }
+    } else {
+      $schoolId = $_POST['school'];
+    }
+
     $sql = "INSERT INTO users (`schoolid`, `firstname`, `lastname`, `email`, `password`, `role`, `createdby`, `updatedby`)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
-    $stmt->execute([$_POST['school'], $_POST['firstname'], $_POST['lastname'], $_POST['email'], $password, $_POST['role'], $_SESSION['userid'], $_SESSION['userid']]);
+    $stmt->execute([$schoolId, $_POST['firstname'], $_POST['lastname'], $_POST['email'], $password, $_POST['role'], $_SESSION['userid'], $_SESSION['userid']]);
 
     $userId = $conn->lastInsertId();
 

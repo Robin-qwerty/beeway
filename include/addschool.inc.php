@@ -15,12 +15,12 @@
 
       <br>
       <label for="schooladmin">
-        <input type="checkbox" name="schooladmin" value="1" checked>
+        <input type="checkbox" name="schooladmin" value="1" id="schooladmin" checked>
         <b> automatisch een school admin toevoegen.</b>
       </label>
 
       <br>
-      <label for="wachtwoord">
+      <label>
         <b>de school naam word het email <br>en het wachtwoord word: </b>
         <span id="wachtwoord"></span>
       </label>
@@ -28,7 +28,7 @@
       <script>
         function updateWachtwoord() {
           // get the school name from the input field and remove any spaces
-          var schoolnaam = document.getElementById("naamschool").value.replace(/\s+/g, '');
+          var schoolnaam = document.getElementById("schoolname").value.replace(/\s+/g, '');
           // get the current year
           var jaar = new Date().getFullYear();
           // create the password by combining the school name, year, and exclamation mark

@@ -15,15 +15,11 @@ $(document).ready(function(){
   const select = document.getElementById("rolselect");
   const input = document.getElementById("klassenselect");
 
-  try {
-    select.addEventListener("change", function() {
-      if (select.value === "2") {
-        input.style.display = "none";
-      } else {
-        input.style.display = "";
-      }
-    });
-  } catch (e) {
-
-  }
+  select.addEventListener("change", function() {
+    if (select.value === "1") {
+      input.style.display = "none";
+    } else {
+      input.style.display = "";
+    }
+  });
 });
