@@ -1,7 +1,7 @@
 <?php  ?>
 
 <div class="addedit">
-  <form class="form" action="php/disciplinetoevoegen.php" method="POST">
+  <form class="form" action="php/adddiscipline.php" method="POST">
     <div id="name"><h1>vakken toevoegen</h1>
     <p>Voeg een nieuwe vak toe aan het systeem</p></div>
     <hr style="margin: 20px 0;">

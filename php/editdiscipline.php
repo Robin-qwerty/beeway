@@ -4,10 +4,10 @@
   // try {
   if ($_POST['disciplinename'] == '' ) {
     $_SESSION['error'] = "vul ff iets in";
-    header("location: ../index.php?page=disciplinebewerken");
+    header("location: ../index.php?page=editdiscipline");
   } elseif (checkForIllegalCharacters($_POST['disciplinename'])) {
     $_SESSION['error'] = "illegal character used";
-    header("location: ../index.php?page=disciplinebewerken");
+    header("location: ../index.php?page=editdiscipline");
   } else {
        try {
          $sql = "UPDATE `disciplines` SET `disciplinename`=:disciplinename, `updatedby`=:updatedby
@@ -17,7 +17,7 @@
          $sth->bindParam(':updatedby', $_SESSION['userid']);
          $sth->bindParam(':disciplineid',$_GET['disciplineid']);
          $sth->execute();
-         $_SESSION['success'] = "updated successful";
+         $_SESSION['info'] = "updated successful";
          header("location: ../index.php?page=vakkenlijst");
        } catch (\Exception $e) {
          echo "string1 ".$e;

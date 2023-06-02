@@ -2,7 +2,7 @@
   require_once '../private/dbconnect.php';
   session_start();
 
-  if (isset($_SESSION['userid'], $_SESSION['userrol'])) {
+  if (isset($_SESSION['userid'], $_SESSION['userrole'])) {
     // User has the necessary privileges
   } else {
     $_SESSION['error'] = 'Unauthorized access. Please log in with appropriate credentials.';

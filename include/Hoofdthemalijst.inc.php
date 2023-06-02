@@ -1,6 +1,6 @@
-<?php if (isset($_SESSION['userrol'])) { // check if user is logedin ?>
+<?php if (isset($_SESSION['userrole'])) { // check if user is logedin ?>
   <div class="beewaylijst">
-      <?php if ($_SESSION['userrol'] == "superuser") { ?>
+      <?php if ($_SESSION['userrole'] == "superuser") { ?>
         <div class="beewaylijsttitel"><h1>Welkom op het super user dashboard</h1></div>
         <h2>beheer hier dingen (:</h2>
 
@@ -10,7 +10,7 @@
           <button onclick="window.location.href='index.php?page=scholenlijst';" id="beewaylijstopties5"><u>Scholen</u></button>
           <b>|</b>
           <button onclick="window.location.href='index.php?page=logslijst';" id="beewaylijstopties5">Site Logs</button>
-      <?php } else if ($_SESSION['userrol'] == "admin") {?>
+      <?php } else if ($_SESSION['userrole'] == "admin") {?>
         <div class="beewaylijsttitel"><h1>Welkom op het admin dashboard</h1></div>
         <h2>beheer hier dingen (:</h2>
 
@@ -69,7 +69,7 @@
               <th><h3>Periode 4</h3></th>
               <th><h3>Periode 5</h3></th>
               <th><h3>verwijderd</h3></th>
-              <th><a href="index.php?page=hoofdthematoevoegen" class="addbutton">toevoegen</a></th>
+              <th><a href="index.php?page=addmaintheme" class="addbutton">toevoegen</a></th>
             </tr>';
           while ($maintheme = $sth->fetch(PDO::FETCH_OBJ)) {
             if ($maintheme->archive == "1") {$archive = "yes";}
@@ -92,7 +92,7 @@
                 <td><b>'.$maintheme->namethemep4.'</b></td>
                 <td><b>'.$maintheme->namethemep5.'</b></td>
                 <td><b>'.$archive.'</b></td>
-                <td><a href="index.php?page=hoofdthemabewerken&mainthemeid='.$maintheme->themeid.'" class="editbutton">bewerken</a></td>
+                <td><a href="index.php?page=editmaintheme&mainthemeid='.$maintheme->themeid.'" class="editbutton">bewerken</a></td>
               </tr>
             ';
           }
@@ -119,9 +119,13 @@
               // ';
             }
           echo '</div>';
+        } elseif (!isset($offset)) {
+          echo '<h2 style="text-align: center;"><strong>the query did not return any rows</strong></h2>';
+          echo '<a href="index.php?page=addmaintheme" class="addbutton" id="addfirst">beeway toevoegen</a>';
+          $_SESSION['error'] = "Er zijn geen resultaten gevonden. Pech!";
         } else {
           // the query did not return any rows
-          echo '<h2><strong>the query did not return any rows</string></h2>';
+          echo '<h2><strong>the query did not return any rows</strong></h2>';
           if (isset($_GET['offset']) && $_GET['offset'] >= '1') {
             $terug = $_GET['offset'] - 1;
 
@@ -129,11 +133,16 @@
           } else if (isset($_GET['offset'])) {
             echo '<div class="tablebuttons"><a href="index.php?page=scholenlijst" class="addbutton">terug</a></div>';
           }
-          $_SESSION['error'] = "the query did not return any rows. Pech!";
+          $_SESSION['error'] = "Er zijn geen resultaten gevonden. Pech!";
         }
       ?>
     <hr>
-    <a class="deletebutton" href="index.php?page=hoofdthemaarchive"><iconify-icon icon="mdi:trash-outline" style="font-size:20px"  ></iconify-icon></a>
+    <div class="seedeleted">
+      <h3>bekijk verwijderde hoofdthema's: </h3>
+      <a class="deletebutton" id="trashbutton2" href="index.php?page=hoofdthemaarchive"><iconify-icon icon="tabler:trash"></iconify-icon></a>
+    </div>
+    <br>
+    <br>
   </div>
 
 <?php

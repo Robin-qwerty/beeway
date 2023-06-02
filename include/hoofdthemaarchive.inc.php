@@ -1,6 +1,6 @@
-<?php if (isset($_SESSION['userrol'])) { // check if user is logedin ?>
+<?php if (isset($_SESSION['userrole'])) { // check if user is logedin ?>
   <div class="beewaylijst">
-      <?php if ($_SESSION['userrol'] == "superuser") { ?>
+      <?php if ($_SESSION['userrole'] == "superuser") { ?>
         <div class="beewaylijsttitel"><h1>Welkom op het super user dashboard</h1></div>
         <h2>beheer hier dingen (:</h2>
 
@@ -10,7 +10,7 @@
           <button onclick="window.location.href='index.php?page=scholenlijst';" id="beewaylijstopties5"><u>Scholen</u></button>
           <b>|</b>
           <button onclick="window.location.href='index.php?page=logslijst';" id="beewaylijstopties5">Site Logs</button>
-      <?php } else if ($_SESSION['userrol'] == "admin") {?>
+      <?php } else if ($_SESSION['userrole'] == "admin") {?>
         <div class="beewaylijsttitel"><h1>Welkom op het admin dashboard</h1></div>
         <h2>beheer hier dingen (:</h2>
 
@@ -111,7 +111,7 @@
           echo '</div>';
         } else {
           // the query did not return any rows
-          echo '<h2><strong>the query did not return any rows</string></h2>';
+          echo '<h2><strong>the query did not return any rows</strong></h2>';
           if (isset($_GET['offset']) && $_GET['offset'] >= '1') {
             $terug = $_GET['offset'] - 1;
 

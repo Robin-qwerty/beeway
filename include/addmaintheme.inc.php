@@ -1,7 +1,7 @@
 <?php  ?>
 
 <div class="addedit">
-    <form class="form" action="php/hoofdthematoevoegen.php" method="POST">
+    <form class="form" action="php/addmaintheme.php" method="POST">
       <div id="name"><h1>Hoofdthema toevoegen</h1>
       <p>Voeg een nieuwe Hoofdthema toe aan het systeem</p></div>
       <hr style="margin: 20px 0;">

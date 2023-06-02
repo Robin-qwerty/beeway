@@ -1,5 +1,5 @@
 <?php
-  if (isset($_SESSION['userid']) && isset($_SESSION['userrol'])) {
+  if (isset($_SESSION['userid']) && isset($_SESSION['userrole'])) {
     header("Location: index.php?page=dashboard");
     exit;
   }
@@ -48,8 +48,11 @@
     <label for="email"><b>Email</b></label>
     <br>
     <input type="text" placeholder="Enter Email" name="email" id="email"
-      value="<?= isset($_SESSION['email']) ? htmlspecialchars($_SESSION['email']) : ''; ?>">
-    <?php unset($_SESSION['email']); ?>
+      value="<?= isset($_SESSION['email']) ? htmlspecialchars($_SESSION['email']) : ''; ?>" required>
+    <?php
+      unset($_SESSION['email']);
+      unset($_SESSION['school']);
+    ?>
 
     <label for="password"><b>Password</b></label>
     <br>

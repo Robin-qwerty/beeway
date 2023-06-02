@@ -1,4 +1,4 @@
-<?php if (isset($_SESSION['userid']) && isset($_SESSION['userrol']) && $_SESSION['userrol'] == 'superuser' || $_SESSION['userrol'] == 'admin') { // check if user is logedin ?>
+<?php if (isset($_SESSION['userid']) && isset($_SESSION['userrole']) && $_SESSION['userrole'] == 'superuser' || $_SESSION['userrole'] == 'admin') { // check if user is logedin ?>
   <script src="script/admin_gebruikertoevoegen.js"></script>
   <form class="form addedit" id="adduserform" method="POST" action="php/adduser.php">
     <div id="logintittle"><h1>admin - gebruiker toevoegen <iconify-icon icon="akar-icons:person"></iconify-icon></h1></div>
@@ -52,7 +52,7 @@
 
     </div>
     <div id="RP">
-      <?php if ($_SESSION['userrol'] == 'superuser') { ?>
+      <?php if ($_SESSION['userrole'] == 'superuser') { ?>
       <label for="schoolselect"><b>School</b></label>
       <br>
       <select id="schoolselect" name="school">

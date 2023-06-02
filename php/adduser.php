@@ -3,7 +3,7 @@
   session_start();
 
   // Check user privileges
-  if (!(isset($_SESSION['userid'], $_SESSION['userrol']) && ($_SESSION['userrol'] === 'superuser' || $_SESSION['userrol'] === 'admin'))) {
+  if (!(isset($_SESSION['userid'], $_SESSION['userrole']) && ($_SESSION['userrole'] === 'superuser' || $_SESSION['userrole'] === 'admin'))) {
     $_SESSION['error'] = 'Unauthorized access. Please log in with appropriate credentials.';
     header('location: ../index.php?page=dashboard');
     exit;
@@ -68,7 +68,7 @@
 
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-    if ($_SESSION['userrol'] === 'admin') {
+    if ($_SESSION['userrole'] === 'admin') {
       // Retrieve schoolid for admin user
       $adminId = $_SESSION['userid'];
       $sqlAdmin = 'SELECT schoolid FROM users WHERE userid = :adminId';

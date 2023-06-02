@@ -34,7 +34,7 @@
     require_once 'include/navbar.inc.php';
 
     // If the 'page' parameter is set and the user is logged in with a role, require_once the corresponding page
-    if (isset($page) && isset($_SESSION['userid']) && isset($_SESSION['userrol'])) {
+    if (isset($page) && isset($_SESSION['userid']) && isset($_SESSION['userrole'])) {
       require_once 'include/'.$page.'.inc.php';
     } else {
       // Otherwise, require_once the login page

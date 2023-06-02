@@ -8,6 +8,6 @@
   $sth = $conn->prepare($sql);
   $sth->bindParam(':disciplineid',$_GET['disciplineid']);
   $sth->execute();
-  $_SESSION['success'] = "archive successful";
+  $_SESSION['info'] = "archive successful";
   header("location: ../index.php?page=vakkenlijst");
 ?>

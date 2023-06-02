@@ -63,11 +63,11 @@
 
     // Set the session variables based on the user role
     if ($user->role == 2) {
-      $_SESSION['userrol'] = 'superuser';
+      $_SESSION['userrole'] = 'superuser';
     } elseif ($user->role == 1) {
-      $_SESSION['userrol'] = 'admin';
+      $_SESSION['userrole'] = 'admin';
     } else {
-      $_SESSION['userrol'] = 'docent';
+      $_SESSION['userrole'] = 'docent';
     }
 
     $_SESSION['userid'] = $user->userid;

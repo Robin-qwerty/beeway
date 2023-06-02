@@ -7,6 +7,6 @@
   $sth = $conn->prepare($sql);
   $sth->bindParam(':groupid', $_GET['groupid']);
   $sth->execute();
-  $_SESSION['success'] = "archived successful";
+  $_SESSION['info'] = "archived successful";
   header("location: ../index.php?page=klassenlijst");
 ?>

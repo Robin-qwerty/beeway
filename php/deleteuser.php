@@ -2,7 +2,7 @@
   require_once '../private/dbconnect.php';
   session_start();
 
-  if (isset($_SESSION['userid'], $_SESSION['userrol'], $_GET['userid']) && ($_SESSION['userrol'] === 'superuser' || $_SESSION['userrol'] === 'admin')) {
+  if (isset($_SESSION['userid'], $_SESSION['userrole'], $_GET['userid']) && ($_SESSION['userrole'] === 'superuser' || $_SESSION['userrole'] === 'admin')) {
     $userId = $_GET['userid'];
 
     if ($userId === $_SESSION['userid']) {
@@ -18,7 +18,7 @@
     }
 
     $loggedInUserId = $_SESSION['userid'];
-    $loggedInUserRole = $_SESSION['userrol'];
+    $loggedInUserRole = $_SESSION['userrole'];
 
     // Get the schoolid and role of the logged-in user
     $sql = 'SELECT schoolid, role FROM users WHERE userid=:userid';

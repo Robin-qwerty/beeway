@@ -1,6 +1,6 @@
 <?php  ?>
 <div class="addedit">
-  <form class="form" action="php/groupstoevoegen.php" method="POST">
+  <form class="form" action="php/addgroups.php" method="POST">
     <div id="name"><h1>groepen toevoegen</h1>
     <p>Voeg een nieuwe groep toe aan het systeem</p></div>
     <hr style="margin: 20px 0;">

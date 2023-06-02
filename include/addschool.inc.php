@@ -1,6 +1,6 @@
 <?php
   // check if user is logged in and has superuser role
-  if (isset($_SESSION['userid']) && isset($_SESSION['userrol']) && $_SESSION['userrol'] == 'superuser') {
+  if (isset($_SESSION['userid']) && isset($_SESSION['userrole']) && $_SESSION['userrole'] == 'superuser') {
 ?>
 
   <div class="addeditschool">

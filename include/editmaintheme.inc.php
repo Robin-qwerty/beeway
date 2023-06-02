@@ -9,7 +9,7 @@
   while ($row = $sth->fetch(PDO::FETCH_OBJ)) {
     echo '
       <div class="addedit">
-        <form class="form" action="php/hoofdthemabewerken.php?mainthemeid='.$_GET['mainthemeid'].'" method="POST">
+        <form class="form" action="php/editmaintheme.php?mainthemeid='.$_GET['mainthemeid'].'" method="POST">
           <div id="name"><h1>Hoofdthema bewerken</h1>
           <p>bestaande hoofdtema aanpassen in het systeem</p></div>
           <hr style="margin: 20px 0;">

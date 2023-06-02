@@ -2,7 +2,7 @@
   require_once '../private/dbconnect.php';
   session_start();
 
-  if (isset($_SESSION['userid'], $_SESSION['userrol']) && ($_SESSION['userrol'] === 'superuser' || $_SESSION['userrol'] === 'admin')) {
+  if (isset($_SESSION['userid'], $_SESSION['userrole']) && ($_SESSION['userrole'] === 'superuser' || $_SESSION['userrole'] === 'admin')) {
     // User has the necessary privileges
   } else {
     $_SESSION['error'] = 'Unauthorized access. Please log in with appropriate credentials.';
@@ -44,10 +44,9 @@
         if (isset($_POST['password'])) {
           $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-          $sql = "UPDATE users SET schoolid=:schoolid, firstname=:firstname, lastname=:lastname, email=:email, password=:password, updatedby=:updatedby, updatedat=:updatedat
+          $sql = "UPDATE users SET firstname=:firstname, lastname=:lastname, email=:email, password=:password, updatedby=:updatedby, updatedat=:updatedat
                   WHERE userid=:userid";
           $sth = $conn->prepare($sql);
-          $sth->bindParam(':schoolid', $_POST['school']);
           $sth->bindParam(':firstname', $_POST['firstname']);
           $sth->bindParam(':lastname', $_POST['lastname']);
           $sth->bindParam(':email', $_POST['email']);
@@ -57,10 +56,9 @@
           $sth->bindParam(':userid', $userId);
           $sth->execute();
         } else {
-          $sql = "UPDATE users SET schoolid=:schoolid, firstname=:firstname, lastname=:lastname, email=:email, updatedby=:updatedby, updatedat=:updatedat
+          $sql = "UPDATE users SET firstname=:firstname, lastname=:lastname, email=:email, updatedby=:updatedby, updatedat=:updatedat
                   WHERE userid=:userid";
           $sth = $conn->prepare($sql);
-          $sth->bindParam(':schoolid', $_POST['school']);
           $sth->bindParam(':firstname', $_POST['firstname']);
           $sth->bindParam(':lastname', $_POST['lastname']);
           $sth->bindParam(':email', $_POST['email']);
