@@ -68,7 +68,7 @@
       <div class="helebeeway">
         <div id="grid-line">
           <div class="cell BEEWAY">
-            <h1>BEEWAY</h1>
+            <h1>[naam]</h1>
             <h2>Iedere dag ’n beetje beter</h2>
             <div id="groepen">
               <label>Groepen</label>

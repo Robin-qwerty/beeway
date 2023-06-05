@@ -68,13 +68,9 @@
               <th><h3>Periode 3</h3></th>
               <th><h3>Periode 4</h3></th>
               <th><h3>Periode 5</h3></th>
-              <th><h3>verwijderd</h3></th>
               <th><a href="index.php?page=addmaintheme" class="addbutton">toevoegen</a></th>
             </tr>';
           while ($maintheme = $sth->fetch(PDO::FETCH_OBJ)) {
-            if ($maintheme->archive == "1") {$archive = "yes";}
-            else {$archive = "no";}
-
             if ($maintheme->schoolyear == "1") {$schoolyear = "2021/2022";}
             else if ($maintheme->schoolyear == "2") {$schoolyear = "2022/2023";}
             else if ($maintheme->schoolyear == "3") {$schoolyear = "2023/2024";}
@@ -91,7 +87,6 @@
                 <td><b>'.$maintheme->namethemep3.'</b></td>
                 <td><b>'.$maintheme->namethemep4.'</b></td>
                 <td><b>'.$maintheme->namethemep5.'</b></td>
-                <td><b>'.$archive.'</b></td>
                 <td><a href="index.php?page=editmaintheme&mainthemeid='.$maintheme->themeid.'" class="editbutton">bewerken</a></td>
               </tr>
             ';
