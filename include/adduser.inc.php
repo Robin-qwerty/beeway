@@ -144,5 +144,6 @@
     exit;
   }
 
+  require_once 'include/info.inc.php';
   require_once 'include/error.inc.php';
 ?>

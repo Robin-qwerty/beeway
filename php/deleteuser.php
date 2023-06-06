@@ -107,8 +107,8 @@
         ':userid' => $userId
       ]);
 
-      $sql2 = "INSERT INTO `logs` (`userid`, `useragent`, `action`, `tableid`, `interactionid`)
-              VALUES (:userid, :useragent, '3', '6', :interactionid)";
+      $sql2 = "INSERT INTO `logs` (`userid`, `useragent`, `action`, `info`, `tableid`, `interactionid`)
+              VALUES (:userid, :useragent, '3', 'user deleted', '6', :interactionid)";
       $sth2 = $conn->prepare($sql2);
       $sth2->execute([
         ':userid' => $loggedInUserId,

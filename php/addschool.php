@@ -13,8 +13,8 @@
   // Check if all required fields are filled in
   if (empty($_POST['schoolname'])) {
     // If the school name field is empty, redirect back to the add user page with an error message
-    $_SESSION['schoolnaam'] = $_POST['schoolnaam'];
-    $_SESSION['error'] = 'Please fill in all required fields ';
+    $_SESSION['schoolname'] = $_POST['schoolname'];
+    $_SESSION['error'] = 'Please fill in all required fields';
     header('Location: ../index.php?page=addschool');
     exit;
   }
@@ -43,15 +43,15 @@
 
     // Insert a school admin user into the database
     if ($schoolid) {
-      $sql = "INSERT INTO `logs` (`userid`, `useragent`, `action`, `tableid`, `interactionid`)
-              VALUES (:userid, :useragent, '1', '5', :interactionid)";
-      $sth = $conn->prepare($sql);
-      $sth->bindParam(':userid', $_SESSION['userid']);
-      $sth->bindParam(':useragent', $_SESSION['useragent']);
-      $sth->bindParam(':interactionid', $schoolid);
-      $sth->execute();
+      $sql1 = "INSERT INTO `logs` (`userid`, `useragent`, `action`, `info`, `tableid`, `interactionid`)
+              VALUES (:userid, :useragent, '1', 'school created', '5', :interactionid)";
+      $sth1 = $conn->prepare($sql1);
+      $sth1->bindParam(':userid', $_SESSION['userid']);
+      $sth1->bindParam(':useragent', $_SESSION['useragent']);
+      $sth1->bindParam(':interactionid', $schoolid);
+      $sth1->execute();
 
-      if (isset($_POST['schooladmin']) == 1) {
+      if (isset($_POST['schooladmin']) and $_POST['schooladmin'] == 1) {
         // Create a temporary password for the school admin user
         $schoolname = $_POST['schoolname'];
         $schoolname = str_replace(' ', '', $schoolname); // remove spaces from schoolname
@@ -70,13 +70,14 @@
 
         $userId = $conn->lastInsertId();
 
-        $sql = "INSERT INTO `logs` (`userid`, `useragent`, `action`, `tableid`, `interactionid`)
-                VALUES (:userid, :useragent, '1', '6', :interactionid)";
-        $sth = $conn->prepare($sql);
-        $sth->bindParam(':userid', $_SESSION['userid']);
-        $sth->bindParam(':useragent', $_SESSION['useragent']);
-        $sth->bindParam(':interactionid', $userId);
-        $sth->execute();
+        $sql3 = "INSERT INTO `logs` (`userid`, `useragent`, `info`, `action`, `tableid`, `interactionid`)
+        VALUES (:userid, :useragent, CONCAT('User added for new school ', :schoolid), '1', '6', :interactionid)";
+        $sth3 = $conn->prepare($sql3);
+        $sth3->bindParam(':userid', $_SESSION['userid']);
+        $sth3->bindParam(':useragent', $_SESSION['useragent']);
+        $sth3->bindParam(':schoolid', $schoolid);
+        $sth3->bindParam(':interactionid', $userId);
+        $sth3->execute();
 
         // Commit the transaction
         $conn->commit();
@@ -102,10 +103,9 @@
     // If there is an error, rollback the transaction and redirect back to the add user page with an error message
     $conn->rollback();
 
-    $_SESSION['schoolnaam'] = $_POST['schoolnaam'];
+    $_SESSION['schoolname'] = $_POST['schoolname'];
     $_SESSION['error'] = 'Failed to add school';
     header('Location: ../index.php?page=addschool');
     exit;
   }
-
 ?>

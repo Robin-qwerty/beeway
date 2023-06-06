@@ -102,8 +102,8 @@
         $stmt->execute([$userId, $groupId]);
       }
 
-      $sql2 = "INSERT INTO `logs` (`userid`, `useragent`, `action`, `tableid`, `interactionid`)
-              VALUES (:userid, :useragent, '1', '6', :interactionid)";
+      $sql2 = "INSERT INTO `logs` (`userid`, `useragent`, `action`, `info`, `tableid`, `interactionid`)
+              VALUES (:userid, :useragent, '1', 'user added', '6', :interactionid)";
       $sth2 = $conn->prepare($sql2);
       $sth2->bindParam(':userid', $_SESSION['userid']);
       $sth2->bindParam(':useragent', $_SESSION['useragent']);

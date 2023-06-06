@@ -50,10 +50,10 @@ if (isset($_SESSION['userrole'])) { // controleer of de gebruiker is ingelogd
   <br>
   <?php
     $sql = 'SELECT schoolid
-         FROM users
-         WHERE schoolid<>0
-         AND archive=0
-         AND userid=:userid';
+           FROM users
+           WHERE schoolid<>0
+           AND archive=0
+           AND userid=:userid';
     $sth = $conn->prepare($sql);
     $sth->bindValue(':userid', $_SESSION['userid']);
     $sth->execute();
@@ -90,55 +90,9 @@ if (isset($_SESSION['userrole'])) { // controleer of de gebruiker is ingelogd
 
         echo '</table>
         <hr>
-        <br>
-        <div class="tablebuttons"> ';
-        if (isset($_GET['offset'])) {
-          $pagina = $_GET['offset'] + 1;
-          $terug = $_GET['offset'] - 1;
-          $volgende = $_GET['offset'] + 1;
-          if ($_GET['offset'] == '0') {
-            echo '
-              <p style="margin:6px;">pagina: '.$pagina.'</p>
-              <a href="index.php?page='.$_GET['page'].'&offset='.$volgende.'" class="addbutton">volgende</a>
-            ';
-          } else {
-            echo '
-              <a href="index.php?page='.$_GET['page'].'&offset='.$terug.'" class="addbutton">terug</a>
-              <p style="margin:6px;">pagina: '.$pagina.'</p>
-              <a href="index.php?page='.$_GET['page'].'&offset='.$volgende.'" class="addbutton">volgende</a>
-            ';
-          }
-        } else {
-          echo '
-            <p style="margin:6px;">pagina: 1</p>
-            <a href="index.php?page='.$_GET['page'].'&offset=1" class="addbutton">volgende</a>
-          ';
-        }
-      echo '</div>';
+        <br>';
+
     } elseif (!isset($offset)) {
-      $_SESSION['error'] = "Er zijn geen resultaten gevonden. Pech!";
-    } else {
-      // the query did not return any rows
-      $pagina = $_GET['offset'] + 1;
-
-      echo '<h2 style="text-align:center;"><strong>Er zijn geen resultaten gevonden</strong></h2>';
-      if (isset($_GET['offset']) && $_GET['offset'] >= '1') {
-        $terug = $_GET['offset'] - 1;
-
-        echo '
-          <div class="tablebuttons">
-            <a href="index.php?page='.$_GET['page'].'&offset='.$terug.'" class="addbutton">terug</a>
-            <p style="margin:6px;">pagina: '.$pagina.'</p>
-          </div>
-          ';
-      } else if (isset($_GET['offset'])) {
-        echo '
-          <div class="tablebuttons">
-            <a href="index.php?page='.$_GET['page'].'&offset='.$terug.'" class="addbutton">terug</a>
-            <p style="margin:6px;">pagina: '.$pagina.'</p>
-          </div>
-          ';
-      }
       $_SESSION['error'] = "Er zijn geen resultaten gevonden. Pech!";
     }
   ?>

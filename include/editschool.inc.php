@@ -60,21 +60,18 @@
           var txt;
           if (confirm("Weet je zekker dat je deze school wilt verwijderen!?")) {
             if (confirm("Dan word alles dat me de school temaken heeft ook verwijdert!!! weet je zeker dat je dat wil!?")) {
-              window.location.href = "#";
+              window.location.href = "php/deleteschool.php?schoolid=<?php echo $_GET['schoolid'] ?>";
             }
           }
         }
       </script>
-
     </form>
   </div>
 
 <?php
-  // require_once any error messages
   require_once 'include/error.inc.php';
 
   } else {
-    // redirect to dashboard if user is not logged in or does not have superuser role
     $_SESSION['error'] = "Er ging iets mis. Pech!";
     header("location: index.php?page=dashboard");
   }

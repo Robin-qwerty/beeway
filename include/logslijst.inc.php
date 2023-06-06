@@ -7,6 +7,11 @@
     header("location: ".$modifiedURL."&offset=0");
     exit;
   }
+
+  if (isset($_GET['userid']) && $_GET['userid'] == 0) {
+    header("location: index.php?page=logslijst&offset=0");
+    exit;
+  }
 ?>
 
   <div class="beewaylijst">
@@ -45,39 +50,55 @@
 
     <hr>
 
-      <input style="width:200px;" type="text" id="myInput" onkeyup="myFunction()" placeholder="zoek op naam..." title="Type in a name">
+      <!-- <input style="width:200px;" type="text" id="myInput" onkeyup="myFunction()" placeholder="zoek op naam..." title="Type in a name">
       <script src="script/tablesearch.js"></script>
 
       <br>
-      <br>
+      <br> -->
 
-      <label for="rol"><b>filter op user</b></label>
+      <label for="schoolselect"><b>filter op user</b></label>
       <br>
       <select id="schoolselect" name="school">
         <option value="0" selected="selected">-- sorteer op user --</option>
         <?php
-          $sql = 'SELECT userid, firstname, lastname FROM users
-                  where userid<>0';
-          $sth = $conn->prepare($sql);
-          $sth->execute();
+          $roles = array(
+            0 => 'docenten',
+            1 => 'school admins',
+            2 => 'superusers'
+          );
 
-          while ($user = $sth->fetch(PDO::FETCH_OBJ)) {
-            $urlParams = $_GET;
-            $urlParams['userid'] = $user->userid;
-            $selectedUrl = 'index.php?' . http_build_query($urlParams);
-            $selectedAttribute = '';
+          foreach ($roles as $roleId => $roleName) {
+            echo '<optgroup label="' . $roleName . '">';
 
-            // Check if the current user id matches the $_GET['userid']
-            if (isset($_GET['userid']) && $_GET['userid'] == $user->userid) {
-              $selectedAttribute = 'selected';
+            $sql = 'SELECT userid, firstname, lastname, role FROM users
+                    WHERE role = :role
+                    AND userid <> 0
+                    ORDER BY firstname, lastname';
+            $sth = $conn->prepare($sql);
+            $sth->bindParam(':role', $roleId, PDO::PARAM_INT);
+            $sth->execute();
+
+            while ($user = $sth->fetch(PDO::FETCH_OBJ)) {
+              $urlParams = $_GET;
+              $urlParams['userid'] = $user->userid;
+              $selectedUrl = 'index.php?' . http_build_query($urlParams);
+              $selectedAttribute = '';
+
+              // Check if the current user id matches the $_GET['userid']
+              if (isset($_GET['userid']) && $_GET['userid'] == $user->userid) {
+                $selectedAttribute = 'selected';
+              }
+
+              echo '
+                <option value="'.$user->userid.'" '.$selectedAttribute.'>'.$user->userid.' - '.$user->firstname.' '.$user->lastname.'</option>
+              ';
             }
 
-            echo '
-              <option value="'.$user->userid.'" '.$selectedAttribute.'>'.$user->firstname.' '.$user->lastname.'</option>
-            ';
+            echo '</optgroup>';
           }
         ?>
       </select>
+
 
       <script>
         const selectElement = document.getElementById('schoolselect');
@@ -145,10 +166,11 @@
           // Output table headers
           echo '<table class="beewaylijsttable">
                 <tr>
-                  <th><h3>username</h3></th>
+                  <th><h3>gedaan door</h3></th>
                   <th><h3>actie</h3></th>
-                  <th><h3>tabel van actie</h3></th>
-                  <th><h3>id van actie</h3></th>
+                  <th><h3>info</h3></th>
+                  <th><h3>tabel</h3></th>
+                  <th><h3>actie id</h3></th>
                   <th><h3>datum en tijd</h3></th>
                 </tr>';
           // Output table rows with log data
@@ -165,7 +187,7 @@
             if ($logs->tableid == '1') {$tableid = 'beeway';}
             elseif ($logs->tableid == '2') {$tableid = 'vakken';}
             elseif ($logs->tableid == '3') {$tableid = 'groepen';}
-            elseif ($logs->tableid == '4') {$tableid = 'hoofdthemas';}
+            elseif ($logs->tableid == '4') {$tableid = "hoofdthema's";}
             elseif ($logs->tableid == '5') {$tableid = 'scholen';}
             elseif ($logs->tableid == '6') {$tableid = 'users';}
 
@@ -173,6 +195,7 @@
               <tr>
                 <td><b><i>('.$logs->userid.")</i> - ".$logs->firstname." ".$logs->lastname.'</b></td>
                 <td><b>'.$action.'</b></td>
+                <td style="width:40%;"><b>'.$logs->info.'</b></td>
                 <td><b>'.$tableid.'</b></td>
                 <td><b>'.$logs->interactionid.'</b></td>
                 <td><b>'.$logs->date.'</b></td>
@@ -196,7 +219,11 @@
                   <a href="javascript:void(0);" onclick="updateOffset('.$volgende.')" class="addbutton">volgende</a>
                 ';
               } else {
-                header("location: index.php?page=logslijst&offset=0");
+                echo '
+                  <a href="javascript:void(0);" onclick="updateOffset('.$terug.')" class="addbutton">terug</a>
+                  <p style="margin:6px;">pagina: '.$pagina.'</p>
+                  <a href="javascript:void(0);" onclick="updateOffset('.$volgende.')" class="addbutton">volgende</a>
+                ';
               }
             } else {
               echo '

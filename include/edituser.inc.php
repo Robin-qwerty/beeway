@@ -55,50 +55,56 @@
           else if ($user->role == "1") {$role = "school admin";}
           else {$role = "super user";}
 
-          echo $role.'</b></p>
+          echo $role.'</b></p>';
 
-          <div class="klassenselect" id="klassenselect">
-            <br>
-            <label for="groepen"><b>groepen</b></label>
-            <br>
+          if ($user->role == 1 || $user->role == 2) {
 
-            <div class="multiselect">
-              <div class="selectBox" onclick="showCheckboxes()">
-                <select>
-                  <option style="text-align:center;">-- Selecteer groepen die bij de docent horen --</option>
-                </select>
-                <div class="overSelect"></div>
-              </div>
-              <div id="checkboxes">';
-                  $sql2 = 'SELECT groups, groupid
-                          FROM groups
-                          WHERE archive=0';
-                  $sth2 = $conn->prepare($sql2);
-                  $sth2->execute();
+          } else {
+          echo '
+            <div class="klassenselect" id="klassenselect">
+              <br>
+              <label for="groepen"><b>groepen</b></label>
+              <br>
 
-                  while ($groups = $sth2->fetch(PDO::FETCH_OBJ)) {
-                    echo'
-                      <label for="groepen">
-                      <input type="checkbox" name="groepen[]" value="'.$groups->groupid.'"
-                    ';
-                    $sql3 = 'SELECT *
-                            FROM linkgroups
-                            WHERE userid=:userid
-                            AND archive=0';
-                    $sth3 = $conn->prepare($sql3);
-                    $sth3->bindParam(':userid', $_GET['userid']);
-                    $sth3->execute();
+              <div class="multiselect">
+                <div class="selectBox" onclick="showCheckboxes()">
+                  <select>
+                    <option style="text-align:center;">-- Selecteer groepen die bij de docent horen --</option>
+                  </select>
+                  <div class="overSelect"></div>
+                </div>
+                <div id="checkboxes">';
+                    $sql2 = 'SELECT groups, groupid
+                            FROM groups
+                            WHERE archive=0';
+                    $sth2 = $conn->prepare($sql2);
+                    $sth2->execute();
 
-                    while ($linkgroups = $sth3->fetch(PDO::FETCH_OBJ)) {
-                      if ($groups->groupid == $linkgroups->groupid) {echo "checked";}
+                    while ($groups = $sth2->fetch(PDO::FETCH_OBJ)) {
+                      echo'
+                        <label for="groepen">
+                        <input type="checkbox" name="groepen[]" value="'.$groups->groupid.'"
+                      ';
+                      $sql3 = 'SELECT *
+                              FROM linkgroups
+                              WHERE userid=:userid
+                              AND archive=0';
+                      $sth3 = $conn->prepare($sql3);
+                      $sth3->bindParam(':userid', $_GET['userid']);
+                      $sth3->execute();
+
+                      while ($linkgroups = $sth3->fetch(PDO::FETCH_OBJ)) {
+                        if ($groups->groupid == $linkgroups->groupid) {echo "checked";}
+                      }
+                      echo'/>groepen '.$groups->groups.'</label>';
                     }
-                    echo'/>groepen '.$groups->groups.'</label>';
-                  }
-                  echo'
+                    echo'
+                </div>
               </div>
-            </div>
-          </div>
+            </div>';
+          }
 
+        echo '
         </div>
         <div id="RP">
 

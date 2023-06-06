@@ -49,9 +49,11 @@
     <br>
   </div>
 
-  <?php require_once 'include/error.inc.php'; ?>
-  
-<?php } else { // no valid user logedin
-  $_SESSION['error'] = "er ging iets mis. Pech!";
-  header("location: index.php?page=login");
-} ?>
+<?php
+  require_once 'include/error.inc.php';
+
+  } else { // no valid user logedin
+    $_SESSION['error'] = "er ging iets mis. Pech!";
+    header("location: index.php?page=login");
+  }
+?>
