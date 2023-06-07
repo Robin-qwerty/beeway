@@ -18,7 +18,7 @@
       <div class="beewaylijstopties">
         <button onclick="window.location.href='index.php?page=beewaylijst';" id="beewaylijstopties1">Beeway's</button>
         <b>|</b>
-        <button onclick="window.location.href='index.php?page=klassenlijst';" id="beewaylijstopties4"><u>klassen</u></button>
+        <button onclick="window.location.href='index.php?page=klassenlijst';" id="beewaylijstopties4"><u>Klassen</u></button>
         <b>|</b>
         <button onclick="window.location.href='index.php?page=vakkenlijst';" id="beewaylijstopties2">Vakken</button>
         <b>|</b>

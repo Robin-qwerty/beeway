@@ -44,9 +44,9 @@
 label, input {
   /* added because a second click to unselect radio often
      appears as a double click to select text */
-   -webkit-user-select: none; /* Safari */
-   -ms-user-select: none; /* IE 10 and IE 11 */
-   user-select: none; /* Standard syntax */
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
 }
 
 div.cell {

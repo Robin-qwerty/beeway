@@ -16,7 +16,7 @@
 
     try {
       // Prepare the SQL statement for logging user activity
-      $sql = "INSERT INTO `logs` (`userid`, `useragent`, `action`, `tableid`, `interactionid`) VALUES (:userid, :useragent, '5', '6', :interactionid)";
+      $sql = "INSERT INTO `logs` (`userid`, `useragent`, `action`, `info`, `tableid`, `interactionid`) VALUES (:userid, :useragent, '5', 'Unauthorized access, user does not exist or is archived', '6', :interactionid)";
       $sth = $conn->prepare($sql);
       $sth->bindParam(':userid', $_SESSION['userid']); // bind the session userid to the SQL statement
       $sth->bindParam(':useragent', $_SESSION['useragent']); // bind the session useragent to the SQL statement
@@ -51,7 +51,7 @@
 
         try {
           // Prepare the SQL statement for logging user activity
-          $sql = "INSERT INTO `logs` (`userid`, `useragent`, `action`, `tableid`, `interactionid`) VALUES (:userid, :useragent, '5', '6', :interactionid)";
+          $sql = "INSERT INTO `logs` (`userid`, `useragent`, `action`, `info`, `tableid`, `interactionid`) VALUES (:userid, :useragent, '5', 'Unauthorized access, users school does not exist or is archived', '6', :interactionid)";
           $sth = $conn->prepare($sql);
           $sth->bindParam(':userid', $_SESSION['userid']); // bind the session userid to the SQL statement
           $sth->bindParam(':useragent', $_SESSION['useragent']); // bind the session useragent to the SQL statement

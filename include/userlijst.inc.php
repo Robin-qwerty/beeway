@@ -51,7 +51,7 @@
         // $user = $sth->fetch(PDO::FETCH_OBJ);
         //
         // if ($user) { // get logedin user
-        //   $userrol = $user->role;
+        //   $userrole = $user->role;
         //   $userschoolid = $user->schoolid;
         // }
 
@@ -60,7 +60,7 @@
         if (isset($_GET['offset'])) {
           $offset = $_GET['offset'] * 25;
 
-          if ($userrol == 2) { // userlist for superuser
+          if ($userrole == 2) { // userlist for superuser
             $sql = 'SELECT u.*, s.schoolname FROM users as u, schools as s
                     WHERE s.schoolid=u.schoolid
                     AND u.userid<>0
@@ -69,7 +69,7 @@
                     LIMIT 25 OFFSET '.intval($offset);
             $sth = $conn->prepare($sql);
             $sth->execute();
-          } elseif ($userrol == 1) { // userlist for school admin
+          } elseif ($userrole == 1) { // userlist for school admin
             $sql = 'SELECT u.*, s.schoolname FROM users as u, schools as s
                     WHERE u.schoolid=:schoolid
                     AND s.schoolid=u.schoolid
