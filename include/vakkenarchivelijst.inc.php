@@ -17,29 +17,25 @@
         <div class="beewaylijstopties">
           <button onclick="window.location.href='index.php?page=beewaylijst';" id="beewaylijstopties1">Beeway's</button>
           <b>|</b>
-          <button onclick="window.location.href='index.php?page=klassenlijst';" id="beewaylijstopties4">Klassen</button>
+          <button onclick="window.location.href='index.php?page=klassenlijst';" id="beewaylijstopties4">Groepen/Klassen</button>
           <b>|</b>
           <button onclick="window.location.href='index.php?page=vakkenlijst';" id="beewaylijstopties2"><u>Vakken</u></button>
           <b>|</b>
-          <button onclick="window.location.href='index.php?page=Hoofdthemalijst';" id="beewaylijstopties3">Hoofdthema's</button>
+          <button onclick="window.location.href='index.php?page=hoofdthemalijst';" id="beewaylijstopties3">Hoofdthema's</button>
           <b>|</b>
           <button onclick="window.location.href='index.php?page=userlijst';" id="beewaylijstopties5">Users</button>
       <?php } else { ?>
         <div class="beewaylijsttitel"><h1>Welkom op het docenten dashboard</h1></div>
         <h2>beheer hier dingen (:</h2>
-
         <div class="beewaylijstopties">
           <button onclick="window.location.href='index.php?page=beewaylijst';" id="beewaylijstopties1">Beeway's</button>
       <?php } ?>
     </div>
-
     <hr>
     <br>
-
       <?php
         if (isset($_GET['offset'])) {
           $offset = $_GET['offset'] * 25;
-
         } else {
           $sql = 'SELECT * FROM disciplines
                   WHERE archive=1
@@ -47,23 +43,18 @@
           $sth = $conn->prepare($sql);
           $sth->execute();
         }
-
         if ($sth->rowCount() > 0) {
           echo '<table class="beewaylijsttable">
             <tr>
               <th><h3>vak</h3></th>
-              <th><h3>verwijderd</h3></th>
             </tr>';
           while ($disciplines = $sth->fetch(PDO::FETCH_OBJ)) {
-
             echo'
               <tr>
                 <td><b>'.$disciplines->disciplinename.'</b></td>
-                <td><a '; ?> onclick='return confirm("Weet je zekker dat je deze vak wilt terughalen!?")' <?php echo ' href="php/disciplinearchive.php?disciplineid='.$disciplines->disciplineid.'" class="deletebutton">vak terughalen</a></td>
               </tr>
             ';
           }
-
           echo '</table>
 
           <div class="tablebuttons">';
@@ -99,14 +90,11 @@
           $_SESSION['error'] = "the query did not return any rows. Pech!";
         }
       ?>
-
     <hr>
   </div>
-
 <?php
   require_once 'include/error.inc.php';
   require_once 'include/info.inc.php';
-
   } else {
     $_SESSION['error'] = "er ging iets mis. Pech!";
     header("location: index.php?page=login");

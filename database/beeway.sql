@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 06 jun 2023 om 13:33
+-- Gegenereerd op: 08 jun 2023 om 15:45
 -- Serverversie: 10.4.28-MariaDB
 -- PHP-versie: 8.2.4
 
@@ -86,6 +86,15 @@ CREATE TABLE `beewayobservation` (
   `deletedby` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Gegevens worden geëxporteerd voor tabel `beewayobservation`
+--
+
+INSERT INTO `beewayobservation` (`observationid`, `beewayid`, `dataclass`, `learninggoal`, `evaluation`, `workgoal`, `action`, `createdat`, `createdby`, `updatedat`, `updatedby`, `archive`, `deletedat`, `deletedby`) VALUES
+(1, 1, 'test asdfakshdjfhaljsdhlfkjasdf', 'test 3', 'test 3', 'test ', 'test ', '2023-06-14 11:21:54', 1, '2023-06-26 11:21:54', 1, 0, NULL, NULL),
+(2, 1, 'test sadfasdf', 'test 2', 'test 2', 'test ', 'test ', '2023-06-14 11:21:54', 1, '2023-06-26 11:21:54', 1, 0, NULL, NULL),
+(3, 2, '', '', '', '', '', '2023-06-14 11:21:54', 1, '2023-06-26 11:21:54', 1, 0, NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -94,11 +103,11 @@ CREATE TABLE `beewayobservation` (
 
 CREATE TABLE `beewayplanning` (
   `planningid` int(11) NOT NULL,
-  `beewayid` varchar(11) NOT NULL,
+  `beewayid` int(11) NOT NULL,
   `planning` varchar(155) DEFAULT NULL,
   `planningwhat` varchar(2500) DEFAULT NULL,
   `planningwho` varchar(2500) DEFAULT NULL,
-  `planningdeadline` datetime DEFAULT NULL,
+  `planningdeadline` varchar(255) DEFAULT NULL,
   `planningdone` varchar(4) DEFAULT NULL,
   `createdat` datetime NOT NULL DEFAULT current_timestamp(),
   `createdby` int(11) DEFAULT NULL,
@@ -108,6 +117,15 @@ CREATE TABLE `beewayplanning` (
   `deletedat` datetime DEFAULT NULL,
   `deletedBy` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `beewayplanning`
+--
+
+INSERT INTO `beewayplanning` (`planningid`, `beewayid`, `planning`, `planningwhat`, `planningwho`, `planningdeadline`, `planningdone`, `createdat`, `createdby`, `updatedat`, `updatedby`, `archive`, `deletedat`, `deletedBy`) VALUES
+(1, 1, 'test aanpassen 1', 'testsdfsdfsdf', 'test ', '2023-06-09 10:51:04', '1', '2023-06-20 10:51:04', 1, '2023-06-15 10:51:04', 1, 0, NULL, NULL),
+(2, 1, 'test aanpassen ', 'test ', 'test ', 'erergdfgdfgdfg', '1', '2023-06-20 10:51:04', 1, '2023-06-15 10:51:04', 1, 0, NULL, NULL),
+(3, 2, 'wertyui', 'wertyui', 'qwrtyi', 'qwerty', '1', '2023-06-20 10:51:04', 1, '2023-06-15 10:51:04', 1, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -135,10 +153,12 @@ CREATE TABLE `disciplines` (
 INSERT INTO `disciplines` (`disciplineid`, `schoolid`, `disciplinename`, `createdat`, `createdby`, `updatedat`, `updatedby`, `archive`, `deletedat`, `deletedby`) VALUES
 (1, 1, 'rekenen', '2023-05-03 08:16:59', 1, '2023-05-03 08:16:59', 1, 0, NULL, NULL),
 (2, 1, 'lezen', '2023-05-03 08:17:16', 1, '2023-05-03 08:17:16', 1, 0, NULL, NULL),
-(3, 1, 'testvak', '2023-05-23 11:06:10', 2, '2023-05-23 11:06:10', 2, 0, NULL, NULL),
+(3, 1, 'testvak', '2023-05-23 11:06:10', 2, '2023-05-23 11:06:10', 2, 1, NULL, NULL),
 (6, 21, 'rekenen berweradsf', '2023-06-02 12:08:26', 49, '2023-06-02 12:08:26', 49, 1, NULL, NULL),
 (7, 21, 'asd', '2023-06-02 12:09:29', 49, '2023-06-02 12:09:29', 49, 1, NULL, NULL),
-(8, 21, 'asd', '2023-06-02 12:11:51', 49, '2023-06-02 12:11:51', 49, 1, NULL, NULL);
+(8, 21, 'asd', '2023-06-02 12:11:51', 49, '2023-06-02 12:11:51', 49, 1, NULL, NULL),
+(9, 1, 'sdfsd', '2023-06-07 08:10:34', 2, '2023-06-07 08:10:34', 2, 1, NULL, NULL),
+(10, 1, '1', '2023-06-08 14:23:30', 2, '2023-06-08 14:23:30', 2, 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -168,7 +188,11 @@ INSERT INTO `groups` (`groupid`, `schoolid`, `groups`, `createdat`, `createdby`,
 (2, 21, '6', '2023-05-03 08:18:09', 1, '2023-05-03 08:18:09', 1, 0, NULL, NULL),
 (3, 21, '3', '2023-05-09 13:54:26', 0, '2023-05-09 13:54:26', 0, 0, NULL, NULL),
 (4, 1, 'dfg', '2023-06-05 08:08:25', 2, '2023-06-05 08:08:25', 2, 0, NULL, NULL),
-(5, 1, '123', '2023-06-05 08:09:21', 2, '2023-06-05 08:09:21', 2, 0, NULL, NULL);
+(5, 1, '123', '2023-06-05 08:09:21', 2, '2023-06-05 08:09:21', 2, 0, NULL, NULL),
+(6, 0, 'sdf', '2023-06-07 08:10:39', 2, '2023-06-07 08:10:39', 2, 0, NULL, NULL),
+(7, 0, 'sdf', '2023-06-07 08:10:43', 2, '2023-06-07 08:10:43', 2, 0, NULL, NULL),
+(8, 0, 'sdf', '2023-06-07 08:10:58', 2, '2023-06-07 08:10:58', 2, 0, NULL, NULL),
+(9, 1, 'tes', '2023-06-08 14:15:13', 2, '2023-06-08 14:15:13', 2, 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -222,7 +246,9 @@ INSERT INTO `linkgroups` (`linkgroupsid`, `userid`, `groupid`, `archive`) VALUES
 (33, 51, 2, 1),
 (34, 51, 3, 1),
 (35, 51, 1, 1),
-(36, 51, 1, 0);
+(36, 51, 1, 0),
+(37, 58, 3, 0),
+(38, 58, 4, 0);
 
 -- --------------------------------------------------------
 
@@ -235,7 +261,7 @@ CREATE TABLE `logs` (
   `date` timestamp NOT NULL DEFAULT current_timestamp(),
   `userid` varchar(11) NOT NULL,
   `useragent` varchar(255) NOT NULL,
-  `action` tinyint(1) NOT NULL COMMENT '0=select\r\n1=insert\r\n2=update\r\n3=delete\r\n4=login\r\n5=logout',
+  `action` tinyint(1) NOT NULL COMMENT '0=select\r\n1=insert\r\n2=update\r\n3=delete\r\n4=login\r\n5=logout\r\n6=restore',
   `info` varchar(255) NOT NULL,
   `tableid` tinyint(4) NOT NULL COMMENT '1=beeway\r\n2=disciplines\r\n3=groups\r\n4=maintheme\r\n5=schools\r\n6=users',
   `interactionid` int(11) NOT NULL,
@@ -533,7 +559,66 @@ INSERT INTO `logs` (`id`, `date`, `userid`, `useragent`, `action`, `info`, `tabl
 (378, '2023-06-06 07:45:50', '2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, '', 6, 2, 0),
 (379, '2023-06-06 10:58:41', '2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, '', 6, 2, 0),
 (380, '2023-06-06 10:59:27', '2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 5, '', 6, 2, 0),
-(381, '2023-06-06 10:59:33', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, '', 6, 1, 0);
+(381, '2023-06-06 10:59:33', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, '', 6, 1, 0),
+(382, '2023-06-06 11:40:13', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 1, '', 5, 22, 0),
+(383, '2023-06-06 11:40:13', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 1, '', 6, 53, 0),
+(397, '2023-06-06 12:05:13', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 3, 'Everything from \'users\' where schoolid is 22 has been deleted.', 6, 22, 0),
+(398, '2023-06-06 12:05:13', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 3, 'Everything from \'maintheme\' where schoolid is 22 has been deleted.', 4, 22, 0),
+(399, '2023-06-06 12:05:13', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 3, 'Everything from \'groups\' where schoolid is 22 has been deleted.', 3, 22, 0),
+(400, '2023-06-06 12:05:13', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 3, 'Everything from \'disciplines\' where schoolid is 22 has been deleted.', 2, 22, 0),
+(401, '2023-06-06 12:05:13', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 3, 'Everything from \'beewayplanning\' and \'beewayobservation\' where beewayid is in () has been archived where beeway.schoolid is 22.', 1, 22, 0),
+(402, '2023-06-06 12:05:13', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 3, 'School with schoolid 22 has been archived.', 5, 22, 0),
+(403, '2023-06-06 12:10:46', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 1, '', 5, 23, 0),
+(404, '2023-06-06 12:10:46', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 1, '', 6, 54, 0),
+(405, '2023-06-06 12:10:52', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 3, 'Everything from \'users\' where schoolid is 23 has been deleted.', 6, 23, 0),
+(406, '2023-06-06 12:10:52', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 3, 'Everything from \'maintheme\' where schoolid is 23 has been deleted.', 4, 23, 0);
+INSERT INTO `logs` (`id`, `date`, `userid`, `useragent`, `action`, `info`, `tableid`, `interactionid`, `error`) VALUES
+(407, '2023-06-06 12:10:52', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 3, 'Everything from \'groups\' where schoolid is 23 has been deleted.', 3, 23, 0),
+(408, '2023-06-06 12:10:52', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 3, 'Everything from \'disciplines\' where schoolid is 23 has been deleted.', 2, 23, 0),
+(409, '2023-06-06 12:10:52', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 3, 'School with schoolid 23 has been archived.', 5, 23, 0),
+(410, '2023-06-06 12:12:00', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 1, '', 5, 24, 0),
+(411, '2023-06-06 12:12:00', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 1, '', 6, 55, 0),
+(412, '2023-06-06 12:12:03', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 3, 'Everything from \'users\' where schoolid is 24 has been deleted.', 6, 24, 0),
+(413, '2023-06-06 12:12:03', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 3, 'Everything from \'maintheme\' where schoolid is 24 has been deleted.', 4, 24, 0),
+(414, '2023-06-06 12:12:03', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 3, 'Everything from \'groups\' where schoolid is 24 has been deleted.', 3, 24, 0),
+(415, '2023-06-06 12:12:03', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 3, 'Everything from \'disciplines\' where schoolid is 24 has been deleted.', 2, 24, 0),
+(416, '2023-06-06 12:12:03', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 3, 'School with schoolid 24 has been archived.', 5, 24, 0),
+(417, '2023-06-06 12:29:19', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 1, 'school created', 5, 25, 0),
+(418, '2023-06-06 12:29:19', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 1, 'User added for new school 25', 6, 56, 0),
+(419, '2023-06-06 12:48:10', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 1, '', 6, 57, 0),
+(420, '2023-06-06 12:51:14', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 3, 'user deleted', 6, 57, 0),
+(421, '2023-06-07 06:08:44', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, 'User login', 6, 1, 0),
+(422, '2023-06-07 06:10:19', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 5, '', 6, 1, 0),
+(423, '2023-06-07 06:10:24', '2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, 'User login', 6, 2, 0),
+(424, '2023-06-07 06:15:41', '2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, 'User login', 6, 2, 0),
+(425, '2023-06-07 07:05:56', '2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 5, '', 6, 2, 0),
+(426, '2023-06-07 07:06:00', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, 'User login', 6, 1, 0),
+(427, '2023-06-07 08:41:33', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 5, '', 6, 1, 0),
+(428, '2023-06-07 08:41:38', '2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, 'User login', 6, 2, 0),
+(429, '2023-06-07 09:59:58', '2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 5, '', 6, 2, 0),
+(430, '2023-06-07 10:00:02', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, 'User login', 6, 1, 0),
+(431, '2023-06-08 06:06:49', '2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, 'User login', 6, 2, 0),
+(432, '2023-06-08 07:00:26', '2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 1, 'user added', 6, 58, 0),
+(433, '2023-06-08 07:02:56', '0', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, 'User login', 6, 0, 0),
+(434, '2023-06-08 07:03:31', '0', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, 'User login', 6, 0, 0),
+(435, '2023-06-08 07:05:21', '0', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 5, '', 6, 0, 0),
+(436, '2023-06-08 07:05:25', '2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 5, '', 6, 2, 0),
+(437, '2023-06-08 07:05:28', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, 'User login', 6, 1, 0),
+(438, '2023-06-08 07:40:38', '0', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 1, 'user added', 6, 59, 0),
+(439, '2023-06-08 07:40:48', '0', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 3, 'user deleted', 6, 59, 0),
+(440, '2023-06-08 08:23:16', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 5, 'User logout', 6, 1, 0),
+(441, '2023-06-08 08:23:20', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, 'User login', 6, 1, 0),
+(442, '2023-06-08 10:18:55', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 2, '', 6, 58, 0),
+(443, '2023-06-08 12:14:36', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 5, 'User logout', 6, 1, 0),
+(444, '2023-06-08 12:14:41', '2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, 'User login', 6, 2, 0),
+(445, '2023-06-08 12:15:13', '2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 1, '', 3, 9, 0),
+(446, '2023-06-08 12:23:30', '2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 1, '', 2, 10, 0),
+(447, '2023-06-08 12:24:06', '2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 3, '', 2, 10, 0),
+(448, '2023-06-08 12:27:20', '2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 5, 'Unauthorized access, user does not exist or is archived', 6, 2, 0),
+(449, '2023-06-08 12:34:53', '2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 3, '', 2, 9, 0),
+(450, '2023-06-08 12:36:06', '2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 3, '', 2, 3, 0),
+(451, '2023-06-08 13:44:53', '2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 5, 'User logout', 6, 2, 0),
+(452, '2023-06-08 13:44:56', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, 'User login', 6, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -544,7 +629,6 @@ INSERT INTO `logs` (`id`, `date`, `userid`, `useragent`, `action`, `info`, `tabl
 CREATE TABLE `maintheme` (
   `themeid` int(11) NOT NULL,
   `schoolid` varchar(11) NOT NULL,
-  `groupid` int(11) NOT NULL,
   `namethemep1` varchar(55) NOT NULL,
   `namethemep2` varchar(55) NOT NULL,
   `namethemep3` varchar(55) NOT NULL,
@@ -564,13 +648,13 @@ CREATE TABLE `maintheme` (
 -- Gegevens worden geëxporteerd voor tabel `maintheme`
 --
 
-INSERT INTO `maintheme` (`themeid`, `schoolid`, `groupid`, `namethemep1`, `namethemep2`, `namethemep3`, `namethemep4`, `namethemep5`, `schoolyear`, `createdat`, `createdby`, `updatedat`, `updatedby`, `archive`, `deletedat`, `deletedby`) VALUES
-(0, '1', 0, 'niet van toepasing', 'niet van toepasing', 'niet van toepasing', 'niet van toepasing', 'niet van toepasing', '1', '2023-05-23 08:58:16', 0, '2023-05-23 08:58:16', 0, 0, NULL, NULL),
-(1, '1', 1, 'test thema 1', 'naam p2', 'naam p3', 'naam p4', 'naam p5', '1', '2023-05-03 08:19:06', 1, '2023-05-03 08:19:06', 1, 0, NULL, NULL),
-(2, '1', 2, 'test thema 2', 'naam p2', 'naam p3', 'naam p4', 'naam p5', '1', '2023-05-03 08:19:14', 1, '2023-05-03 08:19:14', 1, 0, NULL, NULL),
-(3, '2', 3, 'test thema 3', 'naam p2', 'naam p3', 'naam p4', 'naam p5', '1', '2023-05-03 08:19:14', 1, '2023-05-03 08:19:14', 1, 0, NULL, NULL),
-(5, '1', 0, '1', '2', '3', '4', '5', '2', '2023-05-24 09:35:00', 0, '2023-05-24 09:35:00', 0, 0, NULL, NULL),
-(6, '1', 0, '1', '1', '1', '1', '1', '2', '2023-06-05 08:10:06', 0, '2023-06-05 08:10:06', 0, 0, NULL, NULL);
+INSERT INTO `maintheme` (`themeid`, `schoolid`, `namethemep1`, `namethemep2`, `namethemep3`, `namethemep4`, `namethemep5`, `schoolyear`, `createdat`, `createdby`, `updatedat`, `updatedby`, `archive`, `deletedat`, `deletedby`) VALUES
+(0, '1', 'niet van toepasing', 'niet van toepasing', 'niet van toepasing', 'niet van toepasing', 'niet van toepasing', '1', '2023-05-23 08:58:16', 0, '2023-05-23 08:58:16', 0, 0, NULL, NULL),
+(1, '1', 'test thema 1', 'naam p2', 'naam p3', 'naam p4', 'naam p5', '1', '2023-05-03 08:19:06', 1, '2023-05-03 08:19:06', 1, 0, NULL, NULL),
+(2, '1', 'test thema 2', 'naam p2', 'naam p3', 'naam p4', 'naam p5', '1', '2023-05-03 08:19:14', 1, '2023-05-03 08:19:14', 1, 0, NULL, NULL),
+(3, '2', 'test thema 3', 'naam p2', 'naam p3', 'naam p4', 'naam p5', '1', '2023-05-03 08:19:14', 1, '2023-05-03 08:19:14', 1, 0, NULL, NULL),
+(5, '1', '1', '2', '3', '4', '5', '2', '2023-05-24 09:35:00', 0, '2023-05-24 09:35:00', 0, 0, NULL, NULL),
+(6, '1', '1', '1', '1', '1', '1', '2', '2023-06-05 08:10:06', 0, '2023-06-05 08:10:06', 0, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -599,7 +683,11 @@ INSERT INTO `schools` (`schoolid`, `schoolname`, `createdat`, `createdby`, `upda
 (1, 'mijnschool', '2023-05-03 08:19:49', 1, '2023-05-03 08:19:49', 1, 0, NULL, NULL),
 (2, 'nietmijnschool', '2023-05-03 16:06:18', 1, '2023-05-03 16:06:18', 1, 0, NULL, NULL),
 (19, 'test beeway', '2023-05-24 09:40:03', 1, '2023-05-24 09:40:03', 1, 0, NULL, NULL),
-(21, 'asd', '2023-06-01 09:15:41', 1, '2023-06-01 09:15:41', 1, 0, NULL, NULL);
+(21, 'asd', '2023-06-01 09:15:41', 1, '2023-06-01 09:15:41', 1, 0, NULL, NULL),
+(22, 'test', '2023-06-06 13:40:13', 1, '2023-06-06 13:40:13', 1, 1, '2023-06-06 14:05:13', 1),
+(23, 'test', '2023-06-06 14:10:46', 1, '2023-06-06 14:10:46', 1, 1, '2023-06-06 14:10:52', 1),
+(24, 'test', '2023-06-06 14:12:00', 1, '2023-06-06 14:12:00', 1, 1, '2023-06-06 14:12:03', 1),
+(25, 'test', '2023-06-06 14:29:19', 1, '2023-06-06 14:29:19', 1, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -629,15 +717,22 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`userid`, `schoolid`, `firstname`, `lastname`, `email`, `password`, `role`, `createdat`, `createdby`, `updatedat`, `updatedby`, `archive`, `deletedat`, `deletedby`) VALUES
-(0, 0, 'system', '', '', '', 3, '2023-05-09 09:29:55', 0, '2023-05-09 09:29:55', 0, 1, NULL, NULL),
+(0, 0, 'system', '', '', '', 2, '2023-05-09 09:29:55', 0, '2023-05-09 09:29:55', 0, 1, NULL, NULL),
 (1, 0, 'superuser', 'test', 'test@test.nl', '$2y$10$PEIaTvE2w3VJw/t9iagKSu8tL1eUiGjYJqtkQ8snMoOWvW1lin6Lu', 2, '2023-05-03 08:20:53', 1, '2023-05-03 08:20:53', 1, 0, NULL, NULL),
-(2, 1, 'school admin', 'test', 'een@test.nl', '$2y$10$PEIaTvE2w3VJw/t9iagKSu8tL1eUiGjYJqtkQ8snMoOWvW1lin6Lu', 1, '2023-05-03 08:21:20', 1, '2023-05-03 08:21:20', 1, 0, '2023-05-31 16:22:00', 2),
-(3, 1, 'school docent', 'test', 'twee@test.nl', '$2y$10$PEIaTvE2w3VJw/t9iagKSu8tL1eUiGjYJqtkQ8snMoOWvW1lin6Lu', 0, '2023-05-10 16:14:24', 1, '2023-05-10 16:14:24', 1, 0, '2023-05-31 13:51:11', 2),
+(2, 1, 'school admin', 'test', 'een@test.nl', '$2y$10$PEIaTvE2w3VJw/t9iagKSu8tL1eUiGjYJqtkQ8snMoOWvW1lin6Lu', 1, '2023-05-03 08:21:20', 1, '2023-05-03 08:21:20', 1, 0, NULL, NULL),
+(3, 1, 'school docent', 'test', 'twee@test.nl', '$2y$10$PEIaTvE2w3VJw/t9iagKSu8tL1eUiGjYJqtkQ8snMoOWvW1lin6Lu', 0, '2023-05-10 16:14:24', 1, '2023-05-10 16:14:24', 1, 0, NULL, NULL),
 (45, 19, 'schooladmin', 'one', 'test beeway', '$2y$10$n0bNQG9rYwViXUCU38nKrORLrseI9qxpFM33UD8cjRM4LVqBQcE3q', 1, '2023-05-24 09:40:03', 1, '2023-05-24 09:40:03', 1, 0, NULL, NULL),
 (48, 19, 'docent 2', 'test', 'asdf@asdf', '$2y$10$PzlD5LmLReARPFIyy9pm5eXqxdxi.w2PzfjoMeWwL1UZBQ53LKW5C', 1, '2023-05-31 10:18:24', 47, '2023-05-31 10:18:24', 47, 0, NULL, NULL),
 (49, 21, 'schooladmin', 'one', 'asd', '$2y$10$/gUOnpYXN599EjE/w53xmet7cVhpuInUQi0PQGAzj2RM9wUKz21GK', 1, '2023-06-01 09:15:42', 1, '2023-06-01 09:15:42', 1, 0, NULL, NULL),
 (51, 21, 'jan', 'docent 1', '3@asd.nl', '$2y$10$aZRZ0D7sYUYls9yuxh6P6.J7zFujutplNQj9Y2cjjbs8M6GFu1URy', 0, '2023-06-01 15:20:45', 49, '2023-06-02 11:05:15', 49, 0, NULL, NULL),
-(52, 21, 'piet', 'docent 2', '1@asd.nl', '$2y$10$CioQR4B.1isgfKU2pr9eXOHZ6faW7mXckKKsADv1/FqYDtuYr663S', 0, '2023-06-02 13:43:40', 49, '2023-06-02 13:43:40', 49, 0, NULL, NULL);
+(52, 21, 'piet', 'docent 2', '1@asd.nl', '$2y$10$CioQR4B.1isgfKU2pr9eXOHZ6faW7mXckKKsADv1/FqYDtuYr663S', 0, '2023-06-02 13:43:40', 49, '2023-06-02 13:43:40', 49, 0, NULL, NULL),
+(53, 22, 'schooladmin', 'one', 'test', '$2y$10$oYsR32Frz2GatgFnU7rN8OP8eqix1xKCFwFZkyn/dDO0nmgiIau96', 1, '2023-06-06 13:40:13', 1, '2023-06-06 13:40:13', 1, 1, '2023-06-06 14:05:13', 1),
+(54, 23, 'schooladmin', 'one', 'test', '$2y$10$0QFKs763k8tNnJ4.dK4/5OLg9QPuQ1nXeraHLqL/EdKaVMwBbY.oi', 1, '2023-06-06 14:10:46', 1, '2023-06-06 14:10:46', 1, 1, '2023-06-06 14:10:52', 1),
+(55, 24, 'schooladmin', 'one', 'test', '$2y$10$aC.xWf.eRx3hMzgqw2Mti..OdKtX3u2BFwo2nGkI5iQ6a9PEcd.pq', 1, '2023-06-06 14:12:00', 1, '2023-06-06 14:12:00', 1, 1, '2023-06-06 14:12:03', 1),
+(56, 25, 'schooladmin', 'one', 'test', '$2y$10$LoC4GOPZbON3SQtYtEaamO.Ic0PIQOG/CWPDakVwx7fGGXMGvk4wq', 1, '2023-06-06 14:29:19', 1, '2023-06-06 14:29:19', 1, 0, NULL, NULL),
+(57, 25, '1', '1', '1@2.nl', '$2y$10$jdNiGl8Dbymkim6NJ7S6IuBFJrYKdmz.feNrY2kSEpWVUzkBSMJpa', 0, '2023-06-06 14:48:10', 1, '2023-06-06 14:48:10', 1, 1, '2023-06-06 14:51:14', 1),
+(58, 1, 'test', 'test', 'test@2345234', '$2y$10$Ih6mNLpVTHcOIO5Y9e9wm.i0ZLs0cdKdCo/kOJCvR8A3qfJMkfRq.', 0, '2023-06-08 09:00:26', 2, '2023-06-08 12:18:55', 1, 0, NULL, NULL),
+(59, 1, 'asd', 'asd', 'asd@mijnschool', '$2y$10$6r7LdjjpFJ/6HW4WJK/iROLJ2O6JjDeum7n76pCDFFQ.MhZTlcjYi', 1, '2023-06-08 09:40:38', 0, '2023-06-08 09:40:38', 0, 1, '2023-06-08 09:40:48', 0);
 
 --
 -- Indexen voor geëxporteerde tabellen
@@ -717,37 +812,37 @@ ALTER TABLE `beeway`
 -- AUTO_INCREMENT voor een tabel `beewayobservation`
 --
 ALTER TABLE `beewayobservation`
-  MODIFY `observationid` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `observationid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT voor een tabel `beewayplanning`
 --
 ALTER TABLE `beewayplanning`
-  MODIFY `planningid` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `planningid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT voor een tabel `disciplines`
 --
 ALTER TABLE `disciplines`
-  MODIFY `disciplineid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `disciplineid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT voor een tabel `groups`
 --
 ALTER TABLE `groups`
-  MODIFY `groupid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `groupid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT voor een tabel `linkgroups`
 --
 ALTER TABLE `linkgroups`
-  MODIFY `linkgroupsid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `linkgroupsid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT voor een tabel `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=382;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=453;
 
 --
 -- AUTO_INCREMENT voor een tabel `maintheme`
@@ -759,13 +854,13 @@ ALTER TABLE `maintheme`
 -- AUTO_INCREMENT voor een tabel `schools`
 --
 ALTER TABLE `schools`
-  MODIFY `schoolid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `schoolid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT voor een tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `userid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `userid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

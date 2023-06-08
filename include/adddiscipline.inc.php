@@ -11,7 +11,7 @@
       <input id="vak" type="text" placeholder="vak" name="disciplinename" required>
 
       <hr style="margin: 20px 0;">
-      <button type="submit" class="adddisciplinerbtn" style="font-size:20px;font-weight: bold;">vakken toevoegen</button>
+      <button type="submit" class="adddisciplinerbtn" style="font-size:20px;font-weight: bold;">vak toevoegen</button>
     </form>
   </div>
 

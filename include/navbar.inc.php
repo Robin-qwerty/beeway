@@ -46,15 +46,9 @@
       <div class="menu_profiel_foto">
         <iconify-icon icon="material-symbols:person" style="font-size:80px;"></iconify-icon>
       </div>
-      <div class="menu_profiel_rechts" style="margin-top:20px;">  
+      <div class="menu_profiel_rechts" style="margin-top:20px;">
         <h2 id="menu_profiel_naam" style="font-weight:none;" class="day-message">Hallo</h2>
-        <h3 id="voornaam" style="margin:0;margin-left:35px;"></h3>
-        <script type='text/javascript'>
-          // Get the value from session storage
-          var sessionData = sessionStorage.getItem("voornaam");
-          // Set the value as the innerHTML of the div element
-          document.getElementById("voornaam").innerHTML = sessionData;
-        </script>
+        <h3 id="voornaam" style="margin:0;margin-left:35px;"><?php echo $_SESSION['name']; ?></h3>
         <a id="menu_profiel_knop" href="index.php?page=profiel" class="editbutton">Profiel</a>
       </div>
     </div>

@@ -18,11 +18,11 @@
       <div class="beewaylijstopties">
         <button onclick="window.location.href='index.php?page=beewaylijst';" id="beewaylijstopties1">Beeway's</button>
         <b>|</b>
-        <button onclick="window.location.href='index.php?page=klassenlijst';" id="beewaylijstopties4"><u>Klassen</u></button>
+        <button onclick="window.location.href='index.php?page=klassenlijst';" id="beewaylijstopties4"><u>Groepen/Klassen</u></button>
         <b>|</b>
         <button onclick="window.location.href='index.php?page=vakkenlijst';" id="beewaylijstopties2">Vakken</button>
         <b>|</b>
-        <button onclick="window.location.href='index.php?page=Hoofdthemalijst';" id="beewaylijstopties3">Hoofdthema's</button>
+        <button onclick="window.location.href='index.php?page=hoofdthemalijst';" id="beewaylijstopties3">Hoofdthema's</button>
         <b>|</b>
         <button onclick="window.location.href='index.php?page=userlijst';" id="beewaylijstopties5">Users</button>
       <?php } else { ?>
@@ -66,7 +66,7 @@
       echo '
         <tr>
           <td><b>'.$groups->groups.'</b></td>
-          <td><a id="groupsdelete" onclick="return confirm(\'Weet je zeker dat je deze groep/klas wilt verwijderen!?\')" href="php/groupsverwijderen.php?groupid='.$groups->groupid.'" class="deletebutton">groep/klas verwijderen</a></td>
+          <td><a id="groupsdelete" onclick="return confirm(\'Weet je zeker dat je deze groep/klas wilt verwijderen!?\')" href="php/deletegroup.php?groupid='.$groups->groupid.'" class="deletebutton">groep/klas verwijderen</a></td>
         </tr>
         ';
     }
@@ -75,7 +75,7 @@
     <br>
     <div class="seedeleted">
       <h3>Bekijk verwijderde groepen/klassen:</h3>
-      <a class="deletebutton" id="trashbutton2" href="index.php?page=klassendeletedlijst"><iconify-icon icon="tabler:trash"></iconify-icon></a>
+      <a class="deletebutton" id="trashbutton2" href="index.php?page=klassenarchivelijst"><iconify-icon icon="tabler:trash"></iconify-icon></a>
     </div>
     <br>
     <br>';

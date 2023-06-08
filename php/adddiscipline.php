@@ -40,6 +40,16 @@
     $sth->bindParam(':createdby', $_SESSION['userid']);
     $sth->bindParam(':updatedby', $_SESSION['userid']);
     $sth->execute();
+
+    $disciplineid = $conn->lastInsertId();
+    
+    $sql = "INSERT INTO `logs` (`userid`, `useragent`, `action`, `tableid`, `interactionid`) VALUES (:userid, :useragent, '1', '2', :interactionid)";
+    $sth = $conn->prepare($sql);
+    $sth->bindParam(':userid', $_SESSION['userid']);
+    $sth->bindParam(':useragent', $_SESSION['useragent']);
+    $sth->bindParam(':interactionid', $disciplineid);
+    $sth->execute();
+
     $_SESSION['info'] = "Discipline added successfully.";
     header("location: ../index.php?page=vakkenlijst");
   }

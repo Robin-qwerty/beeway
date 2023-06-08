@@ -26,11 +26,11 @@ if (isset($_SESSION['userrole'])) { // controleer of de gebruiker is ingelogd
     <div class="beewaylijstopties">
       <button onclick="window.location.href='index.php?page=beewaylijst';" id="beewaylijstopties1">Beeway's</button>
       <b>|</b>
-      <button onclick="window.location.href='index.php?page=klassenlijst';" id="beewaylijstopties4">Klassen</button>
+      <button onclick="window.location.href='index.php?page=klassenlijst';" id="beewaylijstopties4">Groepen/Klassen</button>
       <b>|</b>
       <button onclick="window.location.href='index.php?page=vakkenlijst';" id="beewaylijstopties2"><u>Vakken</u></button>
       <b>|</b>
-      <button onclick="window.location.href='index.php?page=Hoofdthemalijst';" id="beewaylijstopties3">Hoofdthema's</button>
+      <button onclick="window.location.href='index.php?page=hoofdthemalijst';" id="beewaylijstopties3">Hoofdthema's</button>
       <b>|</b>
       <button onclick="window.location.href='index.php?page=userlijst';" id="beewaylijstopties5">Users</button>
     <?php } else { ?>
@@ -98,7 +98,7 @@ if (isset($_SESSION['userrole'])) { // controleer of de gebruiker is ingelogd
   ?>
     <div class="seedeleted">
       <h3>bekijk verwijderde vakken: </h3>
-      <a class="deletebutton" id="trashbutton2" href="index.php?page=disciplinearchive"><iconify-icon icon="tabler:trash"></iconify-icon></a>
+      <a class="deletebutton" id="trashbutton2" href="index.php?page=vakkenarchivelijst"><iconify-icon icon="tabler:trash"></iconify-icon></a>
     </div>
     <br>
     <br>

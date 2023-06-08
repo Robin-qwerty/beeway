@@ -2,7 +2,7 @@
   require_once '../private/dbconnect.php';
   session_start();
 
-  // try {
+  try {
     if ($_POST['namethemep1'] == '' || $_POST['namethemep2'] == '' || $_POST['namethemep3'] == '' || $_POST['namethemep4'] == '' || $_POST['namethemep5'] == '' || $_POST['schoolyear'] == '') {
       $_SESSION['error'] = "vul ff iets in";
       header("location: ../index.php?page=addmaintheme");
@@ -30,32 +30,28 @@
         $sth->bindParam(':schoolyear', $_POST['schoolyear']);
         $sth->execute();
 
-        // $lastInsertedId = $conn->lastInsertId();
-        //
-        //
-        //
-        // if ($lastInsertedId) {
-        //
-        //
-        //
-        //   // $sql = "INSERT INTO `logs` (`userid`, `action`, `tableid`, `interactionid`) VALUES (:userid, '1', '6', :interactionid)";
-        //   // $sth = $conn->prepare($sql);
-        //   // $sth->bindParam(':userid', $_SESSION['userid']);
-        //   // $sth->bindParam(':interactionid', $lastInsertedId);
-        //   // $sth->execute();
-        //
-        //   $_SESSION['info'] = 'user toegevoegt';
-        //   header('location: ../index.php?page=hoofdthemalijst');
-        //
-        // } else {
-        //   $_SESSION['error'] = 'er ging iets mis. Pech';
-        //   header('location: ../index.php?page=hoofdthemalijst');
+        $lastInsertedId = $conn->lastInsertId();
+
+        if ($lastInsertedId) {
+          $sql = "INSERT INTO `logs` (`userid`, `action`, `tableid`, `interactionid`)
+                  VALUES (:userid, '1', '4', :interactionid)";
+          $sth = $conn->prepare($sql);
+          $sth->bindParam(':userid', $_SESSION['userid']);
+          $sth->bindParam(':interactionid', $lastInsertedId);
+          $sth->execute();
+
+          $_SESSION['info'] = 'hoofdthema toegevoegd';
+          header('location: ../index.php?page=hoofdthemalijst');
+        } else {
+          $_SESSION['error'] = 'er ging iets mis. Pech';
+          header('location: ../index.php?page=hoofdthemalijst');
+        }
       }
     }
-  // } catch (\Exception $e) {
-  //   $_SESSION['error'] = "er ging iets mis. Pech";
-  //   header("location: ../index.php?page=userlijst");
-  // }
+  } catch (\Exception $e) {
+    $_SESSION['error'] = "er ging iets mis. Pech";
+    header("location: ../index.php?page=userlijst");
+  }
 
   function checkForIllegalCharacters($str) { // check for iliegal characters
     $illegalChars = array('<', '>', '{', '}', '(', ')', '[', ']', '*', '$', '^', '`', '~', '|', '\\', '\'', '"', ':', ';', ',', '/');

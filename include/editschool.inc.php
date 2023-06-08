@@ -1,8 +1,4 @@
-<?php
-  // check if user is logged in and has superuser role
-  if (isset($_SESSION['userid']) && isset($_SESSION['userrole']) && $_SESSION['userrole'] == 'superuser') {
-?>
-
+<?php if (isset($_SESSION['userid']) && isset($_SESSION['userrole']) && $_SESSION['userrole'] == 'superuser') { // check if user is logedin ?>
   <div class="addeditschool">
     <form class="form" action="php/editschool.php?schoolid=<?php echo $_GET['schoolid']; ?>" method="POST">
       <div id="name">

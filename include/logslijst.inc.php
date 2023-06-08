@@ -32,11 +32,11 @@
         <div class="beewaylijstopties">
           <button onclick="window.location.href='index.php?page=beewaylijst';" id="beewaylijstopties1">Beeway's</button>
           <b>|</b>
-          <button onclick="window.location.href='index.php?page=klassenlijst';" id="beewaylijstopties4">Klassen</button>
+          <button onclick="window.location.href='index.php?page=klassenlijst';" id="beewaylijstopties4">Groepen/Klassen</button>
           <b>|</b>
           <button onclick="window.location.href='index.php?page=vakkenlijst';" id="beewaylijstopties2">Vakken</button>
           <b>|</b>
-          <button onclick="window.location.href='index.php?page=Hoofdthemalijst';" id="beewaylijstopties3">Hoofdthema's</button>
+          <button onclick="window.location.href='index.php?page=hoofdthemalijst';" id="beewaylijstopties3">Hoofdthema's</button>
           <b>|</b>
           <button onclick="window.location.href='index.php?page=userlijst';" id="beewaylijstopties5">Users</button>
       <?php } else { ?>
@@ -71,8 +71,8 @@
             echo '<optgroup label="' . $roleName . '">';
 
             $sql = 'SELECT userid, firstname, lastname, role FROM users
-                    WHERE role = :role
-                    AND userid <> 0
+                    WHERE role=:role
+                    AND userid<>0
                     ORDER BY firstname, lastname';
             $sth = $conn->prepare($sql);
             $sth->bindParam(':role', $roleId, PDO::PARAM_INT);
@@ -143,6 +143,7 @@
                   FROM logs as l, users as u
                   WHERE u.userid=:userid
                   AND l.userid=u.userid
+                  AND l.userid<>0
                   ORDER BY id DESC
                   LIMIT 50 OFFSET '.intval($offset);
           $sth = $conn->prepare($sql);
@@ -154,6 +155,7 @@
           $sql = 'SELECT l.*, u.firstname, u.lastname
                   FROM logs as l, users as u
                   WHERE l.userid=u.userid
+                  AND l.userid<>0
                   ORDER BY id DESC
                   LIMIT 50 OFFSET '.intval($offset);
           $sth = $conn->prepare($sql);

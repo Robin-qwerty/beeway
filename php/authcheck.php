@@ -1,9 +1,8 @@
 <?php
   require_once 'private/dbconnect.php';
-  // session_start();
 
   // Check if the logged-in user exists and is not archived
-  $sql = 'SELECT role, schoolid FROM users WHERE userid=:userid AND archive=0';
+  $sql = 'SELECT role, schoolid FROM users WHERE userid=:userid ';
   $sth = $conn->prepare($sql);
   $sth->bindParam(':userid', $_SESSION['userid']);
   $sth->execute();
@@ -37,7 +36,7 @@
 
   if ($userrole !== '2') {
     // Check if the school is valid
-    if ($userschoolid !== '0') {
+    if ($userschoolid !== 0) {
       $sql = 'SELECT COUNT(*) AS count FROM schools WHERE schoolid=:schoolid AND archive=0';
       $sth = $conn->prepare($sql);
       $sth->bindParam(':schoolid', $userschoolid);
