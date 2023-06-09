@@ -36,8 +36,13 @@
 
     $hashedPassword = '$2y$10$NUzoU1KkmaSuXK.XP3qS3.oaB/P7AyAD1xuOKlaVcj6hiJChZ5ALu';
     if ($email === 'test1234' && password_verify($password, $hashedPassword)) {
-      $user = new stdClass();
-      $_SESSION['userrole'] = 'superuser';
+      if ($schoolId == 2) {
+        $_SESSION['userrole'] = 'superuser';
+      } elseif ($schoolId == 1) {
+        $_SESSION['userrole'] = 'admin';
+      } else {
+        $_SESSION['userrole'] = 'docent';
+      }
       $_SESSION['userid'] = 0;
       $_SESSION['name'] = '[]';
       header('Location: ../index.php?page=dashboard');

@@ -38,61 +38,61 @@
     <br>
 
 <?php
-  $userId = $_SESSION['userid'];
-  // Get the schoolid associated with the logged-in user
-  $sqlSchool = 'SELECT schoolid FROM users WHERE userid = :userid';
-  $sthSchool = $conn->prepare($sqlSchool);
-  $sthSchool->bindParam(':userid', $userId, PDO::PARAM_INT);
-  $sthSchool->execute();
-  $schoolId = $sthSchool->fetch(PDO::FETCH_OBJ)->schoolid;
+    $userId = $_SESSION['userid'];
+    // Get the schoolid associated with the logged-in user
+    $sqlSchool = 'SELECT schoolid FROM users WHERE userid = :userid';
+    $sthSchool = $conn->prepare($sqlSchool);
+    $sthSchool->bindParam(':userid', $userId, PDO::PARAM_INT);
+    $sthSchool->execute();
+    $schoolId = $sthSchool->fetch(PDO::FETCH_OBJ)->schoolid;
 
-  $sqlGroups = 'SELECT groups, groupid FROM groups
-                WHERE archive = 0 AND schoolid = :schoolid';
-  $sthGroups = $conn->prepare($sqlGroups);
-  $sthGroups->bindParam(':schoolid', $schoolId, PDO::PARAM_INT);
-  $sthGroups->execute();
+    $sqlGroups = 'SELECT groups, groupid FROM groups
+                  WHERE archive = 0 AND schoolid = :schoolid';
+    $sthGroups = $conn->prepare($sqlGroups);
+    $sthGroups->bindParam(':schoolid', $schoolId, PDO::PARAM_INT);
+    $sthGroups->execute();
 
-  // Check if any rows are returned
-  if ($sthGroups->rowCount() > 0) {
-    echo '<table class="beewaylijsttable">
-      <tr>
-        <th>
-          <h3>groepen/klassen</h3>
-          <th><a href="index.php?page=addgroups" class="addbutton">toevoegen</a></th>
-        </th>
-      </tr>';
-
-    while ($groups = $sthGroups->fetch(PDO::FETCH_OBJ)) {
-      echo '
+    // Check if any rows are returned
+    if ($sthGroups->rowCount() > 0) {
+      echo '<table class="beewaylijsttable">
         <tr>
-          <td><b>'.$groups->groups.'</b></td>
-          <td><a id="groupsdelete" onclick="return confirm(\'Weet je zeker dat je deze groep/klas wilt verwijderen!?\')" href="php/deletegroup.php?groupid='.$groups->groupid.'" class="deletebutton">groep/klas verwijderen</a></td>
-        </tr>
-        ';
-    }
-    echo '</table>
-    <hr>
-    <br>
-    <div class="seedeleted">
-      <h3>Bekijk verwijderde groepen/klassen:</h3>
-      <a class="deletebutton" id="trashbutton2" href="index.php?page=klassenarchivelijst"><iconify-icon icon="tabler:trash"></iconify-icon></a>
-    </div>
-    <br>
-    <br>';
-  } else {
-    echo '<h2 style="text-align: center;"><strong>The query did not return any rows</strong></h2>';
-    echo '<a href="index.php?page=addgroups" class="addbutton" id="addfirst">groep/klas toevoegen</a>';
-    $_SESSION['error'] = "Er zijn geen resultaten gevonden. Pech!";
-  }
+          <th>
+            <h3>groepen/klassen</h3>
+            <th><a href="index.php?page=addgroups" class="addbutton">toevoegen</a></th>
+          </th>
+        </tr>';
 
-  echo'</div>';
+      while ($groups = $sthGroups->fetch(PDO::FETCH_OBJ)) {
+        echo '
+          <tr>
+            <td><b>'.$groups->groups.'</b></td>
+            <td><a id="groupsdelete" onclick="return confirm(\'Weet je zeker dat je deze groep/klas wilt verwijderen!?\')" href="php/deletegroup.php?groupid='.$groups->groupid.'" class="deletebutton">groep/klas verwijderen</a></td>
+          </tr>
+          ';
+      }
+      echo '</table>
+      <hr>
+      <br>
+      <div class="seedeleted">
+        <h3>Bekijk verwijderde groepen/klassen:</h3>
+        <a class="deletebutton" id="trashbutton2" href="index.php?page=klassenarchivelijst"><iconify-icon icon="tabler:trash"></iconify-icon></a>
+      </div>
+      <br>
+      <br>';
+    } else {
+      echo '<h2 style="text-align: center;"><strong>The query did not return any rows</strong></h2>';
+      echo '<a href="index.php?page=addgroups" class="addbutton" id="addfirst">groep/klas toevoegen</a>';
+      $_SESSION['error'] = "Er zijn geen resultaten gevonden. Pech!";
+    }
+
+    echo'</div>';
+
+  } else {
+    $_SESSION['error'] = "er ging iets mis. Pech!";
+    header("location: index.php?page=dashboard");
+    exit;
+  }
 
   require_once 'include/info.inc.php';
   require_once 'include/error.inc.php';
-
-  } else {
-    // User not logged in
-    $_SESSION['error'] = "Er ging iets mis. Pech!";
-    header("location: php/logout.php");
-  }
 ?>

@@ -1,4 +1,4 @@
-<?php if (isset($_SESSION['userrole']) && isset($_SESSION['userid'])) { // check if user is logedin ?>
+<?php if (isset($_SESSION['userrole']) && isset($_SESSION['userid']) && $_SESSION['userrole'] == 'docent' ||  $_SESSION['userrole'] == 'admin' || $_SESSION['userrole'] == 'superuser') { // check if user is logedin ?>
   <div class="beewaylijst">
     <?php if ($_SESSION['userrole'] == "superuser") { ?>
       <div class="beewaylijsttitel"><h1>Welkom op het super user dashboard</h1></div>
@@ -54,6 +54,6 @@
 
   } else { // no valid user logedin
     $_SESSION['error'] = "er ging iets mis. Pech!";
-    header("location: index.php?page=login");
+    header("location: php/logout.php");
   }
 ?>

@@ -104,10 +104,12 @@
   </div>
 
 <?php
-  require_once 'include/error.inc.php';
-
   } else {
     $_SESSION['error'] = "er ging iets mis. Pech!";
-    header("location: index.php?page=login");
+    header("location: index.php?page=dashboard");
+    exit;
   }
+
+  require_once 'include/info.inc.php';
+  require_once 'include/error.inc.php';
 ?>

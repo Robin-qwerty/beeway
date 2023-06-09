@@ -1,58 +1,60 @@
 <script src="script/beeway.js"></script>
 
 <?php
-  if (isset($_GET['beewayid']) && $_GET['beewayid'] > 0) {
+  if (isset($_SESSION['userid']) && isset($_SESSION['userrole']) && $_SESSION['userrole'] == 'admin' || $_SESSION['userrole'] == 'docent') { // check if user is logedin
 
-    $sql = 'SELECT schoolid
-         FROM users
-         WHERE schoolid<>0
-         AND archive<>1
-         AND userid=:userid';
+    if (isset($_GET['beewayid']) && $_GET['beewayid'] > 0) {
 
-    $sth = $conn->prepare($sql);
-    $sth->bindValue(':userid', $_SESSION['userid']);
-    $sth->execute();
+      $sql = 'SELECT schoolid
+           FROM users
+           WHERE schoolid<>0
+           AND archive<>1
+           AND userid=:userid';
 
-    $result = $sth->fetch(); // Fetch the result from the executed query
-    $schoolid = $result['schoolid']; // Access the schoolid value from the result array
+      $sth = $conn->prepare($sql);
+      $sth->bindValue(':userid', $_SESSION['userid']);
+      $sth->execute();
 
-            $sql = 'SELECT * FROM beeway
-                    WHERE beewayid=:beewayid';
-            $sth = $conn->prepare($sql);
-            $sth->bindParam(':beewayid', $_GET['beewayid']);
-            $sth->execute();
+      $result = $sth->fetch(); // Fetch the result from the executed query
+      $schoolid = $result['schoolid']; // Access the schoolid value from the result array
 
-            if ($beeway = $sth->fetch(PDO::FETCH_OBJ)) {
+              $sql = 'SELECT * FROM beeway
+                      WHERE beewayid=:beewayid';
+              $sth = $conn->prepare($sql);
+              $sth->bindParam(':beewayid', $_GET['beewayid']);
+              $sth->execute();
 
-              echo'
-              <div class="beewayedit">
-                <form id="form0" action="php/editbeeway.php?beewayid='.$_GET['beewayid'].'" method="post">
-                  <div><input type="text" placeholder="BeewayNaam" name="beewaynaam" value="'.$beeway->beewayname.'" required></div>
-                  <div><button id="opslaan" class="addbutton" type="submit" style="font-size: 16px;">Opslaan</button></div>
-                  <div><button '; ?> onclick='return confirm("Weet je zekker dat je deze beeway wilt verwijderen!?")' <?php echo ' href="##" class="deletebutton" style="font-size: 16px;">Verwijderen</button></div>
-                  <div>
-              ';
+              if ($beeway = $sth->fetch(PDO::FETCH_OBJ)) {
 
-              $sql1 = 'SELECT firstname, lastname FROM users WHERE userid = :userid1
-                      UNION ALL
-                      SELECT firstname, lastname FROM users WHERE userid = :userid2';
-              $sth1 = $conn->prepare($sql1);
-              $sth1->bindParam(':userid1', $beeway->createdby);
-              $sth1->bindParam(':userid2', $beeway->updatedby);
-              $sth1->execute();
+                echo'
+                <div class="beewayedit">
+                  <form id="form0" action="php/editbeeway.php?beewayid='.$_GET['beewayid'].'" method="post">
+                    <div><input type="text" placeholder="BeewayNaam" name="beewaynaam" value="'.$beeway->beewayname.'" required></div>
+                    <div><button id="opslaan" class="addbutton" type="submit" style="font-size: 16px;">Opslaan</button></div>
+                    <div><button '; ?> onclick='return confirm("Weet je zekker dat je deze beeway wilt verwijderen!?")' <?php echo ' href="##" class="deletebutton" style="font-size: 16px;">Verwijderen</button></div>
+                    <div>
+                ';
 
-              $y = 1;
+                $sql1 = 'SELECT firstname, lastname FROM users WHERE userid = :userid1
+                        UNION ALL
+                        SELECT firstname, lastname FROM users WHERE userid = :userid2';
+                $sth1 = $conn->prepare($sql1);
+                $sth1->bindParam(':userid1', $beeway->createdby);
+                $sth1->bindParam(':userid2', $beeway->updatedby);
+                $sth1->execute();
 
-              while ($editedby = $sth1->fetch(PDO::FETCH_OBJ)) {
-                if ($y == 1) {
-                  echo'<p>Aangemaakt door: <b>'.$editedby->firstname.' '.$editedby->lastname.'</b></p>';
-                } else {
-                  echo'<p>Als laast bewerkt door: <b>'.$editedby->firstname.' '.$editedby->lastname.'</b></p>';
+                $y = 1;
+
+                while ($editedby = $sth1->fetch(PDO::FETCH_OBJ)) {
+                  if ($y == 1) {
+                    echo'<p>Aangemaakt door: <b>'.$editedby->firstname.' '.$editedby->lastname.'</b></p>';
+                  } else {
+                    echo'<p>Als laast bewerkt door: <b>'.$editedby->firstname.' '.$editedby->lastname.'</b></p>';
+                  }
+
+                  $y++;
                 }
-
-                $y++;
               }
-            }
           ?>
         </div>
         <div>
@@ -226,10 +228,17 @@
 
 <?php
 
-} else {
-  $_SESSION['error'] = 'Failed to get beeway';
-  header('Location: index.php?page=beewaylijst');
-  exit;
-}
+    } else {
+      $_SESSION['error'] = 'Failed to get beeway';
+      header('Location: index.php?page=beewaylijst');
+      exit;
+    }
+  } else {
+    $_SESSION['error'] = "er ging iets mis. Pech!";
+    header("location: index.php?page=dashboard");
+    exit;
+  }
 
+  require_once 'include/info.inc.php';
+  require_once 'include/error.inc.php';
 ?>

@@ -1,7 +1,5 @@
-<?php
-if (isset($_SESSION['userrole'])) { // controleer of de gebruiker is ingelogd
-?>
-<div class="beewaylijst">
+<?php if (isset($_SESSION['userrole']) && isset($_SESSION['userid']) && $_SESSION['userrole'] == 'admin') { // controleer of de gebruiker is ingelogd ?>
+  <div class="beewaylijst">
     <?php if ($_SESSION['userrole'] == "superuser") { ?>
     <div class="beewaylijsttitel">
       <h1>Welkom op het super user dashboard</h1>
@@ -45,9 +43,11 @@ if (isset($_SESSION['userrole'])) { // controleer of de gebruiker is ingelogd
       <button onclick="window.location.href='index.php?page=beewaylijst';" id="beewaylijstopties1">Beeway's</button>
     </div>
     <?php } ?>
+
   </div>
   <hr>
   <br>
+
   <?php
     $sql = 'SELECT schoolid
            FROM users
@@ -104,14 +104,15 @@ if (isset($_SESSION['userrole'])) { // controleer of de gebruiker is ingelogd
     <br>
   </div>
 
-    <hr>
-    </div>
-  <?php
-    require_once 'include/info.inc.php';
-    require_once 'include/error.inc.php';
+  <hr>
 
-    } else {
-      $_SESSION['error'] = "er ging iets mis. Pech!";
-      header("location: php/logout.php");
-    }
-  ?>
+<?php
+  } else {
+    $_SESSION['error'] = "er ging iets mis. Pech!";
+    header("location: index.php?page=dashboard");
+    exit;
+  }
+
+  require_once 'include/info.inc.php';
+  require_once 'include/error.inc.php';
+?>

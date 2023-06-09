@@ -1,4 +1,4 @@
-<?php if (isset($_SESSION['userrole'])) { // check if user is logedin ?>
+<?php if (isset($_SESSION['userrole']) && isset($_SESSION['userid']) && $_SESSION['userrole'] == 'admin') { // check if user is logedin ?>
   <div class="beewaylijst">
       <?php if ($_SESSION['userrole'] == "superuser") { ?>
         <div class="beewaylijsttitel"><h1>Welkom op het super user dashboard</h1></div>
@@ -92,11 +92,14 @@
       ?>
     <hr>
   </div>
+  
 <?php
-  require_once 'include/error.inc.php';
-  require_once 'include/info.inc.php';
   } else {
     $_SESSION['error'] = "er ging iets mis. Pech!";
-    header("location: index.php?page=login");
+    header("location: index.php?page=dashboard");
+    exit;
   }
+
+  require_once 'include/info.inc.php';
+  require_once 'include/error.inc.php';
 ?>
