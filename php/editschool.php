@@ -30,20 +30,24 @@
       $sth->bindParam(':schoolid', $_GET['schoolid']);
       $sth->execute();
 
-      $sql = "INSERT INTO `logs` (`userid`, `useragent`, `action`, `tableid`, `interactionid`)
-              VALUES (:userid, :useragent, '2', '5', :interactionid)";
-      $sth = $conn->prepare($sql);
-      $sth->bindParam(':userid', $_SESSION['userid']);
-      $sth->bindParam(':useragent', $_SESSION['useragent']);
-      $sth->bindParam(':interactionid', $_GET['schoolid']);
-      $sth->execute();
+      if ($sth->rowCount() > 0) {
+        $sql1 = "INSERT INTO `logs` (`userid`, `useragent`, `action`, `tableid`, `interactionid`) VALUES (:userid, :useragent, '2', '5', :interactionid)";
+        $sth1 = $conn->prepare($sql1);
+        $sth1->bindParam(':userid', $_SESSION['userid']);
+        $sth1->bindParam(':useragent', $_SESSION['useragent']);
+        $sth1->bindParam(':interactionid', $_GET['schoolid']);
+        $sth1->execute();
 
         $_SESSION['info'] = 'school aangepast';
         header('location: ../index.php?page=scholenlijst');
+      } else {
+        $_SESSION['error'] = "er ging iets mis. Pech";
+        header("location: ../index.php?page=scholenlijst");
+      }
     }
   } catch (\Exception $e) {
     $_SESSION['error'] = "er ging iets mis. Pech";
-    header("location: ../index.php?page=userlijst");
+    header("location: ../index.php?page=scholenlijst");
   }
 
   function checkForIllegalCharacters($str) { // check for iliegal characters

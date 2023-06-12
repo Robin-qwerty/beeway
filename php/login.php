@@ -59,7 +59,7 @@
 
     // Log the login attempt
     if ($user) {
-      $sql = 'INSERT INTO logs (userid, useragent, action, info, tableid, interactionid) VALUES (:userid, :useragent, 4, "User login", 6, :interactionid)';
+      $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid) VALUES (:userid, :useragent, 4, 6, :interactionid)';
       $sth = $conn->prepare($sql);
       $sth->bindValue(':userid', $user->userid);
       $sth->bindValue(':useragent', $_SESSION['useragent']);
@@ -69,9 +69,15 @@
 
     // Check if the user exists and the password is correct
     if (!$user || !password_verify($password, $user->password)) {
+      $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES ("-", :useragent, 4, 6, "-", "4")';
+      $sth = $conn->prepare($sql);
+      $sth->bindValue(':useragent', $_SESSION['useragent']);
+      $sth->execute();
+
       $_SESSION['school'] = $schoolId;
       $_SESSION['email'] = $email;
       $_SESSION['error'] = 'Invalid school, email or password. Please try again.';
+
       header('Location: ../index.php?page=login');
       exit();
     }

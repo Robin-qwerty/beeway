@@ -115,10 +115,10 @@
 
         // Bijwerken van de planninggegevens
         foreach($planningData as $planningId => $data) {
-            $planning = $data['planning'];
-            $planningWhat = $data['planningwhat'];
-            $planningWho = $data['planningwho'];
-            $planningDeadline = $data['planningdeadline'];
+            $planning = isset($data['planning']) ? $data['planning'] : '';
+            $planningWhat = isset($data['planningwhat']) ? $data['planningwhat'] : '';
+            $planningWho = isset($data['planningwho']) ? $data['planningwho'] : '';
+            $planningDeadline = isset($data['planningdeadline']) ? $data['planningdeadline'] : '';
             $planningDone = isset($data['planningdone']) ? '1' : '0';
 
             $updatePlanningStmt->bindParam(':planningid', $planningId);
@@ -136,11 +136,11 @@
 
         // Bijwerken van de observatiegegevens
         foreach($observationData as $observationId => $data) {
-            $dataClass = $data['dataclass'];
-            $learningGoal = $data['learninggoal'];
-            $evaluation = $data['evaluation'];
-            $workGoal = $data['workgoal'];
-            $action = $data['action'];
+            $dataClass = isset($data['dataclass']) ? $data['dataclass'] : '';
+            $learningGoal = isset($data['learninggoal']) ? $data['learninggoal'] : '';
+            $evaluation = isset($data['evaluation']) ? $data['evaluation'] : '';
+            $workGoal = isset($data['workgoal']) ? $data['workgoal'] : '';
+            $action = isset($data['action']) ? $data['action'] : '';
 
             $updateObservationStmt->bindParam(':observationid', $observationId);
             $updateObservationStmt->bindParam(':dataclass', $dataClass);

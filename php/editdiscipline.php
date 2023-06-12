@@ -17,12 +17,27 @@
          $sth->bindParam(':updatedby', $_SESSION['userid']);
          $sth->bindParam(':disciplineid',$_GET['disciplineid']);
          $sth->execute();
-         $_SESSION['info'] = "updated successful";
-         header("location: ../index.php?page=vakkenlijst");
+
+         if ($sth->rowCount() > 0) {
+           $sql1 = "INSERT INTO `logs` (`userid`, `useragent`, `action`, `tableid`, `interactionid`) VALUES (:userid, :useragent, '2', '2', :interactionid)";
+           $sth1 = $conn->prepare($sql1);
+           $sth1->bindParam(':userid', $_SESSION['userid']);
+           $sth1->bindParam(':useragent', $_SESSION['useragent']);
+           $sth1->bindParam(':interactionid', $_GET['disciplineid']);
+           $sth1->execute();
+
+           $_SESSION['info'] = "updated successful";
+           header("location: ../index.php?page=vakkenlijst");
+         } else {
+           $_SESSION['error'] = "er ging iets mis. Pech";
+           header("location: ../index.php?page=vakkenlijst");
+         }
        } catch (\Exception $e) {
-         echo "string1 ".$e;
+         $_SESSION['error'] = "er ging iets mis. Pech";
+         header("location: ../index.php?page=vakkenlijst");
        }
     }
+
   function checkForIllegalCharacters($str) { // check for iliegal characters
     $illegalChars = array('<', '>', '{', '}', '(', ')', '[', ']', '*', '$', '^', '`', '~', '|', '\\', '\'', '"', ':', ';', ',', '/');
     foreach ($illegalChars as $char) {

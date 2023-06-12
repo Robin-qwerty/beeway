@@ -68,22 +68,22 @@
           $sth->execute();
         }
 
-        $sql = "UPDATE linkgroups SET archive=1
+        $sql1 = "UPDATE linkgroups SET archive=1
                 WHERE userid=:userid
                 AND archive<>1";
-        $sth = $conn->prepare($sql);
-        $sth->bindParam(':userid', $userId);
-        $sth->execute();
+        $sth1 = $conn->prepare($sql1);
+        $sth1->bindParam(':userid', $userId);
+        $sth1->execute();
 
         try {
           $selectedGroepen = $_POST['groepen'];
 
           foreach ($selectedGroepen as $groep) {
-            $sql = "INSERT INTO `linkgroups` (`userid`, `groupid`) VALUES (:userid, :groupid)";
-            $sth = $conn->prepare($sql);
-            $sth->bindParam(':userid', $userId);
-            $sth->bindParam(':groupid', $groep);
-            $sth->execute();
+            $sql2 = "INSERT INTO `linkgroups` (`userid`, `groupid`) VALUES (:userid, :groupid)";
+            $sth2 = $conn->prepare($sql2);
+            $sth2->bindParam(':userid', $userId);
+            $sth2->bindParam(':groupid', $groep);
+            $sth2->execute();
           }
         } catch (\Exception $e) {
           $_SESSION['error'] = 'Failed to link groups.';
@@ -91,16 +91,21 @@
           exit;
         }
 
-        $sql = "INSERT INTO `logs` (`userid`, `useragent`, `action`, `tableid`, `interactionid`)
-                VALUES (:userid, :useragent, '2', '6', :interactionid)";
-        $sth = $conn->prepare($sql);
-        $sth->bindParam(':userid', $_SESSION['userid']);
-        $sth->bindParam(':useragent', $_SESSION['useragent']);
-        $sth->bindParam(':interactionid', $userId);
-        $sth->execute();
+        if ($sth->rowCount() > 0) {
+          $sql = "INSERT INTO `logs` (`userid`, `useragent`, `action`, `tableid`, `interactionid`)
+                  VALUES (:userid, :useragent, '2', '6', :interactionid)";
+          $sth = $conn->prepare($sql);
+          $sth->bindParam(':userid', $_SESSION['userid']);
+          $sth->bindParam(':useragent', $_SESSION['useragent']);
+          $sth->bindParam(':interactionid', $userId);
+          $sth->execute();
 
-        $_SESSION['info'] = 'User updated.';
-        header('location: ../index.php?page=userlijst');
+          $_SESSION['info'] = 'User updated.';
+          header('location: ../index.php?page=userlijst');
+        } else {
+          $_SESSION['error'] = "er ging iets mis. Pech";
+          header("location: ../index.php?page=userlijst");
+        }
       }
     }
   } catch (\Exception $e) {
