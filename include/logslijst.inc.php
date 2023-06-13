@@ -15,37 +15,37 @@
 ?>
 
   <div class="beewaylijst">
-      <?php if ($_SESSION['userrole'] == "superuser") { ?>
-        <div class="beewaylijsttitel"><h1>Welkom op het super user dashboard</h1></div>
-        <h2>beheer hier dingen (:</h2>
+    <?php if ($_SESSION['userrole'] == "superuser") { ?>
+      <div class="beewaylijsttitel"><h1>Welkom op het super user dashboard</h1></div>
+      <h2>beheer hier dingen (:</h2>
 
-        <div class="beewaylijstopties">
-          <button onclick="window.location.href='index.php?page=userlijst';" id="beewaylijstopties5">Users</button>
-          <b>|</b>
-          <button onclick="window.location.href='index.php?page=scholenlijst';" id="beewaylijstopties5">Scholen</button>
-          <b>|</b>
-          <button onclick="window.location.href='index.php?page=logslijst';" id="beewaylijstopties5"><u>Site Logs</u></button>
-      <?php } else if ($_SESSION['userrole'] == "admin") {?>
-        <div class="beewaylijsttitel"><h1>Welkom op het admin dashboard</h1></div>
-        <h2>beheer hier dingen (:</h2>
+      <div class="beewaylijstopties">
+        <button onclick="window.location.href='index.php?page=userlijst';" id="beewaylijstopties5">Users</button>
+        <b>|</b>
+        <button onclick="window.location.href='index.php?page=scholenlijst';" id="beewaylijstopties5">Scholen</button>
+        <b>|</b>
+        <button onclick="window.location.href='index.php?page=logslijst';" id="beewaylijstopties5"><u>Site Logs</u></button>
+    <?php } else if ($_SESSION['userrole'] == "admin") {?>
+      <div class="beewaylijsttitel"><h1>Welkom op het admin dashboard</h1></div>
+      <h2>beheer hier dingen (:</h2>
 
-        <div class="beewaylijstopties">
-          <button onclick="window.location.href='index.php?page=beewaylijst';" id="beewaylijstopties1">Beeway's</button>
-          <b>|</b>
-          <button onclick="window.location.href='index.php?page=klassenlijst';" id="beewaylijstopties4">Groepen/Klassen</button>
-          <b>|</b>
-          <button onclick="window.location.href='index.php?page=vakkenlijst';" id="beewaylijstopties2">Vakken</button>
-          <b>|</b>
-          <button onclick="window.location.href='index.php?page=hoofdthemalijst';" id="beewaylijstopties3">Hoofdthema's</button>
-          <b>|</b>
-          <button onclick="window.location.href='index.php?page=userlijst';" id="beewaylijstopties5">Users</button>
-      <?php } else { ?>
-        <div class="beewaylijsttitel"><h1>Welkom op het docenten dashboard</h1></div>
-        <h2>beheer hier dingen (:</h2>
+      <div class="beewaylijstopties">
+        <button onclick="window.location.href='index.php?page=beewaylijst';" id="beewaylijstopties1">Beeway's</button>
+        <b>|</b>
+        <button onclick="window.location.href='index.php?page=klassenlijst';" id="beewaylijstopties4">Groepen/Klassen</button>
+        <b>|</b>
+        <button onclick="window.location.href='index.php?page=vakkenlijst';" id="beewaylijstopties2">Vakken</button>
+        <b>|</b>
+        <button onclick="window.location.href='index.php?page=hoofdthemalijst';" id="beewaylijstopties3">Hoofdthema's</button>
+        <b>|</b>
+        <button onclick="window.location.href='index.php?page=userlijst';" id="beewaylijstopties5">Users</button>
+    <?php } else { ?>
+      <div class="beewaylijsttitel"><h1>Welkom op het docenten dashboard</h1></div>
+      <h2>beheer hier dingen (:</h2>
 
-        <div class="beewaylijstopties">
-          <button onclick="window.location.href='index.php?page=beewaylijst';" id="beewaylijstopties1">Beeway's</button>
-      <?php } ?>
+      <div class="beewaylijstopties">
+        <button onclick="window.location.href='index.php?page=beewaylijst';" id="beewaylijstopties1">Beeway's</button>
+    <?php } ?>
     </div>
 
     <hr>
@@ -58,7 +58,8 @@
         $roles = array(
           0 => 'docenten',
           1 => 'school admins',
-          2 => 'superusers'
+          2 => 'superusers',
+          3 => 'system monitor'
         );
 
         foreach ($roles as $roleId => $roleName) {
@@ -191,14 +192,15 @@
           elseif ($logs->error == '2') {$error = 'not allowed';}
           elseif ($logs->error == '3') {$error = "unknown";}
           elseif ($logs->error == '4') {$error = "failed login";}
+          elseif ($logs->error == '5') {$error = "failed";}
 
-          echo'
+          echo '
             <tr>
               <td><b><i>('.$logs->userid.")</i> - ".$logs->firstname." ".$logs->lastname.'</b></td>
               <td><b>'.$action.'</b></td>
               <td style="width:40%;"><b>'.$logs->info.'</b></td>
               <td><b>'.$tableid.'</b></td>
-              <td><b>'.$logs->interactionid.'</b></td>
+              <td><b>'.(($logs->interactionid == 0) ? "<i>(none)</i>" : $logs->interactionid).'</b></td>
               <td><b>'.$error.'</b></td>
               <td><b>'.$logs->date.'</b></td>
             </tr>

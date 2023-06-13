@@ -41,11 +41,9 @@
   </div>
 
 <?php
-  // require_once any error messages
   require_once 'include/error.inc.php';
 
   } else {
-    // redirect to dashboard if user is not logged in or does not have superuser role
     $_SESSION['error'] = "Er ging iets mis. Pech!";
     header("location: index.php?page=dashboard");
   }

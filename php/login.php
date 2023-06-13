@@ -69,7 +69,7 @@
 
     // Check if the user exists and the password is correct
     if (!$user || !password_verify($password, $user->password)) {
-      $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES ("-", :useragent, 4, 6, "-", "4")';
+      $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES ("9999", :useragent, 4, 6, "0", "4")';
       $sth = $conn->prepare($sql);
       $sth->bindValue(':useragent', $_SESSION['useragent']);
       $sth->execute();

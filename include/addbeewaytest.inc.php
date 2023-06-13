@@ -1,106 +1,151 @@
 <?php
-    // Your database connection code here
+  $sql = 'SELECT schoolid
+       FROM users
+       WHERE schoolid<>0
+       AND archive<>1
+       AND userid=:userid';
+  $sth = $conn->prepare($sql);
+  $sth->bindValue(':userid', $_SESSION['userid']);
+  $sth->execute();
 
-    // Check if the form is submitted
-    if(isset($_POST['saveData'])) {
-        $planningData = $_POST['planning'];
-        $observationData = $_POST['observation'];
+  $result = $sth->fetch();
 
-        // Prepare the insert statement for planning
-        $insertPlanningStmt = $conn->prepare("INSERT INTO beewayplanning (planning, planningwhat, planningwho, planningdeadline, planningdone) VALUES (:planning, :planningwhat, :planningwho, :planningdeadline, :planningdone)");
-
-        // Insert the planning data
-        foreach($planningData as $data) {
-            $planning = isset($data['planning']) ? $data['planning'] : '';
-            $planningWhat = isset($data['planningwhat']) ? $data['planningwhat'] : '';
-            $planningWho = isset($data['planningwho']) ? $data['planningwho'] : '';
-            $planningDeadline = isset($data['planningdeadline']) ? $data['planningdeadline'] : '';
-            $planningDone = isset($data['planningdone']) ? '1' : '0';
-
-            $insertPlanningStmt->bindParam(':planning', $planning);
-            $insertPlanningStmt->bindParam(':planningwhat', $planningWhat);
-            $insertPlanningStmt->bindParam(':planningwho', $planningWho);
-            $insertPlanningStmt->bindParam(':planningdeadline', $planningDeadline);
-            $insertPlanningStmt->bindParam(':planningdone', $planningDone);
-
-            $insertPlanningStmt->execute();
-        }
-
-        // Prepare the insert statement for observation
-        $insertObservationStmt = $conn->prepare("INSERT INTO beewayobservation (dataclass, learninggoal, evaluation, workgoal, action) VALUES (:dataclass, :learninggoal, :evaluation, :workgoal, :action)");
-
-        // Insert the observation data
-        foreach($observationData as $data) {
-            $dataClass = isset($data['dataclass']) ? $data['dataclass'] : '';
-            $learningGoal = isset($data['learninggoal']) ? $data['learninggoal'] : '';
-            $evaluation = isset($data['evaluation']) ? $data['evaluation'] : '';
-            $workGoal = isset($data['workgoal']) ? $data['workgoal'] : '';
-            $action = isset($data['action']) ? $data['action'] : '';
-
-            $insertObservationStmt->bindParam(':dataclass', $dataClass);
-            $insertObservationStmt->bindParam(':learninggoal', $learningGoal);
-            $insertObservationStmt->bindParam(':evaluation', $evaluation);
-            $insertObservationStmt->bindParam(':workgoal', $workGoal);
-            $insertObservationStmt->bindParam(':action', $action);
-
-            $insertObservationStmt->execute();
-        }
-
-        echo "Data has been successfully saved.";
-    }
+  if ($result !== false) {
+      $schoolid = $result['schoolid'];
+  } else {
+      // Handle the case when no rows were found
+      $_SESSION['error'] = "er ging iets mis met het ophalen van je school. <br> je kan deze beeway nu niet opslaan!";
+  }
 ?>
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>New Page</title>
-</head>
-<body>
-    <form method="POST" action="">
-        <!-- Table for Planning -->
-        <table>
+
+<form id="form0" action="php/addbeewaytest.php" method="post">
+<div><input type="text" placeholder="BeewayNaam" name="beewaynaam" required></div>
+<div><button id="opslaan" class="addbutton" type="submit" style="font-size: 16px;">Opslaan</button></div>
+</div>
+
+<hr>
+
+<div class="helebeeway">
+<div id="grid-line">
+  <div class="cell BEEWAY">
+    <h1>[naam]</h1>
+    <h2>Iedere dag ’n beetje beter</h2>
+    <div id="groepen">
+      <label>Groepen</label>
+      <input type="number" name="groepen" onKeyDown="if(this.value.length==1 && event.keyCode!=8) return false;" min="1" max="8" required></input>
+    </div>
+  </div>
+
+  <div class="cell HOOFDTHEMA">
+    <h2 id="orange">HOOFDTHEMA</h2>
+    <input type="radio" name="hoofdthemaid" value="1" required>
+    <label for="html">P1: EDI</label>
+    <br>
+    <input type="radio" name="hoofdthemaid" value="2">
+    <label for="html">P2: BEGELEIDENDE INOEFENING</label>
+    <br>
+    <input type="radio" name="hoofdthemaid" value="3">
+    <label for="html">P3: LEZEN</label>
+    <br>
+    <input type="radio" name="hoofdthemaid" value="4">
+    <label for="html">P4: DIFFERENTIATIE EDI</label>
+    <br>
+    <input type="radio" name="hoofdthemaid" value="5">
+    <label for="html">P5: DOELENPLANNER</label>
+    <br>
+  </div>
+
+  <div class="cell CONCREETDOEL">
+    <h2 id="orange">CONCREET DOEL</h2>
+    <textarea type="text" name="concreetdoel" id="doel" maxlength="2500"></textarea>
+  </div>
+
+  <div class="cell beoordeling">
+    <div class="beoordeling-item beoordeling-item1"><iconify-icon icon="fa:smile-o" style='font-size:62px'></iconify-icon></div>
+    <div class="beoordeling-item beoordeling-item2">
+      <input type="number" name="begoed" id="beoordeling1" onKeyDown="if(this.value.length==3 && event.keyCode!=8) return false;"></input>
+    </div>
+    <div class="beoordeling-item beoordeling-item3"><iconify-icon icon="fa:meh-o" style='font-size:62px'></iconify-icon></div>
+    <div class="beoordeling-item beoordeling-item4">
+      <input type="number" name="bevoldoende" id="beoordeling2" onKeyDown="if(this.value.length==3 && event.keyCode!=8) return false;"></input>
+    </div>
+    <div class="beoordeling-item beoordeling-item5"><iconify-icon icon="fa:frown-o" style='font-size:62px'></iconify-icon></div>
+    <div class="beoordeling-item beoordeling-item6">
+      <input type="number" name="beonvoldoende" id="beoordeling3" onKeyDown="if(this.value.length==3 && event.keyCode!=8) return false;"></input>
+    </div>
+  </div>
+
+  <div class="cell vakgebied">
+    <h2 id="orange">VAKGEBIED</h2>
+    <select name="vakgebiedid" id="vakgebied" required>
+      <!-- <optgroup label="Selecteer een vakgebied"> -->
+        <option value="">-- selecteer een vakgebied --</option>
+        <?php
+          $sql = 'SELECT disciplinename, disciplineid
+                  FROM disciplines
+                  WHERE archive=0
+                  AND schoolid=:schoolid';
+          $sth = $conn->prepare($sql);
+          $sth->bindValue(':schoolid', $schoolid);
+          $sth->execute();
+
+          while ($disciplines = $sth->fetch(PDO::FETCH_OBJ)) {
+            $selected = '';
+            if (isset($_SESSION['disciplines']) && $disciplines->disciplineid == $_SESSION['disciplines']) {
+              $selected = 'selected="selected"';
+              unset($_SESSION['disciplines']);
+            }
+            echo '<option value="'.$disciplines->disciplineid.'" '.$selected.'>'.$disciplines->disciplinename.'</option>';
+          }
+        ?>
+      <!-- </optgroup> -->
+    </select>
+  <!-- </form> -->
+</div>
+</div>
+
+<!-- <form method="POST" action=""> -->
+    <!-- Table for Planning -->
+    <table>
+        <tr>
+            <th>Planning</th>
+            <th>Planning What</th>
+            <th>Planning Who</th>
+            <th>Planning Deadline</th>
+            <th>Planning Done</th>
+        </tr>
+
+        <?php for($i = 1; $i <= 8; $i++): ?>
             <tr>
-                <th>Planning</th>
-                <th>Planning What</th>
-                <th>Planning Who</th>
-                <th>Planning Deadline</th>
-                <th>Planning Done</th>
+                <td><input type="text" name="planning[<?php echo $i; ?>][planning]" value=""></td>
+                <td><input type="text" name="planning[<?php echo $i; ?>][planningwhat]" value=""></td>
+                <td><input type="text" name="planning[<?php echo $i; ?>][planningwho]" value=""></td>
+                <td><input type="text" name="planning[<?php echo $i; ?>][planningdeadline]" value=""></td>
+                <td><input type="checkbox" name="planning[<?php echo $i; ?>][planningdone]"></td>
             </tr>
+        <?php endfor; ?>
+    </table>
 
-            <?php for($i = 1; $i <= 8; $i++): ?>
-                <tr>
-                    <td><input type="text" name="planning[<?php echo $i; ?>][planning]" value=""></td>
-                    <td><input type="text" name="planning[<?php echo $i; ?>][planningwhat]" value=""></td>
-                    <td><input type="text" name="planning[<?php echo $i; ?>][planningwho]" value=""></td>
-                    <td><input type="text" name="planning[<?php echo $i; ?>][planningdeadline]" value=""></td>
-                    <td><input type="checkbox" name="planning[<?php echo $i; ?>][planningdone]"></td>
-                </tr>
-            <?php endfor; ?>
-        </table>
+    <!-- Table for Observation -->
+    <table>
+        <tr>
+            <th>Data Class</th>
+            <th>Learning Goal</th>
+            <th>Evaluation</th>
+            <th>Work Goal</th>
+            <th>Action</th>
+        </tr>
 
-        <!-- Table for Observation -->
-        <table>
+        <?php for($i = 1; $i <= 8; $i++): ?>
             <tr>
-                <th>Data Class</th>
-                <th>Learning Goal</th>
-                <th>Evaluation</th>
-                <th>Work Goal</th>
-                <th>Action</th>
+                <td><input type="text" name="observation[<?php echo $i; ?>][dataclass]" value=""></td>
+                <td><input type="text" name="observation[<?php echo $i; ?>][learninggoal]" value=""></td>
+                <td><input type="text" name="observation[<?php echo $i; ?>][evaluation]" value=""></td>
+                <td><input type="text" name="observation[<?php echo $i; ?>][workgoal]" value=""></td>
+                <td><input type="text" name="observation[<?php echo $i; ?>][action]" value=""></td>
             </tr>
-
-            <?php for($i = 1; $i <= 8; $i++): ?>
-                <tr>
-                    <td><input type="text" name="observation[<?php echo $i; ?>][dataclass]" value=""></td>
-                    <td><input type="text" name="observation[<?php echo $i; ?>][learninggoal]" value=""></td>
-                    <td><input type="text" name="observation[<?php echo $i; ?>][evaluation]" value=""></td>
-                    <td><input type="text" name="observation[<?php echo $i; ?>][workgoal]" value=""></td>
-                    <td><input type="text" name="observation[<?php echo $i; ?>][action]" value=""></td>
-                </tr>
-            <?php endfor; ?>
-        </table>
-
-        <!-- Save button to insert the data -->
-        <input type="submit" name="saveData" value="Save">
-    </form>
-</body>
-</html>
+        <?php endfor; ?>
+    </table>
+</form>
+</div>

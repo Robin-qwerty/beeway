@@ -27,7 +27,8 @@
 #grid-line {
   display: grid;
   grid-template-columns: 10% 10% 10% 10% 10% 10% 10% 10% 10% 7% 3%;
-  grid-template-rows: 180px 80px 38px 310px 340px;
+  grid-template-rows: 180px 80px;
+  /* grid-template-rows: 180px 80px 38px 310px 340px; */
   grid-gap: 1px;
   background-color: black;
   padding-right: 9px;

@@ -2,7 +2,7 @@
   require_once '../private/dbconnect.php';
   session_start();
 
-  if (isset($_SESSION['userid'], $_SESSION['userrole']) && ($_SESSION['userrole'] === 'superuser' || $_SESSION['userrole'] === 'admin')) {
+  if (isset($_SESSION['userid'], $_SESSION['userrole']) && ($_SESSION['userrole'] === 'superuser')) {
     // User has the necessary privileges
   } else {
     $_SESSION['error'] = 'Unauthorized access. Please log in with appropriate credentials.';
@@ -41,11 +41,21 @@
         $_SESSION['info'] = 'school aangepast';
         header('location: ../index.php?page=scholenlijst');
       } else {
+        $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES ("9999", :useragent, 2, 5, 0, 5)';
+        $sth = $conn->prepare($sql);
+        $sth->bindValue(':useragent', $_SESSION['useragent']);
+        $sth->execute();
+
         $_SESSION['error'] = "er ging iets mis. Pech";
         header("location: ../index.php?page=scholenlijst");
       }
     }
   } catch (\Exception $e) {
+    $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES ("9999", :useragent, 2, 5, 0, 5)';
+    $sth = $conn->prepare($sql);
+    $sth->bindValue(':useragent', $_SESSION['useragent']);
+    $sth->execute();
+
     $_SESSION['error'] = "er ging iets mis. Pech";
     header("location: ../index.php?page=scholenlijst");
   }

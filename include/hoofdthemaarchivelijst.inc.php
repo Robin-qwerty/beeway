@@ -1,36 +1,36 @@
 <?php if (isset($_SESSION['userid']) && isset($_SESSION['userrole']) && $_SESSION['userrole'] == 'admin') { // check if user is logedin ?>
   <div class="beewaylijst">
-      <?php if ($_SESSION['userrole'] == "superuser") { ?>
-        <div class="beewaylijsttitel"><h1>Welkom op het super user dashboard</h1></div>
-        <h2>beheer hier dingen (:</h2>
+    <?php if ($_SESSION['userrole'] == "superuser") { ?>
+      <div class="beewaylijsttitel"><h1>Welkom op het super user dashboard</h1></div>
+      <h2>beheer hier dingen (:</h2>
 
-        <div class="beewaylijstopties">
-          <button onclick="window.location.href='index.php?page=userlijst';" id="beewaylijstopties5">Users</button>
-          <b>|</b>
-          <button onclick="window.location.href='index.php?page=scholenlijst';" id="beewaylijstopties5"><u>Scholen</u></button>
-          <b>|</b>
-          <button onclick="window.location.href='index.php?page=logslijst';" id="beewaylijstopties5">Site Logs</button>
-      <?php } else if ($_SESSION['userrole'] == "admin") {?>
-        <div class="beewaylijsttitel"><h1>Welkom op het admin dashboard</h1></div>
-        <h2>beheer hier dingen (:</h2>
+      <div class="beewaylijstopties">
+        <button onclick="window.location.href='index.php?page=userlijst';" id="beewaylijstopties5">Users</button>
+        <b>|</b>
+        <button onclick="window.location.href='index.php?page=scholenlijst';" id="beewaylijstopties5"><u>Scholen</u></button>
+        <b>|</b>
+        <button onclick="window.location.href='index.php?page=logslijst';" id="beewaylijstopties5">Site Logs</button>
+    <?php } else if ($_SESSION['userrole'] == "admin") {?>
+      <div class="beewaylijsttitel"><h1>Welkom op het admin dashboard</h1></div>
+      <h2>beheer hier dingen (:</h2>
 
-        <div class="beewaylijstopties">
-          <button onclick="window.location.href='index.php?page=beewaylijst';" id="beewaylijstopties1">Beeway's</button>
-          <b>|</b>
-          <button onclick="window.location.href='index.php?page=klassenlijst';" id="beewaylijstopties4">Groepen/Klassen</button>
-          <b>|</b>
-          <button onclick="window.location.href='index.php?page=vakkenlijst';" id="beewaylijstopties2">Vakken</button>
-          <b>|</b>
-          <button onclick="window.location.href='index.php?page=hoofdthemalijst';" id="beewaylijstopties3"><u>Hoofdthema's</u></button>
-          <b>|</b>
-          <button onclick="window.location.href='index.php?page=userlijst';" id="beewaylijstopties5">Users</button>
-      <?php } else { ?>
-        <div class="beewaylijsttitel"><h1>Welkom op het docenten dashboard</h1></div>
-        <h2>beheer hier dingen (:</h2>
+      <div class="beewaylijstopties">
+        <button onclick="window.location.href='index.php?page=beewaylijst';" id="beewaylijstopties1">Beeway's</button>
+        <b>|</b>
+        <button onclick="window.location.href='index.php?page=klassenlijst';" id="beewaylijstopties4">Groepen/Klassen</button>
+        <b>|</b>
+        <button onclick="window.location.href='index.php?page=vakkenlijst';" id="beewaylijstopties2">Vakken</button>
+        <b>|</b>
+        <button onclick="window.location.href='index.php?page=hoofdthemalijst';" id="beewaylijstopties3"><u>Hoofdthema's</u></button>
+        <b>|</b>
+        <button onclick="window.location.href='index.php?page=userlijst';" id="beewaylijstopties5">Users</button>
+    <?php } else { ?>
+      <div class="beewaylijsttitel"><h1>Welkom op het docenten dashboard</h1></div>
+      <h2>beheer hier dingen (:</h2>
 
-        <div class="beewaylijstopties">
-          <button onclick="window.location.href='index.php?page=beewaylijst';" id="beewaylijstopties1">Beeway's</button>
-      <?php } ?>
+      <div class="beewaylijstopties">
+        <button onclick="window.location.href='index.php?page=beewaylijst';" id="beewaylijstopties1">Beeway's</button>
+    <?php } ?>
     </div>
     <hr>
     <br>

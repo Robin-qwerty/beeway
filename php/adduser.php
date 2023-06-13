@@ -4,6 +4,11 @@
 
   // Check user privileges
   if (!(isset($_SESSION['userid'], $_SESSION['userrole']) && ($_SESSION['userrole'] === 'superuser' || $_SESSION['userrole'] === 'admin'))) {
+    $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES ("9999", :useragent, 1, 6, 0, 1)';
+    $sth = $conn->prepare($sql);
+    $sth->bindValue(':useragent', $_SESSION['useragent']);
+    $sth->execute();
+
     $_SESSION['error'] = 'Unauthorized access. Please log in with appropriate credentials.';
     header('location: ../index.php?page=dashboard');
     exit;
@@ -120,6 +125,11 @@
     }
   } catch (Exception $e) {
     $conn->rollback();
+
+    $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES ("9999", :useragent, 1, 6, 0, 5)';
+    $sth = $conn->prepare($sql);
+    $sth->bindValue(':useragent', $_SESSION['useragent']);
+    $sth->execute();
 
     $_SESSION['school'] = $_POST['school'];
     $_SESSION['firstname'] = $_POST['firstname'];

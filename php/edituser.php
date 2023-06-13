@@ -109,6 +109,11 @@
       }
     }
   } catch (\Exception $e) {
+    $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES ("9999", :useragent, 2, 6, 0, 5)';
+    $sth = $conn->prepare($sql);
+    $sth->bindValue(':useragent', $_SESSION['useragent']);
+    $sth->execute();
+
     $_SESSION['error'] = 'Something went wrong.';
     header("location: ../index.php?page=userlijst");
   }

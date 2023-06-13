@@ -123,12 +123,22 @@
     } catch (\Exception $e) {
       $conn->rollBack();
 
+      $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES ("9999", :useragent, 3, 6, 0, 5)';
+      $sth = $conn->prepare($sql);
+      $sth->bindValue(':useragent', $_SESSION['useragent']);
+      $sth->execute();
+
       $_SESSION['error'] = 'Er ging iets mis, probeer het opnieuw.';
       insertLog($loggedInUserId, '3', $userId);
       header("location: ../index.php?page=edituser&userid={$userId}");
       exit;
     }
   } else {
+    $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES ("9999", :useragent, 3, 6, "0", "1")';
+    $sth = $conn->prepare($sql);
+    $sth->bindValue(':useragent', $_SESSION['useragent']);
+    $sth->execute();
+
     $_SESSION['error'] = 'Ongeautoriseerde toegang. Log in met de juiste referenties.';
     header('location: ../index.php?page=dashboard');
     exit;

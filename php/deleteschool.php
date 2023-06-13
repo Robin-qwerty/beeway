@@ -2,7 +2,7 @@
   require_once '../private/dbconnect.php';
   session_start();
 
-  if (isset($_SESSION['userid'], $_SESSION['userrole']) && ($_SESSION['userid'] === '1' && ($_SESSION['userrole'] === 'superuser'))) { // User has the necessary privileges
+  if (isset($_SESSION['userid'], $_SESSION['userrole']) && ($_SESSION['userrole'] === 'superuser'))) { // User has the necessary privileges
     if ($_GET['schoolid'] == '0' || $_GET['schoolid'] == '1') {
       $_SESSION['error'] = 'Deze school mag niet verwijderd worden.';
       header('location: ../index.php?page=scholenlijst');
@@ -214,6 +214,11 @@
           $_SESSION['info'] = 'School succesvol gearchiveerd.';
           header('Location: ../index.php?page=scholenlijst');
         } catch (\Exception $e) {
+          $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES ("9999", :useragent, 3, 5, 0, 5)';
+          $sth = $conn->prepare($sql);
+          $sth->bindValue(':useragent', $_SESSION['useragent']);
+          $sth->execute();
+
           $_SESSION['error'] = $e->getMessage();
           header('Location: ../index.php?page=scholenlijst');
           exit;
@@ -221,6 +226,11 @@
       }
     }
   } else {
+    $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES ("9999", :useragent, 3, 6, "0", "1")';
+    $sth = $conn->prepare($sql);
+    $sth->bindValue(':useragent', $_SESSION['useragent']);
+    $sth->execute();
+
     $_SESSION['error'] = 'U heeft geen toegang tot deze pagina';
     header('Location: ../index.php');
     exit;
