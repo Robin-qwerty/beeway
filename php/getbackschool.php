@@ -16,7 +16,7 @@
       $sth->execute();
 
       $_SESSION['error'] = "er ging iets mis. Pech";
-      header("location: ../index.php?page=scholenarchivelijst");
+      header("Location: ../index.php?page=scholenarchivelijst");
     }
   } else {
     $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES ("9999", :useragent, 6, 5, 0, 1)';

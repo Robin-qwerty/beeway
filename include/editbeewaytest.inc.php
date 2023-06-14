@@ -3,11 +3,10 @@
     if (isset($_GET['beewayid']) && $_GET['beewayid'] > 0) {
 
       $sql = 'SELECT schoolid
-           FROM users
-           WHERE schoolid<>0
-           AND archive<>1
-           AND userid=:userid';
-
+             FROM users
+             WHERE schoolid<>0
+             AND archive<>1
+             AND userid=:userid';
       $sth = $conn->prepare($sql);
       $sth->bindValue(':userid', $_SESSION['userid']);
       $sth->execute();
@@ -281,7 +280,7 @@
     }
   } else {
     $_SESSION['error'] = "er ging iets mis. Pech!";
-    header("location: index.php?page=dashboard");
+    header("Location: index.php?page=dashboard");
     exit;
   }
 

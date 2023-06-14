@@ -6,10 +6,10 @@
     try {
       if ($_POST['namethemep1'] == '' || $_POST['namethemep2'] == '' || $_POST['namethemep3'] == '' || $_POST['namethemep4'] == '' || $_POST['namethemep5'] == '' || $_POST['schoolyear'] == '') {
         $_SESSION['error'] = "vul ff iets in";
-        header("location: ../index.php?page=addmaintheme");
+        header("Location: ../index.php?page=addmaintheme");
       } elseif (checkForIllegalCharacters($_POST['namethemep1']) || checkForIllegalCharacters($_POST['namethemep2']) || checkForIllegalCharacters($_POST['namethemep3']) || checkForIllegalCharacters($_POST['namethemep4']) || checkForIllegalCharacters($_POST['namethemep5']) || checkForIllegalCharacters($_POST['schoolyear'])) {
         $_SESSION['error'] = "illegal character used";
-        header("location: ../index.php?page=addmaintheme");
+        header("Location: ../index.php?page=addmaintheme");
       } else {
 
         $sql = "select schoolid from users WHERE userid=:userid";
@@ -60,7 +60,7 @@
       $sth->execute();
 
       $_SESSION['error'] = "er ging iets mis. Pech";
-      header("location: ../index.php?page=userlijst");
+      header("Location: ../index.php?page=userlijst");
     }
   } else {
     $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES ("9999", :useragent, 1, 4, 0, 1)';

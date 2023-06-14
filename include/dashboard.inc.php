@@ -32,7 +32,7 @@
         <button onclick="window.location.href='index.php?page=beewaylijst';" id="beewaylijstopties1">Beeway's</button>
     <?php } else { // no valid user logedin
       $_SESSION['error'] = "er ging iets mis. Pech!";
-      header("location: index.php?page=login");
+      header("Location: index.php?page=login");
     } ?>
     </div>
 
@@ -54,6 +54,6 @@
 
   } else { // no valid user logedin
     $_SESSION['error'] = "er ging iets mis. Pech!";
-    header("location: php/logout.php");
+    header("Location: php/logout.php");
   }
 ?>

@@ -6,7 +6,7 @@
     $modifiedURL = str_replace('/beewayphp/', '', $currentURL);
 
   if (!isset($_GET['offset'])) {
-    header("location: ".$modifiedURL."&offset=0");
+    header("Location: ".$modifiedURL."&offset=0");
     exit;
   }
 ?>
@@ -70,6 +70,7 @@
             $sql = 'SELECT u.*, s.schoolname FROM users as u, schools as s
                     WHERE s.schoolid=u.schoolid
                     AND u.userid<>0
+                    AND u.userid<>9999
                     AND u.archive=0';
 
             if ($selectedSchoolID) {
@@ -91,6 +92,7 @@
                     WHERE u.schoolid=:schoolid
                     AND s.schoolid=u.schoolid
                     AND u.userid<>0
+                    AND u.userid<>9999
                     AND u.role<>2
                     AND u.archive=0';
 
@@ -111,7 +113,7 @@
             $sth->execute();
           } else { // no access to userlist
             $_SESSION['error'] = "Unauthorized access. Please log in with appropriate credentials";
-            header("location: index.php?page=dashboard");
+            header("Location: index.php?page=dashboard");
             exit;
           }
         } catch (PDOException $e) {
@@ -251,7 +253,7 @@
 <?php
   } else {
     $_SESSION['error'] = "er ging iets mis. Pech!";
-    header("location: index.php?page=dashboard");
+    header("Location: index.php?page=dashboard");
     exit;
   }
 

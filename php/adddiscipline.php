@@ -25,7 +25,7 @@
         $sth->execute();
 
         $_SESSION['error'] = "Unable to fetch user's schoolid.";
-        header("location: ../index.php?page=adddiscipline");
+        header("Location: ../index.php?page=adddiscipline");
         exit;
       }
 
@@ -34,10 +34,10 @@
       // Proceed with the rest of the code
       if ($_POST['disciplinename'] == '') {
         $_SESSION['error'] = "Please fill in the discipline name.";
-        header("location: ../index.php?page=adddiscipline");
+        header("Location: ../index.php?page=adddiscipline");
       } elseif (checkForIllegalCharacters($_POST['disciplinename'])) {
         $_SESSION['error'] = "Illegal character used.";
-        header("location: ../index.php?page=adddiscipline");
+        header("Location: ../index.php?page=adddiscipline");
       } else {
         $sql = "INSERT INTO disciplines (`schoolid`, `disciplinename`, `createdby`, `updatedby`)
                 VALUES (:schoolid, :disciplinename, :createdby, :updatedby)";
@@ -58,7 +58,7 @@
         $sth->execute();
 
         $_SESSION['info'] = "Discipline added successfully.";
-        header("location: ../index.php?page=vakkenlijst");
+        header("Location: ../index.php?page=vakkenlijst");
       }
     } catch (\Exception $e) {
       $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES ("9999", :useragent, 1, 4, 0, 5)';
@@ -67,7 +67,7 @@
       $sth->execute();
 
       $_SESSION['error'] = "er ging iets mis. Pech.";
-      header("location: ../index.php?page=adddiscipline");
+      header("Location: ../index.php?page=adddiscipline");
       exit;
     }
   } else {

@@ -69,6 +69,6 @@
 
   } else {
     $_SESSION['error'] = "Er ging iets mis. Pech!";
-    header("location: index.php?page=dashboard");
+    header("Location: index.php?page=dashboard");
   }
 ?>

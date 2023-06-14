@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 13 jun 2023 om 16:19
+-- Gegenereerd op: 14 jun 2023 om 14:48
 -- Serverversie: 10.4.28-MariaDB
 -- PHP-versie: 8.2.4
 
@@ -63,7 +63,8 @@ INSERT INTO `beeway` (`beewayid`, `schoolid`, `groupid`, `beewayname`, `begood`,
 (21, 1, '1', '2', '2', '2', '2', '1', 2, '2', 'hoe veel worden kunnen we nu hier van lezen of is dit minder dan 35?', '0', '2023-05-24 09:07:21', 2, '2023-05-24 09:07:21', 2, 0, NULL, NULL),
 (22, 1, '3', '1', '', '', '', '1', 4, '1', '123123123', '0', '2023-05-24 09:16:11', 2, '2023-05-24 09:16:11', 2, 0, NULL, NULL),
 (24, 1, '2', '2', '2', '2', '2', '1', 1, '2', '2', '0', '2023-06-13 09:44:31', NULL, '2023-06-13 09:44:31', 2, 0, NULL, NULL),
-(25, 1, '5', '5', '5', '5', '5', '5', 0, '2', '5', '0', '2023-06-13 11:09:41', NULL, '2023-06-13 11:09:41', NULL, 0, NULL, NULL);
+(25, 1, '5', '5', '5', '5', '5', '5', 0, '2', '5', '0', '2023-06-13 11:09:41', NULL, '2023-06-13 11:09:41', NULL, 0, NULL, NULL),
+(26, 1, '6', 'test 6 7', '6', '6', '6', '1', 4, '1', '6666666 7777777\n8888888 9999999\n1010101 1111111\n2222222 3333333\n4444444', '0', '2023-06-14 10:58:46', NULL, '2023-06-14 10:58:46', 2, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -108,7 +109,15 @@ INSERT INTO `beewayobservation` (`observationid`, `beewayid`, `dataclass`, `lear
 (13, 25, 'nbv', '', '', 'bv', 'nbv', '2023-06-13 11:09:42', 0, '2023-06-13 11:09:42', 0, 0, NULL, NULL),
 (14, 25, 'nmbv', 'b', '', '', 'bv', '2023-06-13 11:09:42', 0, '2023-06-13 11:09:42', 0, 0, NULL, NULL),
 (15, 25, 'nmbv', 'nbv', 'nbv', 'bv', 'nbv', '2023-06-13 11:09:42', 0, '2023-06-13 11:09:42', 0, 0, NULL, NULL),
-(16, 25, '', 'bnvnbvn', '', '', '', '2023-06-13 11:09:42', 0, '2023-06-13 11:09:42', 0, 0, NULL, NULL);
+(16, 25, '', 'bnvnbvn', '', '', '', '2023-06-13 11:09:42', 0, '2023-06-13 11:09:42', 0, 0, NULL, NULL),
+(17, 26, '7', '7', '7', '7', '7', '2023-06-14 10:58:46', 0, '2023-06-14 10:58:46', 0, 0, NULL, NULL),
+(18, 26, '7', '7', '', '', '', '2023-06-14 10:58:46', 0, '2023-06-14 10:58:46', 0, 0, NULL, NULL),
+(19, 26, '7', '', '7', '77', '7', '2023-06-14 10:58:46', 0, '2023-06-14 10:58:46', 0, 0, NULL, NULL),
+(20, 26, '7', '7', '', '', '', '2023-06-14 10:58:46', 0, '2023-06-14 10:58:46', 0, 0, NULL, NULL),
+(21, 26, '7', '7', '7', '77', '7', '2023-06-14 10:58:46', 0, '2023-06-14 10:58:46', 0, 0, NULL, NULL),
+(22, 26, '', '', '', '', '', '2023-06-14 10:58:46', 0, '2023-06-14 10:58:46', 0, 0, NULL, NULL),
+(23, 26, '7', '77', '7', '7', '7', '2023-06-14 10:58:46', 0, '2023-06-14 10:58:46', 0, 0, NULL, NULL),
+(24, 26, '7', '', '', '77777777777777777777', '', '2023-06-14 10:58:46', 0, '2023-06-14 10:58:46', 0, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -153,7 +162,15 @@ INSERT INTO `beewayplanning` (`planningid`, `beewayid`, `planning`, `planningwha
 (13, 25, 'gf', 'jhg', 'f', 'hjgf', '0', '2023-06-13 11:09:42', NULL, '2023-06-13 11:09:42', NULL, 0, NULL, NULL),
 (14, 25, 'fj', 'gf', 'hjgf', 'hjg', '0', '2023-06-13 11:09:42', NULL, '2023-06-13 11:09:42', NULL, 0, NULL, NULL),
 (15, 25, 'hjgf', 'hjg', 'fhj', 'gf', '0', '2023-06-13 11:09:42', NULL, '2023-06-13 11:09:42', NULL, 0, NULL, NULL),
-(16, 25, 'fhj', 'gf', 'j', 'fj', '0', '2023-06-13 11:09:42', NULL, '2023-06-13 11:09:42', NULL, 0, NULL, NULL);
+(16, 25, 'fhj', 'gf', 'j', 'fj', '0', '2023-06-13 11:09:42', NULL, '2023-06-13 11:09:42', NULL, 0, NULL, NULL),
+(17, 26, '6', '', '', '', '0', '2023-06-14 10:58:46', NULL, '2023-06-14 10:58:46', NULL, 0, NULL, NULL),
+(18, 26, '6', '6', '6', '6', '1', '2023-06-14 10:58:46', NULL, '2023-06-14 10:58:46', NULL, 0, NULL, NULL),
+(19, 26, '6', '6', '6', '6', '1', '2023-06-14 10:58:46', NULL, '2023-06-14 10:58:46', NULL, 0, NULL, NULL),
+(20, 26, '6', '6', '66', '6', '0', '2023-06-14 10:58:46', NULL, '2023-06-14 10:58:46', NULL, 0, NULL, NULL),
+(21, 26, '6', '6', '6', '6', '0', '2023-06-14 10:58:46', NULL, '2023-06-14 10:58:46', NULL, 0, NULL, NULL),
+(22, 26, '6', '6', '6', '6', '0', '2023-06-14 10:58:46', NULL, '2023-06-14 10:58:46', NULL, 0, NULL, NULL),
+(23, 26, '6', '', '', '', '0', '2023-06-14 10:58:46', NULL, '2023-06-14 10:58:46', NULL, 0, NULL, NULL),
+(24, 26, '', '', '', '', '1', '2023-06-14 10:58:46', NULL, '2023-06-14 10:58:46', NULL, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -186,7 +203,9 @@ INSERT INTO `disciplines` (`disciplineid`, `schoolid`, `disciplinename`, `create
 (7, 21, 'asd', '2023-06-02 12:09:29', 49, '2023-06-02 12:09:29', 49, 1, NULL, NULL),
 (8, 21, 'asd', '2023-06-02 12:11:51', 49, '2023-06-02 12:11:51', 49, 1, NULL, NULL),
 (9, 1, 'sdfsd', '2023-06-07 08:10:34', 2, '2023-06-07 08:10:34', 2, 1, NULL, NULL),
-(10, 1, '1', '2023-06-08 14:23:30', 2, '2023-06-08 14:23:30', 2, 1, NULL, NULL);
+(10, 1, '1', '2023-06-08 14:23:30', 2, '2023-06-08 14:23:30', 2, 1, NULL, NULL),
+(11, 1, 'sdfadf', '2023-06-14 09:50:49', 2, '2023-06-14 09:50:49', 2, 0, NULL, NULL),
+(12, 1, 'qwerty', '2023-06-14 09:50:55', 2, '2023-06-14 09:50:55', 2, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -279,8 +298,24 @@ INSERT INTO `linkgroups` (`linkgroupsid`, `userid`, `groupid`, `archive`) VALUES
 (38, 58, 4, 1),
 (39, 58, 3, 1),
 (40, 58, 4, 1),
-(41, 58, 3, 0),
-(42, 58, 4, 0);
+(41, 58, 3, 1),
+(42, 58, 4, 1),
+(43, 58, 1, 1),
+(44, 58, 2, 1),
+(45, 58, 3, 1),
+(46, 58, 4, 1),
+(47, 58, 5, 1),
+(48, 58, 6, 1),
+(49, 58, 7, 1),
+(50, 58, 8, 1),
+(51, 58, 1, 0),
+(52, 58, 2, 0),
+(53, 58, 3, 0),
+(54, 58, 4, 0),
+(55, 58, 5, 0),
+(56, 58, 6, 0),
+(57, 58, 7, 0),
+(58, 58, 8, 0);
 
 -- --------------------------------------------------------
 
@@ -391,7 +426,33 @@ INSERT INTO `logs` (`id`, `date`, `userid`, `useragent`, `action`, `info`, `tabl
 (483, '2023-06-13 14:17:32', '9999', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, NULL, 6, 0, 4),
 (484, '2023-06-13 14:17:36', '9999', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, NULL, 6, 0, 4),
 (485, '2023-06-13 14:17:40', '9999', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, NULL, 6, 0, 4),
-(486, '2023-06-13 14:17:44', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, NULL, 6, 1, 0);
+(486, '2023-06-13 14:17:44', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, NULL, 6, 1, 0),
+(487, '2023-06-14 06:13:00', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, NULL, 6, 1, 0),
+(488, '2023-06-14 07:33:04', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 2, NULL, 6, 58, 0),
+(489, '2023-06-14 07:33:51', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 2, NULL, 6, 58, 0),
+(490, '2023-06-14 07:36:26', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 2, NULL, 5, 25, 0),
+(491, '2023-06-14 07:37:03', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 2, NULL, 5, 25, 0),
+(492, '2023-06-14 07:38:42', '2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, NULL, 6, 2, 0),
+(493, '2023-06-14 07:38:53', '2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 2, NULL, 4, 5, 0),
+(494, '2023-06-14 07:39:01', '2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 2, NULL, 4, 5, 0),
+(495, '2023-06-14 07:39:08', '2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 2, NULL, 4, 5, 0),
+(496, '2023-06-14 07:40:12', '2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 2, NULL, 4, 5, 0),
+(497, '2023-06-14 07:45:50', '2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 2, NULL, 4, 5, 0),
+(498, '2023-06-14 07:50:49', '2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 1, NULL, 2, 11, 0),
+(499, '2023-06-14 07:50:55', '2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 1, NULL, 2, 12, 0),
+(500, '2023-06-14 07:51:52', '9999', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 2, NULL, 2, 0, 5),
+(501, '2023-06-14 07:52:13', '9999', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 2, NULL, 2, 0, 5),
+(502, '2023-06-14 07:53:01', '9999', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 2, NULL, 2, 0, 5),
+(503, '2023-06-14 07:57:15', '9999', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 2, NULL, 2, 0, 5),
+(504, '2023-06-14 07:57:21', '9999', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 2, NULL, 2, 0, 5),
+(505, '2023-06-14 07:57:49', '9999', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 2, NULL, 2, 0, 5),
+(506, '2023-06-14 07:58:30', '9999', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 2, NULL, 2, 0, 5),
+(507, '2023-06-14 07:59:57', '9999', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 2, NULL, 2, 0, 5),
+(508, '2023-06-14 08:00:50', '2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 2, NULL, 2, 12, 0),
+(509, '2023-06-14 08:57:12', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 5, NULL, 6, 1, 0),
+(510, '2023-06-14 08:57:18', '2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, NULL, 6, 2, 0),
+(511, '2023-06-14 09:00:16', '2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 2, NULL, 1, 26, 0),
+(512, '2023-06-14 09:01:05', '2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 2, NULL, 1, 26, 0);
 
 -- --------------------------------------------------------
 
@@ -426,7 +487,7 @@ INSERT INTO `maintheme` (`themeid`, `schoolid`, `namethemep1`, `namethemep2`, `n
 (1, '1', 'test thema 1', 'naam p2', 'naam p3', 'naam p4', 'naam p5', '1', '2023-05-03 08:19:06', 1, '2023-05-03 08:19:06', 1, 0, NULL, NULL),
 (2, '1', 'test thema 2', 'naam p2', 'naam p3', 'naam p4', 'naam p5', '1', '2023-05-03 08:19:14', 1, '2023-05-03 08:19:14', 1, 0, NULL, NULL),
 (3, '2', 'test thema 3', 'naam p2', 'naam p3', 'naam p4', 'naam p5', '1', '2023-05-03 08:19:14', 1, '2023-05-03 08:19:14', 1, 0, NULL, NULL),
-(5, '1', '1', '2', '3', '4', '5', '2', '2023-05-24 09:35:00', 0, '2023-05-24 09:35:00', 0, 0, NULL, NULL),
+(5, '1', '1 2', '2 2', '3 2', '4 2', '5 2', '2', '2023-05-24 09:35:00', 0, '2023-05-24 09:35:00', 0, 0, NULL, NULL),
 (6, '1', '1', '1', '1', '1', '1', '2', '2023-06-05 08:10:06', 0, '2023-06-05 08:10:06', 0, 0, NULL, NULL);
 
 -- --------------------------------------------------------
@@ -460,7 +521,7 @@ INSERT INTO `schools` (`schoolid`, `schoolname`, `createdat`, `createdby`, `upda
 (22, 'test', '2023-06-06 13:40:13', 1, '2023-06-06 13:40:13', 1, 1, '2023-06-06 14:05:13', 1),
 (23, 'test', '2023-06-06 14:10:46', 1, '2023-06-06 14:10:46', 1, 1, '2023-06-06 14:10:52', 1),
 (24, 'test', '2023-06-06 14:12:00', 1, '2023-06-06 14:12:00', 1, 1, '2023-06-06 14:12:03', 1),
-(25, 'sdfdsf', '2023-06-06 14:29:19', 1, '2023-06-12 08:42:33', 1, 0, NULL, NULL);
+(25, 'dfdfsdfsdfs', '2023-06-06 14:29:19', 1, '2023-06-14 09:37:03', 1, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -504,7 +565,7 @@ INSERT INTO `users` (`userid`, `schoolid`, `firstname`, `lastname`, `email`, `pa
 (55, 24, 'schooladmin', 'one', 'test', '$2y$10$aC.xWf.eRx3hMzgqw2Mti..OdKtX3u2BFwo2nGkI5iQ6a9PEcd.pq', 1, '2023-06-06 14:12:00', 1, '2023-06-06 14:12:00', 1, 1, '2023-06-06 14:12:03', 1),
 (56, 25, 'schooladmin', 'one', 'test', '$2y$10$LoC4GOPZbON3SQtYtEaamO.Ic0PIQOG/CWPDakVwx7fGGXMGvk4wq', 1, '2023-06-06 14:29:19', 1, '2023-06-06 14:29:19', 1, 0, NULL, NULL),
 (57, 25, '1', '1', '1@2.nl', '$2y$10$jdNiGl8Dbymkim6NJ7S6IuBFJrYKdmz.feNrY2kSEpWVUzkBSMJpa', 0, '2023-06-06 14:48:10', 1, '2023-06-06 14:48:10', 1, 1, '2023-06-06 14:51:14', 1),
-(58, 1, 'fsdf', 'fsdf', 'test@2345234', '$2y$10$xniw77iQyX9qiMQLMHKkeeumnFw8YSZzqUvHKQSTpdsA682Kn7rcq', 0, '2023-06-08 09:00:26', 2, '2023-06-12 08:42:29', 1, 0, NULL, NULL),
+(58, 1, 'fsdf', 'fsdf', 'test@23452349999', '$2y$10$2mvuBaGg.BoYoo249ARrwe5M0tO.ZLOhVodWQhn0NOBIn.8SschBu', 0, '2023-06-08 09:00:26', 2, '2023-06-14 09:33:50', 1, 0, NULL, NULL),
 (59, 1, 'asd', 'asd', 'asd@mijnschool', '$2y$10$6r7LdjjpFJ/6HW4WJK/iROLJ2O6JjDeum7n76pCDFFQ.MhZTlcjYi', 1, '2023-06-08 09:40:38', 0, '2023-06-08 09:40:38', 0, 1, '2023-06-08 09:40:48', 0),
 (9999, 0, 'system', 'monitor', '', '', 3, '2023-06-13 11:28:08', 0, '2023-06-13 11:28:08', 0, 0, NULL, NULL);
 
@@ -580,25 +641,25 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT voor een tabel `beeway`
 --
 ALTER TABLE `beeway`
-  MODIFY `beewayid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `beewayid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT voor een tabel `beewayobservation`
 --
 ALTER TABLE `beewayobservation`
-  MODIFY `observationid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `observationid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT voor een tabel `beewayplanning`
 --
 ALTER TABLE `beewayplanning`
-  MODIFY `planningid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `planningid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT voor een tabel `disciplines`
 --
 ALTER TABLE `disciplines`
-  MODIFY `disciplineid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `disciplineid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT voor een tabel `groups`
@@ -610,13 +671,13 @@ ALTER TABLE `groups`
 -- AUTO_INCREMENT voor een tabel `linkgroups`
 --
 ALTER TABLE `linkgroups`
-  MODIFY `linkgroupsid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `linkgroupsid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- AUTO_INCREMENT voor een tabel `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=487;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=513;
 
 --
 -- AUTO_INCREMENT voor een tabel `maintheme`

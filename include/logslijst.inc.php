@@ -4,12 +4,12 @@
     $modifiedURL = str_replace('/beewayphp/', '', $currentURL);
 
   if (!isset($_GET['offset'])) {
-    header("location: ".$modifiedURL."&offset=0");
+    header("Location: ".$modifiedURL."&offset=0");
     exit;
   }
 
   if (isset($_GET['userid']) && $_GET['userid'] == 0) {
-    header("location: index.php?page=logslijst&offset=0");
+    header("Location: index.php?page=logslijst&offset=0");
     exit;
   }
 ?>
@@ -269,7 +269,7 @@
 <?php
   } else {
     $_SESSION['error'] = "er ging iets mis. Pech!";
-    header("location: index.php?page=dashboard");
+    header("Location: index.php?page=dashboard");
     exit;
   }
 

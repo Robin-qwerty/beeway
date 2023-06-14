@@ -100,7 +100,7 @@
     $_SESSION['school'] = $schoolId;
     $_SESSION['email'] = $email;
     $_SESSION['error'] = "An error occurred. Please try again.";
-    header("location: ../index.php?page=login");
+    header("Location: ../index.php?page=login");
   }
 
   // Check for illegal characters in an array of strings

@@ -26,7 +26,7 @@
       $sth2->execute();
 
       $_SESSION['info'] = "archive successful";
-      header("location: ../index.php?page=vakkenlijst");
+      header("Location: ../index.php?page=vakkenlijst");
     } catch (\Exception $e) {
       $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES ("9999", :useragent, 3, 2, 0, 5)';
       $sth = $conn->prepare($sql);
@@ -34,7 +34,7 @@
       $sth->execute();
 
       $_SESSION['error'] = "archive failed";
-      header("location: ../index.php?page=vakkenlijst");
+      header("Location: ../index.php?page=vakkenlijst");
     }
   } else {
     $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES ("9999", :useragent, 3, 2, 0, 1)';
@@ -43,6 +43,6 @@
     $sth->execute();
 
     $_SESSION['error'] = "Unauthorized access. Please log in with appropriate credentials.";
-    header("location: ../index.php?page=vakkenlijst");
+    header("Location: ../index.php?page=vakkenlijst");
   }
 ?>

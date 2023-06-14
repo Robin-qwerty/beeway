@@ -6,10 +6,10 @@
     try {
       if ($_POST['groups'] == '' ) {
         $_SESSION['error'] = "vul ff iets in";
-        header("location: ../index.php?page=addgroups");
+        header("Location: ../index.php?page=addgroups");
       } elseif (checkForIllegalCharacters($_POST['groups'])) {
         $_SESSION['error'] = "illegal character used";
-        header("location: ../index.php?page=addgroups");
+        header("Location: ../index.php?page=addgroups");
       } else {
 
         $sql = "select schoolid from users WHERE userid=:userid";
@@ -37,7 +37,7 @@
         $sth->execute();
 
         $_SESSION['info'] = "added successful";
-        header("location: ../index.php?page=klassenlijst");
+        header("Location: ../index.php?page=klassenlijst");
         }
       }
     } catch (\Exception $e) {
@@ -47,7 +47,7 @@
       $sth->execute();
 
       $_SESSION['error'] = "er ging iets mis. Pech";
-      header("location: ../index.php?page=addgroups");
+      header("Location: ../index.php?page=addgroups");
     }
   } else {
     $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES ("9999", :useragent, 1, 3, 0, 1)';

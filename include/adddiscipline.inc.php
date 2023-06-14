@@ -18,7 +18,7 @@
 <?php
   } else {
     $_SESSION['error'] = "er ging iets mis. Pech!";
-    header("location: index.php?page=dashboard");
+    header("Location: index.php?page=dashboard");
     exit;
   }
 
