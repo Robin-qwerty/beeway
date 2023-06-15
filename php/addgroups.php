@@ -4,63 +4,77 @@
 
   if (isset($_SESSION['userid'], $_SESSION['userrole']) && ($_SESSION['userrole'] === 'superuser' || $_SESSION['userrole'] === 'admin')) {
     try {
-      if ($_POST['groups'] == '' ) {
-        $_SESSION['error'] = "vul ff iets in";
+      if (empty($_POST['groups'])) {
+        $_SESSION['error'] = "Please fill in the group name.";
         header("Location: ../index.php?page=addgroups");
+        exit;
       } elseif (checkForIllegalCharacters($_POST['groups'])) {
-        $_SESSION['error'] = "illegal character used";
+        $_SESSION['error'] = "Illegal character used.";
         header("Location: ../index.php?page=addgroups");
-      } else {
+        exit;
+      }
 
-        $sql = "select schoolid from users WHERE userid=:userid";
-        $sth1 = $conn->prepare($sql);
-        $sth1->bindParam(':userid', $_SESSION['userid']);
-        $sth1->execute();
+      $sql = "SELECT schoolid FROM users WHERE userid = :userid";
+      $stmt1 = $conn->prepare($sql);
+      $stmt1->bindParam(':userid', $_SESSION['userid']);
+      $stmt1->execute();
 
-       while ($school = $sth1->fetch(PDO::FETCH_OBJ)) {
+      while ($school = $stmt1->fetch(PDO::FETCH_OBJ)) {
         $sql = "INSERT INTO groups (`groups`, `schoolid`, `createdby`, `updatedby`)
                 VALUES (:groups, :schoolid, :createdby, :updatedby)";
-        $sth = $conn->prepare($sql);
-        $sth->bindParam(':groups', $_POST['groups']);
-        $sth->bindParam(':schoolid', $school->schoolid);
-        $sth->bindParam(':createdby', $_SESSION['userid']);
-        $sth->bindParam(':updatedby', $_SESSION['userid']);
-        $sth->execute();
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':groups', $_POST['groups']);
+        $stmt->bindParam(':schoolid', $school->schoolid);
+        $stmt->bindParam(':createdby', $_SESSION['userid']);
+        $stmt->bindParam(':updatedby', $_SESSION['userid']);
+        $stmt->execute();
 
         $groupid = $conn->lastInsertId();
 
-        $sql = "INSERT INTO `logs` (`userid`, `useragent`, `action`, `tableid`, `interactionid`) VALUES (:userid, :useragent, '1', '3', :interactionid)";
-        $sth = $conn->prepare($sql);
-        $sth->bindParam(':userid', $_SESSION['userid']);
-        $sth->bindParam(':useragent', $_SESSION['useragent']);
-        $sth->bindParam(':interactionid', $groupid);
-        $sth->execute();
+        if ($groupid) {
+          $sql = "INSERT INTO `logs` (`userid`, `useragent`, `action`, `tableid`, `interactionid`) VALUES (:userid, :useragent, '1', '3', :interactionid)";
+          $stmt = $conn->prepare($sql);
+          $stmt->bindParam(':userid', $_SESSION['userid']);
+          $stmt->bindParam(':useragent', $_SESSION['useragent']);
+          $stmt->bindParam(':interactionid', $groupid);
+          $stmt->execute();
 
-        $_SESSION['info'] = "added successful";
-        header("Location: ../index.php?page=klassenlijst");
+          $_SESSION['info'] = "Group added successfully.";
+          header("Location: ../index.php?page=klassenlijst");
+          exit;
+        } else {
+          $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES ("9999", :useragent, 1, 3, 0, 5)';
+          $stmt = $conn->prepare($sql);
+          $stmt->bindValue(':useragent', $_SESSION['useragent']);
+          $stmt->execute();
+
+          $_SESSION['error'] = "Failed to add group.";
+          header("Location: ../index.php?page=addgroups");
+          exit;
         }
       }
     } catch (\Exception $e) {
       $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES ("9999", :useragent, 1, 3, 0, 5)';
-      $sth = $conn->prepare($sql);
-      $sth->bindValue(':useragent', $_SESSION['useragent']);
-      $sth->execute();
+      $stmt = $conn->prepare($sql);
+      $stmt->bindValue(':useragent', $_SESSION['useragent']);
+      $stmt->execute();
 
-      $_SESSION['error'] = "er ging iets mis. Pech";
+      $_SESSION['error'] = "An error occurred. Please try again.";
       header("Location: ../index.php?page=addgroups");
+      exit;
     }
   } else {
     $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES ("9999", :useragent, 1, 3, 0, 1)';
-    $sth = $conn->prepare($sql);
-    $sth->bindValue(':useragent', $_SESSION['useragent']);
-    $sth->execute();
+    $stmt = $conn->prepare($sql);
+    $stmt->bindValue(':useragent', $_SESSION['useragent']);
+    $stmt->execute();
 
     $_SESSION['error'] = 'Unauthorized access. Please log in with appropriate credentials.';
-    header('location: ../index.php?page=dashboard');
+    header('Location: ../index.php?page=dashboard');
     exit;
   }
 
-  function checkForIllegalCharacters($str) { // check for iliegal characters
+  function checkForIllegalCharacters($str) {
     $illegalChars = array('<', '>', '{', '}', '(', ')', '[', ']', '*', '$', '^', '`', '~', '|', '\\', '\'', '"', ':', ';', ',', '/');
     foreach ($illegalChars as $char) {
       if (strpos($str, $char) !== false) {

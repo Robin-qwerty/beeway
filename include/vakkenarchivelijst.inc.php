@@ -55,44 +55,16 @@
               </tr>
             ';
           }
-          echo '</table>
-
-          <div class="tablebuttons">';
-            if (isset($_GET['offset'])) {
-              $terug = $_GET['offset'] - 1;
-              $volgende = $_GET['offset'] + 1;
-              if ($_GET['offset'] == '0') {
-                // echo '
-                //   <a href="index.php?page=scholenlijst&offset='.$volgende.'" class="addbutton">volgende</a>
-                // ';
-              } else {
-                // echo '
-                //   <a href="index.php?page=scholenlijst&offset='.$terug.'" class="addbutton">terug</a>
-                //   <a href="index.php?page=scholenlijst&offset='.$volgende.'" class="addbutton">volgende</a>
-                // ';
-              }
-            } else {
-              // echo '
-              //   <a href="index.php?page=scholenlijst&offset=1" class="addbutton">volgende</a>
-              // ';
-            }
-          echo '</div>';
+          echo '</table>';
         } else {
-          // the query did not return any rows
           echo '<h2><strong>the query did not return any rows</strong></h2>';
-          if (isset($_GET['offset']) && $_GET['offset'] >= '1') {
-            $terug = $_GET['offset'] - 1;
-
-            echo '<div class="tablebuttons"><a href="index.php?page=scholenlijst&offset='.$terug.'" class="addbutton">terug</a></div>';
-          } else if (isset($_GET['offset'])) {
-            echo '<div class="tablebuttons"><a href="index.php?page=scholenlijst" class="addbutton">terug</a></div>';
-          }
           $_SESSION['error'] = "the query did not return any rows. Pech!";
         }
       ?>
     <hr>
   </div>
-  
+  </div>
+
 <?php
   } else {
     $_SESSION['error'] = "er ging iets mis. Pech!";
