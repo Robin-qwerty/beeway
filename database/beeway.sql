@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 14 jun 2023 om 14:48
+-- Gegenereerd op: 16 jun 2023 om 14:55
 -- Serverversie: 10.4.28-MariaDB
 -- PHP-versie: 8.2.4
 
@@ -40,6 +40,7 @@ CREATE TABLE `beeway` (
   `disciplineid` varchar(11) NOT NULL,
   `concretegoal` varchar(2500) DEFAULT NULL,
   `status` varchar(1) NOT NULL DEFAULT '0',
+  `lock` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0=unlocked\r\n1=locked',
   `createdat` datetime NOT NULL DEFAULT current_timestamp(),
   `createdby` int(11) DEFAULT NULL,
   `updatedat` datetime NOT NULL DEFAULT current_timestamp(),
@@ -53,18 +54,18 @@ CREATE TABLE `beeway` (
 -- Gegevens worden geëxporteerd voor tabel `beeway`
 --
 
-INSERT INTO `beeway` (`beewayid`, `schoolid`, `groupid`, `beewayname`, `begood`, `beenough`, `benotgood`, `mainthemeid`, `themeperiodid`, `disciplineid`, `concretegoal`, `status`, `createdat`, `createdby`, `updatedat`, `updatedby`, `archive`, `deletedat`, `deletedby`) VALUES
-(1, 1, '6', 'eerste beeway', '0', '12', '', '1', 2, '1', 'beeway doel, leuk he fgddddeeeeeeeeee', '0', '2023-05-03 08:15:03', 1, '2023-05-03 08:15:03', 2, 0, NULL, NULL),
-(2, 1, '2', 'tweede beeway', '67', '12', '45', '1', 2, '2', 'beeway doel, leuk hesdfgsdfgsdfg', '0', '2023-05-03 08:15:42', 1, '2023-05-03 08:15:42', 2, 0, NULL, NULL),
-(3, 1, '1', 'derde beeway', '23', '567', '23', '1', 5, '2', 'beeway doel, stom he', '0', '2023-05-03 08:16:14', 1, '2023-05-03 08:16:14', 2, 0, NULL, NULL),
-(18, 1, '1', 'testschoolid', NULL, '13', '14', '1', 4, '1', 'doel leuk he', '0', '2023-05-23 10:59:02', 2, '2023-05-23 10:59:02', 2, 0, NULL, NULL),
-(19, 1, '1', 'eerste beeway', '0', '12', '45', '1', 4, '1', 'beeway doel, leuk he', '0', '2023-05-24 08:41:42', 2, '2023-05-24 08:41:42', 2, 0, NULL, NULL),
-(20, 1, '3', '3', '11', '11', '11', '1', 1, '3', 'beeway doel, leuk he', '0', '2023-05-24 08:44:08', 2, '2023-05-24 08:44:08', 2, 0, NULL, NULL),
-(21, 1, '1', '2', '2', '2', '2', '1', 2, '2', 'hoe veel worden kunnen we nu hier van lezen of is dit minder dan 35?', '0', '2023-05-24 09:07:21', 2, '2023-05-24 09:07:21', 2, 0, NULL, NULL),
-(22, 1, '3', '1', '', '', '', '1', 4, '1', '123123123', '0', '2023-05-24 09:16:11', 2, '2023-05-24 09:16:11', 2, 0, NULL, NULL),
-(24, 1, '2', '2', '2', '2', '2', '1', 1, '2', '2', '0', '2023-06-13 09:44:31', NULL, '2023-06-13 09:44:31', 2, 0, NULL, NULL),
-(25, 1, '5', '5', '5', '5', '5', '5', 0, '2', '5', '0', '2023-06-13 11:09:41', NULL, '2023-06-13 11:09:41', NULL, 0, NULL, NULL),
-(26, 1, '6', 'test 6 7', '6', '6', '6', '1', 4, '1', '6666666 7777777\n8888888 9999999\n1010101 1111111\n2222222 3333333\n4444444', '0', '2023-06-14 10:58:46', NULL, '2023-06-14 10:58:46', 2, 0, NULL, NULL);
+INSERT INTO `beeway` (`beewayid`, `schoolid`, `groupid`, `beewayname`, `begood`, `beenough`, `benotgood`, `mainthemeid`, `themeperiodid`, `disciplineid`, `concretegoal`, `status`, `lock`, `createdat`, `createdby`, `updatedat`, `updatedby`, `archive`, `deletedat`, `deletedby`) VALUES
+(1, 1, '6', 'eerste beeway', '0', '12', '', '1', 2, '1', 'beeway doel, leuk he fgddddeeeeeeeeee', '0', 0, '2023-05-03 08:15:03', 1, '2023-05-03 08:15:03', 2, 0, NULL, NULL),
+(2, 1, '2', 'tweede beeway', '67', '12', '45', '1', 2, '2', 'beeway doel, leuk hesdfgsdfgsdfg', '0', 0, '2023-05-03 08:15:42', 1, '2023-05-03 08:15:42', 2, 0, NULL, NULL),
+(3, 1, '1', 'derde beeway', '23', '567', '23', '1', 5, '2', 'beeway doel, stom he', '0', 0, '2023-05-03 08:16:14', 1, '2023-05-03 08:16:14', 2, 0, NULL, NULL),
+(18, 1, '1', 'testschoolid', NULL, '13', '14', '1', 4, '1', 'doel leuk he', '0', 0, '2023-05-23 10:59:02', 2, '2023-05-23 10:59:02', 2, 0, NULL, NULL),
+(19, 1, '1', 'eerste beeway', '0', '12', '45', '1', 4, '1', 'beeway doel, leuk he', '0', 0, '2023-05-24 08:41:42', 2, '2023-05-24 08:41:42', 2, 0, NULL, NULL),
+(20, 1, '3', '3', '11', '11', '11', '1', 1, '3', 'beeway doel, leuk he', '0', 0, '2023-05-24 08:44:08', 2, '2023-05-24 08:44:08', 2, 0, NULL, NULL),
+(21, 1, '1', '2', '2', '2', '2', '1', 2, '2', 'hoe veel worden kunnen we nu hier van lezen of is dit minder dan 35?', '0', 0, '2023-05-24 09:07:21', 2, '2023-05-24 09:07:21', 2, 0, NULL, NULL),
+(22, 1, '3', '1', '', '', '', '1', 4, '1', '123123123', '0', 0, '2023-05-24 09:16:11', 2, '2023-05-24 09:16:11', 2, 0, NULL, NULL),
+(24, 1, '2', '2', '2', '2', '2', '1', 1, '2', '2', '0', 0, '2023-06-13 09:44:31', NULL, '2023-06-13 09:44:31', 2, 0, NULL, NULL),
+(25, 1, '5', '5', '5', '5', '5', '5', 0, '2', '5', '0', 0, '2023-06-13 11:09:41', NULL, '2023-06-13 11:09:41', NULL, 0, NULL, NULL),
+(26, 1, '6', 'test 6 7', '6', '6', '6', '1', 4, '1', '6666666 7777777\n8888888 9999999\n1010101 1111111\n2222222 3333333\n4444444', '0', 0, '2023-06-14 10:58:46', NULL, '2023-06-14 10:58:46', 2, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -205,7 +206,8 @@ INSERT INTO `disciplines` (`disciplineid`, `schoolid`, `disciplinename`, `create
 (9, 1, 'sdfsd', '2023-06-07 08:10:34', 2, '2023-06-07 08:10:34', 2, 1, NULL, NULL),
 (10, 1, '1', '2023-06-08 14:23:30', 2, '2023-06-08 14:23:30', 2, 1, NULL, NULL),
 (11, 1, 'sdfadf', '2023-06-14 09:50:49', 2, '2023-06-14 09:50:49', 2, 0, NULL, NULL),
-(12, 1, 'qwerty', '2023-06-14 09:50:55', 2, '2023-06-14 09:50:55', 2, 0, NULL, NULL);
+(12, 1, 'qwerty', '2023-06-14 09:50:55', 2, '2023-06-14 09:50:55', 2, 0, NULL, NULL),
+(13, 1, '3452452345', '2023-06-15 09:30:18', 2, '2023-06-15 09:30:18', 2, 1, '2023-06-15 09:30:24', 2);
 
 -- --------------------------------------------------------
 
@@ -452,7 +454,18 @@ INSERT INTO `logs` (`id`, `date`, `userid`, `useragent`, `action`, `info`, `tabl
 (509, '2023-06-14 08:57:12', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 5, NULL, 6, 1, 0),
 (510, '2023-06-14 08:57:18', '2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, NULL, 6, 2, 0),
 (511, '2023-06-14 09:00:16', '2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 2, NULL, 1, 26, 0),
-(512, '2023-06-14 09:01:05', '2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 2, NULL, 1, 26, 0);
+(512, '2023-06-14 09:01:05', '2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 2, NULL, 1, 26, 0),
+(513, '2023-06-15 06:55:52', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, NULL, 6, 1, 0),
+(514, '2023-06-15 06:55:52', '9999', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, NULL, 6, 0, 4),
+(515, '2023-06-15 06:55:55', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, NULL, 6, 1, 0),
+(516, '2023-06-15 07:23:58', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 5, NULL, 6, 1, 0),
+(517, '2023-06-15 07:24:03', '2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, NULL, 6, 2, 0),
+(518, '2023-06-15 07:30:18', '2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 1, NULL, 2, 13, 0),
+(519, '2023-06-15 07:30:21', '2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 2, NULL, 2, 13, 0),
+(520, '2023-06-15 07:30:24', '2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 3, NULL, 2, 13, 0),
+(521, '2023-06-16 07:16:28', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, NULL, 6, 1, 0),
+(522, '2023-06-16 07:16:58', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 5, NULL, 6, 1, 0),
+(523, '2023-06-16 07:17:05', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, NULL, 6, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -659,7 +672,7 @@ ALTER TABLE `beewayplanning`
 -- AUTO_INCREMENT voor een tabel `disciplines`
 --
 ALTER TABLE `disciplines`
-  MODIFY `disciplineid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `disciplineid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT voor een tabel `groups`
@@ -677,7 +690,7 @@ ALTER TABLE `linkgroups`
 -- AUTO_INCREMENT voor een tabel `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=513;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=524;
 
 --
 -- AUTO_INCREMENT voor een tabel `maintheme`

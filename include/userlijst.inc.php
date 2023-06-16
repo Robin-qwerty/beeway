@@ -5,10 +5,10 @@
     $currentURL = $_SERVER['REQUEST_URI'];
     $modifiedURL = str_replace('/beewayphp/', '', $currentURL);
 
-  if (!isset($_GET['offset'])) {
-    header("Location: ".$modifiedURL."&offset=0");
-    exit;
-  }
+    if (!isset($_GET['offset'])) {
+      header("Location: ".$modifiedURL."&offset=0");
+      exit;
+    }
 ?>
 
   <div class="beewaylijst">

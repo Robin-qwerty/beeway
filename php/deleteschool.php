@@ -2,7 +2,7 @@
   require_once '../private/dbconnect.php';
   session_start();
 
-  if (isset($_SESSION['userid'], $_SESSION['userrole']) && ($_SESSION['userrole'] === 'superuser'))) { // User has the necessary privileges
+  if (isset($_SESSION['userid'], $_SESSION['userrole']) && ($_SESSION['userrole'] === 'superuser')) { // User has the necessary privileges
     if ($_GET['schoolid'] == '0' || $_GET['schoolid'] == '1') {
       $_SESSION['error'] = 'Deze school mag niet verwijderd worden.';
       header('location: ../index.php?page=scholenlijst');
