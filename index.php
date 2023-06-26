@@ -39,7 +39,7 @@
     }
 
     // Debugging: display the contents of the session
-    // echo "<pre>", print_r($_SESSION),"</pre>";
+    echo "<pre>", print_r($_SESSION),"</pre>";
 
     require_once 'include/error.inc.php';
     require_once 'include/info.inc.php';

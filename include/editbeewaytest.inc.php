@@ -182,7 +182,8 @@
             echo "</table>";
             echo "<br>";
         } else {
-            echo "Geen planninggegevens gevonden.";
+            $_SESSION['error'] = "Geen planninggegevens gevonden. Pech!";
+            echo "<br> Geen planninggegevens gevonden.";
         }
 
         // Controleren of er resultaten zijn voor de observatie
@@ -213,11 +214,12 @@
             echo "</table>";
             echo "<br>";
         } else {
-            echo "Geen observatiegegevens gevonden.";
+          $_SESSION['error'] = "Geen observatiegegevens gevonden. Pech!";
+          echo "<br> Geen observatiegegevens gevonden.";
         }
 
         // De knop weergeven voor het bijwerken van zowel planning als observatie
-        echo "<input type='submit' name='updateData' value='Update Planning en Observatie'>";
+        // echo "<input type='submit' name='updateData' value='Update Planning en Observatie'>";
         echo "</form>";
     }
 ?>
