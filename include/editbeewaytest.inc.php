@@ -27,7 +27,7 @@
           <form id="form0" action="php/editbeeway.php?beewayid='.$_GET['beewayid'].'" method="post">
             <div><input type="text" placeholder="BeewayNaam" name="beewaynaam" value="'.$beeway->beewayname.'" required></div>
             <div><button id="opslaan" class="addbutton" type="submit" style="font-size: 16px;">Opslaan</button></div>
-            <div><button '; ?> onclick='return confirm("Weet je zekker dat je deze beeway wilt verwijderen!?")' <?php echo ' href="##" class="deletebutton" style="font-size: 16px;">Verwijderen</button></div>
+            <div><a '; ?> onclick='return confirm("Weet je zekker dat je deze beeway wilt verwijderen!?")' <?php echo ' href="php/deletebeeway.php?beewayid='.$_GET['beewayid'].'" class="deletebutton" style="font-size: 16px;">Verwijderen</a></div>
             <div>
         ';
 
@@ -89,7 +89,24 @@
                 <h2>Iedere dag ’n beetje beter</h2>
                 <div id="groepen">
                   <label>Groepen</label>
-                  <input type="number" name="groepen" onKeyDown="if(this.value.length==1 && event.keyCode!=8) return false;" min="1" max="8" <?php echo isset($beeway->groupid) ? 'value="'.$beeway->groupid.'"' : ''; ?> required></input>
+                  <select name="groepen" required>
+                    <option value="">-- selecteer een groep --</option>
+                    <?php
+                      $sql = 'SELECT groups, groupid
+                              FROM groups
+                              WHERE archive=0
+                              AND schoolid=:schoolid';
+                      $sth = $conn->prepare($sql);
+                      $sth->bindValue(':schoolid', $schoolid);
+                      $sth->execute();
+
+                      while ($group = $sth->fetch(PDO::FETCH_OBJ)) {
+                        $selected = isset($beeway->groupid) && $beeway->groupid == $group->groupid ? 'selected="selected"' : '';
+                        echo '<option value="'.$group->groupid.'" '.$selected.'>'.$group->groups.'</option>';
+                      }
+                    ?>
+                  </select>
+                  <!-- <input type="number" name="groepen" onKeyDown="if(this.value.length==1 && event.keyCode!=8) return false;" min="1" max="8" <?php echo isset($beeway->groupid) ? 'value="'.$beeway->groupid.'"' : ''; ?> required></input> -->
                 </div>
               </div>
 
@@ -153,8 +170,8 @@
                     }
                   ?>
                 </select>
-          </div>
-          </div>
+              </div>
+            </div>
           <?php
             // Een formulier genereren met de planninggegevens
             echo "<table>

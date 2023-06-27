@@ -2,7 +2,7 @@
   require_once '../private/dbconnect.php';
   session_start();
 
-  if (isset($_SESSION['userid'], $_SESSION['userrole']) && $_SESSION['userrole'] === 'superuser') {
+  if (isset($_SESSION['userid'], $_SESSION['userrole'])) {
     try {
       $sql = "UPDATE users SET archive = 0 WHERE userid = :userid";
       $sth = $conn->prepare($sql);

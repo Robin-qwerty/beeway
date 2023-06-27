@@ -33,7 +33,24 @@
     <h2>Iedere dag ’n beetje beter</h2>
     <div id="groepen">
       <label>Groepen</label>
-      <input type="number" name="groepen" onKeyDown="if(this.value.length==1 && event.keyCode!=8) return false;" min="1" max="8" required></input>
+      <select name="groepen" required>
+        <option value="">-- selecteer een groep --</option>
+        <?php
+          $sql = 'SELECT groups, groupid
+                  FROM groups
+                  WHERE archive=0
+                  AND schoolid=:schoolid';
+          $sth = $conn->prepare($sql);
+          $sth->bindValue(':schoolid', $schoolid);
+          $sth->execute();
+
+          while ($group = $sth->fetch(PDO::FETCH_OBJ)) {
+            $selected = isset($beeway->groupid) && $beeway->groupid == $group->groupid ? 'selected="selected"' : '';
+            echo '<option value="'.$group->groupid.'" '.$selected.'>'.$group->groups.'</option>';
+          }
+        ?>
+      </select>
+      <!-- <input type="number" name="groepen" onKeyDown="if(this.value.length==1 && event.keyCode!=8) return false;" min="1" max="8" <?php echo isset($beeway->groupid) ? 'value="'.$beeway->groupid.'"' : ''; ?> required></input> -->
     </div>
   </div>
 
