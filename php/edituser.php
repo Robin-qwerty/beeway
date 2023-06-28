@@ -94,7 +94,7 @@
       $sth->bindParam(':userid', $userId);
       $sth->execute();
 
-      if (isset($_POST['password'])) {
+      if (!empty($_POST['password']) && strlen($_POST['password']) > 6) {
           $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
           $sql = "UPDATE users SET password=:password WHERE userid=:userid";
@@ -104,6 +104,7 @@
           $sth->execute();
       }
   }
+
 
   function linkGroups($userId, $selectedGroepen)
   {

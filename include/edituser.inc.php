@@ -30,7 +30,6 @@
             } else {
               echo'<p>Als laast bewerkt door: <b>'.$editedby->firstname.' '.$editedby->lastname.'</b></p>';
             }
-
             $y++;
           }
 
@@ -76,8 +75,10 @@
                 <div id="checkboxes">';
                     $sql2 = 'SELECT groups, groupid
                             FROM groups
-                            WHERE archive=0';
+                            WHERE schoolid=:schoolid
+                            AND archive=0';
                     $sth2 = $conn->prepare($sql2);
+                    $sth2->bindParam(':schoolid', $user->schoolid);
                     $sth2->execute();
 
                     while ($groups = $sth2->fetch(PDO::FETCH_OBJ)) {

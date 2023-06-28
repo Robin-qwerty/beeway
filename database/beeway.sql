@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 26 jun 2023 om 16:11
+-- Gegenereerd op: 28 jun 2023 om 16:25
 -- Serverversie: 10.4.28-MariaDB
 -- PHP-versie: 8.2.4
 
@@ -58,7 +58,9 @@ INSERT INTO `beeway` (`beewayid`, `schoolid`, `groupid`, `beewayname`, `begood`,
 (24, 1, '2', '2', '2', '2', '2', '1', 1, '2', '2', '0', 0, '2023-06-13 09:44:31', NULL, '2023-06-13 09:44:31', 2, 0, NULL, NULL),
 (25, 1, '5', '5', '5', '5', '5', '1', 1, '2', '5', '0', 0, '2023-06-13 11:09:41', NULL, '2023-06-13 11:09:41', 2, 0, NULL, NULL),
 (26, 1, '8', 'test 6 7 88888888', '6', '6', '6', '4', 4, '2', '6666666 7777777\r\n8888888 9999999\r\n1010101 1111111\r\n2222222 3333333\r\n4444444dfsd df sd fsd fsdf \r\n\r\n\r\nde 8ters update test', '0', 0, '2023-06-14 10:58:46', NULL, '2023-06-14 10:58:46', 2, 0, NULL, NULL),
-(28, 1, '1', 'test test 223', '1', '1', '1', '1', 1, '1', 'sdfsdfsdfsdf', '0', 0, '2023-06-26 14:43:23', NULL, '2023-06-26 14:43:23', 2, 0, NULL, NULL);
+(28, 1, '1', 'test test 223', '1', '1', '1', '1', 1, '1', 'sdfsdfsdfsdf', '0', 0, '2023-06-26 14:43:23', NULL, '2023-06-26 14:43:23', 2, 0, NULL, NULL),
+(29, 1, '1', 'test delete', '1', '', '', '1', 1, '11', 'test delete', '0', 0, '2023-06-27 08:54:16', NULL, '2023-06-27 08:54:16', 3, 1, '2023-06-27 09:00:41', 3),
+(30, 1, '5', 'bb', '', '', '', '1', 1, '1', 'bb', '0', 0, '2023-06-27 13:52:23', NULL, '2023-06-27 13:52:23', 3, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -119,7 +121,23 @@ INSERT INTO `beewayobservation` (`observationid`, `beewayid`, `dataclass`, `lear
 (29, 28, '11', '11', '11', '11', '1', '2023-06-26 14:43:23', 0, '2023-06-26 14:43:23', 0, 0, NULL, NULL),
 (30, 28, '1', '2', '1', '1', '1', '2023-06-26 14:43:23', 0, '2023-06-26 14:43:23', 0, 0, NULL, NULL),
 (31, 28, '1', '1', '2', '11', '11', '2023-06-26 14:43:23', 0, '2023-06-26 14:43:23', 0, 0, NULL, NULL),
-(32, 28, '11', '11', '2', '1', '1', '2023-06-26 14:43:23', 0, '2023-06-26 14:43:23', 0, 0, NULL, NULL);
+(32, 28, '11', '11', '2', '1', '1', '2023-06-26 14:43:23', 0, '2023-06-26 14:43:23', 0, 0, NULL, NULL),
+(33, 29, '', '', '', '', '', '2023-06-27 08:54:16', 0, '2023-06-27 08:54:16', 0, 1, '2023-06-27 09:00:41', 3),
+(34, 29, '', '', '', '', '', '2023-06-27 08:54:16', 0, '2023-06-27 08:54:16', 0, 1, '2023-06-27 09:00:41', 3),
+(35, 29, '', '', 'test delete', '', '', '2023-06-27 08:54:16', 0, '2023-06-27 08:54:16', 0, 1, '2023-06-27 09:00:41', 3),
+(36, 29, '', '', '', '', '', '2023-06-27 08:54:16', 0, '2023-06-27 08:54:16', 0, 1, '2023-06-27 09:00:41', 3),
+(37, 29, '', '', '', '', '', '2023-06-27 08:54:16', 0, '2023-06-27 08:54:16', 0, 1, '2023-06-27 09:00:41', 3),
+(38, 29, '', 'test delete', 'test delete', '', '', '2023-06-27 08:54:16', 0, '2023-06-27 08:54:16', 0, 1, '2023-06-27 09:00:41', 3),
+(39, 29, '', '', '', '', '', '2023-06-27 08:54:16', 0, '2023-06-27 08:54:16', 0, 1, '2023-06-27 09:00:41', 3),
+(40, 29, '', 'test delete', '', '', '', '2023-06-27 08:54:16', 0, '2023-06-27 08:54:16', 0, 1, '2023-06-27 09:00:41', 3),
+(41, 30, '', '', '', '', '', '2023-06-27 13:52:23', 0, '2023-06-27 13:52:23', 0, 0, NULL, NULL),
+(42, 30, '', '', '', '', '', '2023-06-27 13:52:23', 0, '2023-06-27 13:52:23', 0, 0, NULL, NULL),
+(43, 30, '', '', '', '', '', '2023-06-27 13:52:23', 0, '2023-06-27 13:52:23', 0, 0, NULL, NULL),
+(44, 30, '', '', '', '', '', '2023-06-27 13:52:23', 0, '2023-06-27 13:52:23', 0, 0, NULL, NULL),
+(45, 30, '', '', '', '', '', '2023-06-27 13:52:23', 0, '2023-06-27 13:52:23', 0, 0, NULL, NULL),
+(46, 30, '', '', '', '', '', '2023-06-27 13:52:23', 0, '2023-06-27 13:52:23', 0, 0, NULL, NULL),
+(47, 30, '', '', '', '', '', '2023-06-27 13:52:23', 0, '2023-06-27 13:52:23', 0, 0, NULL, NULL),
+(48, 30, '', '', '', '', '', '2023-06-27 13:52:23', 0, '2023-06-27 13:52:23', 0, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -180,7 +198,23 @@ INSERT INTO `beewayplanning` (`planningid`, `beewayid`, `planning`, `planningwha
 (29, 28, '1', '2', '1', '1', '1', '2023-06-26 14:43:23', NULL, '2023-06-26 14:43:23', NULL, 0, NULL, NULL),
 (30, 28, '2', '2', '2', '2', '1', '2023-06-26 14:43:23', NULL, '2023-06-26 14:43:23', NULL, 0, NULL, NULL),
 (31, 28, '2', '2', '1', '2', '1', '2023-06-26 14:43:23', NULL, '2023-06-26 14:43:23', NULL, 0, NULL, NULL),
-(32, 28, '2', '1', '11', '11', '1', '2023-06-26 14:43:23', NULL, '2023-06-26 14:43:23', NULL, 0, NULL, NULL);
+(32, 28, '2', '1', '11', '11', '1', '2023-06-26 14:43:23', NULL, '2023-06-26 14:43:23', NULL, 0, NULL, NULL),
+(33, 29, 'test delete', '', '', '', '0', '2023-06-27 08:54:16', NULL, '2023-06-27 08:54:16', NULL, 1, '2023-06-27 09:00:41', 3),
+(34, 29, '', '', '', '', '0', '2023-06-27 08:54:16', NULL, '2023-06-27 08:54:16', NULL, 1, '2023-06-27 09:00:41', 3),
+(35, 29, '', '', '', '', '0', '2023-06-27 08:54:16', NULL, '2023-06-27 08:54:16', NULL, 1, '2023-06-27 09:00:41', 3),
+(36, 29, '', '', '', '', '0', '2023-06-27 08:54:16', NULL, '2023-06-27 08:54:16', NULL, 1, '2023-06-27 09:00:41', 3),
+(37, 29, '', 'test delete', '', '', '1', '2023-06-27 08:54:16', NULL, '2023-06-27 08:54:16', NULL, 1, '2023-06-27 09:00:41', 3),
+(38, 29, '', '', '', '', '0', '2023-06-27 08:54:16', NULL, '2023-06-27 08:54:16', NULL, 1, '2023-06-27 09:00:41', 3),
+(39, 29, '', '', '', '', '0', '2023-06-27 08:54:16', NULL, '2023-06-27 08:54:16', NULL, 1, '2023-06-27 09:00:41', 3),
+(40, 29, '', '', '', '', '0', '2023-06-27 08:54:16', NULL, '2023-06-27 08:54:16', NULL, 1, '2023-06-27 09:00:41', 3),
+(41, 30, '', '', '', '', '0', '2023-06-27 13:52:23', NULL, '2023-06-27 13:52:23', NULL, 0, NULL, NULL),
+(42, 30, '', '', '', '', '0', '2023-06-27 13:52:23', NULL, '2023-06-27 13:52:23', NULL, 0, NULL, NULL),
+(43, 30, '', '', '', '', '0', '2023-06-27 13:52:23', NULL, '2023-06-27 13:52:23', NULL, 0, NULL, NULL),
+(44, 30, '', '', '', '', '0', '2023-06-27 13:52:23', NULL, '2023-06-27 13:52:23', NULL, 0, NULL, NULL),
+(45, 30, '', '', '', '', '0', '2023-06-27 13:52:23', NULL, '2023-06-27 13:52:23', NULL, 0, NULL, NULL),
+(46, 30, '', '', '', '', '0', '2023-06-27 13:52:23', NULL, '2023-06-27 13:52:23', NULL, 0, NULL, NULL),
+(47, 30, '', '', '', '', '0', '2023-06-27 13:52:23', NULL, '2023-06-27 13:52:23', NULL, 0, NULL, NULL),
+(48, 30, '', '', '', '', '0', '2023-06-27 13:52:23', NULL, '2023-06-27 13:52:23', NULL, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -250,7 +284,8 @@ INSERT INTO `groups` (`groupid`, `schoolid`, `groups`, `createdat`, `createdby`,
 (6, 0, 'sdf', '2023-06-07 08:10:39', 2, '2023-06-07 08:10:39', 2, 0, NULL, NULL),
 (7, 0, 'sdf', '2023-06-07 08:10:43', 2, '2023-06-07 08:10:43', 2, 0, NULL, NULL),
 (8, 0, 'sdf', '2023-06-07 08:10:58', 2, '2023-06-07 08:10:58', 2, 0, NULL, NULL),
-(9, 1, 'tes', '2023-06-08 14:15:13', 2, '2023-06-08 14:15:13', 2, 1, NULL, NULL);
+(9, 1, 'tes', '2023-06-08 14:15:13', 2, '2023-06-08 14:15:13', 2, 1, NULL, NULL),
+(10, 1, 'tes', '2023-06-28 08:56:43', 2, '2023-06-28 08:56:43', 2, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -319,14 +354,34 @@ INSERT INTO `linkgroups` (`linkgroupsid`, `userid`, `groupid`, `archive`) VALUES
 (48, 58, 6, 1),
 (49, 58, 7, 1),
 (50, 58, 8, 1),
-(51, 58, 1, 0),
-(52, 58, 2, 0),
-(53, 58, 3, 0),
-(54, 58, 4, 0),
-(55, 58, 5, 0),
-(56, 58, 6, 0),
-(57, 58, 7, 0),
-(58, 58, 8, 0);
+(51, 58, 1, 1),
+(52, 58, 2, 1),
+(53, 58, 3, 1),
+(54, 58, 4, 1),
+(55, 58, 5, 1),
+(56, 58, 6, 1),
+(57, 58, 7, 1),
+(58, 58, 8, 1),
+(59, 58, 4, 1),
+(60, 58, 5, 1),
+(61, 58, 4, 0),
+(62, 58, 5, 0),
+(63, 3, 10, 1),
+(64, 3, 10, 1),
+(65, 3, 5, 1),
+(66, 3, 10, 1),
+(67, 3, 5, 1),
+(68, 3, 10, 1),
+(69, 3, 4, 1),
+(70, 3, 5, 1),
+(71, 3, 10, 1),
+(72, 3, 4, 1),
+(73, 3, 5, 1),
+(74, 3, 10, 1),
+(75, 3, 4, 1),
+(76, 3, 5, 1),
+(77, 3, 4, 1),
+(78, 3, 5, 1);
 
 -- --------------------------------------------------------
 
@@ -485,7 +540,76 @@ INSERT INTO `logs` (`id`, `date`, `userid`, `useragent`, `action`, `info`, `tabl
 (531, '2023-06-26 06:08:26', '2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, NULL, 6, 2, 0),
 (532, '2023-06-26 06:08:45', '2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 2, NULL, 1, 26, 0),
 (533, '2023-06-26 09:30:26', '2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 2, NULL, 1, 26, 0),
-(534, '2023-06-26 11:04:09', '3', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, NULL, 6, 3, 0);
+(534, '2023-06-26 11:04:09', '3', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, NULL, 6, 3, 0),
+(535, '2023-06-27 06:10:28', '9999', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, NULL, 6, 0, 4),
+(536, '2023-06-27 06:10:32', '3', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, NULL, 6, 3, 0),
+(537, '2023-06-27 06:45:18', '9999', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 3, NULL, 1, 0, 1),
+(538, '2023-06-27 06:54:34', '9999', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 3, NULL, 1, 0, 5),
+(539, '2023-06-27 06:58:25', '3', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 5, NULL, 6, 3, 0),
+(540, '2023-06-27 06:58:28', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, NULL, 6, 1, 0),
+(541, '2023-06-27 07:00:29', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 5, NULL, 6, 1, 0),
+(542, '2023-06-27 07:00:32', '3', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, NULL, 6, 3, 0),
+(543, '2023-06-27 07:00:41', '3', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 3, 'beeway deleted', 1, 29, 0),
+(544, '2023-06-27 07:00:50', '3', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 5, NULL, 6, 3, 0),
+(545, '2023-06-27 07:00:53', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, NULL, 6, 1, 0),
+(546, '2023-06-27 07:01:33', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 1, 'school created', 5, 27, 0),
+(547, '2023-06-27 07:01:33', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 1, 'User added for new school 27', 6, 10001, 0),
+(548, '2023-06-27 07:02:10', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 3, 'Everything from \'users\' where schoolid is 27 has been deleted.', 6, 27, 0),
+(549, '2023-06-27 07:02:10', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 3, 'Everything from \'maintheme\' where schoolid is 27 has been deleted.', 4, 27, 0),
+(550, '2023-06-27 07:02:10', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 3, 'Everything from \'groups\' where schoolid is 27 has been deleted.', 3, 27, 0),
+(551, '2023-06-27 07:02:10', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 3, 'Everything from \'disciplines\' where schoolid is 27 has been deleted.', 2, 27, 0),
+(552, '2023-06-27 07:02:10', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 3, 'School with schoolid 27 has been archived.', 5, 27, 0),
+(553, '2023-06-27 11:15:42', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 5, NULL, 6, 1, 0),
+(554, '2023-06-27 11:15:47', '3', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, NULL, 6, 3, 0),
+(555, '2023-06-28 06:52:00', '2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, NULL, 6, 2, 0),
+(556, '2023-06-28 06:53:10', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, NULL, 6, 1, 0),
+(557, '2023-06-28 06:56:22', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 2, NULL, 6, 58, 0),
+(558, '2023-06-28 06:56:37', '2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 2, NULL, 6, 58, 0),
+(559, '2023-06-28 06:56:43', '2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 1, NULL, 3, 10, 0),
+(560, '2023-06-28 06:56:57', '2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 2, NULL, 6, 3, 0),
+(561, '2023-06-28 08:55:15', '2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 5, NULL, 6, 2, 0),
+(562, '2023-06-28 08:55:34', '9999', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, NULL, 6, 0, 4),
+(563, '2023-06-28 08:55:40', '3', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, NULL, 6, 3, 0),
+(564, '2023-06-28 08:55:40', '9999', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, NULL, 6, 0, 4),
+(565, '2023-06-28 08:55:45', '3', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, NULL, 6, 3, 0),
+(566, '2023-06-28 08:55:45', '9999', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, NULL, 6, 0, 4),
+(567, '2023-06-28 08:55:58', '3', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, NULL, 6, 3, 0),
+(568, '2023-06-28 08:55:58', '9999', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, NULL, 6, 0, 4),
+(569, '2023-06-28 08:56:20', '3', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, NULL, 6, 3, 0),
+(570, '2023-06-28 08:56:27', '3', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 5, NULL, 6, 3, 0),
+(571, '2023-06-28 08:56:31', '2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, NULL, 6, 2, 0),
+(572, '2023-06-28 08:56:39', '2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 2, NULL, 6, 3, 0),
+(573, '2023-06-28 08:57:25', '2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 2, NULL, 6, 3, 0),
+(574, '2023-06-28 08:57:41', '3', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, NULL, 6, 3, 0),
+(575, '2023-06-28 08:57:47', '2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 2, NULL, 6, 3, 0),
+(576, '2023-06-28 08:57:52', '3', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 5, NULL, 6, 3, 0),
+(577, '2023-06-28 08:57:56', '3', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, NULL, 6, 3, 0),
+(578, '2023-06-28 08:57:56', '9999', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, NULL, 6, 0, 4),
+(579, '2023-06-28 09:00:48', '2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 2, NULL, 6, 3, 0),
+(580, '2023-06-28 09:01:06', '2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 2, NULL, 6, 3, 0),
+(581, '2023-06-28 11:40:29', '2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 5, NULL, 6, 2, 0),
+(582, '2023-06-28 11:40:34', '3', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, NULL, 6, 3, 0),
+(583, '2023-06-28 11:40:34', '9999', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, NULL, 6, 0, 4),
+(584, '2023-06-28 11:40:36', '3', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, NULL, 6, 3, 0),
+(585, '2023-06-28 11:40:36', '9999', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, NULL, 6, 0, 4),
+(586, '2023-06-28 11:40:47', '2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, NULL, 6, 2, 0),
+(587, '2023-06-28 11:41:02', '2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 2, NULL, 6, 3, 0),
+(588, '2023-06-28 11:41:13', '2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 2, NULL, 6, 3, 0),
+(589, '2023-06-28 11:41:15', '2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 5, NULL, 6, 2, 0),
+(590, '2023-06-28 11:41:20', '3', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, NULL, 6, 3, 0),
+(591, '2023-06-28 11:41:20', '9999', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, NULL, 6, 0, 4),
+(592, '2023-06-28 12:31:36', '2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, NULL, 6, 2, 0),
+(593, '2023-06-28 12:31:48', '2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 2, NULL, 6, 3, 0),
+(594, '2023-06-28 12:32:05', '2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 2, NULL, 6, 3, 0),
+(595, '2023-06-28 12:32:13', '2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 5, NULL, 6, 2, 0),
+(596, '2023-06-28 12:32:17', '3', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, NULL, 6, 3, 0),
+(597, '2023-06-28 12:32:17', '9999', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, NULL, 6, 0, 4),
+(598, '2023-06-28 12:32:31', '2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, NULL, 6, 2, 0),
+(599, '2023-06-28 12:33:29', '2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 2, NULL, 6, 3, 0),
+(600, '2023-06-28 12:33:45', '3', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, NULL, 6, 3, 0),
+(601, '2023-06-28 12:33:45', '9999', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, NULL, 6, 0, 4),
+(602, '2023-06-28 12:33:49', '3', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, NULL, 6, 3, 0),
+(603, '2023-06-28 12:33:49', '9999', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, NULL, 6, 0, 4);
 
 -- --------------------------------------------------------
 
@@ -555,7 +679,8 @@ INSERT INTO `schools` (`schoolid`, `schoolname`, `createdat`, `createdby`, `upda
 (23, 'test', '2023-06-06 14:10:46', 1, '2023-06-06 14:10:46', 1, 1, '2023-06-06 14:10:52', 1),
 (24, 'test', '2023-06-06 14:12:00', 1, '2023-06-06 14:12:00', 1, 1, '2023-06-06 14:12:03', 1),
 (25, 'dfdfsdfsdfs', '2023-06-06 14:29:19', 1, '2023-06-14 09:37:03', 1, 0, NULL, NULL),
-(26, 'test', '2023-06-16 15:21:58', 1, '2023-06-16 15:21:58', 1, 1, '2023-06-16 15:22:33', 1);
+(26, 'test', '2023-06-16 15:21:58', 1, '2023-06-16 15:21:58', 1, 1, '2023-06-16 15:22:33', 1),
+(27, 'test', '2023-06-27 09:01:33', 1, '2023-06-27 09:01:33', 1, 1, '2023-06-27 09:02:10', 1);
 
 -- --------------------------------------------------------
 
@@ -588,7 +713,7 @@ INSERT INTO `users` (`userid`, `schoolid`, `firstname`, `lastname`, `email`, `pa
 (0, 0, 'system', '', '', '', 2, '2023-05-09 09:29:55', 0, '2023-05-09 09:29:55', 0, 1, NULL, NULL),
 (1, 0, 'superuser', 'test', 'test@test.nl', '$2y$10$PEIaTvE2w3VJw/t9iagKSu8tL1eUiGjYJqtkQ8snMoOWvW1lin6Lu', 2, '2023-05-03 08:20:53', 1, '2023-05-03 08:20:53', 1, 0, NULL, NULL),
 (2, 1, 'school admin', 'test', 'een@test.nl', '$2y$10$PEIaTvE2w3VJw/t9iagKSu8tL1eUiGjYJqtkQ8snMoOWvW1lin6Lu', 1, '2023-05-03 08:21:20', 1, '2023-05-03 08:21:20', 1, 0, NULL, NULL),
-(3, 1, 'school docent', 'test', 'twee@test.nl', '$2y$10$PEIaTvE2w3VJw/t9iagKSu8tL1eUiGjYJqtkQ8snMoOWvW1lin6Lu', 0, '2023-05-10 16:14:24', 1, '2023-05-10 16:14:24', 1, 0, NULL, NULL),
+(3, 1, 'school docent', 'test', 'twee@test.nl', '$2y$10$WO0wzqjr8vBjQipCUIgJvuhw5AypjTi4ACh4bgW9XI0qspOa4EsB6', 0, '2023-05-10 16:14:24', 1, '2023-06-28 14:33:29', 2, 0, NULL, NULL),
 (45, 19, 'schooladmin', 'one', 'test beeway', '$2y$10$n0bNQG9rYwViXUCU38nKrORLrseI9qxpFM33UD8cjRM4LVqBQcE3q', 1, '2023-05-24 09:40:03', 1, '2023-05-24 09:40:03', 1, 0, NULL, NULL),
 (48, 19, 'docent 2', 'test', 'asdf@asdf', '$2y$10$PzlD5LmLReARPFIyy9pm5eXqxdxi.w2PzfjoMeWwL1UZBQ53LKW5C', 1, '2023-05-31 10:18:24', 47, '2023-05-31 10:18:24', 47, 0, NULL, NULL),
 (49, 21, 'schooladmin', 'one', 'asd', '$2y$10$/gUOnpYXN599EjE/w53xmet7cVhpuInUQi0PQGAzj2RM9wUKz21GK', 1, '2023-06-01 09:15:42', 1, '2023-06-01 09:15:42', 1, 0, NULL, NULL),
@@ -599,7 +724,7 @@ INSERT INTO `users` (`userid`, `schoolid`, `firstname`, `lastname`, `email`, `pa
 (55, 24, 'schooladmin', 'one', 'test', '$2y$10$aC.xWf.eRx3hMzgqw2Mti..OdKtX3u2BFwo2nGkI5iQ6a9PEcd.pq', 1, '2023-06-06 14:12:00', 1, '2023-06-06 14:12:00', 1, 1, '2023-06-06 14:12:03', 1),
 (56, 25, 'schooladmin', 'one', 'test', '$2y$10$LoC4GOPZbON3SQtYtEaamO.Ic0PIQOG/CWPDakVwx7fGGXMGvk4wq', 1, '2023-06-06 14:29:19', 1, '2023-06-06 14:29:19', 1, 0, NULL, NULL),
 (57, 25, '1', '1', '1@2.nl', '$2y$10$jdNiGl8Dbymkim6NJ7S6IuBFJrYKdmz.feNrY2kSEpWVUzkBSMJpa', 0, '2023-06-06 14:48:10', 1, '2023-06-06 14:48:10', 1, 1, '2023-06-06 14:51:14', 1),
-(58, 1, 'fsdf', 'fsdf', 'test@23452349999', '$2y$10$2mvuBaGg.BoYoo249ARrwe5M0tO.ZLOhVodWQhn0NOBIn.8SschBu', 0, '2023-06-08 09:00:26', 2, '2023-06-14 09:33:50', 1, 0, NULL, NULL),
+(58, 1, 'fsdf', 'fsdf', 'test@23452349999', '$2y$10$a6W89uKVv50y/9gy3b3JLeDgSpczWKvDugEfwu6ZIwkoiX5VRdh7a', 0, '2023-06-08 09:00:26', 2, '2023-06-28 08:56:37', 2, 0, NULL, NULL),
 (59, 1, 'asd', 'asd', 'asd@mijnschool', '$2y$10$6r7LdjjpFJ/6HW4WJK/iROLJ2O6JjDeum7n76pCDFFQ.MhZTlcjYi', 1, '2023-06-08 09:40:38', 0, '2023-06-08 09:40:38', 0, 1, '2023-06-08 09:40:48', 0),
 (9999, 0, 'system', 'monitor', '', '', 3, '2023-06-13 11:28:08', 0, '2023-06-13 11:28:08', 0, 0, NULL, NULL),
 (10000, 26, 'schooladmin', 'one', 'test', '$2y$10$6ZkuGd7BEHA1.A34i48ymeURWMcKhu52/qummz3LHMjIvjSaU2KzC', 1, '2023-06-16 15:21:58', 1, '2023-06-16 15:21:58', 1, 1, '2023-06-16 15:22:33', 1);
@@ -676,19 +801,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT voor een tabel `beeway`
 --
 ALTER TABLE `beeway`
-  MODIFY `beewayid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `beewayid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT voor een tabel `beewayobservation`
 --
 ALTER TABLE `beewayobservation`
-  MODIFY `observationid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `observationid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT voor een tabel `beewayplanning`
 --
 ALTER TABLE `beewayplanning`
-  MODIFY `planningid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `planningid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT voor een tabel `disciplines`
@@ -700,19 +825,19 @@ ALTER TABLE `disciplines`
 -- AUTO_INCREMENT voor een tabel `groups`
 --
 ALTER TABLE `groups`
-  MODIFY `groupid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `groupid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT voor een tabel `linkgroups`
 --
 ALTER TABLE `linkgroups`
-  MODIFY `linkgroupsid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `linkgroupsid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
 
 --
 -- AUTO_INCREMENT voor een tabel `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=535;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=604;
 
 --
 -- AUTO_INCREMENT voor een tabel `maintheme`
@@ -724,13 +849,13 @@ ALTER TABLE `maintheme`
 -- AUTO_INCREMENT voor een tabel `schools`
 --
 ALTER TABLE `schools`
-  MODIFY `schoolid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `schoolid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT voor een tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `userid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10001;
+  MODIFY `userid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10002;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
