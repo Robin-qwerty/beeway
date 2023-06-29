@@ -21,18 +21,11 @@
       $sth->execute();
 
       if ($beeway = $sth->fetch(PDO::FETCH_OBJ)) {
-        if ($beeway->archive == 1) {
-          $_SESSION['error'] = "Je kan deze beeway niet bewerken omdat ie verwijdert is. Pech!";
-          header("Location: index.php?page=beewaylijst");
-          exit;
-        }
 
         echo'
         <div class="beewayedit">
           <form id="form0" action="php/editbeeway.php?beewayid='.$_GET['beewayid'].'" method="post">
-            <div><input type="text" placeholder="BeewayNaam" name="beewaynaam" value="'.$beeway->beewayname.'" required></div>
-            <div><button id="opslaan" class="addbutton" type="submit" style="font-size: 16px;">Opslaan</button></div>
-            <div><a '; ?> onclick='return confirm("Weet je zekker dat je deze beeway wilt verwijderen!?")' <?php echo ' href="php/deletebeeway.php?beewayid='.$_GET['beewayid'].'" class="deletebutton" style="font-size: 16px;">Verwijderen</a></div>
+            <div><h2>'.$beeway->beewayname.'</h2></div>
             <div>
         ';
 
@@ -56,12 +49,7 @@
           $y++;
         }
       }
-      echo '</div>
-      <div>
-
-        <label for="status" style="font-size:20px;"><b>beeway Markeren als afgerond</b></label>
-        <input id="my-checkbox" type="checkbox" name="status" value="1">
-
+      echo '
       </div>
     </div>
 
@@ -195,12 +183,12 @@
             for ($i = 1; $i <= $desiredRowCount; $i++) {
                 $row = isset($planningResult[$i - 1]) ? $planningResult[$i - 1] : array('planningid' => '', 'planning' => '', 'planningwhat' => '', 'planningwho' => '', 'planningdeadline' => '', 'planningdone' => '');
                 echo "<tr>
-                        <td><textarea class='editable-input textareaplaning' name='planning[" . $row['planningid'] . "][planning]' rows='3' maxlength='155'>" . $row['planning'] . "</textarea></td>
-                        <td><textarea class='editable-input textareaplaning' name='planning[" . $row['planningid'] . "][planningwhat]' rows='3' maxlength='155'>" . $row['planningwhat'] . "</textarea></td>
-                        <td><textarea class='editable-input textareaplaning' name='planning[" . $row['planningid'] . "][planningwho]' rows='3' maxlength='155'>" . $row['planningwho'] . "</textarea></td>
-                        <td><textarea class='editable-input textareaplaning' name='planning[" . $row['planningid'] . "][planningdeadline]' rows='3' maxlength='155'>" . $row['planningdeadline'] . "</textarea></td>
+                        <td><input class='editable-input' type='text' name='planning[" . $row['planningid'] . "][planning]' value='" . $row['planning'] . "'></td>
+                        <td><input class='editable-input' type='text' name='planning[" . $row['planningid'] . "][planningwhat]' value='" . $row['planningwhat'] . "'></td>
+                        <td><input class='editable-input' type='text' name='planning[" . $row['planningid'] . "][planningwho]' value='" . $row['planningwho'] . "'></td>
+                        <td><input class='editable-input' type='text' name='planning[" . $row['planningid'] . "][planningdeadline]' value='" . $row['planningdeadline'] . "'></td>
                         <td><input class='editable-input' type='checkbox' name='planning[" . $row['planningid'] . "][planningdone]' value='1' " . ($row['planningdone'] == '1' ? 'checked' : '') . "></td>
-                      </tr>";
+                    </tr>";
             }
 
             echo "</table>";
@@ -227,12 +215,12 @@
             for ($i = 1; $i <= $desiredRowCount; $i++) {
                 $row = isset($observationResult[$i - 1]) ? $observationResult[$i - 1] : array('observationid' => '', 'dataclass' => '', 'learninggoal' => '', 'evaluation' => '', 'workgoal' => '', 'action' => '');
                 echo "<tr>
-                        <td><textarea class='editable-input textareaobservatie' name='observation[" . $row['observationid'] . "][dataclass]' rows='3' maxlength='155'>" . $row['dataclass'] . "</textarea></td>
-                        <td><textarea class='editable-input textareaobservatie' name='observation[" . $row['observationid'] . "][learninggoal]' rows='3' maxlength='155'>" . $row['learninggoal'] . "</textarea></td>
-                        <td><textarea class='editable-input textareaobservatie' name='observation[" . $row['observationid'] . "][evaluation]' rows='3' maxlength='155'>" . $row['evaluation'] . "</textarea></td>
-                        <td><textarea class='editable-input textareaobservatie' name='observation[" . $row['observationid'] . "][workgoal]' rows='3' maxlength='155'>" . $row['workgoal'] . "</textarea></td>
-                        <td><textarea class='editable-input textareaobservatie' name='observation[" . $row['observationid'] . "][action]' rows='3' maxlength='155'>" . $row['action'] . "</textarea></td>
-                      </tr>";
+                        <td><input class='editable-input' type='text' name='observation[" . $row['observationid'] . "][dataclass]' value='" . $row['dataclass'] . "'></td>
+                        <td><input class='editable-input' type='text' name='observation[" . $row['observationid'] . "][learninggoal]' value='" . $row['learninggoal'] . "'></td>
+                        <td><input class='editable-input' type='text' name='observation[" . $row['observationid'] . "][evaluation]' value='" . $row['evaluation'] . "'></td>
+                        <td><input class='editable-input' type='text' name='observation[" . $row['observationid'] . "][workgoal]' value='" . $row['workgoal'] . "'></td>
+                        <td><input class='editable-input' type='text' name='observation[" . $row['observationid'] . "][action]' value='" . $row['action'] . "'></td>
+                    </tr>";
             }
 
             echo "</table>";

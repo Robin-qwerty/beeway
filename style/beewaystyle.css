@@ -61,13 +61,13 @@ div.cell h2 {
 }
 
 
-.textareaplaning textarea {
+.textareaplaning {
   resize: none;
   width: calc(100% + 20px);
   height: 40px;
   margin: -5px -10px;
 }
-.textareaobservatie textarea {
+.textareaobservatie {
   resize: none;
   width: calc(100% + 20px);
   height: 66.5px;

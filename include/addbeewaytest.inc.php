@@ -36,12 +36,15 @@
       <select name="groepen" required>
         <option value="">-- selecteer een groep --</option>
         <?php
-          $sql = 'SELECT groups, groupid
-                  FROM groups
-                  WHERE archive=0
-                  AND schoolid=:schoolid';
+          $sql = 'SELECT DISTINCT g.groups, g.groupid
+                  FROM groups AS g
+                  INNER JOIN linkgroups AS lg ON g.groupid = lg.groupid
+                  WHERE g.archive = 0
+                  AND g.schoolid = :schoolid
+                  AND lg.userid = :userid';
           $sth = $conn->prepare($sql);
           $sth->bindValue(':schoolid', $schoolid);
+          $sth->bindValue(':userid', $_SESSION['userid']);
           $sth->execute();
 
           while ($group = $sth->fetch(PDO::FETCH_OBJ)) {
@@ -50,7 +53,6 @@
           }
         ?>
       </select>
-      <!-- <input type="number" name="groepen" onKeyDown="if(this.value.length==1 && event.keyCode!=8) return false;" min="1" max="8" <?php echo isset($beeway->groupid) ? 'value="'.$beeway->groupid.'"' : ''; ?> required></input> -->
     </div>
   </div>
 
