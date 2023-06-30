@@ -183,10 +183,10 @@
             for ($i = 1; $i <= $desiredRowCount; $i++) {
                 $row = isset($planningResult[$i - 1]) ? $planningResult[$i - 1] : array('planningid' => '', 'planning' => '', 'planningwhat' => '', 'planningwho' => '', 'planningdeadline' => '', 'planningdone' => '');
                 echo "<tr>
-                        <td><input class='editable-input' type='text' name='planning[" . $row['planningid'] . "][planning]' value='" . $row['planning'] . "'></td>
-                        <td><input class='editable-input' type='text' name='planning[" . $row['planningid'] . "][planningwhat]' value='" . $row['planningwhat'] . "'></td>
-                        <td><input class='editable-input' type='text' name='planning[" . $row['planningid'] . "][planningwho]' value='" . $row['planningwho'] . "'></td>
-                        <td><input class='editable-input' type='text' name='planning[" . $row['planningid'] . "][planningdeadline]' value='" . $row['planningdeadline'] . "'></td>
+                        <td><input name='planning[" . $row['planningid'] . "][planning]' value='" . $row['planning'] . "'></td>
+                        <td><input name='planning[" . $row['planningid'] . "][planningwhat]' value='" . $row['planningwhat'] . "'></td>
+                        <td><input name='planning[" . $row['planningid'] . "][planningwho]' value='" . $row['planningwho'] . "'></td>
+                        <td><input name='planning[" . $row['planningid'] . "][planningdeadline]' value='" . $row['planningdeadline'] . "'></td>
                         <td><input class='editable-input' type='checkbox' name='planning[" . $row['planningid'] . "][planningdone]' value='1' " . ($row['planningdone'] == '1' ? 'checked' : '') . "></td>
                     </tr>";
             }
@@ -234,9 +234,7 @@
         // echo "<input type='submit' name='updateData' value='Update Planning en Observatie'>";
         echo "</form>";
     }
-?>
 
-<?php
     // Controleren of het formulier voor het bijwerken van planning en observatie is verzonden
     if(isset($_POST['updateData'])) {
         $planningData = $_POST['planning'];
@@ -247,20 +245,20 @@
 
         // Bijwerken van de planninggegevens
         foreach($planningData as $planningId => $data) {
-            $planning = isset($data['planning']) ? $data['planning'] : '';
-            $planningWhat = isset($data['planningwhat']) ? $data['planningwhat'] : '';
-            $planningWho = isset($data['planningwho']) ? $data['planningwho'] : '';
-            $planningDeadline = isset($data['planningdeadline']) ? $data['planningdeadline'] : '';
-            $planningDone = isset($data['planningdone']) ? '1' : '0';
+          $planning = isset($data['planning']) ? $data['planning'] : '';
+          $planningWhat = isset($data['planningwhat']) ? $data['planningwhat'] : '';
+          $planningWho = isset($data['planningwho']) ? $data['planningwho'] : '';
+          $planningDeadline = isset($data['planningdeadline']) ? $data['planningdeadline'] : '';
+          $planningDone = isset($data['planningdone']) ? '1' : '0';
 
-            $updatePlanningStmt->bindParam(':planningid', $planningId);
-            $updatePlanningStmt->bindParam(':planning', $planning);
-            $updatePlanningStmt->bindParam(':planningwhat', $planningWhat);
-            $updatePlanningStmt->bindParam(':planningwho', $planningWho);
-            $updatePlanningStmt->bindParam(':planningdeadline', $planningDeadline);
-            $updatePlanningStmt->bindParam(':planningdone', $planningDone);
+          $updatePlanningStmt->bindParam(':planningid', $planningId);
+          $updatePlanningStmt->bindParam(':planning', $planning);
+          $updatePlanningStmt->bindParam(':planningwhat', $planningWhat);
+          $updatePlanningStmt->bindParam(':planningwho', $planningWho);
+          $updatePlanningStmt->bindParam(':planningdeadline', $planningDeadline);
+          $updatePlanningStmt->bindParam(':planningdone', $planningDone);
 
-            $updatePlanningStmt->execute();
+          $updatePlanningStmt->execute();
         }
 
         // Voorbereiden van de update query voor observatie
@@ -268,22 +266,21 @@
 
         // Bijwerken van de observatiegegevens
         foreach($observationData as $observationId => $data) {
-            $dataClass = isset($data['dataclass']) ? $data['dataclass'] : '';
-            $learningGoal = isset($data['learninggoal']) ? $data['learninggoal'] : '';
-            $evaluation = isset($data['evaluation']) ? $data['evaluation'] : '';
-            $workGoal = isset($data['workgoal']) ? $data['workgoal'] : '';
-            $action = isset($data['action']) ? $data['action'] : '';
+          $dataClass = isset($data['dataclass']) ? $data['dataclass'] : '';
+          $learningGoal = isset($data['learninggoal']) ? $data['learninggoal'] : '';
+          $evaluation = isset($data['evaluation']) ? $data['evaluation'] : '';
+          $workGoal = isset($data['workgoal']) ? $data['workgoal'] : '';
+          $action = isset($data['action']) ? $data['action'] : '';
 
-            $updateObservationStmt->bindParam(':observationid', $observationId);
-            $updateObservationStmt->bindParam(':dataclass', $dataClass);
-            $updateObservationStmt->bindParam(':learninggoal', $learningGoal);
-            $updateObservationStmt->bindParam(':evaluation', $evaluation);
-            $updateObservationStmt->bindParam(':workgoal', $workGoal);
-            $updateObservationStmt->bindParam(':action', $action);
+          $updateObservationStmt->bindParam(':observationid', $observationId);
+          $updateObservationStmt->bindParam(':dataclass', $dataClass);
+          $updateObservationStmt->bindParam(':learninggoal', $learningGoal);
+          $updateObservationStmt->bindParam(':evaluation', $evaluation);
+          $updateObservationStmt->bindParam(':workgoal', $workGoal);
+          $updateObservationStmt->bindParam(':action', $action);
 
-            $updateObservationStmt->execute();
+          $updateObservationStmt->execute();
         }
-
         echo "Planning en observatiegegevens zijn succesvol bijgewerkt.";
     }
 

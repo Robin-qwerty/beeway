@@ -246,9 +246,7 @@
         // echo "<input type='submit' name='updateData' value='Update Planning en Observatie'>";
         echo "</form>";
     }
-?>
 
-<?php
     // Controleren of het formulier voor het bijwerken van planning en observatie is verzonden
     if(isset($_POST['updateData'])) {
         $planningData = $_POST['planning'];
