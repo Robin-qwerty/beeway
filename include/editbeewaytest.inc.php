@@ -1,6 +1,56 @@
 <?php
-  if (isset($_SESSION['userid']) && isset($_SESSION['userrole']) && $_SESSION['userrole'] == 'admin' || $_SESSION['userrole'] == 'docent') { // check if user is logedin
+  if (isset($_SESSION['userid']) && isset($_SESSION['userrole']) && ($_SESSION['userrole'] == 'admin' || $_SESSION['userrole'] == 'docent')) {
     if (isset($_GET['beewayid']) && $_GET['beewayid'] > 0) {
+      // Retrieve the school ID of the logged-in user
+      $loggedInUserID = $_SESSION['userid'];
+
+      // Modify this section to fetch the school ID and group ID from the users and linkgroups tables
+      $stmt = $conn->prepare("SELECT u.schoolid, lg.groupid FROM users u JOIN linkgroups lg ON u.userid = lg.userid WHERE u.userid = :userid");
+      $stmt->bindValue(':userid', $loggedInUserID, PDO::PARAM_INT);
+      $stmt->execute();
+      $userGroups = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+      // Retrieve the school ID and group ID of the BeeWay
+      $beewayID = $_GET['beewayid'];
+
+      // Modify this section to fetch the school ID and group ID from the beeway table
+      $stmt = $conn->prepare("SELECT schoolid, groupid, `lock` FROM beeway WHERE beewayid = :beewayid");
+      $stmt->bindValue(':beewayid', $beewayID, PDO::PARAM_INT);
+      $stmt->execute();
+      $beewayDetails = $stmt->fetch(PDO::FETCH_ASSOC);
+      $beewaySchoolID = $beewayDetails['schoolid'];
+      $beewayGroupID = $beewayDetails['groupid'];
+      $beewayLock = $beewayDetails['lock'];
+
+      // Check if the user's school ID matches the BeeWay's school ID
+      if ($userGroups[0]['schoolid'] != $beewaySchoolID) {
+        $_SESSION['error'] = "Je hebt geen toegang tot deze beeway. Pech!";
+        header("Location: index.php?page=beewaylijst");
+        exit;
+      }
+
+      // Check if any of the user's group IDs match the BeeWay's group ID
+      $userGroupIDs = array_column($userGroups, 'groupid');
+      if (!in_array($beewayGroupID, $userGroupIDs)) {
+        $_SESSION['error'] = "Je kan deze beeway niet bewerken. Pech!";
+        header("Location: index.php?page=beeway&beewayid=$beewayID");
+        exit;
+      }
+
+      // Check if the lock is already set to 1
+      if ($beewayLock != 1) {
+        // Set the lock to 1
+        $stmt = $conn->prepare("UPDATE beeway SET `lock` = 1 WHERE beewayid = :beewayid");
+        $stmt->bindValue(':beewayid', $beewayID, PDO::PARAM_INT);
+        $stmt->execute();
+      }
+
+      // At the end of the script or when leaving the page, set the lock back to 0
+      register_shutdown_function(function() use ($conn, $beewayID) {
+        $stmt = $conn->prepare("UPDATE beeway SET `lock` = 0 WHERE beewayid = :beewayid");
+        $stmt->bindValue(':beewayid', $beewayID, PDO::PARAM_INT);
+        $stmt->execute();
+      });
 
       $sql = 'SELECT schoolid
              FROM users

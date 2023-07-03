@@ -1,6 +1,30 @@
 <?php
   if (isset($_SESSION['userid']) && isset($_SESSION['userrole']) && $_SESSION['userrole'] == 'admin' || $_SESSION['userrole'] == 'docent') { // check if user is logedin
     if (isset($_GET['beewayid']) && $_GET['beewayid'] > 0) {
+      // Retrieve the school ID of the logged-in user
+      $loggedInUserID = $_SESSION['userid'];
+
+      // Modify this section to fetch the school ID from the users table
+      $stmt = $conn->prepare("SELECT schoolid FROM users WHERE userid = :userid");
+      $stmt->bindValue(':userid', $loggedInUserID, PDO::PARAM_INT);
+      $stmt->execute();
+      $loggedInUserSchoolID = $stmt->fetchColumn();
+
+      // Retrieve the school ID of the BeeWay
+      $beewayID = $_GET['beewayid'];
+
+      // Modify this section to fetch the school ID from the beeway table
+      $stmt = $conn->prepare("SELECT schoolid FROM beeway WHERE beewayid = :beewayid");
+      $stmt->bindValue(':beewayid', $beewayID, PDO::PARAM_INT);
+      $stmt->execute();
+      $beewaySchoolID = $stmt->fetchColumn();
+
+      // Check if the user's school ID does not match the BeeWay's school ID
+      if ($loggedInUserSchoolID != $beewaySchoolID) {
+        $_SESSION['error'] = "Je hebt geen toegang tot deze beeway. Pech!";
+        header("Location: index.php?page=beewaylijst");
+        exit;
+      }
 
       $sql = 'SELECT schoolid
              FROM users
@@ -24,7 +48,6 @@
 
         echo'
         <div class="beewayedit">
-          <form id="form0" action="php/editbeeway.php?beewayid='.$_GET['beewayid'].'" method="post">
             <div><h2>'.$beeway->beewayname.'</h2></div>
             <div>
         ';
@@ -232,7 +255,6 @@
 
         // De knop weergeven voor het bijwerken van zowel planning als observatie
         // echo "<input type='submit' name='updateData' value='Update Planning en Observatie'>";
-        echo "</form>";
     }
 
     // Controleren of het formulier voor het bijwerken van planning en observatie is verzonden
