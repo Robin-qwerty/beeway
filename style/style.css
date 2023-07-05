@@ -29,6 +29,15 @@ html {
 
 /*------------------------------buttons------------------------------------------*/
 
+a.disabled {
+  pointer-events: none!important;
+  background-color: #e6e6e6!important;
+}
+.disabled:hover,
+.disabled:focus {
+  background-color: #999999;
+}
+
 .button {
   cursor: pointer;
   display: inline;

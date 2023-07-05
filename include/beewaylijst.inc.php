@@ -144,12 +144,22 @@
               $result = $sth2->fetch(PDO::FETCH_OBJ);
 
               if ($_SESSION['userrole'] === 'admin' || $result->count > 0) {
+                if ($beeway->lock == 0) {
                   echo '<td><a href="index.php?page=editbeewaytest&beewayid='.$beeway->beewayid.'" class="editbutton">bewerken</a></td>';
+                } else {
+                  echo '<td><a href="#" class="editbutton disabled">bewerken</a></td>';
+                }
               } else {
                 echo '<td><a style="background-color:#999999;" href="index.php?page=beeway&beewayid='.$beeway->beewayid.'" class="editbutton">bekijken</a></td>';
               }
 
-              echo '</tr>';
+              if ($_SESSION['userrole'] == 'admin') {
+                if ($beeway->lock != 0) {
+                  echo '<td><a href="php/beewayunlock.php?beewayid='.$beeway->beewayid.'" class="editbutton">unlock</a></td>';
+                }
+              }
+
+              echo '</tr>'; 
             }
           echo '</table>
 
