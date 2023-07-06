@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 05 jul 2023 om 15:24
+-- Gegenereerd op: 06 jul 2023 om 15:11
 -- Serverversie: 10.4.28-MariaDB
 -- PHP-versie: 8.2.4
 
@@ -40,7 +40,7 @@ CREATE TABLE `beeway` (
   `disciplineid` varchar(11) NOT NULL,
   `concretegoal` varchar(2500) DEFAULT NULL,
   `status` varchar(1) NOT NULL DEFAULT '0',
-  `lock` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0=unlocked\r\nanything else=locked',
+  `lock` int(11) NOT NULL DEFAULT 0 COMMENT '0=unlocked\r\nanything else=locked',
   `createdat` datetime NOT NULL DEFAULT current_timestamp(),
   `createdby` int(11) DEFAULT NULL,
   `updatedat` datetime NOT NULL DEFAULT current_timestamp(),
@@ -55,7 +55,7 @@ CREATE TABLE `beeway` (
 --
 
 INSERT INTO `beeway` (`beewayid`, `schoolid`, `groupid`, `beewayname`, `begood`, `beenough`, `benotgood`, `mainthemeid`, `themeperiodid`, `disciplineid`, `concretegoal`, `status`, `lock`, `createdat`, `createdby`, `updatedat`, `updatedby`, `archive`, `deletedat`, `deletedby`) VALUES
-(24, 1, '5', '2 333333', '2', '2', '2', '1', 1, '2', '2sdfsdfsdfgsdfgsdfgsdfgsdfgsdfgsdfg', '0', 1, '2023-06-13 09:44:31', NULL, '2023-06-13 09:44:31', 3, 0, NULL, NULL),
+(24, 1, '5', '2 333333', '2', '2', '2', '1', 1, '2', '2sdfsdfsdfgsdfgsdfgsdfgsdfgsdfgsdfgsdfasdf\r\n', '0', 0, '2023-06-13 09:44:31', NULL, '2023-06-13 09:44:31', 3, 0, NULL, NULL),
 (25, 2, '9', '5', '5', '5', '5', '1', 1, '2', '5', '0', 0, '2023-06-13 11:09:41', NULL, '2023-06-13 11:09:41', 3, 0, NULL, NULL),
 (26, 1, '8', 'test 6 7 88888888', '6', '6', '6', '4', 4, '2', '6666666 7777777\r\n8888888 9999999\r\n1010101 1111111\r\n2222222 3333333\r\n4444444dfsd df sd fsd fsdf \r\n\r\n\r\nde 8ters update test', '0', 0, '2023-06-14 10:58:46', NULL, '2023-06-14 10:58:46', 2, 0, NULL, NULL),
 (28, 1, '1', 'test test 223', '1', '1', '1', '1', 1, '1', 'sdfsdfsdfsdf', '0', 0, '2023-06-26 14:43:23', NULL, '2023-06-26 14:43:23', 2, 0, NULL, NULL),
@@ -207,14 +207,14 @@ INSERT INTO `beewayplanning` (`planningid`, `beewayid`, `planning`, `planningwha
 (38, 29, '22', '2', '2', '', '0', '2023-06-27 08:54:16', NULL, '2023-06-27 08:54:16', NULL, 1, '2023-06-27 09:00:41', 3),
 (39, 29, '2', '2', '2', '', '0', '2023-06-27 08:54:16', NULL, '2023-06-27 08:54:16', NULL, 1, '2023-06-27 09:00:41', 3),
 (40, 29, '', '', '', '', '0', '2023-06-27 08:54:16', NULL, '2023-06-27 08:54:16', NULL, 1, '2023-06-27 09:00:41', 3),
-(41, 30, '', '', '', '', '0', '2023-06-27 13:52:23', NULL, '2023-06-27 13:52:23', NULL, 0, NULL, NULL),
-(42, 30, '', '', '', '', '0', '2023-06-27 13:52:23', NULL, '2023-06-27 13:52:23', NULL, 0, NULL, NULL),
-(43, 30, '', '', '', '', '0', '2023-06-27 13:52:23', NULL, '2023-06-27 13:52:23', NULL, 0, NULL, NULL),
-(44, 30, '', '', '', '', '0', '2023-06-27 13:52:23', NULL, '2023-06-27 13:52:23', NULL, 0, NULL, NULL),
-(45, 30, '', '', '', '', '0', '2023-06-27 13:52:23', NULL, '2023-06-27 13:52:23', NULL, 0, NULL, NULL),
+(41, 30, 'sdfsd fsdfsdfs dfsd fsdfs dfsdfsdfsdfsdf   ', 'sdf', '', '', '1', '2023-06-27 13:52:23', NULL, '2023-06-27 13:52:23', NULL, 0, NULL, NULL),
+(42, 30, '', '', '', 'sd', '0', '2023-06-27 13:52:23', NULL, '2023-06-27 13:52:23', NULL, 0, NULL, NULL),
+(43, 30, '', 'asdf', '', 'asdf', '0', '2023-06-27 13:52:23', NULL, '2023-06-27 13:52:23', NULL, 0, NULL, NULL),
+(44, 30, 'fasdf', 'asdf', '', '', '0', '2023-06-27 13:52:23', NULL, '2023-06-27 13:52:23', NULL, 0, NULL, NULL),
+(45, 30, '', '', 'asdfasdfasdfasd', '', '0', '2023-06-27 13:52:23', NULL, '2023-06-27 13:52:23', NULL, 0, NULL, NULL),
 (46, 30, '', '', '', '', '0', '2023-06-27 13:52:23', NULL, '2023-06-27 13:52:23', NULL, 0, NULL, NULL),
-(47, 30, '', '', '', '', '0', '2023-06-27 13:52:23', NULL, '2023-06-27 13:52:23', NULL, 0, NULL, NULL),
-(48, 30, '', '', '', '', '0', '2023-06-27 13:52:23', NULL, '2023-06-27 13:52:23', NULL, 0, NULL, NULL);
+(47, 30, '', 'as', '', 'asdfasdfasdfasdfasdfsadfsadf', '0', '2023-06-27 13:52:23', NULL, '2023-06-27 13:52:23', NULL, 0, NULL, NULL),
+(48, 30, '', 'df', 'as', 'df', '0', '2023-06-27 13:52:23', NULL, '2023-06-27 13:52:23', NULL, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -582,7 +582,20 @@ INSERT INTO `logs` (`id`, `date`, `userid`, `useragent`, `action`, `info`, `tabl
 (635, '2023-07-05 13:08:40', '9999', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 2, NULL, 1, 0, 5),
 (636, '2023-07-05 13:08:40', '9999', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 2, NULL, 1, 0, 5),
 (637, '2023-07-05 13:08:41', '9999', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 2, NULL, 1, 0, 5),
-(638, '2023-07-05 13:08:50', '9999', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 2, NULL, 1, 0, 5);
+(638, '2023-07-05 13:08:50', '9999', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 2, NULL, 1, 0, 5),
+(639, '2023-07-06 07:00:06', '3', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, NULL, 6, 3, 0),
+(640, '2023-07-06 08:46:01', '3', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 5, NULL, 6, 3, 0),
+(641, '2023-07-06 08:46:05', '2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, NULL, 6, 2, 0),
+(642, '2023-07-06 08:46:11', '2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 5, NULL, 6, 2, 0),
+(643, '2023-07-06 08:46:14', '3', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, NULL, 6, 3, 0),
+(644, '2023-07-06 12:29:38', '3', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 5, NULL, 6, 3, 0),
+(645, '2023-07-06 12:29:50', '9999', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, NULL, 6, 0, 4),
+(646, '2023-07-06 12:29:56', '2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, NULL, 6, 2, 0),
+(647, '2023-07-06 12:30:17', '2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 5, NULL, 6, 2, 0),
+(648, '2023-07-06 12:30:21', '3', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, NULL, 6, 3, 0),
+(649, '2023-07-06 12:51:46', '2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, NULL, 6, 2, 0),
+(650, '2023-07-06 12:53:27', '3', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 5, NULL, 6, 3, 0),
+(651, '2023-07-06 13:06:23', '2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, NULL, 6, 2, 0);
 
 -- --------------------------------------------------------
 
@@ -810,7 +823,7 @@ ALTER TABLE `linkgroups`
 -- AUTO_INCREMENT voor een tabel `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=639;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=652;
 
 --
 -- AUTO_INCREMENT voor een tabel `maintheme`

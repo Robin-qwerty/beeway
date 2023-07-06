@@ -2,6 +2,17 @@
   session_start();
   require_once '../private/dbconnect.php';
 
+  // Check if the beeway lock session is set and the user is not on the editbeewaytest page
+  if (isset($_SESSION['beewaylock']) && $_SESSION['beewaylock'] === true && $page !== 'editbeewaytest') {
+    // Update the lock to 0 in the database
+    $stmt = $conn->prepare("UPDATE beeway SET `lock` = 0 WHERE `lock` = :userid");
+    $stmt->bindValue(':userid', $_SESSION['userid'], PDO::PARAM_INT);
+    $stmt->execute();
+
+    // Unset the session variable
+    unset($_SESSION['beewaylock']);
+  }
+
   try {
     $sql = "INSERT INTO `logs` (`userid`, `useragent`, `action`, `tableid`, `interactionid`) VALUES (:userid, :useragent, 5, 6, :interactionid)";
     $sth = $conn->prepare($sql);

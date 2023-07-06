@@ -21,7 +21,7 @@
 
       // Check if the user's school ID does not match the BeeWay's school ID
       if ($loggedInUserSchoolID != $beewaySchoolID) {
-        $_SESSION['error'] = "Je hebt geen toegang tot deze beeway. Pech!";
+        $_SESSION['error'] = "Je hebt geen toegang tot deze beeway of deze beeway bestaad niet. Pech!";
         header("Location: index.php?page=beewaylijst");
         exit;
       }
@@ -105,81 +105,76 @@
                 <h2>Iedere dag ’n beetje beter</h2>
                 <div id="groepen">
                   <label>Groepen</label>
-                  <select name="groepen" required>
-                    <option value="">-- selecteer een groep --</option>
-                    <?php
-                      $sql = 'SELECT DISTINCT g.groups, g.groupid
-                              FROM groups AS g
-                              INNER JOIN linkgroups AS lg ON g.groupid = lg.groupid
-                              WHERE g.archive = 0
-                              AND g.schoolid = :schoolid
-                              AND lg.userid = :userid';
-                      $sth = $conn->prepare($sql);
-                      $sth->bindValue(':schoolid', $schoolid);
-                      $sth->bindValue(':userid', $_SESSION['userid']);
-                      $sth->execute();
+                  <?php
+                    $sql = 'SELECT `groups` FROM groups WHERE groupid = :groupid';
+                    $sth = $conn->prepare($sql);
+                    $sth->bindValue(':groupid', $beeway->groupid);
+                    $sth->execute();
 
-                      while ($group = $sth->fetch(PDO::FETCH_OBJ)) {
-                        $selected = isset($beeway->groupid) && $beeway->groupid == $group->groupid ? 'selected="selected"' : '';
-                        echo '<option value="'.$group->groupid.'" '.$selected.'>'.$group->groups.'</option>';
-                      }
-                    ?>
-                  </select>
+                    if ($group = $sth->fetch(PDO::FETCH_OBJ)) {
+                      echo '<div class="editable-text">' . $group->groups . '</div>';
+                    } else {
+                      echo '<div class="editable-text">Group Not Found</div>';
+                    }
+                  ?>
                 </div>
               </div>
 
               <div class="cell HOOFDTHEMA">
                 <h2 id="orange">HOOFDTHEMA</h2>
-                <input type="radio" name="hoofdthemaid" value="1" <?php echo isset($beeway->themeperiodid) && $beeway->themeperiodid == 1 ? 'checked' : ''; ?> required>
-                <label for="html">P1: EDI</label>
-                <br>
-                <input type="radio" name="hoofdthemaid" value="2" <?php echo isset($beeway->themeperiodid) && $beeway->themeperiodid == 2 ? 'checked' : ''; ?>>
-                <label for="html">P2: BEGELEIDENDE INOEFENING</label>
-                <br>
-                <input type="radio" name="hoofdthemaid" value="3" <?php echo isset($beeway->themeperiodid) && $beeway->themeperiodid == 3 ? 'checked' : ''; ?>>
-                <label for="html">P3: LEZEN</label>
-                <br>
-                <input type="radio" name="hoofdthemaid" value="4" <?php echo isset($beeway->themeperiodid) && $beeway->themeperiodid == 4 ? 'checked' : ''; ?>>
-                <label for="html">P4: DIFFERENTIATIE EDI</label>
-                <br>
-                <input type="radio" name="hoofdthemaid" value="5" <?php echo isset($beeway->themeperiodid) && $beeway->themeperiodid == 5 ? 'checked' : ''; ?>>
-                <label for="html">P5: DOELENPLANNER</label>
-                <br>
+                <div>
+                  <input type="radio" name="hoofdthemaid" value="1" <?php echo isset($beeway->themeperiodid) && $beeway->themeperiodid == 1 ? 'checked' : ''; ?> disabled>
+                  <label for="html">P1: EDI</label>
+                  <br>
+                  <input type="radio" name="hoofdthemaid" value="2" <?php echo isset($beeway->themeperiodid) && $beeway->themeperiodid == 2 ? 'checked' : ''; ?> disabled>
+                  <label for="html">P2: BEGELEIDENDE INOEFENING</label>
+                  <br>
+                  <input type="radio" name="hoofdthemaid" value="3" <?php echo isset($beeway->themeperiodid) && $beeway->themeperiodid == 3 ? 'checked' : ''; ?> disabled>
+                  <label for="html">P3: LEZEN</label>
+                  <br>
+                  <input type="radio" name="hoofdthemaid" value="4" <?php echo isset($beeway->themeperiodid) && $beeway->themeperiodid == 4 ? 'checked' : ''; ?> disabled>
+                  <label for="html">P4: DIFFERENTIATIE EDI</label>
+                  <br>
+                  <input type="radio" name="hoofdthemaid" value="5" <?php echo isset($beeway->themeperiodid) && $beeway->themeperiodid == 5 ? 'checked' : ''; ?> disabled>
+                  <label for="html">P5: DOELENPLANNER</label>
+                  <br>
+                </div>
               </div>
-
 
               <div class="cell CONCREETDOEL">
                 <h2 id="orange">CONCREET DOEL</h2>
-                <textarea type="text" name="concreetdoel" id="doel" maxlength="2500"><?php echo isset($beeway->concretegoal) ? $beeway->concretegoal : ''; ?></textarea>
+                <div class="editable-text"><?php echo $beeway->concretegoal; ?></div>
               </div>
 
               <div class="cell beoordeling">
                 <div class="beoordeling-item beoordeling-item1"><iconify-icon icon="fa:smile-o" style='font-size:62px'></iconify-icon></div>
                 <div class="beoordeling-item beoordeling-item2">
-                  <input type="number" name="begoed" id="beoordeling1" onKeyDown="if(this.value.length==3 && event.keyCode!=8) return false;" <?php echo isset($beeway->begood) ? 'value="'.$beeway->begood.'"' : ''; ?> ></input>
+                  <div class="editable-text"><?php echo $beeway->begood; ?></div>
                 </div>
                 <div class="beoordeling-item beoordeling-item3"><iconify-icon icon="fa:meh-o" style='font-size:62px'></iconify-icon></div>
                 <div class="beoordeling-item beoordeling-item4">
-                  <input type="number" name="bevoldoende" id="beoordeling2" onKeyDown="if(this.value.length==3 && event.keyCode!=8) return false;" <?php echo isset($beeway->beenough) ? 'value="'.$beeway->beenough.'"' : ''; ?> ></input>
+                  <div class="editable-text"><?php echo $beeway->beenough; ?></div>
                 </div>
                 <div class="beoordeling-item beoordeling-item5"><iconify-icon icon="fa:frown-o" style='font-size:62px'></iconify-icon></div>
                 <div class="beoordeling-item beoordeling-item6">
-                  <input type="number" name="beonvoldoende" id="beoordeling3" onKeyDown="if(this.value.length==3 && event.keyCode!=8) return false;" <?php echo isset($beeway->benotgood) ? 'value="'.$beeway->benotgood.'"' : ''; ?> ></input>
+                  <div class="editable-text"><?php echo $beeway->benotgood; ?></div>
                 </div>
               </div>
 
 
               <div class="cell vakgebied">
                 <h2 id="orange">VAKGEBIED</h2>
-                <select name="vakgebiedid" id="vakgebied" required>
-                  <option value="">-- selecteer een vakgebied --</option>
+                <select name="vakgebiedid" id="vakgebied" required disabled style="color: black;">
+                  <option value="">-- vakgebied niet gevonde --</option>
                   <?php
                     $sql = 'SELECT disciplinename, disciplineid
                             FROM disciplines
                             WHERE archive=0
-                            AND schoolid=:schoolid';
+                            AND schoolid=:schoolid
+                            AND disciplineid=:disciplineid';
                     $sth = $conn->prepare($sql);
                     $sth->bindValue(':schoolid', $schoolid);
+                    $sth->bindValue(':disciplineid', $beeway->disciplineid);
                     $sth->execute();
 
                     while ($disciplines = $sth->fetch(PDO::FETCH_OBJ)) {
@@ -206,16 +201,29 @@
             for ($i = 1; $i <= $desiredRowCount; $i++) {
                 $row = isset($planningResult[$i - 1]) ? $planningResult[$i - 1] : array('planningid' => '', 'planning' => '', 'planningwhat' => '', 'planningwho' => '', 'planningdeadline' => '', 'planningdone' => '');
                 echo "<tr>
-                        <td><input name='planning[" . $row['planningid'] . "][planning]' value='" . $row['planning'] . "'></td>
-                        <td><input name='planning[" . $row['planningid'] . "][planningwhat]' value='" . $row['planningwhat'] . "'></td>
-                        <td><input name='planning[" . $row['planningid'] . "][planningwho]' value='" . $row['planningwho'] . "'></td>
-                        <td><input name='planning[" . $row['planningid'] . "][planningdeadline]' value='" . $row['planningdeadline'] . "'></td>
-                        <td><input class='editable-input' type='checkbox' name='planning[" . $row['planningid'] . "][planningdone]' value='1' " . ($row['planningdone'] == '1' ? 'checked' : '') . "></td>
+                        <td><div class='editable-text'>" . $row['planning'] . "</div></td>
+                        <td><div class='editable-text'>" . $row['planningwhat'] . "</div></td>
+                        <td><div class='editable-text'>" . $row['planningwho'] . "</div></td>
+                        <td><div class='editable-text'>" . $row['planningdeadline'] . "</div></td>
+                        <td><div class='editable-text checkbox-text'>" . ($row['planningdone'] == '1' ? '&#x2713;' : '') . "</div></td>
                     </tr>";
             }
-
             echo "</table>";
             echo "<br>";
+            echo "
+            <style>
+              .editable-text {
+                  display: inline-block;
+                  border: 1px solid #ccc;
+                  padding: 5px;
+                  min-width: 100px;
+              }
+
+              .checkbox-text {
+                  text-align: center;
+              }
+            </style>
+            ";
         } else {
             $_SESSION['error'] = "Geen planninggegevens gevonden. Pech!";
             echo "<br> Geen planninggegevens gevonden.";
@@ -223,31 +231,31 @@
 
         // Controleren of er resultaten zijn voor de observatie
         if (!empty($observationResult)) {
-            // Een formulier genereren met de observatiegegevens
-            echo "<table>
-                    <tr>
-                        <th>Dataclass</th>
-                        <th>Leerdoel</th>
-                        <th>Evaluatie</th>
-                        <th>Werkdoel</th>
-                        <th>Actie</th>
-                    </tr>";
+          // Een formulier genereren met de observatiegegevens
+          echo "<table>
+                  <tr>
+                      <th>Dataclass</th>
+                      <th>Leerdoel</th>
+                      <th>Evaluatie</th>
+                      <th>Werkdoel</th>
+                      <th>Actie</th>
+                  </tr>";
 
-            // Gegevens weergeven in de tabel voor de observatie
-            $desiredRowCount = 8;
-            for ($i = 1; $i <= $desiredRowCount; $i++) {
-                $row = isset($observationResult[$i - 1]) ? $observationResult[$i - 1] : array('observationid' => '', 'dataclass' => '', 'learninggoal' => '', 'evaluation' => '', 'workgoal' => '', 'action' => '');
-                echo "<tr>
-                        <td><input class='editable-input' type='text' name='observation[" . $row['observationid'] . "][dataclass]' value='" . $row['dataclass'] . "'></td>
-                        <td><input class='editable-input' type='text' name='observation[" . $row['observationid'] . "][learninggoal]' value='" . $row['learninggoal'] . "'></td>
-                        <td><input class='editable-input' type='text' name='observation[" . $row['observationid'] . "][evaluation]' value='" . $row['evaluation'] . "'></td>
-                        <td><input class='editable-input' type='text' name='observation[" . $row['observationid'] . "][workgoal]' value='" . $row['workgoal'] . "'></td>
-                        <td><input class='editable-input' type='text' name='observation[" . $row['observationid'] . "][action]' value='" . $row['action'] . "'></td>
-                    </tr>";
-            }
+          // Gegevens weergeven in de tabel voor de observatie
+          $desiredRowCount = 8;
+          for ($i = 1; $i <= $desiredRowCount; $i++) {
+              $row = isset($observationResult[$i - 1]) ? $observationResult[$i - 1] : array('observationid' => '', 'dataclass' => '', 'learninggoal' => '', 'evaluation' => '', 'workgoal' => '', 'action' => '');
+              echo "<tr>
+                      <td><div class='editable-text'>" . $row['dataclass'] . "</div></td>
+                      <td><div class='editable-text'>" . $row['learninggoal'] . "</div></td>
+                      <td><div class='editable-text'>" . $row['evaluation'] . "</div></td>
+                      <td><div class='editable-text'>" . $row['workgoal'] . "</div></td>
+                      <td><div class='editable-text'>" . $row['action'] . "</div></td>
+                  </tr>";
+          }
 
-            echo "</table>";
-            echo "<br>";
+          echo "</table>";
+          echo "<br>";
         } else {
           $_SESSION['error'] = "Geen observatiegegevens gevonden. Pech!";
           echo "<br> Geen observatiegegevens gevonden.";
