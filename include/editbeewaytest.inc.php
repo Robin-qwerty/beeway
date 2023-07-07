@@ -88,10 +88,8 @@
       }
       echo '</div>
       <div>
-
         <label for="status" style="font-size:20px;"><b>beeway Markeren als afgerond</b></label>
         <input id="my-checkbox" type="checkbox" name="status" value="1">
-
       </div>
     </div>
 
@@ -127,16 +125,26 @@
                   <select name="groepen" required>
                     <option value="">-- selecteer een groep --</option>
                     <?php
-                      $sql = 'SELECT DISTINCT g.groups, g.groupid
-                              FROM groups AS g
-                              INNER JOIN linkgroups AS lg ON g.groupid = lg.groupid
-                              WHERE g.archive = 0
-                              AND g.schoolid = :schoolid
-                              AND lg.userid = :userid';
-                      $sth = $conn->prepare($sql);
-                      $sth->bindValue(':schoolid', $schoolid);
-                      $sth->bindValue(':userid', $_SESSION['userid']);
-                      $sth->execute();
+                      if ($_SESSION['userrole'] == 'admin') {
+                        $sql = 'SELECT g.groups, g.groupid
+                                FROM groups AS g
+                                WHERE g.archive=0
+                                AND g.schoolid=:schoolid';
+                        $sth = $conn->prepare($sql);
+                        $sth->bindValue(':schoolid', $schoolid);
+                        $sth->execute();
+                      } else {
+                        $sql = 'SELECT DISTINCT g.groups, g.groupid
+                                FROM groups AS g
+                                INNER JOIN linkgroups AS lg ON g.groupid = lg.groupid
+                                WHERE g.archive = 0
+                                AND g.schoolid = :schoolid
+                                AND lg.userid = :userid';
+                        $sth = $conn->prepare($sql);
+                        $sth->bindValue(':schoolid', $schoolid);
+                        $sth->bindValue(':userid', $_SESSION['userid']);
+                        $sth->execute();
+                      }
 
                       while ($group = $sth->fetch(PDO::FETCH_OBJ)) {
                         $selected = isset($beeway->groupid) && $beeway->groupid == $group->groupid ? 'selected="selected"' : '';
@@ -211,30 +219,28 @@
             </div>
           <?php
             // Een formulier genereren met de planninggegevens
-            echo "<table>
-                    <tr>
-                        <th>Planning</th>
-                        <th>Planning Wat</th>
-                        <th>Planning Wie</th>
-                        <th>Planning Deadline</th>
-                        <th>Planning Klaar</th>
-                    </tr>";
+            echo '<table style="width:80%;">
+                    <tr style="background-color:#feae00;">
+                      <th>Planning</th>
+                      <th>Wat</th>
+                      <th>Wie</th>
+                      <th>Deadline</th>
+                      <th style="width:60px;">&#x2714;</th>
+                    </tr>';
 
             // Gegevens weergeven in de tabel voor de planning
             $desiredRowCount = 8;
             for ($i = 1; $i <= $desiredRowCount; $i++) {
                 $row = isset($planningResult[$i - 1]) ? $planningResult[$i - 1] : array('planningid' => '', 'planning' => '', 'planningwhat' => '', 'planningwho' => '', 'planningdeadline' => '', 'planningdone' => '');
                 echo "<tr>
-                        <td><textarea class='editable-input textareaplaning' name='planning[" . $row['planningid'] . "][planning]' rows='3' maxlength='155'>" . $row['planning'] . "</textarea></td>
-                        <td><textarea class='editable-input textareaplaning' name='planning[" . $row['planningid'] . "][planningwhat]' rows='3' maxlength='155'>" . $row['planningwhat'] . "</textarea></td>
-                        <td><textarea class='editable-input textareaplaning' name='planning[" . $row['planningid'] . "][planningwho]' rows='3' maxlength='155'>" . $row['planningwho'] . "</textarea></td>
-                        <td><textarea class='editable-input textareaplaning' name='planning[" . $row['planningid'] . "][planningdeadline]' rows='3' maxlength='155'>" . $row['planningdeadline'] . "</textarea></td>
-                        <td><input class='editable-input' type='checkbox' name='planning[" . $row['planningid'] . "][planningdone]' value='1' " . ($row['planningdone'] == '1' ? 'checked' : '') . "></td>
+                        <td><textarea class='editable-input textareaobservatie' name='planning[" . $row['planningid'] . "][planning]' rows='3' maxlength='155'>" . $row['planning'] . "</textarea></td>
+                        <td><textarea class='editable-input textareaobservatie' name='planning[" . $row['planningid'] . "][planningwhat]' rows='3' maxlength='155'>" . $row['planningwhat'] . "</textarea></td>
+                        <td><textarea class='editable-input textareaobservatie' name='planning[" . $row['planningid'] . "][planningwho]' rows='3' maxlength='155'>" . $row['planningwho'] . "</textarea></td>
+                        <td><textarea class='editable-input textareaobservatie' name='planning[" . $row['planningid'] . "][planningdeadline]' rows='3' maxlength='155'>" . $row['planningdeadline'] . "</textarea></td>
+                        <td style='background-color:white;border-style:solid;border-width: 0.8px;padding: 1rem;'><input class='editable-input' type='checkbox' name='planning[" . $row['planningid'] . "][planningdone]' value='1' " . ($row['planningdone'] == '1' ? 'checked' : '') . "></td>
                       </tr>";
             }
-
             echo "</table>";
-            echo "<br>";
         } else {
             $_SESSION['error'] = "Geen planninggegevens gevonden. Pech!";
             echo "<br> Geen planninggegevens gevonden.";
@@ -243,17 +249,17 @@
         // Controleren of er resultaten zijn voor de observatie
         if (!empty($observationResult)) {
             // Een formulier genereren met de observatiegegevens
-            echo "<table>
-                    <tr>
-                        <th>Dataclass</th>
-                        <th>Leerdoel</th>
-                        <th>Evaluatie</th>
-                        <th>Werkdoel</th>
-                        <th>Actie</th>
-                    </tr>";
+            echo '<table style="width:80%;">
+                    <tr style="background-color:#feae00;">
+                      <th>Dataclass</th>
+                      <th>Leerdoel</th>
+                      <th>Evaluatie</th>
+                      <th>Werkdoel</th>
+                      <th>Actie</th>
+                    </tr>';
 
             // Gegevens weergeven in de tabel voor de observatie
-            $desiredRowCount = 8;
+            $desiredRowCount = 5;
             for ($i = 1; $i <= $desiredRowCount; $i++) {
                 $row = isset($observationResult[$i - 1]) ? $observationResult[$i - 1] : array('observationid' => '', 'dataclass' => '', 'learninggoal' => '', 'evaluation' => '', 'workgoal' => '', 'action' => '');
                 echo "<tr>
@@ -264,9 +270,7 @@
                         <td><textarea class='editable-input textareaobservatie' name='observation[" . $row['observationid'] . "][action]' rows='3' maxlength='155'>" . $row['action'] . "</textarea></td>
                       </tr>";
             }
-
             echo "</table>";
-            echo "<br>";
         } else {
           $_SESSION['error'] = "Geen observatiegegevens gevonden. Pech!";
           echo "<br> Geen observatiegegevens gevonden.";
@@ -275,56 +279,8 @@
         // De knop weergeven voor het bijwerken van zowel planning als observatie
         // echo "<input type='submit' name='updateData' value='Update Planning en Observatie'>";
         echo "</form>";
-    }
+        echo "</div>";
 
-    // Controleren of het formulier voor het bijwerken van planning en observatie is verzonden
-    if(isset($_POST['updateData'])) {
-        $planningData = $_POST['planning'];
-        $observationData = $_POST['observation'];
-
-        // Voorbereiden van de update query voor planning
-        $updatePlanningStmt = $conn->prepare("UPDATE beewayplanning SET planning = :planning, planningwhat = :planningwhat, planningwho = :planningwho, planningdeadline = :planningdeadline, planningdone = :planningdone WHERE planningid = :planningid");
-
-        // Bijwerken van de planninggegevens
-        foreach($planningData as $planningId => $data) {
-            $planning = isset($data['planning']) ? $data['planning'] : '';
-            $planningWhat = isset($data['planningwhat']) ? $data['planningwhat'] : '';
-            $planningWho = isset($data['planningwho']) ? $data['planningwho'] : '';
-            $planningDeadline = isset($data['planningdeadline']) ? $data['planningdeadline'] : '';
-            $planningDone = isset($data['planningdone']) ? '1' : '0';
-
-            $updatePlanningStmt->bindParam(':planningid', $planningId);
-            $updatePlanningStmt->bindParam(':planning', $planning);
-            $updatePlanningStmt->bindParam(':planningwhat', $planningWhat);
-            $updatePlanningStmt->bindParam(':planningwho', $planningWho);
-            $updatePlanningStmt->bindParam(':planningdeadline', $planningDeadline);
-            $updatePlanningStmt->bindParam(':planningdone', $planningDone);
-
-            $updatePlanningStmt->execute();
-        }
-
-        // Voorbereiden van de update query voor observatie
-        $updateObservationStmt = $conn->prepare("UPDATE beewayobservation SET dataclass = :dataclass, learninggoal = :learninggoal, evaluation = :evaluation, workgoal = :workgoal, action = :action WHERE observationid = :observationid");
-
-        // Bijwerken van de observatiegegevens
-        foreach($observationData as $observationId => $data) {
-            $dataClass = isset($data['dataclass']) ? $data['dataclass'] : '';
-            $learningGoal = isset($data['learninggoal']) ? $data['learninggoal'] : '';
-            $evaluation = isset($data['evaluation']) ? $data['evaluation'] : '';
-            $workGoal = isset($data['workgoal']) ? $data['workgoal'] : '';
-            $action = isset($data['action']) ? $data['action'] : '';
-
-            $updateObservationStmt->bindParam(':observationid', $observationId);
-            $updateObservationStmt->bindParam(':dataclass', $dataClass);
-            $updateObservationStmt->bindParam(':learninggoal', $learningGoal);
-            $updateObservationStmt->bindParam(':evaluation', $evaluation);
-            $updateObservationStmt->bindParam(':workgoal', $workGoal);
-            $updateObservationStmt->bindParam(':action', $action);
-
-            $updateObservationStmt->execute();
-        }
-
-        echo "Planning en observatiegegevens zijn succesvol bijgewerkt.";
     }
 
     } else {

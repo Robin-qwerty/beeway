@@ -111,6 +111,12 @@
       exit;
     }
   } else {
+    $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES ("9999", :useragent, 2, 1, :beewayid, 1)';
+    $sth = $conn->prepare($sql);
+    $sth->bindValue(':useragent', $_SESSION['useragent']);
+    $sth->bindValue(':beewayid', $beewayid);
+    $sth->execute();
+
     $_SESSION['error'] = 'Unauthorized access. Please log in with appropriate credentials.';
     header('location: ../index.php?page=dashboard');
     exit;

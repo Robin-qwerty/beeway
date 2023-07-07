@@ -18,10 +18,10 @@
   }
 ?>
 
-
-<form id="form0" action="php/addbeewaytest.php" method="post">
-<div><input type="text" placeholder="BeewayNaam" name="beewaynaam" required></div>
-<div><button id="opslaan" class="addbutton" type="submit" style="font-size: 16px;">Opslaan</button></div>
+<div class="beewayedit">
+  <form id="form0" action="php/addbeewaytest.php" method="post">
+  <div><input type="text" placeholder="BeewayNaam" name="beewaynaam" required></div>
+  <div><button id="opslaan" class="addbutton" type="submit" style="font-size: 16px;">Opslaan</button></div>
 </div>
 
 <hr>
@@ -98,7 +98,6 @@
   <div class="cell vakgebied">
     <h2 id="orange">VAKGEBIED</h2>
     <select name="vakgebiedid" id="vakgebied" required>
-      <!-- <optgroup label="Selecteer een vakgebied"> -->
         <option value="">-- selecteer een vakgebied --</option>
         <?php
           $sql = 'SELECT disciplinename, disciplineid
@@ -118,52 +117,47 @@
             echo '<option value="'.$disciplines->disciplineid.'" '.$selected.'>'.$disciplines->disciplinename.'</option>';
           }
         ?>
-      <!-- </optgroup> -->
     </select>
-  <!-- </form> -->
 </div>
 </div>
 
-<!-- <form method="POST" action=""> -->
-    <!-- Table for Planning -->
-    <table>
-        <tr>
-            <th>Planning</th>
-            <th>Planning What</th>
-            <th>Planning Who</th>
-            <th>Planning Deadline</th>
-            <th>Planning Done</th>
+    <table style="width:80%;">
+        <tr style="background-color:#feae00;">
+          <th>Planning</th>
+          <th>Wat</th>
+          <th>Wie</th>
+          <th>Deadline</th>
+          <th style="width:60px;">&#x2714;</th>
         </tr>
 
         <?php for($i = 1; $i <= 8; $i++): ?>
-            <tr>
-                <td><input type="text" name="planning[<?php echo $i; ?>][planning]" value=""></td>
-                <td><input type="text" name="planning[<?php echo $i; ?>][planningwhat]" value=""></td>
-                <td><input type="text" name="planning[<?php echo $i; ?>][planningwho]" value=""></td>
-                <td><input type="text" name="planning[<?php echo $i; ?>][planningdeadline]" value=""></td>
-                <td><input type="checkbox" name="planning[<?php echo $i; ?>][planningdone]"></td>
-            </tr>
+          <tr>
+            <td><textarea class='editable-input textareaobservatie' name='planning[<?php echo $i; ?>][planning]' rows='3' maxlength='155'></textarea></td>
+            <td><textarea class='editable-input textareaobservatie' name='planning[<?php echo $i; ?>][planningwhat]' rows='3' maxlength='155'></textarea></td>
+            <td><textarea class='editable-input textareaobservatie' name='planning[<?php echo $i; ?>][planningwho]' rows='3' maxlength='155'></textarea></td>
+            <td><textarea class='editable-input textareaobservatie' name='planning[<?php echo $i; ?>][planningdeadline]' rows='3' maxlength='155'></textarea></td>
+            <td style='background-color:white;border-style:solid;border-width: 0.8px;padding: 1rem;'><input class='editable-input' type='checkbox' name='planning[<?php echo $i; ?>][planningdone]' value='1'></td>
+          </tr>
         <?php endfor; ?>
     </table>
 
-    <!-- Table for Observation -->
-    <table>
-        <tr>
-            <th>Data Class</th>
-            <th>Learning Goal</th>
-            <th>Evaluation</th>
-            <th>Work Goal</th>
-            <th>Action</th>
+    <table style="width:80%;">
+        <tr style="background-color:#feae00;">
+          <th>Dataclass</th>
+          <th>Leerdoel</th>
+          <th>Evaluatie</th>
+          <th>Werkdoel</th>
+          <th>Actie</th>
         </tr>
 
-        <?php for($i = 1; $i <= 8; $i++): ?>
-            <tr>
-                <td><input type="text" name="observation[<?php echo $i; ?>][dataclass]" value=""></td>
-                <td><input type="text" name="observation[<?php echo $i; ?>][learninggoal]" value=""></td>
-                <td><input type="text" name="observation[<?php echo $i; ?>][evaluation]" value=""></td>
-                <td><input type="text" name="observation[<?php echo $i; ?>][workgoal]" value=""></td>
-                <td><input type="text" name="observation[<?php echo $i; ?>][action]" value=""></td>
-            </tr>
+        <?php for($i = 1; $i <= 5; $i++): ?>
+          <tr>
+            <td><textarea class='editable-input textareaobservatie' name='observation[<?php echo $i; ?>][dataclass]' rows='3' maxlength='155'></textarea></td>
+            <td><textarea class='editable-input textareaobservatie' name='observation[<?php echo $i; ?>][learninggoal]' rows='3' maxlength='155'></textarea></td>
+            <td><textarea class='editable-input textareaobservatie' name='observation[<?php echo $i; ?>][evaluation]' rows='3' maxlength='155'></textarea></td>
+            <td><textarea class='editable-input textareaobservatie' name='observation[<?php echo $i; ?>][workgoal]' rows='3' maxlength='155'></textarea></td>
+            <td><textarea class='editable-input textareaobservatie' name='observation[<?php echo $i; ?>][action]' rows='3' maxlength='155'></textarea></td>
+          </tr>
         <?php endfor; ?>
     </table>
 </form>
