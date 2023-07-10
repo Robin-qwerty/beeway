@@ -234,6 +234,7 @@
 
   } else {
     $_SESSION['error'] = "er ging iets mis. Pech!";
-    header("Location: php/logout.php");
+    header("Location: index.php?page=dashboard");
+    exit;
   }
 ?>

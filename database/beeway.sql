@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 06 jul 2023 om 15:11
+-- Gegenereerd op: 10 jul 2023 om 16:12
 -- Serverversie: 10.4.28-MariaDB
 -- PHP-versie: 8.2.4
 
@@ -55,7 +55,7 @@ CREATE TABLE `beeway` (
 --
 
 INSERT INTO `beeway` (`beewayid`, `schoolid`, `groupid`, `beewayname`, `begood`, `beenough`, `benotgood`, `mainthemeid`, `themeperiodid`, `disciplineid`, `concretegoal`, `status`, `lock`, `createdat`, `createdby`, `updatedat`, `updatedby`, `archive`, `deletedat`, `deletedby`) VALUES
-(24, 1, '5', '2 333333', '2', '2', '2', '1', 1, '2', '2sdfsdfsdfgsdfgsdfgsdfgsdfgsdfgsdfgsdfasdf\r\n', '0', 0, '2023-06-13 09:44:31', NULL, '2023-06-13 09:44:31', 3, 0, NULL, NULL),
+(24, 1, '5', '2 333333', '2', '2', '2', '1', 1, '2', '2sdfsdfsdfgsdfgsdfgsdfgsdfgsdfgsdfgsdfasdf\r\nsdfsfasdfas\r\ndfasdfadfasdf sadf sdf sd\r\n\r\nasdf afsdfasdf \r\nasdf \r\nsad\r\n\r\n\r\n\r\nsadfasdf fsdf s', '0', 3, '2023-06-13 09:44:31', NULL, '2023-06-13 09:44:31', 3, 0, NULL, NULL),
 (25, 2, '9', '5', '5', '5', '5', '1', 1, '2', '5', '0', 0, '2023-06-13 11:09:41', NULL, '2023-06-13 11:09:41', 3, 0, NULL, NULL),
 (26, 1, '8', 'test 6 7 88888888', '6', '6', '6', '4', 4, '2', '6666666 7777777\r\n8888888 9999999\r\n1010101 1111111\r\n2222222 3333333\r\n4444444dfsd df sd fsd fsdf \r\n\r\n\r\nde 8ters update test', '0', 0, '2023-06-14 10:58:46', NULL, '2023-06-14 10:58:46', 2, 0, NULL, NULL),
 (28, 1, '1', 'test test 223', '1', '1', '1', '1', 1, '1', 'sdfsdfsdfsdf', '0', 0, '2023-06-26 14:43:23', NULL, '2023-06-26 14:43:23', 2, 0, NULL, NULL),
@@ -90,7 +90,7 @@ CREATE TABLE `beewayobservation` (
 --
 
 INSERT INTO `beewayobservation` (`observationid`, `beewayid`, `dataclass`, `learninggoal`, `evaluation`, `workgoal`, `action`, `createdat`, `createdby`, `updatedat`, `updatedby`, `archive`, `deletedat`, `deletedby`) VALUES
-(1, 24, 'o', 'o', 'o', 'o', 'o', '2023-06-13 09:44:31', 0, '2023-06-13 09:44:31', 0, 0, NULL, NULL),
+(1, 24, 'o', 'o', 'o', 'odsfdf     sddsdsddssd', 'odsfsdfsdfsdfsdfsdfsdfs', '2023-06-13 09:44:31', 0, '2023-06-13 09:44:31', 0, 0, NULL, NULL),
 (2, 24, 'o', 'o', 'o', 'o', 'osdfsdfsdfsdf', '2023-06-13 09:44:31', 0, '2023-06-13 09:44:31', 0, 0, NULL, NULL),
 (3, 24, 'o', 'o', 'o', 'o', 'o', '2023-06-13 09:44:31', 0, '2023-06-13 09:44:31', 0, 0, NULL, NULL),
 (4, 24, 'o', 'o', 'o', 'o', '', '2023-06-13 09:44:31', 0, '2023-06-13 09:44:31', 0, 0, NULL, NULL),
@@ -167,14 +167,14 @@ CREATE TABLE `beewayplanning` (
 --
 
 INSERT INTO `beewayplanning` (`planningid`, `beewayid`, `planning`, `planningwhat`, `planningwho`, `planningdeadline`, `planningdone`, `createdat`, `createdby`, `updatedat`, `updatedby`, `archive`, `deletedat`, `deletedBy`) VALUES
-(1, 24, 'p', 'p', 'p', 'p', '1', '2023-06-13 09:44:31', NULL, '2023-06-13 09:44:31', NULL, 0, NULL, NULL),
-(2, 24, 'p', 'p', 'p', 'p', '1', '2023-06-13 09:44:31', NULL, '2023-06-13 09:44:31', NULL, 0, NULL, NULL),
-(3, 24, 'p', 'p', 'p', 'p', '1', '2023-06-13 09:44:31', NULL, '2023-06-13 09:44:31', NULL, 0, NULL, NULL),
-(4, 24, 'p', 'p', 'p', 'p', '1', '2023-06-13 09:44:31', NULL, '2023-06-13 09:44:31', NULL, 0, NULL, NULL),
-(5, 24, 'p', 'p', 'p', 'p', '1', '2023-06-13 09:44:31', NULL, '2023-06-13 09:44:31', NULL, 0, NULL, NULL),
-(6, 24, 'p', 'p', 'p', 'p', '1', '2023-06-13 09:44:31', NULL, '2023-06-13 09:44:31', NULL, 0, NULL, NULL),
-(7, 24, 'p', 'p', 'pp', 'p', '1', '2023-06-13 09:44:31', NULL, '2023-06-13 09:44:31', NULL, 0, NULL, NULL),
-(8, 24, 'p', 'p', 'p', 'p', '1', '2023-06-13 09:44:31', NULL, '2023-06-13 09:44:31', NULL, 0, NULL, NULL),
+(1, 24, 'p', 'p', 'p', 'p', '0', '2023-06-13 09:44:31', NULL, '2023-06-13 09:44:31', NULL, 0, NULL, NULL),
+(2, 24, 'p', 'p', 'p', 'p', '0', '2023-06-13 09:44:31', NULL, '2023-06-13 09:44:31', NULL, 0, NULL, NULL),
+(3, 24, 'p', 'p', 'p', 'p', '0', '2023-06-13 09:44:31', NULL, '2023-06-13 09:44:31', NULL, 0, NULL, NULL),
+(4, 24, 'p', 'p', 'p', 'p', '0', '2023-06-13 09:44:31', NULL, '2023-06-13 09:44:31', NULL, 0, NULL, NULL),
+(5, 24, 'p', 'p', 'pddf sdf s df sdf  sdfsdfsdf sdfsdf asdfeth\r\ndfsdf sd fsdf sdfsdf sdf s\r\nfsf', 'p', '1', '2023-06-13 09:44:31', NULL, '2023-06-13 09:44:31', NULL, 0, NULL, NULL),
+(6, 24, 'p', 'p', 'p', 'p', '0', '2023-06-13 09:44:31', NULL, '2023-06-13 09:44:31', NULL, 0, NULL, NULL),
+(7, 24, 'p', 'p', 'pp', 'p', '0', '2023-06-13 09:44:31', NULL, '2023-06-13 09:44:31', NULL, 0, NULL, NULL),
+(8, 24, 'p', 'p', 'p', 'p', '0', '2023-06-13 09:44:31', NULL, '2023-06-13 09:44:31', NULL, 0, NULL, NULL),
 (9, 25, '', 'jkj', 'hkj', 'jk', '1', '2023-06-13 11:09:41', NULL, '2023-06-13 11:09:41', NULL, 0, NULL, NULL),
 (10, 25, 'hjgf', 'g', 'fh', 'gf', '1', '2023-06-13 11:09:42', NULL, '2023-06-13 11:09:42', NULL, 0, NULL, NULL),
 (11, 25, '', 'gf', 'hgf', 'hjgf', '1', '2023-06-13 11:09:42', NULL, '2023-06-13 11:09:42', NULL, 0, NULL, NULL),
@@ -595,7 +595,20 @@ INSERT INTO `logs` (`id`, `date`, `userid`, `useragent`, `action`, `info`, `tabl
 (648, '2023-07-06 12:30:21', '3', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, NULL, 6, 3, 0),
 (649, '2023-07-06 12:51:46', '2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, NULL, 6, 2, 0),
 (650, '2023-07-06 12:53:27', '3', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 5, NULL, 6, 3, 0),
-(651, '2023-07-06 13:06:23', '2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, NULL, 6, 2, 0);
+(651, '2023-07-06 13:06:23', '2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, NULL, 6, 2, 0),
+(652, '2023-07-07 06:40:16', '9999', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, NULL, 6, 0, 4),
+(653, '2023-07-07 06:40:20', '2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, NULL, 6, 2, 0),
+(654, '2023-07-07 11:26:24', '2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 5, NULL, 6, 2, 0),
+(655, '2023-07-07 11:26:29', '2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, NULL, 6, 2, 0),
+(656, '2023-07-10 06:10:20', '3', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, NULL, 6, 3, 0),
+(657, '2023-07-10 06:24:34', '3', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 5, NULL, 6, 3, 0),
+(658, '2023-07-10 06:24:38', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, NULL, 6, 1, 0),
+(659, '2023-07-10 06:24:38', '9999', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, NULL, 6, 0, 4),
+(660, '2023-07-10 06:24:41', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, NULL, 6, 1, 0),
+(661, '2023-07-10 06:28:22', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 5, NULL, 6, 1, 0),
+(662, '2023-07-10 06:29:00', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, NULL, 6, 1, 0),
+(663, '2023-07-10 07:37:33', '1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 5, NULL, 6, 1, 0),
+(664, '2023-07-10 07:37:39', '3', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 4, NULL, 6, 3, 0);
 
 -- --------------------------------------------------------
 
@@ -823,7 +836,7 @@ ALTER TABLE `linkgroups`
 -- AUTO_INCREMENT voor een tabel `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=652;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=665;
 
 --
 -- AUTO_INCREMENT voor een tabel `maintheme`

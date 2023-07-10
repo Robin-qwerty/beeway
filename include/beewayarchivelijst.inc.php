@@ -128,6 +128,7 @@
                   <td><b>'.$beeway->disciplinename.'</b></td>
                   <td><b>'.(strlen($beeway->concretegoal) > 35 ? substr($beeway->concretegoal, 0, 35) . '...' : $beeway->concretegoal).'</b></td>
                   <td><b>'.$status.'</b></td>
+                  <td><a style="background-color:#999999;" href="index.php?page=beeway&beewayid='.$beeway->beewayid.'" class="editbutton">bekijken</a></td>
                   <td><a href="php/getbackbeeway.php?&beewayid='.$beeway->beewayid.'" class="editbutton">terughalen</a></td>
                 </tr>
               ';

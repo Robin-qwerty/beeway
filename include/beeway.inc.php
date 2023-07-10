@@ -47,7 +47,7 @@
       if ($beeway = $sth->fetch(PDO::FETCH_OBJ)) {
 
         echo'
-        <div class="beewayedit">
+          <div class="beewayedit">
             <div><h2>'.$beeway->beewayname.'</h2></div>
             <div>
         ';
