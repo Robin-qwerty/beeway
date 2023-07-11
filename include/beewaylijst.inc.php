@@ -92,7 +92,7 @@
               <th><h3>vakgebied</h3></th>
               <th><h3>concreet doel</h3></th>
               <th><h3>status</h3></th>
-              <th><a href="index.php?page=addbeeway" class="addbutton">toevoegen</a></th>
+              <th><a href="index.php?page=addbeewaytest" class="addbutton">toevoegen</a></th>
             </tr>';
 
             while ($beeway = $sth->fetch(PDO::FETCH_OBJ)) {
@@ -192,7 +192,7 @@
           echo '</div>';
         } elseif (!isset($offset)) {
           echo '<h2 style="text-align: center;"><strong>the query did not return any rows</strong></h2>';
-          echo '<a href="index.php?page=addbeeway" class="addbutton" id="addfirst">beeway toevoegen</a>';
+          echo '<a href="index.php?page=addbeewaytest" class="addbutton" id="addfirst">beeway toevoegen</a>';
           $_SESSION['error'] = "Er zijn geen resultaten gevonden. Pech!";
         } else {
           // the query did not return any rows
