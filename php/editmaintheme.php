@@ -79,7 +79,7 @@
   function logErrorAndRedirect($errorMessage, $action, $tableId)
   {
       global $conn;
-      $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES ("9999", :useragent, :action, :tableid, 0, 5)';
+      $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES (9999, :useragent, :action, :tableid, 0, 5)';
       $sth = $conn->prepare($sql);
       $sth->bindValue(':useragent', $_SESSION['useragent']);
       $sth->bindParam(':action', $action);

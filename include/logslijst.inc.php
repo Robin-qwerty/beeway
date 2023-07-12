@@ -179,6 +179,8 @@
           elseif ($logs->action == '3') {$action = 'delete';}
           elseif ($logs->action == '4') {$action = 'login';}
           elseif ($logs->action == '5') {$action = 'logout';}
+          elseif ($logs->action == '6') {$action = 'restore';}
+          else {$action = 'unknown';}
 
           if ($logs->tableid == '1') {$tableid = 'beeway';}
           elseif ($logs->tableid == '2') {$tableid = 'vakken';}
@@ -186,6 +188,7 @@
           elseif ($logs->tableid == '4') {$tableid = "hoofdthema's";}
           elseif ($logs->tableid == '5') {$tableid = 'scholen';}
           elseif ($logs->tableid == '6') {$tableid = 'users';}
+          else {$tableid = 'unknown';}
 
           if ($logs->error == '0') {$error = '-';}
           elseif ($logs->error == '1') {$error = 'Unauthorized access';}
@@ -193,6 +196,7 @@
           elseif ($logs->error == '3') {$error = "unknown";}
           elseif ($logs->error == '4') {$error = "failed login";}
           elseif ($logs->error == '5') {$error = "failed";}
+          else {$error = 'unknown';}
 
           echo '
             <tr>

@@ -100,18 +100,31 @@
         }
       }
 
+      $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES (9999, :useragent, 2, 1, :beewayid, 0)';
+      $sth = $conn->prepare($sql);
+      $sth->bindValue(':useragent', $_SESSION['useragent']);
+      $sth->bindParam(':beewayid', $beewayid);
+      $sth->execute();
+
       $conn->commit();
       $_SESSION['info'] = 'Beeway updated successfully';
       header('Location: ../index.php?page=beewaylijst');
       exit;
     } catch (PDOException $e) {
       $conn->rollback();
+
+      $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES (9999, :useragent, 2, 1, :beewayid, 5)';
+      $sth = $conn->prepare($sql);
+      $sth->bindValue(':useragent', $_SESSION['useragent']);
+      $sth->bindValue(':beewayid', $beewayid);
+      $sth->execute();
+
       $_SESSION['error'] = 'Error updating beeway: ' . $e->getMessage();
       header('Location: ../index.php?page=editbeeway&beewayid=' . $beewayid);
       exit;
     }
   } else {
-    $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES ("9999", :useragent, 2, 1, :beewayid, 1)';
+    $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES (9999, :useragent, 2, 1, :beewayid, 1)';
     $sth = $conn->prepare($sql);
     $sth->bindValue(':useragent', $_SESSION['useragent']);
     $sth->bindValue(':beewayid', $beewayid);

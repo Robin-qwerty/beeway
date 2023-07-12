@@ -112,7 +112,7 @@
 
       $conn->beginTransaction();
 
-      $sql = "DELETE FROM linkgroups WHERE userid = :userid AND archive <> 1";
+      $sql = "DELETE FROM linkgroups WHERE userid = :userid AND archive = 0";
       $sth = $conn->prepare($sql);
       $sth->bindParam(':userid', $userId);
       $sth->execute();

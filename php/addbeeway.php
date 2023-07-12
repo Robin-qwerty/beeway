@@ -100,7 +100,7 @@
     //   exit;
     // }
   } else {
-    $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES ("9999", :useragent, 1, 1, 0, 1)';
+    $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES (9999, :useragent, 1, 1, 0, 1)';
     $sth = $conn->prepare($sql);
     $sth->bindValue(':useragent', $_SESSION['useragent']);
     $sth->execute();

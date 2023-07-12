@@ -2,7 +2,7 @@
   $sql = 'SELECT schoolid
        FROM users
        WHERE schoolid<>0
-       AND archive<>1
+       AND archive=0
        AND userid=:userid';
   $sth = $conn->prepare($sql);
   $sth->bindValue(':userid', $_SESSION['userid']);
@@ -36,16 +36,26 @@
           <select name="groepen" required>
             <option value="">-- selecteer een groep --</option>
             <?php
-              $sql = 'SELECT DISTINCT g.groups, g.groupid
-                      FROM groups AS g
-                      INNER JOIN linkgroups AS lg ON g.groupid = lg.groupid
-                      WHERE g.archive = 0
-                      AND g.schoolid = :schoolid
-                      AND lg.userid = :userid';
-              $sth = $conn->prepare($sql);
-              $sth->bindValue(':schoolid', $schoolid);
-              $sth->bindValue(':userid', $_SESSION['userid']);
-              $sth->execute();
+              if ($_SESSION['userrole'] == 'admin') {
+                $sql = 'SELECT g.groups, g.groupid
+                        FROM groups AS g
+                        WHERE g.archive=0
+                        AND g.schoolid=:schoolid';
+                $sth = $conn->prepare($sql);
+                $sth->bindValue(':schoolid', $schoolid);
+                $sth->execute();
+              } else {
+                $sql = 'SELECT DISTINCT g.groups, g.groupid
+                        FROM groups AS g
+                        INNER JOIN linkgroups AS lg ON g.groupid = lg.groupid
+                        WHERE g.archive = 0
+                        AND g.schoolid = :schoolid
+                        AND lg.userid = :userid';
+                $sth = $conn->prepare($sql);
+                $sth->bindValue(':schoolid', $schoolid);
+                $sth->bindValue(':userid', $_SESSION['userid']);
+                $sth->execute();
+              }
 
               while ($group = $sth->fetch(PDO::FETCH_OBJ)) {
                 $selected = isset($beeway->groupid) && $beeway->groupid == $group->groupid ? 'selected="selected"' : '';

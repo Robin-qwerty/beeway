@@ -43,7 +43,7 @@
           header("Location: ../index.php?page=klassenlijst");
           exit;
         } else {
-          $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES ("9999", :useragent, 1, 3, 0, 5)';
+          $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES (9999, :useragent, 1, 3, 0, 5)';
           $stmt = $conn->prepare($sql);
           $stmt->bindValue(':useragent', $_SESSION['useragent']);
           $stmt->execute();
@@ -54,7 +54,7 @@
         }
       }
     } catch (\Exception $e) {
-      $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES ("9999", :useragent, 1, 3, 0, 5)';
+      $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES (9999, :useragent, 1, 3, 0, 5)';
       $stmt = $conn->prepare($sql);
       $stmt->bindValue(':useragent', $_SESSION['useragent']);
       $stmt->execute();
@@ -64,7 +64,7 @@
       exit;
     }
   } else {
-    $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES ("9999", :useragent, 1, 3, 0, 1)';
+    $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES (9999, :useragent, 1, 3, 0, 1)';
     $stmt = $conn->prepare($sql);
     $stmt->bindValue(':useragent', $_SESSION['useragent']);
     $stmt->execute();

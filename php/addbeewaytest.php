@@ -7,7 +7,7 @@
       $sql = 'SELECT schoolid
                FROM users
                WHERE schoolid <> 0
-               AND archive <> 1
+               AND archive = 0
                AND userid = :userid';
       $sth = $conn->prepare($sql);
       $sth->bindValue(':userid', $_SESSION['userid']);
@@ -91,7 +91,7 @@
       }
     } catch (PDOException $e) {
       // Handle database errors
-      $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES ("9999", :useragent, 1, 1, 0, 5)';
+      $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES (9999, :useragent, 1, 1, 0, 5)';
       $sth = $conn->prepare($sql);
       $sth->bindValue(':useragent', $_SESSION['useragent']);
       $sth->execute();
@@ -101,7 +101,7 @@
       exit;
     }
   } else {
-    $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES ("9999", :useragent, 1, 1, :beewayid, 1)';
+    $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES (9999, :useragent, 1, 1, :beewayid, 1)';
     $sth = $conn->prepare($sql);
     $sth->bindValue(':useragent', $_SESSION['useragent']);
     $sth->bindValue(':beewayid', $beewayid);

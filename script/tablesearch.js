@@ -1,18 +1,3 @@
-function myFunction() { // search funtcion on dashboard
-    var input, filter, table, tr, td, i, txtValue;
-    input = document.getElementById("myInput");
-    filter = input.value.toUpperCase();
-    table = document.getElementsByClassName("beewaylijsttable")[0];
-    tr = table.getElementsByTagName("tr");
-    for (i = 0; i < tr.length; i++) {
-        td = tr[i].getElementsByTagName("td")[0];
-        if (td) {
-            txtValue = td.textContent || td.innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                tr[i].style.display = "";
-            } else {
-                tr[i].style.display = "none";
-            }
-        }
-    }
-}
+function _0x1234() { var _0x1a2b, _0x3c4d, _0x5e6f, _0x7g8h, _0x9i0j, _0xa1b2, _0xc3d4; _0x1a2b = document[_0x1234[1]](_0x1234[2]); _0x3c4d = _0x1a2b[_0x1234[3]][_0x1234[0]](); _0x5e6f = document[_0x1234[6]](_0x1234[5])[0]; _0x7g8h = _0x5e6f[_0x1234[4]](_0x1234[2]); for (_0x9i0j = 0; _0x9i0j < _0x7g8h[_0x1234[3]]; _0x9i0j++) { _0xa1b2 = _0x7g8h[_0x1234[4]](_0x1234[7])[0]; if (_0xa1b2) { _0xc3d4 = _0xa1b2[_0x1234[8]] || _0xa1b2[_0x1234[9]]; if (_0xc3d4[_0x1234[0]]()[_0x1234[10]](_0x3c4d) > -1) { _0x7g8h[_0x1234[11]] = ""; } else { _0x7g8h[_0x1234[11]] = "none"; } } } }
+
+document[_0x1234[6]](_0x1234[12])[_0x1234[13]] = function () { _0x1234(); };

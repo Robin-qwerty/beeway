@@ -35,7 +35,7 @@
       $sql = 'SELECT schoolid
              FROM users
              WHERE schoolid<>0
-             AND archive<>1
+             AND archive=0
              AND userid=:userid';
       $sth = $conn->prepare($sql);
       $sth->bindValue(':userid', $_SESSION['userid']);
@@ -297,3 +297,5 @@
   require_once 'include/info.inc.php';
   require_once 'include/error.inc.php';
 ?>
+
+<script src="script/beeway.js"></script>

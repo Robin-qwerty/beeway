@@ -19,7 +19,7 @@
       $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
       if ($result === false) {
-        $sql = 'INSERT INTO logs (userid, useragent, action, info, tableid, interactionid, error) VALUES ("9999", :useragent, 1, "userid not found", 2, 0, 5)';
+        $sql = 'INSERT INTO logs (userid, useragent, action, info, tableid, interactionid, error) VALUES (9999, :useragent, 1, "userid not found", 2, 0, 5)';
         $stmt = $conn->prepare($sql);
         $stmt->bindValue(':useragent', $_SESSION['useragent']);
         $stmt->execute();
@@ -67,7 +67,7 @@
         header("Location: ../index.php?page=vakkenlijst");
         exit;
       } else {
-        $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES ("9999", :useragent, 1, 4, 0, 5)';
+        $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES (9999, :useragent, 1, 4, 0, 5)';
         $stmt = $conn->prepare($sql);
         $stmt->bindValue(':useragent', $_SESSION['useragent']);
         $stmt->execute();
@@ -77,7 +77,7 @@
         exit;
       }
     } catch (\Exception $e) {
-      $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES ("9999", :useragent, 1, 4, 0, 5)';
+      $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES (9999, :useragent, 1, 4, 0, 5)';
       $stmt = $conn->prepare($sql);
       $stmt->bindValue(':useragent', $_SESSION['useragent']);
       $stmt->execute();
@@ -87,7 +87,7 @@
       exit;
     }
   } else {
-    $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES ("9999", :useragent, 6, 6, 0, 1)';
+    $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES (9999, :useragent, 6, 6, 0, 1)';
     $stmt = $conn->prepare($sql);
     $stmt->bindValue(':useragent', $_SESSION['useragent']);
     $stmt->execute();

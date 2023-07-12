@@ -4,7 +4,7 @@
 
   // Check user privileges
   if (!(isset($_SESSION['userid'], $_SESSION['userrole']) && ($_SESSION['userrole'] === 'superuser' || $_SESSION['userrole'] === 'admin'))) {
-    $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES ("9999", :useragent, 1, 6, 0, 1)';
+    $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES (9999, :useragent, 1, 6, 0, 1)';
     $stmt = $conn->prepare($sql);
     $stmt->bindValue(':useragent', $_SESSION['useragent']);
     $stmt->execute();
@@ -115,7 +115,7 @@
   } catch (Exception $e) {
     $conn->rollback();
 
-    $sqlInsertErrorLog = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES ("9999", :useragent, 1, 6, 0, 5)';
+    $sqlInsertErrorLog = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES (9999, :useragent, 1, 6, 0, 5)';
     $stmtInsertErrorLog = $conn->prepare($sqlInsertErrorLog);
     $stmtInsertErrorLog->bindValue(':useragent', $_SESSION['useragent']);
     $stmtInsertErrorLog->execute();

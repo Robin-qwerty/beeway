@@ -98,7 +98,7 @@
         ':userid' => $userId
       ]);
 
-      $sql1 = "UPDATE linkgroups SET archive = 1 WHERE userid = :userid AND archive <> 1";
+      $sql1 = "UPDATE linkgroups SET archive = 1 WHERE userid = :userid AND archive = 0";
       $sth1 = $conn->prepare($sql1);
       $sth1->execute([
         ':userid' => $userId
@@ -119,7 +119,7 @@
     } catch (\Exception $e) {
       $conn->rollBack();
 
-      $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES ("9999", :useragent, 3, 6, 0, 5)';
+      $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES (9999, :useragent, 3, 6, 0, 5)';
       $sth = $conn->prepare($sql);
       $sth->bindValue(':useragent', $_SESSION['useragent']);
       $sth->execute();
@@ -130,7 +130,7 @@
       exit;
     }
   } else {
-    $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES ("9999", :useragent, 3, 6, "0", "1")';
+    $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES (9999, :useragent, 3, 6, "0", "1")';
     $sth = $conn->prepare($sql);
     $sth->bindValue(':useragent', $_SESSION['useragent']);
     $sth->execute();
