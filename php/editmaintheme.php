@@ -93,7 +93,7 @@
   function logInteractionUpdate($userId, $interactionId)
   {
       global $conn;
-      $sql = "INSERT INTO `logs` (`userid`, `useragent`, `action`, `tableid`, `interactionid`) VALUES (:userid, :useragent, '2', '4', :interactionid)";
+      $sql = "INSERT INTO `logs` (`userid`, `useragent`, `action`, `tableid`, `interactionid`) VALUES (:userid, :useragent, 2, 4, :interactionid)";
       $sth = $conn->prepare($sql);
       $sth->bindParam(':userid', $userId);
       $sth->bindParam(':useragent', $_SESSION['useragent']);

@@ -115,8 +115,9 @@
   } catch (Exception $e) {
     $conn->rollback();
 
-    $sqlInsertErrorLog = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES (9999, :useragent, 1, 6, 0, 5)';
+    $sqlInsertErrorLog = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES (:userid, :useragent, 1, 6, 0, 5)';
     $stmtInsertErrorLog = $conn->prepare($sqlInsertErrorLog);
+    $stmtInsertErrorLog->bindParam(':userid', $_SESSION['userid']);
     $stmtInsertErrorLog->bindValue(':useragent', $_SESSION['useragent']);
     $stmtInsertErrorLog->execute();
 

@@ -49,8 +49,9 @@
       $_SESSION['info'] = "Archiving successful.";
       header("Location: ../index.php?page=beewaylijst");
     } catch (\Exception $e) {
-      $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES (9999, :useragent, 3, 1, 0, 5)';
+      $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES (:userid, :useragent, 3, 1, 0, 5)';
       $sth = $conn->prepare($sql);
+      $stmtInsertErrorLog->bindParam(':userid', $_SESSION['userid']);
       $sth->bindValue(':useragent', $_SESSION['useragent']);
       $sth->execute();
 

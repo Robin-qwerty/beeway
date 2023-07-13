@@ -9,8 +9,9 @@
       $sth->bindParam(':themeid', $_GET['themeid']);
       $sth->execute();
 
-      $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES (9999, :useragent, 6, 6, :themeid, 0)';
+      $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES (:userid, :useragent, 6, 6, :themeid, 0)';
       $sth = $conn->prepare($sql);
+      $sth->bindParam(':userid', $_SESSION['userid']);
       $sth->bindValue(':useragent', $_SESSION['useragent']);
       $sth->bindParam(':themeid', $_GET['themeid']);
       $sth->execute();
@@ -18,8 +19,9 @@
       $_SESSION['info'] = 'user terug gehaald!';
       header('location: ../index.php?page=Hoofdthemalijst');
     } catch (\Exception $e) {
-      $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES (9999, :useragent, 6, 4, :themeid, 5)';
+      $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES (:userid, :useragent, 6, 4, :themeid, 5)';
       $sth = $conn->prepare($sql);
+      $sth->bindParam(':userid', $_SESSION['userid']);
       $sth->bindValue(':useragent', $_SESSION['useragent']);
       $sth->bindParam(':themeid', $_GET['themeid']);
       $sth->execute();

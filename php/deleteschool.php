@@ -214,8 +214,9 @@
           $_SESSION['info'] = 'School succesvol gearchiveerd.';
           header('Location: ../index.php?page=scholenlijst');
         } catch (\Exception $e) {
-          $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES (9999, :useragent, 3, 5, 0, 5)';
+          $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES (:userid, :useragent, 3, 5, 0, 5)';
           $sth = $conn->prepare($sql);
+          $sth->bindParam(':userid', $_SESSION['userid']);
           $sth->bindValue(':useragent', $_SESSION['useragent']);
           $sth->execute();
 

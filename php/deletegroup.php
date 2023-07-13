@@ -29,8 +29,9 @@
       header("Location: ../index.php?page=klassenlijst");
     } catch (\Exception $e) {
       // Error occurred while updating the database
-      $sqlInsertErrorLog = "INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES (9999, :useragent, 3, 3, 0, 5)";
+      $sqlInsertErrorLog = "INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES (:userid, :useragent, 3, 3, 0, 5)";
       $stmtInsertErrorLog = $conn->prepare($sqlInsertErrorLog);
+      $stmtInsertErrorLog->bindParam(':userid', $_SESSION['userid']);
       $stmtInsertErrorLog->bindParam(':useragent', $_SESSION['useragent']);
       $stmtInsertErrorLog->execute();
 

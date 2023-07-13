@@ -29,8 +29,9 @@
       header("Location: ../index.php?page=vakkenlijst");
     } catch (\Exception $e) {
       // Error occurred while updating the database
-      $sqlInsertErrorLog = "INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES (9999, :useragent, 3, 2, 0, 5)";
+      $sqlInsertErrorLog = "INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES (:userid, :useragent, 3, 2, 0, 5)";
       $stmtInsertErrorLog = $conn->prepare($sqlInsertErrorLog);
+      $stmtInsertErrorLog->bindParam(':userid', $_SESSION['userid']);
       $stmtInsertErrorLog->bindValue(':useragent', $_SESSION['useragent']);
       $stmtInsertErrorLog->execute();
 

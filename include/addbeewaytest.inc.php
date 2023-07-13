@@ -68,22 +68,38 @@
 
       <div class="cell HOOFDTHEMA">
         <h2 id="orange">HOOFDTHEMA</h2>
-        <input type="radio" name="hoofdthemaid" value="1" required>
-        <label for="html">P1: EDI</label>
-        <br>
-        <input type="radio" name="hoofdthemaid" value="2">
-        <label for="html">P2: BEGELEIDENDE INOEFENING</label>
-        <br>
-        <input type="radio" name="hoofdthemaid" value="3">
-        <label for="html">P3: LEZEN</label>
-        <br>
-        <input type="radio" name="hoofdthemaid" value="4">
-        <label for="html">P4: DIFFERENTIATIE EDI</label>
-        <br>
-        <input type="radio" name="hoofdthemaid" value="5">
-        <label for="html">P5: DOELENPLANNER</label>
-        <br>
+
+        <?php
+          $stmt = $conn->prepare('SELECT namethemep1, namethemep2, namethemep3, namethemep4, namethemep5
+                                  FROM maintheme
+                                  WHERE schoolid = :schoolid
+                                  AND schoolyear = 1');
+          $stmt->bindParam(':schoolid', $schoolId);
+          $stmt->execute();
+          $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        ?>
+
+        <?php if ($row) : ?>
+          <input type="radio" name="hoofdthemaid" value="1" required>
+          <label for="html">P1: <?php echo $row['namethemep1']; ?></label>
+          <br>
+          <input type="radio" name="hoofdthemaid" value="2">
+          <label for="html">P2: <?php echo $row['namethemep2']; ?></label>
+          <br>
+          <input type="radio" name="hoofdthemaid" value="3">
+          <label for="html">P3: <?php echo $row['namethemep3']; ?></label>
+          <br>
+          <input type="radio" name="hoofdthemaid" value="4">
+          <label for="html">P4: <?php echo $row['namethemep4']; ?></label>
+          <br>
+          <input type="radio" name="hoofdthemaid" value="5">
+          <label for="html">P5: <?php echo $row['namethemep5']; ?></label>
+          <br>
+        <?php else : ?>
+          <p>No main theme options available.</p>
+        <?php endif; ?>
       </div>
+
 
       <div class="cell CONCREETDOEL">
         <h2 id="orange">CONCREET DOEL</h2>

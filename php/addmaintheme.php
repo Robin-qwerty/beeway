@@ -35,9 +35,10 @@
         $lastInsertedId = $conn->lastInsertId();
 
         if ($lastInsertedId) {
-          $sql = "INSERT INTO `logs` (`userid`, `action`, `tableid`, `interactionid`) VALUES (:userid, '1', '4', :interactionid)";
+          $sql = "INSERT INTO `logs` (`userid`, `action`, `tableid`, `interactionid`) VALUES (:userid, :useragent, 1, 4, :interactionid)";
           $stmt = $conn->prepare($sql);
           $stmt->bindParam(':userid', $_SESSION['userid']);
+          $stmt->bindValue(':useragent', $_SESSION['useragent']);
           $stmt->bindParam(':interactionid', $lastInsertedId);
           $stmt->execute();
 

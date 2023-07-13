@@ -66,7 +66,7 @@
   {
       global $conn;
 
-      $sql = "INSERT INTO logs (userid, useragent, action, tableid, interactionid) VALUES (:userid, :useragent, '2', '5', :interactionid)";
+      $sql = "INSERT INTO logs (userid, useragent, action, tableid, interactionid) VALUES (:userid, :useragent, 2, 5, :interactionid)";
       $sth = $conn->prepare($sql);
       $sth->bindParam(':userid', $_SESSION['userid']);
       $sth->bindParam(':useragent', $_SESSION['useragent']);
@@ -85,7 +85,7 @@
   {
       global $conn;
 
-      $sql = "INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES ('9999', :useragent, :action, '5', :interactionid, '5')";
+      $sql = "INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES (9999, :useragent, :action, 5, :interactionid, 5)";
       $sth = $conn->prepare($sql);
       $sth->bindValue(':useragent', $_SESSION['useragent']);
       $sth->bindParam(':action', $action);

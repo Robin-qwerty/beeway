@@ -104,7 +104,7 @@
         ':userid' => $userId
       ]);
 
-      $sql2 = "INSERT INTO logs (userid, useragent, action, info, tableid, interactionid) VALUES (:userid, :useragent, '3', 'user deleted', '6', :interactionid)";
+      $sql2 = "INSERT INTO logs (userid, useragent, action, info, tableid, interactionid) VALUES (:userid, :useragent, 3, 'user deleted', 6, :interactionid)";
       $sth2 = $conn->prepare($sql2);
       $sth2->execute([
         ':userid' => $loggedInUserId,
@@ -119,8 +119,9 @@
     } catch (\Exception $e) {
       $conn->rollBack();
 
-      $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES (9999, :useragent, 3, 6, 0, 5)';
+      $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES (:userid, :useragent, 3, 6, 0, 5)';
       $sth = $conn->prepare($sql);
+      $sth->bindParam(':userid', $_SESSION['userid']);
       $sth->bindValue(':useragent', $_SESSION['useragent']);
       $sth->execute();
 

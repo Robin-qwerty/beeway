@@ -100,8 +100,9 @@
         }
       }
 
-      $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES (9999, :useragent, 2, 1, :beewayid, 0)';
+      $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES (:userid, :useragent, 2, 1, :beewayid, 0)';
       $sth = $conn->prepare($sql);
+      $sth->bindParam(':userid', $_SESSION['userid']);
       $sth->bindValue(':useragent', $_SESSION['useragent']);
       $sth->bindParam(':beewayid', $beewayid);
       $sth->execute();
@@ -113,8 +114,9 @@
     } catch (PDOException $e) {
       $conn->rollback();
 
-      $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES (9999, :useragent, 2, 1, :beewayid, 5)';
+      $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES (:userid, :useragent, 2, 1, :beewayid, 5)';
       $sth = $conn->prepare($sql);
+      $sth->bindParam(':userid', $_SESSION['userid']);
       $sth->bindValue(':useragent', $_SESSION['useragent']);
       $sth->bindValue(':beewayid', $beewayid);
       $sth->execute();

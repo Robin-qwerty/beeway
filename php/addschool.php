@@ -51,8 +51,7 @@
 
           $userId = $conn->lastInsertId();
 
-          $sqlInsertUserLog = "INSERT INTO logs (userid, useragent, info, action, tableid, interactionid)
-                               VALUES (:userid, :useragent, CONCAT('User added for new school ', :schoolid), '1', '6', :interactionid)";
+          $sqlInsertUserLog = "INSERT INTO logs (userid, useragent, info, action, tableid, interactionid) VALUES (:userid, :useragent, CONCAT('User added for new school ', :schoolid), 1, 6, :interactionid)";
           $stmtInsertUserLog = $conn->prepare($sqlInsertUserLog);
           $stmtInsertUserLog->bindParam(':userid', $_SESSION['userid']);
           $stmtInsertUserLog->bindParam(':useragent', $_SESSION['useragent']);
@@ -78,9 +77,9 @@
     } catch (Exception $e) {
       $conn->rollback();
 
-      $sqlInsertErrorLog = "INSERT INTO logs (userid, useragent, action, tableid, interactionid, error)
-                            VALUES ('9999', :useragent, 1, 5, 0, 5)";
+      $sqlInsertErrorLog = "INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES (:userid, :useragent, 1, 5, 0, 5)";
       $stmtInsertErrorLog = $conn->prepare($sqlInsertErrorLog);
+      $stmtInsertErrorLog->bindParam(':userid', $_SESSION['userid']);
       $stmtInsertErrorLog->bindValue(':useragent', $_SESSION['useragent']);
       $stmtInsertErrorLog->execute();
 
@@ -90,8 +89,7 @@
       exit;
     }
   } else {
-    $sqlInsertUnauthorizedLog = "INSERT INTO logs (userid, useragent, action, tableid, interactionid, error)
-                                 VALUES ('9999', :useragent, 1, 5, 0, 1)";
+    $sqlInsertUnauthorizedLog = "INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES (9999, :useragent, 1, 5, 0, 1)";
     $stmtInsertUnauthorizedLog = $conn->prepare($sqlInsertUnauthorizedLog);
     $stmtInsertUnauthorizedLog->bindValue(':useragent', $_SESSION['useragent']);
     $stmtInsertUnauthorizedLog->execute();

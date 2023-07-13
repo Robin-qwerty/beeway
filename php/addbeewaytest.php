@@ -91,8 +91,9 @@
       }
     } catch (PDOException $e) {
       // Handle database errors
-      $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES (9999, :useragent, 1, 1, 0, 5)';
+      $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES (:userid, :useragent, 1, 1, 0, 5)';
       $sth = $conn->prepare($sql);
+      $stmt->bindParam(':userid', $_SESSION['userid']);
       $sth->bindValue(':useragent', $_SESSION['useragent']);
       $sth->execute();
 
