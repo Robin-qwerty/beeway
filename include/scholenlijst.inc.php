@@ -106,7 +106,10 @@
           // the query did not return any rows
           $pagina = $_GET['offset'] + 1;
 
-          echo '<h2 style="text-align:center;"><strong>Er zijn geen resultaten gevonden</strong></h2>';
+          echo '
+            <h2 style="text-align:center;"><strong>Er zijn geen resultaten gevonden</strong></h2>
+            <a href="index.php?page=addschool" class="addbutton"> school toevoegen</a>
+          ';
           if (isset($_GET['offset']) && $_GET['offset'] >= '1') {
             $terug = $_GET['offset'] - 1;
 

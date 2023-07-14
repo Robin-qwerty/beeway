@@ -37,29 +37,30 @@
     <br>
 
       <?php
-        $sql = 'SELECT * FROM schools
-                WHERE schoolid<>0
-                AND archive=1
-                ORDER BY schoolid';
+        $sql = 'SELECT s.*, u.firstname, u.lastname
+                FROM schools AS s
+                LEFT JOIN users AS u ON s.deletedby = u.userid
+                WHERE s.schoolid <> 0
+                AND s.archive = 1
+                ORDER BY s.schoolid';
         $sth = $conn->prepare($sql);
         $sth->execute();
 
         if ($sth->rowCount() > 0) {
-          echo '<table class="beewaylijsttable">
-            <tr>
-              <th><h3>school naam</h3></th>
-              <th><h3>users van deze school bekijken</h3></th>
-            </tr>';
-          while ($schools = $sth->fetch(PDO::FETCH_OBJ)) {
-
-            echo'
+        echo '<table class="beewaylijsttable">
               <tr>
-                <td><b>'.$schools->schoolname.'</b></td>
-                <td><a href="php/getbackschool.php?userid='.$schools->schoolid.'" class="editbutton">terug halen</a></td>
-              </tr>
-            ';
-          }
-          echo '</table>
+                <th><h3>School Name</h3></th>
+                <th><h3>Info</h3></th>
+              </tr>';
+        while ($schools = $sth->fetch(PDO::FETCH_OBJ)) {
+          echo '
+            <tr>
+              <td><b>'.$schools->schoolname.'</b></td>
+              <td><b>Deleted at: </b>'.$schools->deletedat.' -- <b>Deleted by: </b>('.$schools->deletedby.') - '.$schools->firstname.' '.$schools->lastname.'</b></td>
+            </tr>
+          ';
+        }
+        echo '</table>
 
           <hr>
           <br>

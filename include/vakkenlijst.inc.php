@@ -47,7 +47,7 @@
       <hr>
       <br>
 
-      <?php
+    <?php
       $sql = 'SELECT schoolid
               FROM users
               WHERE schoolid <> 0
@@ -68,7 +68,7 @@
           $sth->bindValue(':schoolid', $schoolid, PDO::PARAM_INT);
           $sth->execute();
 
-          ?>
+    ?>
           <table class="beewaylijsttable">
               <tr>
                   <th>
@@ -76,7 +76,7 @@
                       <th><a href="index.php?page=adddiscipline" class="addbutton">toevoegen</a></th>
                   </th>
               </tr>
-              <?php
+            <?php
               while ($disciplines = $sth->fetch(PDO::FETCH_OBJ)) {
                   ?>
                   <tr>
@@ -84,21 +84,22 @@
                       <td><a href="index.php?page=editdiscipline&disciplineid=<?= $disciplines->disciplineid ?>"
                              class="editbutton">bewerken</a></td>
                   </tr>
-                  <?php
+            <?php
               }
-              ?>
+            ?>
           </table>
           <hr>
           <br>
           <?php
       } else {
-          $_SESSION['error'] = "Er zijn geen resultaten gevonden. Pech!";
+        echo '<h2 style="text-align: center;"><strong>the query did not return any rows</strong></h2>';
+        echo '<a href="index.php?page=addmaintheme" class="adddiscipline" id="addfirst">vak toevoegen</a>';
+        $_SESSION['error'] = "Er zijn geen resultaten gevonden. Pech!";
       }
       ?>
       <div class="seedeleted">
           <h3>bekijk verwijderde vakken: </h3>
-          <a class="deletebutton" id="trashbutton2" href="index.php?page=vakkenarchivelijst"><iconify-icon
-                      icon="tabler:trash"></iconify-icon></a>
+          <a class="deletebutton" id="trashbutton2" href="index.php?page=vakkenarchivelijst"><iconify-icon icon="tabler:trash"></iconify-icon></a>
       </div>
     <br>
     <br>

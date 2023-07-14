@@ -3,7 +3,7 @@
   <div id="navbar_left">
     <?php if (isset($_SESSION['userid'])) { ?>
       <div id="navbuttons">
-        <a href="index.php"><b>Home</b></a>
+        <!-- <a href="index.php"><b>Home</b></a> -->
         <div class="dropdown">
           <a id="dashboard" href="index.php?page=dashboard"><b>dashboard</b></a>
         </div>

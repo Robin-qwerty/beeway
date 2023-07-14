@@ -30,7 +30,7 @@
       $sth->bindValue(':useragent', $_SESSION['useragent']);
       $sth->execute();
 
-      $_SESSION['error'] = "Something went wrong. Please try again.";
+      $_SESSION['error'] = 'An error occurred. Please try again. or contact an admin if this keeps happaning';
       header("Location: ../index.php?page=userarchivelijst");
       exit;
     }

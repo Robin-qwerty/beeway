@@ -52,6 +52,7 @@
       }
   } catch (\Exception $e) {
       logErrorAndRedirect('An error occurred. Please try again.', '2', '4');
+      $_SESSION['error'] = 'An error occurred. Please try again. or contact an admin if this keeps happaning';
   }
 
   function checkForIllegalCharacters($str)

@@ -155,7 +155,7 @@
                 </div>
               </div>
 
-              <div class="cell HOOFDTHEMA">
+              <!-- <div class="cell HOOFDTHEMA">
                 <h2 id="orange">HOOFDTHEMA</h2>
                 <input type="radio" name="hoofdthemaid" value="1" <?php echo isset($beeway->themeperiodid) && $beeway->themeperiodid == 1 ? 'checked' : ''; ?> required>
                 <label for="html">P1: EDI</label>
@@ -172,7 +172,45 @@
                 <input type="radio" name="hoofdthemaid" value="5" <?php echo isset($beeway->themeperiodid) && $beeway->themeperiodid == 5 ? 'checked' : ''; ?>>
                 <label for="html">P5: DOELENPLANNER</label>
                 <br>
-              </div>
+              </div> -->
+              <div class="cell HOOFDTHEMA">
+                <h2 id="orange">HOOFDTHEMA</h2>
+            <?php
+              $sql = 'SELECT namethemep1, namethemep2, namethemep3, namethemep4, namethemep5
+                      FROM maintheme
+                      WHERE archive = 0
+                      AND schoolid = :schoolid
+                      AND themeid = :themeid';
+              $sth = $conn->prepare($sql);
+              $sth->bindValue(':schoolid', $schoolid);
+              $sth->bindValue(':themeid', $beeway->mainthemeid);
+              $sth->execute();
+
+              if ($sth->rowCount() > 0) {
+                while ($maintheme = $sth->fetch(PDO::FETCH_OBJ)) {
+                  echo '
+                    <input type="radio" name="themeperiodid" value="1" '.(isset($beeway->themeperiodid) && $beeway->themeperiodid == 1 ? 'checked' : '').' required>
+                    <label for="html">P1: '.$maintheme->namethemep1.'</label>
+                    <br>
+                    <input type="radio" name="themeperiodid" value="2" '.(isset($beeway->themeperiodid) && $beeway->themeperiodid == 2 ? 'checked' : '').'>
+                    <label for="html">P2: '.$maintheme->namethemep2.'</label>
+                    <br>
+                    <input type="radio" name="themeperiodid" value="3" '.(isset($beeway->themeperiodid) && $beeway->themeperiodid == 3 ? 'checked' : '').'>
+                    <label for="html">P3: '.$maintheme->namethemep3.'</label>
+                    <br>
+                    <input type="radio" name="themeperiodid" value="4" '.(isset($beeway->themeperiodid) && $beeway->themeperiodid == 4 ? 'checked' : '').'>
+                    <label for="html">P4: '.$maintheme->namethemep4.'</label>
+                    <br>
+                    <input type="radio" name="themeperiodid" value="5" '.(isset($beeway->themeperiodid) && $beeway->themeperiodid == 5 ? 'checked' : '').'>
+                    <label for="html">P5: '.$maintheme->namethemep5.'</label>
+                    <br>
+                  ';
+                }
+              } else {
+                echo "<p>No main theme options available.</p>";
+              }
+            ?>
+          </div>
 
 
               <div class="cell CONCREETDOEL">

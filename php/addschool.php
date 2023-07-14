@@ -28,8 +28,7 @@
       $schoolId = $conn->lastInsertId();
 
       if ($schoolId) {
-        $sqlInsertLog = "INSERT INTO logs (userid, useragent, action, info, tableid, interactionid)
-                         VALUES (:userid, :useragent, '1', 'school created', '5', :interactionid)";
+        $sqlInsertLog = "INSERT INTO logs (userid, useragent, action, info, tableid, interactionid, error) VALUES (:userid, :useragent, 1, 'school created', 5, :interactionid, 0)";
         $stmtInsertLog = $conn->prepare($sqlInsertLog);
         $stmtInsertLog->bindParam(':userid', $_SESSION['userid']);
         $stmtInsertLog->bindParam(':useragent', $_SESSION['useragent']);
@@ -51,7 +50,7 @@
 
           $userId = $conn->lastInsertId();
 
-          $sqlInsertUserLog = "INSERT INTO logs (userid, useragent, info, action, tableid, interactionid) VALUES (:userid, :useragent, CONCAT('User added for new school ', :schoolid), 1, 6, :interactionid)";
+          $sqlInsertUserLog = "INSERT INTO logs (userid, useragent, info, action, tableid, interactionid, error) VALUES (:userid, :useragent, CONCAT('User added for new school ', :schoolid), 1, 6, :interactionid, 0)";
           $stmtInsertUserLog = $conn->prepare($sqlInsertUserLog);
           $stmtInsertUserLog->bindParam(':userid', $_SESSION['userid']);
           $stmtInsertUserLog->bindParam(':useragent', $_SESSION['useragent']);
@@ -84,7 +83,7 @@
       $stmtInsertErrorLog->execute();
 
       $_SESSION['schoolname'] = $_POST['schoolname'];
-      $_SESSION['error'] = 'Failed to add school.';
+      $_SESSION['error'] = 'An error occurred. Please try again. or contact an admin if this keeps happaning';
       header('Location: ../index.php?page=addschool');
       exit;
     }

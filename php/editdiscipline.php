@@ -46,7 +46,7 @@
         $sth->bindValue(':useragent', $_SESSION['useragent']);
         $sth->execute();
 
-        $_SESSION['error'] = "Er is iets misgegaan. Probeer het opnieuw.";
+        $_SESSION['error'] = 'An error occurred. Please try again. or contact an admin if this keeps happaning';
         header("Location: ../index.php?page=vakkenlijst");
       }
     }

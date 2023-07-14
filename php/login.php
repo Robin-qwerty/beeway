@@ -53,7 +53,7 @@
 
     // Log the login attempt
     if ($user) {
-      $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid) VALUES (:userid, :useragent, 4, 6, :interactionid)';
+      $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES (:userid, :useragent, 4, 6, :interactionid, 0)';
       $sth = $conn->prepare($sql);
       $sth->bindValue(':userid', $user->userid);
       $sth->bindValue(':useragent', $_SESSION['useragent']);
@@ -93,7 +93,7 @@
   } catch (\Exception $e) {
     $_SESSION['school'] = $schoolId;
     $_SESSION['email'] = $email;
-    $_SESSION['error'] = "An error occurred. Please try again.";
+    $_SESSION['error'] = 'An error occurred. Please try again. or contact an admin if this keeps happaning';
     header("Location: ../index.php?page=login");
   }
 

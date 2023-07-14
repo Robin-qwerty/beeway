@@ -33,8 +33,7 @@
           $interactionIdUsers = $schoolId;
           $infoUsers = "Everything from 'users' where schoolid is {$schoolId} has been deleted.";
 
-          $sqlLogsUsers = "INSERT INTO logs (userid, useragent, action, tableid, interactionid, info)
-                           VALUES (:userid, :useragent, :action, :tableid, :interactionid, :info)";
+          $sqlLogsUsers = "INSERT INTO logs (userid, useragent, action, tableid, interactionid, info, error) VALUES (:userid, :useragent, :action, :tableid, :interactionid, :info, 0)";
           $sthLogsUsers = $conn->prepare($sqlLogsUsers);
           $sthLogsUsers->bindParam(':userid', $_SESSION['userid']);
           $sthLogsUsers->bindParam(':useragent', $_SESSION['useragent']);
@@ -61,8 +60,7 @@
           $interactionIdMainTheme = $schoolId;
           $infoMainTheme = "Everything from 'maintheme' where schoolid is {$schoolId} has been deleted.";
 
-          $sqlLogsMainTheme = "INSERT INTO logs (userid, useragent, action, tableid, interactionid, info)
-                               VALUES (:userid, :useragent, :action, :tableid, :interactionid, :info)";
+          $sqlLogsMainTheme = "INSERT INTO logs (userid, useragent, action, tableid, interactionid, info, error) VALUES (:userid, :useragent, :action, :tableid, :interactionid, :info, 0)";
           $sthLogsMainTheme = $conn->prepare($sqlLogsMainTheme);
           $sthLogsMainTheme->bindParam(':userid', $_SESSION['userid']);
           $sthLogsMainTheme->bindParam(':useragent', $_SESSION['useragent']);
@@ -89,8 +87,7 @@
           $interactionIdGroups = $schoolId;
           $infoGroups = "Everything from 'groups' where schoolid is {$schoolId} has been deleted.";
 
-          $sqlLogsGroups = "INSERT INTO logs (userid, useragent, action, tableid, interactionid, info)
-                            VALUES (:userid, :useragent, :action, :tableid, :interactionid, :info)";
+          $sqlLogsGroups = "INSERT INTO logs (userid, useragent, action, tableid, interactionid, info, error) VALUES (:userid, :useragent, :action, :tableid, :interactionid, :info, 0)";
           $sthLogsGroups = $conn->prepare($sqlLogsGroups);
           $sthLogsGroups->bindParam(':userid', $_SESSION['userid']);
           $sthLogsGroups->bindParam(':useragent', $_SESSION['useragent']);
@@ -117,8 +114,7 @@
           $interactionIdDisciplines = $schoolId;
           $infoDisciplines = "Everything from 'disciplines' where schoolid is {$schoolId} has been deleted.";
 
-          $sqlLogsDisciplines = "INSERT INTO logs (userid, useragent, action, tableid, interactionid, info)
-                                 VALUES (:userid, :useragent, :action, :tableid, :interactionid, :info)";
+          $sqlLogsDisciplines = "INSERT INTO logs (userid, useragent, action, tableid, interactionid, info, error) VALUES (:userid, :useragent, :action, :tableid, :interactionid, :info, 0)";
           $sthLogsDisciplines = $conn->prepare($sqlLogsDisciplines);
           $sthLogsDisciplines->bindParam(':userid', $_SESSION['userid']);
           $sthLogsDisciplines->bindParam(':useragent', $_SESSION['useragent']);
@@ -172,8 +168,7 @@
             $interactionIdBeeway = $schoolId;
             $infoBeeway = "Everything from 'beewayplanning' and 'beewayobservation' where beewayid is in ({$beewayIdList}) has been archived where beeway.schoolid is {$schoolId}.";
 
-            $sqlLogsBeeway = "INSERT INTO logs (userid, useragent, action, tableid, interactionid, info)
-                              VALUES (:userid, :useragent, :action, :tableid, :interactionid, :info)";
+            $sqlLogsBeeway = "INSERT INTO logs (userid, useragent, action, tableid, interactionid, info, error) VALUES (:userid, :useragent, :action, :tableid, :interactionid, :info, 0)";
             $sthLogsBeeway = $conn->prepare($sqlLogsBeeway);
             $sthLogsBeeway->bindParam(':userid', $_SESSION['userid']);
             $sthLogsBeeway->bindParam(':useragent', $_SESSION['useragent']);
@@ -200,8 +195,7 @@
           $interactionIdSchools = $schoolId;
           $infoSchools = "School with schoolid {$schoolId} has been archived.";
 
-          $sqlLogsSchools = "INSERT INTO logs (userid, useragent, action, tableid, interactionid, info)
-                             VALUES (:userid, :useragent, :action, :tableid, :interactionid, :info)";
+          $sqlLogsSchools = "INSERT INTO logs (userid, useragent, action, tableid, interactionid, info, error) VALUES (:userid, :useragent, :action, :tableid, :interactionid, :info, 0)";
           $sthLogsSchools = $conn->prepare($sqlLogsSchools);
           $sthLogsSchools->bindParam(':userid', $_SESSION['userid']);
           $sthLogsSchools->bindParam(':useragent', $_SESSION['useragent']);
@@ -227,7 +221,7 @@
       }
     }
   } else {
-    $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES (9999, :useragent, 3, 6, "0", "1")';
+    $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES (9999, :useragent, 3, 6, 0, 1)';
     $sth = $conn->prepare($sql);
     $sth->bindValue(':useragent', $_SESSION['useragent']);
     $sth->execute();

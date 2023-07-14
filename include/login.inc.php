@@ -47,8 +47,7 @@
 
     <label for="email"><b>Email</b></label>
     <br>
-    <input type="text" placeholder="Enter Email" name="email" id="email"
-      value="<?= isset($_SESSION['email']) ? htmlspecialchars($_SESSION['email']) : ''; ?>" required>
+    <input type="text" placeholder="Enter Email" name="email" id="email" value="<?= isset($_SESSION['email']) ? htmlspecialchars($_SESSION['email']) : ''; ?>" required>
     <?php
       unset($_SESSION['email']);
       unset($_SESSION['school']);

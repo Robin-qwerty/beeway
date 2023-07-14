@@ -548,3 +548,537 @@ input[type='checkbox']:checked {
   color: white;
   text-align: center;
 }
+
+/*---------------------Beheerlijsten---------------------------------*/
+
+.beewaylijst {
+  margin: 7rem 1rem 0 1rem;
+  background: #8a9297;
+  padding: 1.5rem;
+  border-radius: 1rem;
+}
+
+.beewaylijsttable {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+.beewaylijsttable td, th {
+  padding: 10px;
+  text-align: center;
+}
+.beewaylijsttable td {
+  color: white;
+}
+.beewaylijsttable tr:nth-child(even) {
+  background-color: #172a32;
+  border-radius: 1rem;
+}
+.beewaylijsttable tr:hover {
+  background-color: #595959;
+}
+
+.beewaylijstopties {
+  /* width: 42%;
+  margin: 5px 34%; */
+  text-align: center;
+}
+.beewaylijstopties button {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background-color: #8a9297;
+  font-size: 18px;
+  font-weight: bold;
+  color: #596970;
+}
+.beewaylijstopties u {
+  color: black;
+}
+.beewaylijstopties b {
+  text-align: center;
+  font-size: 20px!important;
+}
+
+.tablebuttons {
+  display: flex;
+  justify-content: center;
+}
+
+/*----------------Beheertoevoegen/aanpassen--------------------------*/
+
+#name {
+  text-align: center;
+  line-height: 20px;
+  color: #ffc107;
+}
+#name a {
+  text-decoration: none;
+  background: none;
+  line-height: 20px;
+  color: #ffc107;
+}
+#name a:hover {
+  color: #737373;
+}
+
+.addedit {
+  width: 1300px;
+  height: 630px;
+  background: #333333;
+  top: 52%;
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  padding: 20px 50px;
+  border-radius: 25px;
+}
+.addedit label,
+.addeditschool label,
+.addeditdiscipline label,
+.addgroups label {
+  color: #ffc107;
+}
+.addeditBy {
+  color: white;
+}
+
+.addeditschool {
+  width: 550px;
+  height: 450px;
+  background: #333333;
+  top: 52%;
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  padding: 20px 50px;
+  border-radius: 25px;
+}
+
+#RP {
+  width: 600px;
+  height: 300px;
+  float: right;
+}
+#LP {
+  width: 600px;
+  height: 300px;
+  float: left;
+}
+
+#addfirst {
+
+}
+
+/*---------------------klassen toevoegen/aanpassen-------------------*/
+
+/*---------------------vakken toevoegen/aanpassen--------------------*/
+
+.addeditdiscipline {
+  width: 550px;
+  height: 450px;
+  background: #333333;
+  top: 52%;
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  padding: 20px 50px;
+  border-radius: 25px;
+}
+
+.adddisciplinerbtn {
+  position: absolute;
+  bottom: 35px;
+  right: 35%;
+  border: none;
+  height: 35px;
+  width: 215px;
+  background: #737373;
+  font-size: 15px;
+  border-radius: 10px;
+}
+.adddisciplinerbtn:hover {
+  background: #ffc107;
+}
+
+/*---------------------hoofdthema toevoegen/aanpassen----------------*/
+
+.addmainthemebtn {
+  position: absolute;
+  bottom: 35px;
+  right: 42%;
+  border: none;
+  height: 35px;
+  width: 250px;
+  background: #737373;
+  font-size: 15px;
+  border-radius: 10px;
+}
+.addmainthemebtn:hover {
+  background: #ffc107;
+}
+
+/*---------------------users toevoegen/aanpassen---------------------*/
+
+.admin_adduser {
+  width: 600px;
+  height: 845px;
+  background: #333333;
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  padding: 50px;
+  border-radius: 25px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+#adduserbtn {
+  bottom: 45px;
+  right: 45%;
+}
+#password-validation,
+#passwordchangewarning {
+  font-size: 15px;
+  color: #ff8533;
+  font-weight: bold;
+}
+
+.selectBox {
+  position: relative;
+}
+.selectBox select {
+  width: 100%;
+  font-weight: bold;
+}
+
+.overSelect {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+#checkboxes {
+  display: none;
+  padding: 5px;
+  border: 1px #dadada solid;
+  position: absolute;
+  background: #4d4d4d;
+  margin-top: -20px;
+  width: 41.5%;
+  font-size: 20px;
+  z-index: 1;
+}
+#checkboxes label {
+  margin: 4px 0px;
+  display: block;
+  color: white;
+}
+#checkboxes label:hover {
+  background-color: #1e90ff;
+}
+#checkboxes input {
+  margin: 0px 9px;
+}
+
+#editedby {
+  color: white;
+}
+
+input[type='radio'],
+input[type='checkbox'] {
+  box-sizing: border-box;
+  appearance: none;
+  background: white;
+  outline: 2px solid #333;
+  border: 3px solid white;
+  width: 18px;
+  height: 18px;
+}
+input[type='radio']:checked,
+input[type='checkbox']:checked {
+  background: #333;
+}
+
+/*---------------------beeway------------------------------------*/
+
+.beewayedit {
+  padding: 1rem;
+  width: 70%;
+  margin: 0 15% 0 15%;
+  display: table-row;
+  float: right;
+}
+.beewayedit div {
+  display: table-cell;
+}
+.beewayedit div input {
+  margin: 0 1rem;
+  font-size: 20px;
+}
+.beewayedit div p {
+  margin: 0 2rem;
+}
+
+.helebeeway {
+  display: grid;
+  place-items: center;
+  padding: 0.5%;
+}
+
+#grid-line {
+  display: grid;
+  grid-template-columns: 10% 10% 10% 10% 10% 10% 10% 10% 10% 7% 3%;
+  grid-template-rows: 180px 80px;
+  /* grid-template-rows: 180px 80px 38px 310px 340px; */
+  grid-gap: 1px;
+  background-color: black;
+  padding-right: 9px;
+  width: 80%;
+}
+
+@media screen and (max-width:1765px){
+  #grid-line {
+    width: 100%;
+  }
+}
+
+
+label, input {
+  /* added because a second click to unselect radio often
+     appears as a double click to select text */
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+}
+
+div.cell {
+  border: 1px solid #000;
+  padding: 10px;
+}
+div.cell h2 {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+
+.textareaobservatie {
+  resize: none;
+  width: calc(100% + 5px);
+  height: 66.5px;
+  margin: -5px 0;
+}
+
+#orange {
+  background-color: #FEAE00;
+  margin: -10px -10px 5px -10px;
+  border-bottom: 2px solid black;
+}
+
+#orange2 {
+  background-color: #FECA5A;
+  margin: -10px -10px 5px -10px;
+  border-bottom: 2px solid black;
+}
+
+#orange3 {
+  background-color: #FEE6B3;
+  margin: -10px -10px 5px -10px;
+  padding-bottom: 19px;
+  border-bottom: 2px solid black;
+}
+#orange3 {
+  margin-top: 10px;
+}
+
+.BEEWAY {
+  grid-column-start: 1;
+  grid-column-end: 4;
+  place-items: center;
+  background-color: #FEAE00;
+}
+.BEEWAY h1 {
+  font-weight: bold;
+  font-size: 65px;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+}
+.BEEWAY h2 {
+  font-weight: bold;
+  text-align: center;
+}
+#groepen {
+  margin: 20px 0 0 38%;
+}
+#groepen label{
+  color: white;
+  font-size: 1.4rem;
+}
+.BEEWAY input {
+  width: 65px;
+  background-color: #FEAE00;
+  font-size: 18px;
+}
+
+
+.HOOFDTHEMA {
+  grid-column-start: 4;
+  grid-column-end: 7;
+  background: white;
+}
+.HOOFDTHEMA label{
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.CONCREETDOEL {
+  grid-column-start: 7;
+  grid-column-end: 12;
+  grid-row-start: 1;
+  grid-row-end: 3;
+  background: white;
+}
+.CONCREETDOEL textarea {
+  resize: none;
+  width: calc(100% + 20px);
+  height: 98%;
+  margin: -8px -10px -10px -10px;
+  font-size: 15px;
+}
+
+.beoordeling {
+  grid-column-start: 1;
+  grid-column-end: 4;
+  background: white;
+  padding: 0!important;
+
+  display: grid;
+  place-items: center;
+  grid-template-columns: 16.6% 17.8% 16.6% 17.8% 16.6% 17.8%;
+}
+.beoordeling-item {
+  margin: 0;
+  padding: 0;
+}
+.beoordeling input {
+  width: 60px!important;
+  background-color: white;
+  font-size: 25px;
+  height: 82px;
+  border: none;
+  border-left: 2px solid black;
+  border-right: 2px solid black;
+}
+/* Chrome, Safari, Edge, Opera */
+.beoordeling input::-webkit-outer-spin-button,
+.beoordeling input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+/* Firefox */
+.beoordeling input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.vakgebied {
+  grid-column-start: 4;
+  grid-column-end: 7;
+  background: white;
+}
+.vakgebied select {
+  width: calc(100% + 20px);
+  height: 85%;
+  margin: -6px -10px;
+  font-size: 25px;
+  font-weight: bold;
+  border: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  text-align: center;
+}
+
+.PLANNING {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 3;
+  grid-row-end: 5;
+  background: #FEE6B3;
+}
+.PLANNING textarea {
+  background: #FEE6B3;
+}
+
+.Acties {
+  grid-column-start: 3;
+  grid-column-end: 12;
+  place-items: center;
+  text-align: center;
+  background-color: #FEAE00;
+  place-items: center;
+}
+.Acties h2 {
+  margin: -5px 0 0 0!important;
+}
+
+.WAT {
+  grid-column-start: 3;
+  grid-column-end: 6;
+  background: white;
+}
+
+.WIE {
+  grid-column-start: 6;
+  grid-column-end: 8;
+  background: white;
+}
+
+.DEADLINE {
+  grid-column-start: 8;
+  grid-column-end: 11;
+  background: white;
+}
+
+.done {
+  background: white;
+}
+.done h2 {
+  font-size: 21px;
+}
+.done input {
+  margin: 0.36rem;
+  height: 18px;
+  width: 18px;
+}
+
+.observatie {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  background: white;
+}
+.leerdoel {
+  grid-column-start: 3;
+  grid-column-end: 5;
+  background: white;
+}
+.evaluatie {
+  grid-column-start: 5;
+  grid-column-end: 7;
+  background: white;
+}
+.werkdoel {
+  grid-column-start: 7;
+  grid-column-end: 9;
+  background: white;
+}
+.actie {
+  grid-column-start: 9;
+  grid-column-end: 12;
+  background: white;
+}
+
+.BeewayAddRows {
+  float: right;
+}

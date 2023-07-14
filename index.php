@@ -16,13 +16,16 @@
   <title><?php if (isset($page)) { echo $page; } else {echo "Home";}?></title>
   <link rel="icon" type="image/x-icon" href="media/favicon.ico">
   <link href="style/style.css" rel="stylesheet">
-  <link href="style/beheer.css" rel="stylesheet">
-  <link href="style/beewaystyle.css" rel="stylesheet">
+  <!-- <link href="style/beheer.css" rel="stylesheet"> -->
+  <!-- <link href="style/beewaystyle.css" rel="stylesheet"> -->
   <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.0-beta.3/dist/iconify-icon.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 </head>
 <body>
-
+<!--
+  This site was made by Robin: https://github.com/Robin-qwerty
+  And Yilmaz: https://github.com/Yilmaz2004
+-->
   <?php
     require_once 'include/navbar.inc.php';
 

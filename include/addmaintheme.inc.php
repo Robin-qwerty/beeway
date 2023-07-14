@@ -7,17 +7,20 @@
       <hr style="margin: 20px 0;">
       <div id="LP">
         <label for="NaamThemaP1"><b>Hoofdthema naam Periode 1</b></label>
-        <input id="NaamThemaP1" type="text" placeholder="NaamThemaP1" name="namethemep1" required>
+        <input id="NaamThemaP1" type="text" placeholder="NaamThemaP1" name="namethemep1" value="<?= isset($_SESSION['namethemep1']) ? htmlspecialchars($_SESSION['namethemep1']) : ''; ?>" required>
+
         <label for="NaamThemaP2"><b>Hoofdthema naam Periode 2</b></label>
-        <input id="NaamThemaP2" type="text" placeholder="NaamThemaP2" name="namethemep2" required>
+        <input id="NaamThemaP2" type="text" placeholder="NaamThemaP2" name="namethemep2" value="<?= isset($_SESSION['namethemep2']) ? htmlspecialchars($_SESSION['namethemep2']) : ''; ?>" required>
+
         <label for="NaamThemaP3"><b>Hoofdthema naam Periode 3</b></label>
-        <input id="NaamThemaP3" type="text" placeholder="NaamThemaP3" name="namethemep3" required>
+        <input id="NaamThemaP3" type="text" placeholder="NaamThemaP3" name="namethemep3" value="<?= isset($_SESSION['namethemep3']) ? htmlspecialchars($_SESSION['namethemep3']) : ''; ?>" required>
       </div>
       <div id="RP">
         <label for="NaamThemaP4"><b>Hoofdthema naam Periode 4</b></label>
-        <input id="NaamThemaP4" type="text" placeholder="NaamThemaP4" name="namethemep4" required>
+        <input id="NaamThemaP4" type="text" placeholder="NaamThemaP4" name="namethemep4" value="<?= isset($_SESSION['namethemep4']) ? htmlspecialchars($_SESSION['namethemep4']) : ''; ?>" required>
+
         <label for="NaamThemaP5"><b>Hoofdthema naam Periode 5</b></label>
-        <input id="NaamThemaP5" type="text" placeholder="NaamThemaP5" name="namethemep5" required>
+        <input id="NaamThemaP5" type="text" placeholder="NaamThemaP5" name="namethemep5" value="<?= isset($_SESSION['namethemep5']) ? htmlspecialchars($_SESSION['namethemep5']) : ''; ?>" required>
 
         <label for="selectaddedit"><b>Schooljaar</b></label>
         <select id="selectaddedit" name="schoolyear" >
@@ -31,6 +34,14 @@
           </optgroup>
         </select>
       </div>
+
+      <?php
+        unset($_SESSION['namethemep1']);
+        unset($_SESSION['namethemep2']);
+        unset($_SESSION['namethemep3']);
+        unset($_SESSION['namethemep4']);
+        unset($_SESSION['namethemep5']);
+      ?>
 
       <hr style="margin: 20px 0;">
       <button type="submit" class="addmainthemebtn" style="font-size:20px;font-weight: bold;">Hoofdthema toevoegen</button>

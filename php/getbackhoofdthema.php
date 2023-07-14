@@ -26,7 +26,7 @@
       $sth->bindParam(':themeid', $_GET['themeid']);
       $sth->execute();
 
-      $_SESSION['error'] = "Something went wrong. Please try again.";
+      $_SESSION['error'] = 'An error occurred. Please try again. or contact an admin if this keeps happaning';
       header("Location: ../index.php?page=hoofdthemaarchivelijst");
       exit;
     }

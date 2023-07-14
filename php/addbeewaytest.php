@@ -21,7 +21,8 @@
         // Retrieve the data from the first form (form0)
         $beewaynaam = $_POST['beewaynaam'];
         $groepen = $_POST['groepen'];
-        $hoofdthemaid = $_POST['hoofdthemaid'];
+        $mainthemeid = $_POST['mainthemeid'];
+        $themeperiodid = $_POST['themeperiodid'];
         $concreetdoel = $_POST['concreetdoel'];
         $begoed = $_POST['begoed'];
         $bevoldoende = $_POST['bevoldoende'];
@@ -29,8 +30,8 @@
         $vakgebiedid = $_POST['vakgebiedid'];
 
         // Insert the data into the `beeway` table
-        $sql = 'INSERT INTO beeway (schoolid, groupid, beewayname, begood, beenough, benotgood, mainthemeid, concretegoal, disciplineid)
-                VALUES (:schoolid, :groupid, :beewayname, :begood, :beenough, :benotgood, :mainthemeid, :concretegoal, :disciplineid)';
+        $sql = 'INSERT INTO beeway (schoolid, groupid, beewayname, begood, beenough, benotgood, mainthemeid, themeperiodid, concretegoal, disciplineid)
+                VALUES (:schoolid, :groupid, :beewayname, :begood, :beenough, :benotgood, :mainthemeid, :themeperiodid, :concretegoal, :disciplineid)';
         $stmt = $conn->prepare($sql);
         $stmt->bindValue(':schoolid', $schoolid);
         $stmt->bindValue(':groupid', $groepen);
@@ -38,7 +39,8 @@
         $stmt->bindValue(':begood', $begoed);
         $stmt->bindValue(':beenough', $bevoldoende);
         $stmt->bindValue(':benotgood', $beonvoldoende);
-        $stmt->bindValue(':mainthemeid', $hoofdthemaid);
+        $stmt->bindValue(':mainthemeid', $mainthemeid);
+        $stmt->bindValue(':themeperiodid', $themeperiodid);
         $stmt->bindValue(':concretegoal', $concreetdoel);
         $stmt->bindValue(':disciplineid', $vakgebiedid);
         $stmt->execute();
@@ -93,11 +95,11 @@
       // Handle database errors
       $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES (:userid, :useragent, 1, 1, 0, 5)';
       $sth = $conn->prepare($sql);
-      $stmt->bindParam(':userid', $_SESSION['userid']);
+      $sth->bindValue(':userid', $_SESSION['userid']);
       $sth->bindValue(':useragent', $_SESSION['useragent']);
       $sth->execute();
 
-      $_SESSION['error'] = "An error occurred while saving the data. Please try again later.";
+      $_SESSION['error'] = 'An error occurred while saving the beeway. Please try again. or contact an admin if this keeps happaning';
       header('Location: ../index.php?page=addbeewaytest');
       exit;
     }

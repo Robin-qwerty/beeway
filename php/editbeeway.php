@@ -5,10 +5,10 @@
   if (isset($_SESSION['userid'], $_SESSION['userrole'])) {
     $beewayid = $_GET['beewayid'];
 
-    if (empty($_POST['beewaynaam']) || empty($_POST['groepen']) || empty($_POST['hoofdthemaid']) || empty($_POST['vakgebiedid'])) {
+    if (empty($_POST['beewaynaam']) || empty($_POST['groepen']) || empty($_POST['themeperiodid']) || empty($_POST['vakgebiedid'])) {
       // If the required fields are not filled in, redirect back to the add beeway page with an error message
       $_SESSION['error'] = 'Please fill in all required fields.';
-      header('Location: ../index.php?page=editbeeway&beewayid=' . $beewayid);
+      header('Location: ../index.php?page=editbeewaytest&beewayid=' . $beewayid);
       exit;
     }
 
@@ -16,20 +16,20 @@
     if (strpbrk($_POST['beewaynaam'], '<>{}[]$^`:;/')) {
       // If illegal characters are found in the beeway name, redirect back to the add beeway page with an error message
       $_SESSION['error'] = 'Illegal character used.';
-      header('Location: ../index.php?page=editbeeway&beewayid=' . $beewayid);
+      header('Location: ../index.php?page=editbeewaytest&beewayid=' . $beewayid);
       exit;
     }
 
     $beewaynaam = $_POST['beewaynaam'];
     $groepen = $_POST['groepen'];
-    $hoofdthemaid = $_POST['hoofdthemaid'];
+    $themeperiodid = $_POST['themeperiodid'];
     $vakgebiedid = $_POST['vakgebiedid'];
     $concreetdoel = isset($_POST['concreetdoel']) ? $_POST['concreetdoel'] : '';
     $begoed = isset($_POST['begoed']) ? $_POST['begoed'] : '';
     $bevoldoende = isset($_POST['bevoldoende']) ? $_POST['bevoldoende'] : '';
     $beonvoldoende = isset($_POST['beonvoldoende']) ? $_POST['beonvoldoende'] : '';
 
-    try {
+    // try {
       $conn->beginTransaction();
 
       // Update beeway
@@ -37,8 +37,7 @@
               SET `begood` = :begoed,
                   `beenough` = :bevoldoende,
                   `benotgood` = :beonvoldoende,
-                  `mainthemeid` = :mainthemeid,
-                  `themeperiodid` = :mainthemeid,
+                  `themeperiodid` = :themeperiodid,
                   `disciplineid` = :disciplineid,
                   `concretegoal` = :concreetdoel,
                   `updatedby` = :updatedby,
@@ -49,7 +48,7 @@
       $stmt->bindValue(':begoed', $begoed);
       $stmt->bindValue(':bevoldoende', $bevoldoende);
       $stmt->bindValue(':beonvoldoende', $beonvoldoende);
-      $stmt->bindValue(':mainthemeid', $hoofdthemaid);
+      $stmt->bindValue(':themeperiodid', $themeperiodid);
       $stmt->bindValue(':disciplineid', $vakgebiedid);
       $stmt->bindValue(':concreetdoel', $concreetdoel);
       $stmt->bindValue(':updatedby', $_SESSION['userid']);
@@ -111,20 +110,20 @@
       $_SESSION['info'] = 'Beeway updated successfully';
       header('Location: ../index.php?page=beewaylijst');
       exit;
-    } catch (PDOException $e) {
-      $conn->rollback();
-
-      $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES (:userid, :useragent, 2, 1, :beewayid, 5)';
-      $sth = $conn->prepare($sql);
-      $sth->bindParam(':userid', $_SESSION['userid']);
-      $sth->bindValue(':useragent', $_SESSION['useragent']);
-      $sth->bindValue(':beewayid', $beewayid);
-      $sth->execute();
-
-      $_SESSION['error'] = 'Error updating beeway: ' . $e->getMessage();
-      header('Location: ../index.php?page=editbeeway&beewayid=' . $beewayid);
-      exit;
-    }
+    // } catch (PDOException $e) {
+    //   $conn->rollback();
+    //
+    //   $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES (:userid, :useragent, 2, 1, :beewayid, 5)';
+    //   $sth = $conn->prepare($sql);
+    //   $sth->bindParam(':userid', $_SESSION['userid']);
+    //   $sth->bindValue(':useragent', $_SESSION['useragent']);
+    //   $sth->bindValue(':beewayid', $beewayid);
+    //   $sth->execute();
+    //
+    //   $_SESSION['error'] = 'Error updating beeway: ' . $e->getMessage();
+    //   header('Location: ../index.php?page=editbeewaytest&beewayid=' . $beewayid);
+    //   exit;
+    // }
   } else {
     $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES (9999, :useragent, 2, 1, :beewayid, 1)';
     $sth = $conn->prepare($sql);

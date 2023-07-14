@@ -96,8 +96,7 @@
         $stmtInsertLinkGroup->execute([$userId, $groupId]);
       }
 
-      $sqlInsertLog = "INSERT INTO logs (userid, useragent, action, info, tableid, interactionid)
-                       VALUES (:userid, :useragent, '1', 'user added', '6', :interactionid)";
+      $sqlInsertLog = "INSERT INTO logs (userid, useragent, action, info, tableid, interactionid, error) VALUES (:userid, :useragent, 1, 'user added', 6, :interactionid, 0)";
       $stmtInsertLog = $conn->prepare($sqlInsertLog);
       $stmtInsertLog->bindParam(':userid', $_SESSION['userid']);
       $stmtInsertLog->bindParam(':useragent', $_SESSION['useragent']);
@@ -121,7 +120,7 @@
     $stmtInsertErrorLog->bindValue(':useragent', $_SESSION['useragent']);
     $stmtInsertErrorLog->execute();
 
-    $_SESSION['error'] = 'Failed to add user.';
+    $_SESSION['error'] = 'An error occurred. Please try again. or contact an admin if this keeps happaning';
     header('Location: ../index.php?page=adduser');
     exit;
   }

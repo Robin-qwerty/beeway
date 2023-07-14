@@ -16,7 +16,7 @@
       $sth->bindValue(':useragent', $_SESSION['useragent']);
       $sth->execute();
 
-      $_SESSION['error'] = "er ging iets mis. Pech";
+      $_SESSION['error'] = 'An error occurred. Please try again. or contact an admin if this keeps happaning';
       header("Location: ../index.php?page=scholenarchivelijst");
     }
   } else {

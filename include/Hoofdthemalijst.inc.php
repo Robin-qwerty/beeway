@@ -114,7 +114,7 @@
           echo '</div>';
         } elseif (!isset($offset)) {
           echo '<h2 style="text-align: center;"><strong>the query did not return any rows</strong></h2>';
-          echo '<a href="index.php?page=addmaintheme" class="addbutton" id="addfirst">beeway toevoegen</a>';
+          echo '<a href="index.php?page=addmaintheme" class="addbutton" id="addfirst">hoofdthema toevoegen</a>';
           $_SESSION['error'] = "Er zijn geen resultaten gevonden. Pech!";
         } else {
           // the query did not return any rows

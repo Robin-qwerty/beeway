@@ -26,7 +26,7 @@ if (isset($_SESSION['userid'], $_SESSION['userrole'])) {
         exit;
     } catch (\Exception $e) {
         $q('INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES (:userid, :useragent, 6, 1, 0, 5)');
-        $_SESSION['error'] = "er ging iets mis. Pech";
+        $_SESSION['error'] = 'An error occurred. Please try again. or contact an admin if this keeps happaning';
         header("Location: ../index.php?page=beewayarchivelijst");
     }
 } else {

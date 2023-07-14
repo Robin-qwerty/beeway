@@ -18,7 +18,7 @@
       $stmtUpdateDiscipline->execute();
 
       // Insert into logs table
-      $sqlInsertLog = "INSERT INTO logs (userid, useragent, action, tableid, interactionid) VALUES (:userid, :useragent, 3, 2, :interactionid)";
+      $sqlInsertLog = "INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES (:userid, :useragent, 3, 2, :interactionid, 0)";
       $stmtInsertLog = $conn->prepare($sqlInsertLog);
       $stmtInsertLog->bindParam(':userid', $_SESSION['userid']);
       $stmtInsertLog->bindParam(':useragent', $_SESSION['useragent']);
@@ -35,7 +35,7 @@
       $stmtInsertErrorLog->bindValue(':useragent', $_SESSION['useragent']);
       $stmtInsertErrorLog->execute();
 
-      $_SESSION['error'] = "Archiving failed.";
+      $_SESSION['error'] = 'An error occurred. Please try again. or contact an admin if this keeps happaning';
       header("Location: ../index.php?page=vakkenlijst");
     }
   } else {

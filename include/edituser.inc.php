@@ -5,6 +5,12 @@
       <hr>
 
       <?php
+        if ($_GET['userid'] == 0 || $_GET['userid'] == 1 || $_GET['userid'] == 9999) {
+          $_SESSION['error'] = "Je mag deze user niet bewerken!";
+          header("Location: index.php?page=userlijst&offset=0");
+          exit;
+        }
+
         $sql = 'SELECT * FROM users
                 WHERE userid=:userid';
         $sth = $conn->prepare($sql);
@@ -190,5 +196,6 @@
   } else {
     $_SESSION['error'] = "er ging iets mis. Pech!";
     header("Location: index.php?page=dashboard");
+    exit;
   }
 ?>

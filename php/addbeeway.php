@@ -90,15 +90,15 @@
       } else {
         throw new Exception('Failed to get schoolid');
       }
-    // } catch (Exception $e) {
-    //   // If there is an error, rollback the transaction and redirect back to the add user page with an error message
-    //   $conn->rollback();
-    //
-    //   $_SESSION['schoolnaam'] = $_POST['schoolnaam'];
-    //   $_SESSION['error'] = 'Failed to add beeway';
-    //   header('Location: ../index.php?page=beewaylijst');
-    //   exit;
-    // }
+    } catch (Exception $e) {
+      // If there is an error, rollback the transaction and redirect back to the add user page with an error message
+      $conn->rollback();
+
+      $_SESSION['schoolnaam'] = $_POST['schoolnaam'];
+      $_SESSION['error'] = 'An error occurred. Please try again. or contact an admin if this keeps happaning';
+      header('Location: ../index.php?page=beewaylijst');
+      exit;
+    }
   } else {
     $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES (9999, :useragent, 1, 1, 0, 1)';
     $sth = $conn->prepare($sql);

@@ -70,36 +70,58 @@
         <h2 id="orange">HOOFDTHEMA</h2>
 
         <?php
-          $stmt = $conn->prepare('SELECT namethemep1, namethemep2, namethemep3, namethemep4, namethemep5
-                                  FROM maintheme
-                                  WHERE schoolid = :schoolid
-                                  AND schoolyear = 1');
-          $stmt->bindParam(':schoolid', $schoolId);
-          $stmt->execute();
-          $row = $stmt->fetch(PDO::FETCH_ASSOC);
+          function getCurrentSchoolYear() {
+            $currentYear = date('Y');
+            $currentMonth = date('n');
+
+            if ($currentMonth >= 7 && $currentMonth <= 12) {
+              // July to December, consider it as the current school year
+              return ($currentYear - 2022) + 1; // Return the difference from the base year plus one
+            } else {
+              // January to June, consider it as the previous school year
+              return ($currentYear - 2022); // Return the difference from the base year
+            }
+          }
+
+          $schoolyear = getCurrentSchoolYear();
+
+          $sql = 'SELECT themeid, namethemep1, namethemep2, namethemep3, namethemep4, namethemep5
+                  FROM maintheme
+                  WHERE archive = 0
+                  AND schoolid = :schoolid
+                  AND schoolyear = :schoolyear';
+          $sth = $conn->prepare($sql);
+          $sth->bindValue(':schoolid', $schoolid);
+          $sth->bindValue(':schoolyear', $schoolyear);
+          $sth->execute();
+
+          if ($sth->rowCount() > 0) {
+            while ($maintheme = $sth->fetch(PDO::FETCH_OBJ)) {
+              echo '
+                <input type="text" hidden name="mainthemeid" value="'.$maintheme->themeid.'" required>
+
+                <input type="radio" name="themeperiodid" value="1" required>
+                <label for="html">P1: '.$maintheme->namethemep1.'</label>
+                <br>
+                <input type="radio" name="themeperiodid" value="2">
+                <label for="html">P2: '.$maintheme->namethemep2.'</label>
+                <br>
+                <input type="radio" name="themeperiodid" value="3">
+                <label for="html">P3: '.$maintheme->namethemep3.'</label>
+                <br>
+                <input type="radio" name="themeperiodid" value="4">
+                <label for="html">P4: '.$maintheme->namethemep4.'</label>
+                <br>
+                <input type="radio" name="themeperiodid" value="5">
+                <label for="html">P5: '.$maintheme->namethemep5.'</label>
+                <br>
+              ';
+            }
+          } else {
+            echo "<p>No main theme options available.</p>";
+          }
         ?>
-
-        <?php if ($row) : ?>
-          <input type="radio" name="hoofdthemaid" value="1" required>
-          <label for="html">P1: <?php echo $row['namethemep1']; ?></label>
-          <br>
-          <input type="radio" name="hoofdthemaid" value="2">
-          <label for="html">P2: <?php echo $row['namethemep2']; ?></label>
-          <br>
-          <input type="radio" name="hoofdthemaid" value="3">
-          <label for="html">P3: <?php echo $row['namethemep3']; ?></label>
-          <br>
-          <input type="radio" name="hoofdthemaid" value="4">
-          <label for="html">P4: <?php echo $row['namethemep4']; ?></label>
-          <br>
-          <input type="radio" name="hoofdthemaid" value="5">
-          <label for="html">P5: <?php echo $row['namethemep5']; ?></label>
-          <br>
-        <?php else : ?>
-          <p>No main theme options available.</p>
-        <?php endif; ?>
       </div>
-
 
       <div class="cell CONCREETDOEL">
         <h2 id="orange">CONCREET DOEL</h2>

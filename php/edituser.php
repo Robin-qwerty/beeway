@@ -133,7 +133,7 @@
   {
       global $conn;
 
-      $sql = "INSERT INTO logs (userid, useragent, action, tableid, interactionid) VALUES (:userid, :useragent, 2, 6, :interactionid)";
+      $sql = "INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES (:userid, :useragent, 2, 6, :interactionid, 0)";
       $sth = $conn->prepare($sql);
       $sth->bindParam(':userid', $_SESSION['userid']);
       $sth->bindParam(':useragent', $_SESSION['useragent']);

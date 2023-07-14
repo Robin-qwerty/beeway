@@ -104,7 +104,7 @@
         ':userid' => $userId
       ]);
 
-      $sql2 = "INSERT INTO logs (userid, useragent, action, info, tableid, interactionid) VALUES (:userid, :useragent, 3, 'user deleted', 6, :interactionid)";
+      $sql2 = "INSERT INTO logs (userid, useragent, action, info, tableid, interactionid, error) VALUES (:userid, :useragent, 3, 'user deleted', 6, :interactionid, 0)";
       $sth2 = $conn->prepare($sql2);
       $sth2->execute([
         ':userid' => $loggedInUserId,
@@ -125,7 +125,7 @@
       $sth->bindValue(':useragent', $_SESSION['useragent']);
       $sth->execute();
 
-      $_SESSION['error'] = 'Er ging iets mis, probeer het opnieuw.';
+      $_SESSION['error'] = 'An error occurred. Please try again. or contact an admin if this keeps happaning';
       insertLog($loggedInUserId, '3', $userId);
       header("Location: ../index.php?page=edituser&userid={$userId}");
       exit;
@@ -145,13 +145,12 @@
   function insertLog($userId, $errorCode, $interactionId) {
     global $conn;
 
-    $sql = "INSERT INTO logs (userid, useragent, action, tableid, interactionid, errorcode) VALUES (:userid, :useragent, '3', '6', :interactionid, :errorcode)";
+    $sql = "INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES (:userid, :useragent, 3, 6, :interactionid, 0)";
     $sth = $conn->prepare($sql);
     $sth->execute([
       ':userid' => $userId,
       ':useragent' => $_SESSION['useragent'],
-      ':interactionid' => $interactionId,
-      ':errorcode' => $errorCode
+      ':interactionid' => $interactionId
     ]);
   }
 ?>

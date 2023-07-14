@@ -39,7 +39,7 @@
       $stmt->execute();
 
       // Insert into logs table
-      $sqlInsertLog = "INSERT INTO logs (userid, useragent, action, info, tableid, interactionid) VALUES (:userid, :useragent, 3, 'beeway deleted', 1, :interactionid)";
+      $sqlInsertLog = "INSERT INTO logs (userid, useragent, action, info, tableid, interactionid, error) VALUES (:userid, :useragent, 3, 'beeway deleted', 1, :interactionid, 0)";
       $stmtInsertLog = $conn->prepare($sqlInsertLog);
       $stmtInsertLog->bindParam(':userid', $_SESSION['userid']);
       $stmtInsertLog->bindParam(':useragent', $_SESSION['useragent']);
@@ -55,7 +55,7 @@
       $sth->bindValue(':useragent', $_SESSION['useragent']);
       $sth->execute();
 
-      $_SESSION['error'] = "er ging iets mis. Pech";
+      $_SESSION['error'] = 'An error occurred. Please try again. or contact an admin if this keeps happaning';
       header("Location: ../index.php?page=beewaylijst");
     }
   } else {

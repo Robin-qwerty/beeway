@@ -92,6 +92,7 @@
                     WHERE u.schoolid=:schoolid
                     AND s.schoolid=u.schoolid
                     AND u.userid<>0
+                    AND u.userid<>1
                     AND u.userid<>9999
                     AND u.role<>2
                     AND u.archive=0';
@@ -179,12 +180,12 @@
                 echo ", ";
               }
             }
-
             echo '</b></td>';
           }
-
-          echo '<td><a href="index.php?page=edituser&userid='.$users->userid.'" class="editbutton">bewerken</a></td>
+          if ($users->userid != 1) {
+            echo '<td><a href="index.php?page=edituser&userid='.$users->userid.'" class="editbutton">bewerken</a></td>
                 </tr>';
+          }
         }
 
         echo '</table>
@@ -220,7 +221,10 @@
           // the query did not return any rows
           $pagina = $_GET['offset'] + 1;
 
-          echo '<h2 style="text-align:center;"><strong>Er zijn geen resultaten gevonden</strong></h2>';
+          echo '
+            <h2 style="text-align:center;"><strong>Er zijn geen resultaten gevonden</strong></h2>
+            <a href="index.php?page=adduser" class="addbutton">user toevoegen</a>
+          ';
           if (isset($_GET['offset']) && $_GET['offset'] >= '1') {
             $terug = $_GET['offset'] - 1;
 
