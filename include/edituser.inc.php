@@ -5,12 +5,6 @@
       <hr>
 
       <?php
-        if ($_GET['userid'] == 0 || $_GET['userid'] == 1 || $_GET['userid'] == 9999) {
-          $_SESSION['error'] = "Je mag deze user niet bewerken!";
-          header("Location: index.php?page=userlijst&offset=0");
-          exit;
-        }
-
         $sql = 'SELECT * FROM users
                 WHERE userid=:userid';
         $sth = $conn->prepare($sql);
@@ -61,9 +55,11 @@
 
           echo $role.'</b></p>';
 
-          if ($user->role == 1 || $user->role == 2) {
-
-          } else {
+          if ($_GET['userid'] == 0 || $_GET['userid'] == 1 || $_GET['userid'] == 9999) {
+            $_SESSION['error'] = "Je mag deze user niet bewerken!";
+            header("Location: index.php?page=userlijst&offset=0");
+            exit;
+          } elseif ($user->role == 0) {
           echo '
             <div class="klassenselect" id="klassenselect">
               <br>
