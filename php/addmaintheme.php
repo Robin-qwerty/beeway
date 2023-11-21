@@ -6,7 +6,7 @@
   session_start();
 
   if (isset($_SESSION['userid'], $_SESSION['userrole']) && ($_SESSION['userrole'] === 'superuser' || $_SESSION['userrole'] === 'admin')) {
-    try {
+    // try {
       if (empty($_POST['namethemep1']) || empty($_POST['namethemep2']) || empty($_POST['namethemep3']) || empty($_POST['namethemep4']) || empty($_POST['namethemep5']) || empty($_POST['schoolyear'])) {
         $_SESSION['namethemep1'] = $_POST['namethemep1'];
         $_SESSION['namethemep2'] = $_POST['namethemep2'];
@@ -93,17 +93,17 @@
           exit;
         }
       }
-    } catch (\Exception $e) {
-      $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES (:userid, :useragent, 1, 4, 0, 5)';
-      $stmt = $conn->prepare($sql);
-      $stmt->bindParam(':userid', $_SESSION['userid']);
-      $stmt->bindValue(':useragent', $_SESSION['useragent']);
-      $stmt->execute();
+    // } catch (\Exception $e) {
+    //   $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES (:userid, :useragent, 1, 4, 0, 5)';
+    //   $stmt = $conn->prepare($sql);
+    //   $stmt->bindParam(':userid', $_SESSION['userid']);
+    //   $stmt->bindValue(':useragent', $_SESSION['useragent']);
+    //   $stmt->execute();
 
-      $_SESSION['error'] = 'An error occurred. Please try again. or contact an admin if this keeps happening';
-      header('Location: ../index.php?page=hoofdthemalijst');
-      exit;
-    }
+    //   $_SESSION['error'] = 'An error occurred. Please try again. or contact an admin if this keeps happening';
+    //   header('Location: ../index.php?page=hoofdthemalijst');
+    //   exit;
+    // }
   } else {
     $sql = 'INSERT INTO logs (userid, useragent, action, tableid, interactionid, error) VALUES (9999, :useragent, 1, 4, 0, 1)';
     $stmt = $conn->prepare($sql);
