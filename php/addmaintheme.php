@@ -1,4 +1,7 @@
 <?php
+  error_reporting(E_ALL);
+  ini_set('display_errors', 1);
+
   require_once '../private/dbconnect.php';
   session_start();
 
@@ -45,8 +48,8 @@
           exit;
         }
 
-        $sql = "INSERT INTO maintheme (`schoolid`, `namethemep1`, `namethemep2`, `namethemep3`, `namethemep4`, `namethemep5`, `schoolyear`)
-                VALUES (:schoolid, :namethemep1, :namethemep2, :namethemep3, :namethemep4, :namethemep5, :schoolyear)";
+        $sql = "INSERT INTO maintheme (`schoolid`, `namethemep1`, `namethemep2`, `namethemep3`, `namethemep4`, `namethemep5`, `schoolyear`, `createdby`, `updatedby`)
+                VALUES (:schoolid, :namethemep1, :namethemep2, :namethemep3, :namethemep4, :namethemep5, :schoolyear, :createdby, :updatedby)";
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':schoolid', $school->schoolid);
         $stmt->bindParam(':namethemep1', $_POST['namethemep1']);
@@ -55,6 +58,8 @@
         $stmt->bindParam(':namethemep4', $_POST['namethemep4']);
         $stmt->bindParam(':namethemep5', $_POST['namethemep5']);
         $stmt->bindParam(':schoolyear', $_POST['schoolyear']);
+        $stmt->bindParam(':createdby', $_SESSION['userid']);
+        $stmt->bindParam(':updatedby', $_SESSION['userid']);
         $stmt->execute();
 
         $lastInsertedId = $conn->lastInsertId();
