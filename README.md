@@ -1,14 +1,16 @@
 # Beeway
-Project that I make during my internship at ict@school/ict@work
 
-We had already started making this project in `Javascript/Jquery` with `ajax` and an api made in `PHP` (see repository 'beeway')
-but we realized it would take much less code and it would be easier and more secure to make it with Embedded PHP in the HTML.
+Developed during my internship at ict@school/ict@work, Beeway is a web-based scheduling software build for educational institutions, providing a digital solution to replace manual paper-based planning systems.
 
-It will be a kind of scheduling software for schools on a website.
+The platform aims to streamline scheduling processes that were traditionally managed on paper, offering an online alternative for efficiency and accessibility.
+Will be hosted on [beeway.nl](https://beeway.nl/) (not publicly accessible).
 
-Wil be hosted on http://beeway.nl/
+## Features:
 
-## Beeway code explain</h2>
+- <b>Scheduling System:</b> Allows efficient planning of academic activities and resources. Designed specifically for primary schools' unique scheduling needs.
+- <b>User Management:</b> Enables user roles for Site Admins, School Admins and Teachers. Theys user roles ensure specific access levels, facilitating administrative control.
+
+## Beeway code explain
 - `HTML, CSS` and `javascript` for the frond end
 - Embedded `PHP` for back end and communicating with database
 - `MySQL` Database
