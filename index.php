@@ -20,12 +20,32 @@
   <!-- <link href="style/beewaystyle.css" rel="stylesheet"> -->
   <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.0-beta.3/dist/iconify-icon.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+  <style>
+    /* Style for the demo bar */
+    .demo-bar {
+      width: 100%;
+      height: 30px;
+      background-color: #005b0e;
+      color: white;
+      text-align: center;
+      line-height: 1px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 9999; /* Ensures it's on top of other content */
+    }
+  </style>
 </head>
 <body>
 <!--
   This site was made by Robin: https://github.com/Robin-qwerty
   And Yilmaz: https://github.com/Yilmaz2004
 -->
+
+  <div class="demo-bar">
+      <p>This website is a demo. the super admin login is email: test@test.nl, password: test - website will reset every hour</p>
+  </div>
+
   <?php
     require_once 'include/navbar.inc.php';
 
@@ -42,7 +62,7 @@
     }
 
     // Debugging: display the contents of the session
-    echo "<pre>", print_r($_SESSION),"</pre>";
+    // echo "<pre>", print_r($_SESSION),"</pre>";
 
     // Check if the beeway lock session is set and the user is not on the editbeewaytest page
     if (isset($_SESSION['beewaylock']) && $_SESSION['beewaylock'] === true && $page !== 'editbeewaytest') {

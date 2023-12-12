@@ -214,7 +214,7 @@ a.disabled {
 
 .sticky {
   position: fixed;
-  top: 0;
+  top: 30px;
   width: 100%;
 }
 
@@ -375,9 +375,6 @@ a.disabled {
 .form #textaddedit:focus {
   background-color: #ffc107;
   outline: none;
-}
-input[type="password"] {
-  -webkit-text-security: disc;
 }
 
 input[type='checkbox'] {
